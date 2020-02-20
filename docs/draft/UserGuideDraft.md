@@ -16,7 +16,10 @@
   - [3.10. Add a new training template: `add training template`](#310-add-a-new-training-template-add-training-template)
   - [3.11. View the list of training template: `view training template`](#311-view-the-list-of-training-template-view-training-template)
   - [3.12. Edit a training template: `edit training template`](#312-edit-a-training-template-edit-training-template)
-  - [3.13. Check total earnings: `earnings`](#313-check-total-earnings-earnings)
+  - [3.13. Tag a client: `tag`](#313-tag-a-client-tag)
+  - [3.14. Sort clients based on attribute: `sort clients`](#314-sort-clients-based-on-attribute-sort-clients)
+  - [3.15. List trainings: `list training`](#315-list-trainings-list-training)
+  - [3.16. Check total earnings: `earnings`](#316-check-total-earnings-earnings)
   - [3.18. Track payment date: `view payment`](#318-track-payment-date-view-payment)
   - [3.19. View personal best: `view pb`](#319-view-personal-best-view-pb)
   - [3.20. View schedule for the day/week: `view schedule`](#320-view-schedule-for-the-dayweek-view-schedule)
@@ -229,7 +232,49 @@ Example:
 - `add tranining template n/Push Pull e/Pull Up e/Bench Press`
   - Adds a new training template with called Push Pull with 2 exercises, Pull Up and Bench Press
 
-### 3.13. Check total earnings: `earnings`
+### 3.13. Tag a client: `tag`
+
+Assigns a tag to a client for ease of grouping and searching.
+
+Format: `tag c/CLIENT t/TAG`
+
+Examples:
+
+- `tag c/Jeffreigh t/Professional`
+ - The client Jeffreigh is now tagged as "Professional". Future searches for the Professional tag will include Jeffreigh
+
+### 3.14. Sort clients based on attribute: `sort clients`
+
+Sorts clients by descending order based on the specified attribute.
+
+Format: `sort clients a/ATTRIBUTE`
+
+Examples:
+
+- `sort clients a/Height`
+    - returns a sorted list of all clients in descending order
+
+### 3.15. List trainings: `list training`
+
+Returns a list of all trainings.
+
+Format: `list trainings`
+
+Examples:
+
+- `list trainings`
+    - returns a complete list of all trainings.
+
+Sorts clients by descending order based on the specified attribute.
+
+Format: `sort clients a/ATTRIBUTE`
+
+Examples:
+
+- `sort clients a/Height`
+    - returns a sorted list of all clients in descending order
+
+### 3.16. Check total earnings: `earnings`
 
 Shows the total earnings or the specific earnings for a client.
 
