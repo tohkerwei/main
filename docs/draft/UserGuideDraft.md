@@ -13,7 +13,7 @@
   - [3.7. Display a list of predefined exercises: `view exercise`](#37-display-a-list-of-predefined-exercises-view-exercise)
   - [3.8. Add a new exercise: `add exercise template`](#38-add-a-new-exercise-add-exercise-template)
   - [3.9. Start a timer: `time`](#39-start-a-timer-time)
-  - [3.10. Add a new routine template: `add routine template`](#310-add-a-new-routine-template-add-routinetemplate)
+  - [3.10. Add a new routine template: `add routine template`](#310-add-a-new-routine-template-add-routine-template)
   - [3.11. View the list of routine template: `view routine template`](#311-view-the-list-of-routine-template-view-routine-template)
   - [3.12. Edit a routine template: `edit routine template`](#312-edit-a-routine-template-edit-routine-template)
   - [3.13. Tag a client: `tag`](#313-tag-a-client-tag)
