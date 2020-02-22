@@ -13,12 +13,12 @@
   - [3.7. Display a list of predefined exercises: `view exercise`](#37-display-a-list-of-predefined-exercises-view-exercise)
   - [3.8. Add a new exercise: `add exercise template`](#38-add-a-new-exercise-add-exercise-template)
   - [3.9. Start a timer: `time`](#39-start-a-timer-time)
-  - [3.10. Add a new training template: `add training template`](#310-add-a-new-training-template-add-training-template)
-  - [3.11. View the list of training template: `view training template`](#311-view-the-list-of-training-template-view-training-template)
-  - [3.12. Edit a training template: `edit training template`](#312-edit-a-training-template-edit-training-template)
+  - [3.10. Add a new routine template: `add routine template`](#310-add-a-new-routine-template-add-routinetemplate)
+  - [3.11. View the list of routine template: `view routine template`](#311-view-the-list-of-routine-template-view-routine-template)
+  - [3.12. Edit a routine template: `edit routine template`](#312-edit-a-routine-template-edit-routine-template)
   - [3.13. Tag a client: `tag`](#313-tag-a-client-tag)
   - [3.14. Sort clients based on attribute: `sort clients`](#314-sort-clients-based-on-attribute-sort-clients)
-  - [3.15. List trainings: `list training`](#315-list-trainings-list-training)
+  - [3.15. List routines: `list routines`](#315-list-routines-list-routines)
   - [3.16. Check total earnings: `earnings`](#316-check-total-earnings-earnings)
   - [3.18. Track payment date: `view payment`](#318-track-payment-date-view-payment)
   - [3.19. View personal best: `view pb`](#319-view-personal-best-view-pb)
@@ -188,11 +188,11 @@ Examples:
 - `time m/4 s/40`
   - Starts a timer for 4 minutes and 40 seconds
 
-### 3.10. Add a new training template: `add training template`
+### 3.10. Add a new routine template: `add routine template`
 
-Adds a new training template with the specified name and exercise templates.
+Adds a new routine template with the specified name and exercise templates.
 
-Format: `add training template n/NAME_OF_TEMPLATE e/[EXERCISE_TEMPLATES]...`
+Format: `add routine template n/NAME_OF_TEMPLATE e/[EXERCISE_TEMPLATES]...`
 
 - `n/NAME_OF_TEMPLATE` is case insensitive. e.g `back` will match `Back`
 - The order of words will matter. e.g `Push Pull` will not match `Pull Push`
@@ -201,36 +201,36 @@ Format: `add training template n/NAME_OF_TEMPLATE e/[EXERCISE_TEMPLATES]...`
 
 Example:
 
-- `add tranining template n/Push Pull e/Pull Up e/Bench Press`
-  - Adds a new training template with called Push Pull with 2 exercises, Pull Up and Bench Press.
+- `add routine template n/Push Pull e/Pull Up e/Bench Press`
+  - Adds a new routine template with called Push Pull with 2 exercises, Pull Up and Bench Press.
 
-### 3.11. View the list of training template: `view training template`
+### 3.11. View the list of routine template: `view routine template`
 
-Lists all training templates.
+Lists all routine templates.
 
-Format: `view training template`
+Format: `view routine template`
 
-### 3.12. Edit a training template: `edit training template`
+### 3.12. Edit a routine template: `edit routine template`
 
-Edits a new training template with the specified name and exercise templates.
+Edits a new routine template with the specified name and exercise templates.
 
-Format: `edit training template n/NAME_OF_TEMPLATE [a/ATTRIBUTE v/VALUE]...`
+Format: `edit routine template n/NAME_OF_TEMPLATE [a/ATTRIBUTE v/VALUE]...`
 
 - `n/NAME_OF_TEMPLATE` is case insensitive. e.g `back` will match `Back`
 - The order of words will matter. e.g `Push Pull` will not match `Pull Push`
 - Only exact match will be shown. e.g `Push` will not match `Push Pull`
-- `[a/ATTRIBUTE]` has to be a valid attribute for the training template
-- `[v/VALUE]` has to be of matching type to the attribute of the training template
+- `[a/ATTRIBUTE]` has to be a valid attribute for the routine template
+- `[v/VALUE]` has to be of matching type to the attribute of the routine template
 
 Examples:
 
-- `edit training template n/Push Pull a/NAME_OF_TEMPLATE v/Pull Push`
-  - Renames the training template called Push Pull to Pull Push
+- `edit routine template n/Push Pull a/NAME_OF_TEMPLATE v/Pull Push`
+  - Renames the routine template called Push Pull to Pull Push
 
 Example:
 
-- `add tranining template n/Push Pull e/Pull Up e/Bench Press`
-  - Adds a new training template with called Push Pull with 2 exercises, Pull Up and Bench Press
+- `add routine template n/Push Pull e/Pull Up e/Bench Press`
+  - Adds a new routine template with called Push Pull with 2 exercises, Pull Up and Bench Press
 
 ### 3.13. Tag a client: `tag`
 
@@ -254,16 +254,16 @@ Examples:
 - `sort clients a/Height`
     - returns a sorted list of all clients in descending order
 
-### 3.15. List trainings: `list training`
+### 3.15. List routines: `list routines`
 
-Returns a list of all trainings.
+Returns a list of all routines.
 
-Format: `list trainings`
+Format: `list routines`
 
 Examples:
 
-- `list trainings`
-    - returns a complete list of all trainings.
+- `list routines`
+    - returns a complete list of all routines.
 
 Sorts clients by descending order based on the specified attribute.
 
@@ -317,7 +317,7 @@ Examples:
 
 ### 3.19. View personal best: `view pb`
 
-Displays the personal best of all workout of a client.
+Displays the personal best of all exercises of a client.
 
 Format: `view pb n/NAME`
 
@@ -428,7 +428,7 @@ Examples:
 
 ### 3.26. Display visualisations of training progress: `training graph`
 
-Shows visualisations of client’s training progress.
+Shows visualisations of client’s exercise progress.
 
 Format: `training graph n/NAME a/ATTRIBUTE [s/START] [e/END]`
 
@@ -515,11 +515,11 @@ Examples:
 - `find competitors Sheffield 2020 Powerlifting`
   - Shows a list of clients competing for Sheffield 2020 Powerlifting.
 
-### 3.30. List the nearest gyms: `list gym`
+### 3.30. Find the nearest gyms: `find gym`
 
-Lists the nearest gyms to a client according to their address.
+Finds the nearest gyms to a client according to their address.
 
-Format: `list gym [n/NAME]`
+Format: `find gym [n/NAME]`
 
 - `n/NAME` is case insensitive. e.g `hans` will match `Hans`
 - The order of words will matter. e.g `Hans Ong` will not match `Ong Hans`
@@ -528,8 +528,8 @@ Format: `list gym [n/NAME]`
 
 Examples:
 
-- `list gym n/Kee Ah Siow`
-  - Lists the nearest gyms to Kee Ah Siow
+- `find gym n/Kee Ah Siow`
+  - Finds the nearest gyms to Kee Ah Siow
 
 ### 3.31. Booking a facility: `book`
 
