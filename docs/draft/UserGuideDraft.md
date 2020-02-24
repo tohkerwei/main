@@ -34,7 +34,7 @@
   - [3.29. Make meal plans: `meal`](#329-make-meal-plans-meal)
   - [3.28. Compares the daily and target caloric intake: `calories`](#328-compares-the-daily-and-target-caloric-intake-calories)
   - [3.29. Show Competitors: `find competitor`](#329-show-competitors-find-competitor)
-  - [3.30. List the nearest gyms: `list gym`](#330-list-the-nearest-gyms-list-gym)
+  - [3.30. Find the nearest gyms: `find gym`](#330-find-the-nearest-gyms-find-gym)
   - [3.31. Booking a facility: `book`](#331-booking-a-facility-book)
   - [3.32. Add photos to client’s photo album: `add photo`](#332-add-photos-to-clients-photo-album-add-photo)
   - [3.33. View client photo album: `view photo`](#333-view-client-photo-album-view-photo)
