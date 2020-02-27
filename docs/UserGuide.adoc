@@ -289,7 +289,7 @@ Shows the list of payment information.
 Format: `view payment d/DETAIL`
 
 * `d/DETAIL` can be `n/NAME`, `d/DATE` or `m/MONTH`
-* `n/NAME`is case insensitive. e.g `hans` will match `Hans`
+* `n/NAME` is case insensitive. e.g `hans` will match `Hans`
 * The order of words will matter. e.g `Hans Ong` will not match `Ong Hans`
 * Only exact match will be shown. e.g. `Hans` will not match `Hans Ong`
 * `d/DATE` must be in the format `DD/MM/YYYY`
@@ -538,15 +538,14 @@ Examples:
 
 Books a fitness facility from a in-built list of available facilities.
 
-Format: book `[f/FACILITY] [t/TIME] [d/DURATION]`
+Format: `book f/FACILITY t/TIME d/DURATION`
 
-* Books the facility specified in `[f/FACILITY]`. The facility needs to be found
+* Books the facility specified in `f/FACILITY`. The facility needs to be found
 in the in-built list. Else, an error would occur
-* `[f/FACILITY]`, `[t/TIME]`, `[d/DURATION]` must be provided
 * Facilities have different operating hours and an error would occur if user
 book outside the operating hours
-* Format for `[t/TIME]` is 24-hour clock
-* Format for `[d/DURATION]` is in minutes and should be multiples of 30. Else,
+* Format for `t/TIME` is 24-hour clock
+* Format for `d/DURATION` is in minutes and should be multiples of 30. Else,
 an error would occur
 
 Examples:
@@ -560,9 +559,9 @@ Examples:
 
 Add photo to a client’s photo album to track physique progress.
 
-Format: `add photo n/NAME
+Format: `add photo n/NAME`
 
-* `[n/NAME]` is case insensitive. e.g `hans` will match `Hans`
+* `n/NAME` is case insensitive. e.g `hans` will match `Hans`
 * If there are 2 people with the same name, enter the `INDEX` of the correct
 person
 * After the person is identified, a file attachment window will appear
@@ -580,14 +579,14 @@ Example:
 
 Shows client’s photo in an album format.
 
-Format: `view photo [n/NAME]`
+Format: `view photo n/NAME`
 
 * Photos displayed in photo album are sorted by date(Newest to Oldest)
 * The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords will matter. e.g. `Hans Bo` will not match `Bo Hans`
+* The order of the keywords will matter. e.g. `Hans Bo` will not match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Clients matching at least one keyword will be returned (i.e. OR search).
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Clients matching at least one keyword will be returned (i.e. `OR` search).
 e.g. `Hans Bo` will return `Hans Gruber, Bo Yang`
 * If there are 2 people identified, enter the `INDEX` of the correct person
 
