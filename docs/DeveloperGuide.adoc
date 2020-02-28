@@ -325,6 +325,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |coach |my client by typing their name |find my client’s information easily
 
+|`* * *` |coach |add, edit and delete new exercises that are not found in the application
+
 |`* *` |coach for fitness competitors |view incoming competitions of my clients |be reminded to focus on them more
 
 |`* *` |forgetful coach with many clients |look at my records on clients |know what exercises they are weak in or require more assistance
@@ -337,17 +339,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |coach with many clients|pre-set standard meal profiles my clients take every day |daily caloric intake is automated
 
-|`* *` |coach with a tight schedule |opt to switch the app to a minimised view to present to me just the important data of the app, configurable by me
+|`* *` |coach with a tight schedule |view a summary page to present to me just the important data, configurable by me
 
 |`* *` |coach with many different clients |easily export the data of a client (to a CSV file) |backup and store that data in another format
 
-|`* *` |coach |track my clients’ macros |tell if my client is eating right with the right proportions
-
 |`* *` |coach |track my total earnings from all my clients
 
-|`* *` |coach |track who is going for a competition by using the competition tag
+|`* *` |coach |track my clients by using a tag | easily view the clients I want to
 
-|`*` |coach that likes to vary my clients’ training |choose from a list of different exercises with the same purposes
+|`* *` |coach that likes to vary my clients’ training |choose from a list of different exercises with the same purposes
 
 |`*` |coach who wants to visually track the progress of my clients |store photos to monitor the changes in my client’s physique
 
