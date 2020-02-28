@@ -297,15 +297,67 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |coach for fitness competitors |record the personal bests of my clients |monitor their progress
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |coach for fitness competitors |record the food intake of my clients |know if they are following my diet plan for them
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |coach for fitness competitors |record the exercise type and intensity my clients have done for the day |know if they are on track for their competitions
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |coach for fitness competitors|record the date and time of my clients’ training sessions and keep track of which day they work out
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |coach with many fitness competitors |view my overall schedule for the day/week
+
+|`* * *` |coach that communicates with my clients |display visualisations(graphs/charts) |convey the client's training progress better
+
+|`* * *` |coach |monitor my clients caloric intake |know he is meeting his dietary requirements
+
+|`* * *` |coach with many clients |be reminded of my daily schedule at the start of the day |I will not forget my appointments
+
+|`* * *` |coach |add new profiles to the app to keep track of new clients
+
+|`* * *` |coach |manage the payment fee/payment day of the clients |charge them accordingly
+
+|`* * *` |coach |list all my clients |view a summary of all my clients
+
+|`* * *` |coach |edit a client’s details |change and update an existing client’s details
+
+|`* * *` |coach |delete my client |remove clients from my clients list
+
+|`* * *` |coach |my client by typing their name |find my client’s information easily
+
+|`* *` |coach for fitness competitors |view incoming competitions of my clients |be reminded to focus on them more
+
+|`* *` |forgetful coach with many clients |look at my records on clients |know what exercises they are weak in or require more assistance
+
+|`* *` |coach with a tight schedule |display my open slots |plan for training more effectively
+
+|`* *` |coach with clients all over SG |find the nearest gym based on where my client stays
+
+|`* *` |coach with many clients |set personalised goals for my clients |plan a workout routine that is achievable
+
+|`* *` |coach with many clients|pre-set standard meal profiles my clients take every day |daily caloric intake is automated
+
+|`* *` |coach with a tight schedule |opt to switch the app to a minimised view to present to me just the important data of the app, configurable by me
+
+|`* *` |coach with many different clients |easily export the data of a client (to a CSV file) |backup and store that data in another format
+
+|`* *` |coach |track my clients’ macros |tell if my client is eating right with the right proportions
+
+|`* *` |coach |track my total earnings from all my clients
+
+|`* *` |coach |track who is going for a competition by using the competition tag
+
+|`*` |coach that likes to vary my clients’ training |choose from a list of different exercises with the same purposes
+
+|`*` |coach who wants to visually track the progress of my clients |store photos to monitor the changes in my client’s physique
+
+|`*` |coach |check if the gym I am going to is closed 
+
+|`*` |coach |use the timer in the app |seamlessly execute the time interval of the workout planned
+
+|`*` |coach |book the facilities required by the workout
+
+|`*` |coach |see upcoming competitions or meet |plan for my clients to attend them
 |=======================================================================
 
 _{More to be added}_
