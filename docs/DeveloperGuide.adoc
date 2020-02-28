@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |coach with many different clients |easily export the data of a client (to a CSV file) |backup and store that data in another format
 
-|`* *` |coach |track my total earnings from all my clients
+|`* *` |coach |track my total earnings from all my clients|
 
 |`* *` |coach |track my clients by using a tag |easily view the clients I want to
 
