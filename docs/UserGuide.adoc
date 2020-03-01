@@ -123,30 +123,30 @@ Examples:
 * `delete n/Ming Liang`
 ** Removes Ming Liang’s profile.
 
-=== List all clients: `list`
+=== List all clients: `list clients`
 
 Shows all clients currently entered in this program.
 
-Format: `list`
+Format: `list clients`
 
-=== Display a list of predefined exercises: `view exercise`
+=== List all exercise templates: `list exercise templates`
 
-Displays a list of exercises available in the program. Specify the muscle
-group(s) to list only exercises that target that muscle group(s).
+Displays a list of exercise templates available in the program. Specify the muscle
+group(s) to list only exercise templates that target that muscle group(s).
 
-Format: `view exercise [m/MUSCLE]...`
+Format: `list exercise templates [m/MUSCLE]...`
 
 Examples:
 
-* `view exercise`
-** Shows a list of all exercises and their information stored in the program
-* `view exercise m/abdomens m/chest`
+* `list exercise templates`
+** Shows a list of all exercise templates and their information
+* `list exercise templates m/abdomens m/chest`
 ** Shows all exercises that target the abdomens and chest
 
 === Add a new exercise: `add exercise template`
 
-If the list of predefined exercises are not enough, you may choose to add a new
-exercise for future use.
+If the list of predefined exercise templates are not enough, you may choose to add a new
+exercise template for future use.
 
 Format: `add exercise template e/EXERCISE_NAME t/TARGET_MUSCLE...`
 
@@ -186,11 +186,11 @@ Example:
 ** Adds a new routine template with called Push Pull with 2 exercises, Pull Up
 and Bench Press.
 
-=== View the list of routine template: `view routine template`
+=== List all routine templates: `list routine templates`
 
-Lists all routine templates.
+Shows all routine templates currently entered in this program.
 
-Format: `view routine template`
+Format: `list routine templates`
 
 === Edit a routine template: `edit routine template`
 
@@ -598,4 +598,4 @@ Examples:
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FitBiz folder.
