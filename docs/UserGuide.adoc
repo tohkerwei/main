@@ -143,7 +143,7 @@ Examples:
 * `list exercise templates m/abdomens m/chest`
 ** Shows all exercises that target the abdomens and chest
 
-=== Add a new exercise: `add exercise template`
+=== Add a new exercise template: `add exercise template`
 
 If the list of predefined exercise templates are not enough, you may choose to add a new
 exercise template for future use.
@@ -208,13 +208,7 @@ template
 Examples:
 
 * `edit routine template n/Push Pull a/NAME_OF_TEMPLATE v/Pull Push`
-** Renames the routine template called Push Pull to Pull Push
-
-Example:
-
-* `add routine template n/Push Pull e/Pull Up e/Bench Press`
-** Adds a new routine template with called Push Pull with 2 exercises, Pull Up
-and Bench Press
+** Renames the routine template called `Push Pull` to `Pull Push`
 
 === Tag a client: `tag client`
 
