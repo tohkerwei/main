@@ -322,7 +322,7 @@ _{More to be added}_
 
 1.  User requests to add a client
 2.  FitBiz adds the client
-+ 
++
 Use case ends.
 
 *Extensions*
@@ -330,10 +330,10 @@ Use case ends.
 [none]
 * 2a.  The input format is invalid.
 +
-[none] 
+[none]
 ** 2a1.  FitBiz shows an error message
-+ 
-Use case resumes at step 1. 
++
+Use case resumes at step 1.
 
 
 [discrete]
@@ -367,7 +367,7 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to view all the available information of client 
+1.  User requests to view all the available information of client
 2.  FitBiz shows a list of clients
 3.  User requests to view a specific client in the list
 4.  FitBiz shows all available information of the client
@@ -396,7 +396,7 @@ Use case resumes at step 2.
 1.  User requests to edit a client's personal details
 2.  FitBiz shows a list of clients
 3.  User requests to edit a specific client in the list and inputs the attributes and values
-4.  FitBiz edits client's details 
+4.  FitBiz edits client's details
 +
 Use case ends.
 
@@ -421,7 +421,7 @@ Use case resumes at step 2.
 
 1.  User requests to add tags to a client
 2.  FitBiz shows a list of clients
-3.  User requests to add a tag to a specific client in the list 
+3.  User requests to add a tag to a specific client in the list
 4. FitBiz assigns the tag to the client
 +
 Use case ends.
@@ -453,12 +453,12 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a.  The input format is invalid. 
+* 2a.  The input format is invalid.
 +
-[none] 
-** 2a1.  FitBiz shows an error message. 
+[none]
+** 2a1.  FitBiz shows an error message.
 +
-Use case resumes at step 1. 
+Use case resumes at step 1.
 
 [discrete]
 === Use case 7: Sort clients
@@ -473,12 +473,12 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a.  The input format is invalid. 
+* 2a.  The input format is invalid.
 +
-[none] 
-** 2a1.  FitBiz shows an error message. 
+[none]
+** 2a1.  FitBiz shows an error message.
 +
-Use case resumes at step 1. 
+Use case resumes at step 1.
 
 [discrete]
 === Use case 8: Add exercise template
@@ -493,12 +493,12 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a.  The input format is invalid. 
+* 2a.  The input format is invalid.
 +
-[none] 
-** 2a1.  FitBiz shows an error message. 
+[none]
+** 2a1.  FitBiz shows an error message.
 +
-Use case resumes at step 1. 
+Use case resumes at step 1.
 
 [discrete]
 === Use case 9: Add routine template
@@ -513,12 +513,12 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a.  The input format is invalid. 
+* 2a.  The input format is invalid.
 +
-[none] 
-** 2a1.  FitBiz shows an error message. 
+[none]
+** 2a1.  FitBiz shows an error message.
 +
-Use case resumes at step 1. 
+Use case resumes at step 1.
 
 [discrete]
 === Use case 10: Edit routine template
