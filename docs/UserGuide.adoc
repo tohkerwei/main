@@ -18,21 +18,23 @@ By: `FitBeasts` Since: `Feb 2020` Licence: `MIT`
 
 == Introduction
 
-FitBiz is for fitness coaches who are managing multiple clients and prefer to use a desktop app to do so. More importantly, FitBiz is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FitBiz can get your client management done faster than traditional GUI apps. Interested? Jump to <<Quick Start>> to get started. Enjoy!
+FitBiz is a business management tool tailor made for fitness coaches to manage their clients. From managing your client's profile to tracking your business finances to planning your schedules, FitBiz will surely ease the pain and monotony of managing a small to medium client portfolio.
+
+This program is primarily a desktop application and optimised for those who prefer to work with a Command Line Interface (CLI). If you can type fast, and have clients to train and manage, FitBiz is definitely for you!
 
 == Quick Start
 
-. Ensure you have Java 11 or above installed in your Computer.
-. Download the latest `FitBiz.jar` link:{repoURL}/releases[here].
-. Copy the file to the folder you want to use as the home folder for your Fitness Manager.
-. Double-click the file to start the app. The GUI should appear in a few seconds.
+. Ensure you have Java 11 or above installed in your Computer
+. Download the latest `FitBiz.jar` link:{repoURL}/releases[here]
+. Copy the file to the folder you want to use as the home folder for your Fitness Manager
+. Double-click the file to start the app. The GUI should appear in a few seconds
 . Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.
 . Some example commands you can try:
 * `list` : lists all clients
 * `add client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-: adds a contact named John Doe to the Address Book.
+: adds a contact named John Doe to the Address Book
 * `exit` : exits the app
-. Refer to Section 3, <<Features>> for details of each command.
+. Refer to <<Features>> below for details of each command
 
 == Features
 
@@ -42,7 +44,7 @@ FitBiz is for fitness coaches who are managing multiple clients and prefer to us
 e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`
 * Items with `…` after them can be used multiple times including zero times e.g. `[t/TAG]…` can be used as (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable
 
 === View help: `help`
 
