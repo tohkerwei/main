@@ -335,35 +335,8 @@ Use case ends.
 +
 Use case resumes at step 1.
 
-
 [discrete]
-=== Use case 2: Delete client
-
-*MSS*
-
-1.  User requests to delete a client
-2.  FitBiz shows a list of clients
-3.  User requests to delete a specific client in the list
-4.  FitBiz deletes the client
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. The list is empty.
-+
-Use case ends.
-
-* 3a. The given format is invalid.
-+
-[none]
-** 3a1. FitBiz shows an error message.
-+
-Use case resumes at step 2.
-
-[discrete]
-=== Use case 3: View client
+=== Use case 2: View client
 
 *MSS*
 
@@ -389,7 +362,7 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case 4: Edit client
+=== Use case 3: Edit client
 
 *MSS*
 
@@ -415,25 +388,25 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case 5: Tag client
+=== Use case 4: Delete client
 
 *MSS*
 
-1.  User requests to add tags to a client
+1.  User requests to delete a client
 2.  FitBiz shows a list of clients
-3.  User requests to add a tag to a specific client in the list
-4. FitBiz assigns the tag to the client
+3.  User requests to delete a specific client in the list
+4.  FitBiz deletes the client
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a.  The list is empty.
+* 2a. The list is empty.
 +
 Use case ends.
 
-* 3a.  The input format is invalid.
+* 3a. The given format is invalid.
 +
 [none]
 ** 3a1. FitBiz shows an error message.
@@ -441,94 +414,100 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case 6: List clients
+=== Use case 5: List clients
 
 *MSS*
 
 1.  User requests to list all existing clients
+2.  FitBiz lists all existing clients
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a.  The input format is invalid.
++
+[none]
+** 2a1.  FitBiz shows an error message.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case 6: Add exercise
+
+*MSS*
+
+1.  User requests to add an exercise to a client
+2.  FitBiz shows a list of clients
+3.  User requests to add exercise to a specific client in the list
+4.  FitBiz add exercise to the client
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a.  The list is empty.
++
+Use case ends.
+
+* 3a.  The given name is invalid.
++
+[none]
+** 3a1. FitBiz shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case 7: Start timer
+
+*MSS*
+
+1.  User requests to start a timer.
+2.  FitBiz starts a timer for the specified duration. 
++
+Use case ends. 
+
+*Extensions*
+
+[none]
+* 2a.  The input format is invalid.
++
+[none]
+** 2a1.  FitBiz shows an error message.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case 8: Filter clients
+
+*MSS*
+
+1.  User requests to filter clients based on an attribute
+2.  FitBiz filters clients based on specified attribute
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a.  The input format is invalid.
++
+[none]
+** 2a1.  FitBiz shows an error message.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case 9: View personal best
+
+*MSS*
+
+1.  User requests to view a client's personal best
 2.  FitBiz lists all clients
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a.  The input format is invalid.
-+
-[none]
-** 2a1.  FitBiz shows an error message.
-+
-Use case resumes at step 1.
-
-[discrete]
-=== Use case 7: Sort clients
-
-*MSS*
-
-1.  User requests to sort clients based on an attribute
-2.  FitBiz sorts clients based on specified attribute
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a.  The input format is invalid.
-+
-[none]
-** 2a1.  FitBiz shows an error message.
-+
-Use case resumes at step 1.
-
-[discrete]
-=== Use case 8: Add exercise template
-
-*MSS*
-
-1.  User requests to add an exercise template.
-2.  FitBiz adds the exercise template.
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a.  The input format is invalid.
-+
-[none]
-** 2a1.  FitBiz shows an error message.
-+
-Use case resumes at step 1.
-
-[discrete]
-=== Use case 9: Add routine template
-
-*MSS*
-
-1.  User requests to add an routine template.
-2.  FitBiz adds the routine template.
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a.  The input format is invalid.
-+
-[none]
-** 2a1.  FitBiz shows an error message.
-+
-Use case resumes at step 1.
-
-[discrete]
-=== Use case 10: Edit routine template
-
-*MSS*
-
-1.  User requests to edit a routine template
-2.  FitBiz shows a list of routine templates
-3.  User requests to edit a specific routine template in the list and inputs the attributes and values
-4.  FitBiz edits routine template
+3.  User requests to view the personal best of a specific client on the list
+3.  FitBiz displays the personal best
 +
 Use case ends.
 
@@ -546,6 +525,77 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+[discrete]
+=== Use case 10: View schedule
+
+*MSS*
+
+1.  User requests to view schedule for the day or the time specified
+2.  FitBiz shows the schedule
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a.  The input format is invalid.
++
+[none]
+** 2a1.  FitBiz shows an error message.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case 11: Export data
+
+*MSS*
+
+1.  User requests to export a client's training record to a CSV file
+2.  FitBiz shows a list of clients
+3.  User requests to export a specific client's training record in the list
+4.  FitBiz exports the client's training records
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a.  The list is empty.
++
+Use case ends.
+
+* 3a.  The given name is invalid.
++
+[none]
+** 3a1. FitBiz shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case 12: View visualisations
+
+*MSS*
+
+1.  User requests to view graph visualisations of a client's progress
+2.  FitBiz shows a list of clients
+3.  User requests to view the training graph of a specific client in the list
+4.  Fitbiz shows the training graph of the client
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a.  The list is empty.
++
+Use case ends.
+
+* 3a.  The given name is invalid.
++
+[none]
+** 3a1. FitBiz shows an error message.
++
+Use case resumes at step 2.
 
 _{More to be added}_
 
