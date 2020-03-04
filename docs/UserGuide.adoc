@@ -59,11 +59,11 @@ Examples:
 * `help add client`
 ** Shows a detailed explanation of the `add client` command
 
-=== Add a new client profile: `add client`
+=== Add a new client profile: `add-c`
 
 Initialises and adds a new client profile.
 
-Format: `add client n/NAME`
+Format: `add-c n/NAME`
 
 * `n/NAME` is case insensitive. e.g `hans` will match `Hans`
 * The order of words will matter. e.g `Hans Ong` will not match `Ong Hans`
@@ -71,94 +71,79 @@ Format: `add client n/NAME`
 
 Examples:
 
-* `add client n/Ming Liang`
+* `add-c n/Ming Liang`
 ** Adds a new client: Ming Liang
-* `add client n/Low Tah Kiow, John`
+* `add-c n/Low Tah Kiow, John`
 ** Adds a new client: Low Tah Kiow, John
 
-=== View a client profile: `view client`
+=== View a client profile: `view-c`
 
-Shows all available information of the client.
+Shows all available information of the client at the specified index.
 
-Format: `view client n/NAME`
+Format: `view-c INDEX`
 
-* `n/NAME` is case insensitive. e.g `hans` will match `Hans`
-* The order of words will matter. e.g `Hans Ong` will not match `Ong Hans`
-* Only exact match will be shown. e.g. `Hans` will not match `Hans Ong`
-
-Examples:
-
-* `view client n/Ming Liang`
-** Shows information about Ming Liang
-* `view client n/Low Tah Kiow, John`
-** Shows information about Low Tah Kiow, John
-
-=== Edit a client’s profile: `edit client`
-
-Updates the client’s personal details by specifying the attribute and the new value.
-
-Format: `edit client n/NAME [a/ATTRIBUTE v/VALUE]...`
-
-* `n/NAME` is case insensitive. e.g `hans` will match `Hans`
-* The order of words will matter. e.g `Hans Ong` will not match `Ong Hans`
-* Only exact match will be shown. e.g. `Hans` will not match `Hans Ong`
-* `[a/ATTRIBUTE]` has to be a valid attribute for the client.
-* `[v/VALUE]` has to be of matching type to the attribute of the client
+* `INDEX` refers to the index number shown in the displayed client list
+* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
 
 Examples:
 
-* `edit client n/Ming Liang a/age v/60 a/gender v/male`
-** Sets Ming Liang’s age to 60 and gender to male.
+* `view client 3`
+** Shows information about the 3rd client
+* `view client 45`
+** Shows information about the 45th client
 
-=== Delete a client: `delete client`
+=== Edit a client’s profile: `edit-c`
 
-Deletes a client from the program.
+Edits the client’s personal details by specifying the attribute and the new value.
 
-Format: `delete n/NAME`
+Format: `edit-c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
-* `n/NAME` is case insensitive. e.g `hans` will match `Hans`
-* The order of words will matter. e.g `Hans Ong` will not match `Ong Hans`
-* Only exact match will be shown. e.g. `Hans` will not match `Hans Ong`
+* `INDEX` refers to the index number shown in the displayed client list
+* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
+* At least one of the optional fields must be provided
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative
+* You can remove all the person’s tags by typing `t/`` without specifying any tags after it
 
 Examples:
 
-* `delete n/Ming Liang`
-** Removes Ming Liang’s profile.
+* `edit-c 1 n/Ming Liang a/age v/60 a/gender v/male`
+** Edits the name of the 1st client to Ming Liang, age to 60, and gender to male.
 
-=== List all clients: `list clients`
+=== Delete a client: `delete-c`
+
+Deletes the client at the specified index from the program.
+
+Format: `delete-c INDEX`
+
+* `INDEX` refers to the index number shown in the displayed client list
+* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
+
+Examples:
+
+* `delete-c 4`
+** Deletes the 4th client from the program
+
+=== List all clients: `list-c`
 
 Shows all clients currently entered in this program.
 
-Format: `list clients`
+Format: `list-c`
 
-=== List all exercise templates: `list exercise templates`
+=== Record a client's exercise: `add-e`
 
-Displays a list of exercise templates available in the program. Specify the muscle
-group(s) to list only exercise templates that target that muscle group(s).
+Adds and records an exercise to a client at the specified index.
 
-Format: `list exercise templates [m/MUSCLE]...`
+Format: `add-e CLIENT_INDEX e/EXERCISE_NAME [d/DATE] [r/REMARKS]`
 
-Examples:
-
-* `list exercise templates`
-** Shows a list of all exercise templates and their information
-* `list exercise templates m/abdomens m/chest`
-** Shows all exercises that target the abdomens and chest
-
-=== Add a new exercise template: `add exercise template`
-
-If the list of predefined exercise templates are not enough, you may choose to add a new
-exercise template for future use.
-
-Format: `add exercise template e/EXERCISE_NAME t/TARGET_MUSCLE...`
-
-* There must be at least one `TARGET_MUSCLE` specified
+* `CLIENT_INDEX` refers to the index number shown in the displayed client list
+* `CLIENT_INDEX` must be a positive integer (ie. 1, 2, 3, ...)
+* If `DATE` is not specified, it will be defaulted to the current day
+* `DATE` must be of the form `DD-MM-YYYY` (ie. 02-07-2020 for 2nd July 2020)
 
 Examples:
 
-* `add exercise template e/Skipping Rope t/Quadriceps t/Calves`
-** Adds a new exercise Skipping Rope which targets the Quadricepts and Calves
-muscle group
+* `add-e 2 e/Push Ups d/25-02-2020 r/50 Reps`
+** Adds an exercise called "Push Ups" with remarks "50 reps" on 2nd July 2020 to the 2nd client
 
 === Start a timer: `time`
 
