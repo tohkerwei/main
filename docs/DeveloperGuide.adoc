@@ -307,7 +307,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |coach |edit a client’s details |change and update an existing client’s details
 |`* * *` |coach |delete my client|
 |`* * *` |coach |search my client by typing their name |find my client’s information easily
-|`* * *` |coach |add, edit and delete new exercises that are not found in the application
+|`* * *` |coach |add, edit and delete new exercises that are not found in the application|
 |`* * *`| coach |look for user help |get help on how to use the features
 |`* *` |coach with many clients |be reminded of my daily schedule at the start of the day |track my appointments
 |`* *` |forgetful coach with many clients |look at my records on clients |know what exercises they are weak in or require more assistance
