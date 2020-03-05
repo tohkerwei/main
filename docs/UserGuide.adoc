@@ -18,7 +18,7 @@ By: `CS2103T-F11-2` Since: `Feb 2020` Licence: `MIT`
 
 == Introduction
 
-FitBiz is a business management tool tailor made for fitness coaches to manage their clients. From managing your client's profile to tracking your business finances to planning your schedules, FitBiz will surely ease the pain and monotony of managing a small to medium client portfolio.
+FitBiz is a business management tool tailor made for fitness coaches to manage their clients. From managing your client's profile to planning your schedules, FitBiz will surely ease the pain and monotony of managing a small to medium client portfolio.
 
 This program is primarily a desktop application and optimised for those who prefer to work with a Command Line Interface (CLI). If you can type fast, and have clients to train and manage, FitBiz is definitely for you!
 
@@ -136,7 +136,7 @@ Format: `list-c`
 
 Adds and records an exercise to a client at the specified index.
 
-Format: `add-e CLIENT_INDEX e/EXERCISE_NAME [d/DATE] [r/REMARKS]`
+Format: `add-e CLIENT_INDEX e/EXERCISE_NAME [d/DATE] [w/WEIGHT] [r/REMARKS]`
 
 * `CLIENT_INDEX` refers to the index number shown in the displayed client list
 * `CLIENT_INDEX` must be a positive integer (ie. 1, 2, 3, ...)
@@ -147,6 +147,8 @@ Examples:
 
 * `add-e 2 e/Push Ups d/25-02-2020 r/50 Reps`
 ** Adds an exercise called "Push Ups" with remarks "50 reps" on 2nd July 2020 to the 2nd client
+* `add-e 3 e/Bench Press d/26-02-2020 w/120 r/10 Reps`
+** Adds an exercise called "Bench Press" of weight 120kg with remarks "50 reps" on 2nd July 2020 to the 3rd client
 
 === Start a timer: `time`
 
