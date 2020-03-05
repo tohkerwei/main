@@ -39,7 +39,7 @@ Role: Developer
 image::Dban1.png[width="150", align="left"]
 {empty}[https://github.com/Dban1[github]]
 
-Role: Developer +
+Role: Developer
 
 '''
 
@@ -47,6 +47,6 @@ Role: Developer +
 image::tohkerwei.png[width="150", align="left"]
 {empty}[https://github.com/tohkerwei[github]]
 
-Role: Developer +
+Role: Developer
 
 '''
