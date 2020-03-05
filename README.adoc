@@ -12,21 +12,23 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* Extensive: Tracks exercises and training schedules.
-* Detailed Data Representation: Displays graphs and charts for clients.
-* Tailored for single-user.
-* This is a desktop application for a gym manager to manage his clients. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
+* The Fitness Business Management App you never knew you needed
+* Tailored made for fitness coaches to manage their clients without the hassle of traditional pen and paper
+* Here are some things you can do:
+** Track your client's exercises and training schedules
+** Display detailed graphs and charts of your client's training data
+** Export a client's training data in `csv` format, allowing clients to easily store or view their own data on Excel
 
 == Site Map
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 
 == Acknowledgements
 
+* Adapted from the https://se-education.org/[AddressBook-Level3 project] created by SE-EDU initiative
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
 * Libraries used: https://openjfx.io/[JavaFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/junit-team/junit5[JUnit5]
