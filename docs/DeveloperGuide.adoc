@@ -279,15 +279,14 @@ Refer to the guide <<DevOps#, here>>.
 
 *Target user profile*:
 
-* has a need to manage a significant number of gym clients and their information (clients' workouts and calorie intake)
-* wants to keep track of his gym training finances
+* has a need to manage a significant number of gym clients and their information (clients' details and exercises)
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 * wants to book facilities easily [v2.0]
 
-*Value proposition*: Keep track of your gym training schedule, finances, clients' workouts and calorie intake faster than a typical mouse/GUI driven app
+*Value proposition*: Keep track of your gym training schedule and clients' exercises faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -644,20 +643,13 @@ _{More to be added}_
 Windows, Linux, Unix, OS-X
 
 [[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
-
-[[exercise-template]] Exercise Template::
-An outline for an exercise.
+A contact detail that is not meant to be shared with others.
 
 [[exercise]] Exercise::
-A fixed set of repetitions according to an exercise template.
+A workout activity done by a client that is to be recorded.
 
-[[training-routine]] Training Routine::
-An outline for a set of exercises.
-
-[[training]] Training::
-A fixed set of exercises according to a training routine.
-
+[[personal-best]] Personal Best::
+The best/highest weight that the client has reached for an exercise.
 
 [appendix]
 == Product Survey
