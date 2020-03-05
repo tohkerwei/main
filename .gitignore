@@ -24,4 +24,5 @@ src/test/data/sandbox/
 .classpath
 .project
 .settings
+.vscode
 /bin
