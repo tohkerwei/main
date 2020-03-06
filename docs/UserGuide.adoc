@@ -68,7 +68,7 @@ Format: `add-c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 * `n/NAME` is case insensitive. e.g `hans` will match `Hans`
 * The order of words will matter. e.g `Hans Ong` will not match `Ong Hans`
 * Only exact match will be shown. e.g. `Hans` will not match `Hans Ong`
-* A person can have any number of tags (including 0)
+* A client can have any number of tags (including 0)
 
 Examples:
 
@@ -95,15 +95,15 @@ Examples:
 
 === Edit a client’s profile: `edit-c`
 
-Edits the client’s personal details by specifying the attribute and the new value.
+Edits the client’s cliental details by specifying the attribute and the new value.
 
 Format: `edit-c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 * `INDEX` refers to the index number shown in the displayed client list
 * `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
 * At least one of the optional fields must be provided
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative
-* You can remove all the person’s tags by typing `t/`` without specifying any tags after it
+* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative
+* You can remove all the client’s tags by typing `t/`` without specifying any tags after it
 
 Examples:
 
@@ -177,9 +177,9 @@ Examples:
 * `filter-c Johnny`
 ** Returns a client list of `Johnny Tim` and `johnny`
 
-=== View personal best: `view-pb`
+=== View cliental best: `view-pb`
 
-Displays the personal best of all exercises of the client at the specified index.
+Displays the cliental best of all exercises of the client at the specified index.
 
 Format: `view-pb INDEX`
 
@@ -189,7 +189,7 @@ Format: `view-pb INDEX`
 Example:
 
 * `view-pb 6`
-** Shows the personal best for all exercises done by the 6th client
+** Shows the cliental best for all exercises done by the 6th client
 
 === View schedule for the day/week: `view-s`
 
