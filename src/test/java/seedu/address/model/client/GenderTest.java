@@ -34,7 +34,6 @@ public class GenderTest {
         assertFalse(Gender.isValidGender("MaleFemale")); // multiple
         assertFalse(Gender.isValidGender("Ma le")); // spaces within
         assertFalse(Gender.isValidGender("feMa3le"));
-        
 
         // valid gender
         assertTrue(Gender.isValidGender("Male"));
