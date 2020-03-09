@@ -10,16 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Gender should be Male / Female / Others, and it should not be blank";
-
-    public static final String VALIDATION_REGEX = "[Male|Female|Others].*";
+        "Gender should be male/female/others, and it should not be blank";
 
     public final String value;
 
     /**
      * Constructs an {@code Gender}.
      *
-     * @param gender Male / Female / Others.
+     * @param gender male/female/others.
      */
     public Gender(String gender) {
         requireNonNull(gender);
@@ -31,7 +29,9 @@ public class Gender {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidGender(String test) {
-        return test.matches(VALIDATION_REGEX);
+        requireNonNull(test);
+        String testInLowerCase = test.toLowerCase();
+        return testInLowerCase.equals("male") || testInLowerCase.equals("female") || testInLowerCase.equals("others");
     }
 
     @Override
