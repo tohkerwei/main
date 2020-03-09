@@ -1,4 +1,4 @@
-= AddressBook Level 3 - User Guide
+= FitBiz - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,166 +12,231 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level3
+:repoURL: https://github.com/AY1920S2-CS2103T-F11-2/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2103T-F11-2` Since: `Feb 2020` Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 3 (AB3) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB3 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+FitBiz is a business management tool tailor made for fitness coaches to manage their clients. From managing your client's profile to planning your schedules, FitBiz will surely ease the pain and monotony of managing a small to medium client portfolio.
+
+This program is primarily a desktop application and optimised for those who prefer to work with a Command Line Interface (CLI). If you can type fast, and have clients to train and manage, FitBiz is definitely for you!
 
 == Quick Start
 
-.  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
-+
-image::Ui.png[width="790"]
-+
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+. Ensure you have Java 11 or above installed in your Computer
+. Download the latest `FitBiz.jar` link:{repoURL}/releases[here]
+. Copy the file to the folder you want to use as the home folder for your Fitness Manager
+. Double-click the file to start the app. The GUI should appear in a few seconds
+. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.
+. Some example commands you can try:
+* `list` : lists all clients
+* `add client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+: adds a contact named John Doe to the Address Book
+* `exit` : exits the app
+. Refer to <<Features>> below for details of each command
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
-
-.  Refer to <<Features>> for details of each command.
-
-[[Features]]
 == Features
 
-====
-*Command Format*
+*Format of Commands*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-====
+* Words in `UPPER_SNAKE_CASE` are the parameters to be supplied by the user
+e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`
+* Items with `…` after them can be used multiple times including zero times e.g. `[t/TAG]…` can be used as (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable
 
-=== Viewing help : `help`
+=== View help: `help`
 
-Format: `help`
+Lists all available commands and a short description of what they do. Specify the command for more detailed explanation.
 
-=== Adding a person: `add`
-
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-[TIP]
-A person can have any number of tags (including 0)
+Format: `help [c/COMMAND]`
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `help`
+** Lists all commands
+* `help add client`
+** Shows a detailed explanation of the `add client` command
 
-=== Listing all persons : `list`
+=== Add a new client profile: `add-c`
 
-Shows a list of all persons in the address book. +
-Format: `list`
+Initialises and adds a new client profile.
 
-=== Editing a person : `edit`
+Format: `add-c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
+* `n/NAME` is case insensitive. e.g `hans` will match `Hans`
+* The order of words will matter. e.g `Hans Ong` will not match `Ong Hans`
+* Only exact match will be shown. e.g. `Hans` will not match `Hans Ong`
+* A client can have any number of tags (including 0)
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `add-c n/Ming Liang p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+** Adds a new client: Ming Liang with the above information
+* `add-c n/Low Tah Kiow, John t/powerlifter e/betsycrowe@example.com a/some street p/1234567 t/strongman`
+** Adds a new client: Low Tah Kiow, John with the above information
 
-=== Locating persons by name: `find`
+=== View a client profile: `view-c`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Shows all available information of the client at the specified index.
 
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
+Format: `view-c INDEX`
+
+* `INDEX` refers to the index number shown in the displayed client list
+* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `view client 3`
+** Shows information about the 3rd client
+* `view client 45`
+** Shows information about the 45th client
 
-// tag::delete[]
-=== Deleting a person : `delete`
+=== Edit a client’s profile: `edit-c`
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+Edits the client’s cliental details by specifying the attribute and the new value.
 
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+Format: `edit-c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+
+* `INDEX` refers to the index number shown in the displayed client list
+* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
+* At least one of the optional fields must be provided
+* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative
+* You can remove all the client’s tags by typing `t/`` without specifying any tags after it
 
 Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+* `edit-c 1 n/Ming Liang a/age v/60 a/gender v/male`
+** Edits the name of the 1st client to Ming Liang, age to 60, and gender to male.
 
-// end::delete[]
-=== Clearing all entries : `clear`
+=== Delete a client: `delete-c`
 
-Clears all entries from the address book. +
-Format: `clear`
+Deletes the client at the specified index from the program.
 
-=== Exiting the program : `exit`
+Format: `delete-c INDEX`
 
-Exits the program. +
-Format: `exit`
+* `INDEX` refers to the index number shown in the displayed client list
+* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
 
-=== Saving the data
+Examples:
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+* `delete-c 4`
+** Deletes the 4th client from the program
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== List all clients: `list-c`
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+Shows all clients currently entered in this program.
+
+* Note that this is the default view when you first launch FitBiz
+
+Format: `list-c`
+
+=== Record a client's exercise: `add-e`
+
+Adds and records an exercise to a client at the specified index.
+
+Format: `add-e CLIENT_INDEX e/EXERCISE_NAME [d/DATE] [w/WEIGHT] [r/REMARKS]`
+
+* `CLIENT_INDEX` refers to the index number shown in the displayed client list
+* `CLIENT_INDEX` must be a positive integer (ie. 1, 2, 3, ...)
+* If `DATE` is not specified, it will be defaulted to the current day
+* `DATE` must be of the form `DD-MM-YYYY` (ie. 02-07-2020 for 2nd July 2020)
+
+Examples:
+
+* `add-e 2 e/Push Ups d/25-02-2020 r/50 Reps`
+** Adds an exercise called "Push Ups" with remarks "50 reps" on 2nd July 2020 to the 2nd client
+* `add-e 3 e/Bench Press d/26-02-2020 w/120 r/10 Reps`
+** Adds an exercise called "Bench Press" of weight 120kg with remarks "50 reps" on 2nd July 2020 to the 3rd client
+
+=== Start a timer: `time`
+
+Starts a timer which will notify you when it ends.
+
+Format: `time [h/HOURS] [m/MINUTES] [s/SECONDS]`
+
+Examples:
+
+* `time m/4 s/40`
+** Starts a timer for 4 minutes and 40 seconds
+
+=== Filter clients based on attribute: `filter-c`
+
+Filters the client list by the specified keyword(s) that matches the name or any attributes the client has.
+
+Format: `filter-c KEYWORD [MORE_KEYWORDS]`
+
+* The search is case insensitive. e.g `push ups` will match `Push Ups`
+* The order of the keywords does not matter (e.g. `Push Pull` will match `Pull Push`)
+* Only full words will be matched e.g. `Push` will not match `Push Pull`
+* Clients matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber, Bo Yang`
+
+Examples:
+
+* `filter-c Johnny`
+** Returns a client list of `Johnny Tim` and `johnny`
+
+=== View cliental best: `view-pb`
+
+Displays the cliental best of all exercises of the client at the specified index.
+
+Format: `view-pb INDEX`
+
+* `INDEX` refers to the index number shown in the displayed client list
+* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
+
+Example:
+
+* `view-pb 6`
+** Shows the cliental best for all exercises done by the 6th client
+
+=== View schedule for the day/week: `view-s`
+
+Shows the schedule for today or the time specified.
+
+Format: `view-s TYPE`
+
+* `TYPE` must be either `today`, `week` or `month`
+
+Examples:
+
+* `view schedule today`
+** Shows the schedule for today
+* `view schedule week`
+** Shows the schedule of the current week
+
+=== Export as CSV: `export`
+
+Exports a client’s training record to a CSV file.
+
+Format: `export INDEX`
+
+* `INDEX` refers to the index number shown in the displayed client list
+* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
+
+Example:
+
+* `export 6`
+** Exports training records of the 6th client
+
+=== Display visualisations of training progress: `graph`
+
+Shows visualisations of a client’s exercise progress.
+
+Format: `graph e/EXERCISE_NAME [s/START] [e/END]`
+
+* Generates a graphical representation of the client’s progress
+* If `START` or `END` is not specified, it will default to the current month
+* Date format of `[s/START]`, `[e/END]` is `DD-MM-YYYY`
+* This command can only be used while viewing a client (ie. right after `view-c` is used)
+
+Examples:
+
+* `graph e/Push Ups`
+** Shows a graph of Ming Liang’s Push Ups progress over the current month
 
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
-
-== Command Summary
-
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FitBiz folder.
