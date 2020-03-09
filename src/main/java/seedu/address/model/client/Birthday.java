@@ -15,7 +15,6 @@ public class Birthday {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Birthday input should be in the format DD-MM-YYYY, and not be more current than the current date";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final LocalDate value;
 
@@ -44,7 +43,7 @@ public class Birthday {
 
     @Override
     public String toString() {
-        return this.value.toString();
+        return this.value.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
     @Override
