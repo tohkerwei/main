@@ -79,7 +79,7 @@ image::UiClassDiagram.png[]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -100,7 +100,7 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `AddressBookParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
-.  The command execution can affect the `Model` (e.g. adding a person).
+.  The command execution can affect the `Model` (e.g. adding a client).
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 .  In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
@@ -123,11 +123,11 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `Address Book`, which `Client` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Client` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:BetterModelClassDiagram.png[]
 
@@ -173,18 +173,18 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 image::UndoRedoState0.png[]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 image::UndoRedoState1.png[]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 image::UndoRedoState2.png[]
 
 [NOTE]
 If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 image::UndoRedoState3.png[]
 
@@ -222,7 +222,7 @@ image::CommitActivityDiagram.png[]
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
@@ -296,7 +296,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<30%,<35%,<50%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |coach for fitness competitors |record the personal bests of my clients |monitor their progress
+|`* * *` |coach for fitness competitors |record the cliental bests of my clients |monitor their progress
 |`* * *` |coach for fitness competitors |record the exercise type and intensity my clients have done for the day |know if they are on track for their competitions
 |`* * *` |coach for fitness competitors|record the date and time of my clients’ training sessions and keep track of which day they work out|
 |`* * *` |coach with many fitness competitors |view my overall schedule for the day/week|
@@ -311,7 +311,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |coach with many clients |be reminded of my daily schedule at the start of the day |track my appointments
 |`* *` |forgetful coach with many clients |look at my records on clients |know what exercises they are weak in or require more assistance
 |`* *` |coach with a tight schedule |display my open slots |plan for training more effectively
-|`* *` |coach with many clients |set personalised goals for my clients |plan a workout routine that is achievable
+|`* *` |coach with many clients |set clientalised goals for my clients |plan a workout routine that is achievable
 |`* *` |coach with many different clients |easily export the data of a client (to a CSV file) |backup and store that data in another format
 |`* *` |coach |track my clients by using a tag |easily view the clients I want to
 |`*` |coach with clients all over SG |find the nearest gym based on where my client stays|
@@ -387,7 +387,7 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to edit a client's personal details
+1.  User requests to edit a client's cliental details
 2.  FitBiz shows a list of clients
 3.  User requests to edit a specific client in the list and inputs the attributes and values
 4.  FitBiz edits client's details
@@ -521,14 +521,14 @@ Use case ends.
 Use case resumes at step 1.
 
 [discrete]
-=== Use case 9: View personal best
+=== Use case 9: View cliental best
 
 *MSS*
 
-1.  User requests to view a client's personal best
+1.  User requests to view a client's cliental best
 2.  FitBiz lists all clients
-3.  User requests to view the personal best of a specific client on the list
-3.  FitBiz displays the personal best
+3.  User requests to view the cliental best of a specific client on the list
+3.  FitBiz displays the cliental best
 +
 Use case ends.
 
@@ -624,7 +624,7 @@ _{More to be added}_
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `11` or above installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  Should work without the need for Internet in the program.
 .  Should work reliably.
@@ -648,7 +648,7 @@ A contact detail that is not meant to be shared with others.
 [[exercise]] Exercise::
 A workout activity done by a client that is to be recorded.
 
-[[personal-best]] Personal Best::
+[[cliental-best]] Cliental Best::
 The best/highest weight that the client has reached for an exercise.
 
 [appendix]
@@ -692,15 +692,15 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
-=== Deleting a person
+=== Deleting a client
 
-. Deleting a person while all persons are listed
+. Deleting a client while all clients are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 

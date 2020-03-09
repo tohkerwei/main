@@ -21,7 +21,7 @@
   - [3.15. List routines: `list routines`](#315-list-routines-list-routines)
   - [3.16. Check total earnings: `earnings`](#316-check-total-earnings-earnings)
   - [3.18. Track payment date: `view payment`](#318-track-payment-date-view-payment)
-  - [3.19. View personal best: `view pb`](#319-view-personal-best-view-pb)
+  - [3.19. View cliental best: `view pb`](#319-view-cliental-best-view-pb)
   - [3.20. View schedule for the day/week: `view schedule`](#320-view-schedule-for-the-dayweek-view-schedule)
   - [3.21. View client summary: `show summary`](#321-view-client-summary-show-summary)
   - [3.22. Export as CSV: `export`](#322-export-as-csv-export)
@@ -115,7 +115,7 @@ Examples:
 
 ### 3.4. Edit a client’s profile: `edit client`
 
-Updates the client’s personal details by specifying the attribute and the new value.
+Updates the client’s cliental details by specifying the attribute and the new value.
 
 Format: `edit client n/NAME [a/ATTRIBUTE v/VALUE]...`
 
@@ -315,9 +315,9 @@ Examples:
 - `view payment m/august`
   - Shows all payment details in August
 
-### 3.19. View personal best: `view pb`
+### 3.19. View cliental best: `view pb`
 
-Displays the personal best of all exercises of a client.
+Displays the cliental best of all exercises of a client.
 
 Format: `view pb n/NAME`
 
@@ -434,7 +434,7 @@ Format: `training graph n/NAME a/ATTRIBUTE [s/START] [e/END]`
 
 - Generates a graphical representation of the client’s progress
 - Client is specified by `n/NAME`
-- `a/ATTRIBUTE` include client’s weight, workout personal best, fat percentage etc
+- `a/ATTRIBUTE` include client’s weight, workout cliental best, fat percentage etc
 - `[s/START]`, `[e/END]` are optional
 - Date format of `[s/START]`, `[e/END]` is `DD/MM/YYYY`
 
@@ -557,8 +557,8 @@ Add photo to a client’s photo album to track physique progress.
 Format: `add photo n/NAME
 
 - `[n/NAME]` is case insensitive. e.g `hans` will match `Hans`
-- If there are 2 people with the same name, enter the `INDEX` of the correct person
-- After the person is identified, a file attachment window will appear
+- If there are 2 people with the same name, enter the `INDEX` of the correct client
+- After the client is identified, a file attachment window will appear
 - Select the file you want from the file attachment window
 - The timestamp of the photo added will be recorded
 
@@ -581,7 +581,7 @@ Format: `view photo [n/NAME]`
 - Only the name is searched.
 - Only full words will be matched e.g. `Han` will not match `Hans`
 - Clients matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber, Bo Yang`
-- If there are 2 people identified, enter the `INDEX` of the correct person
+- If there are 2 people identified, enter the `INDEX` of the correct client
 
 Examples:
 
