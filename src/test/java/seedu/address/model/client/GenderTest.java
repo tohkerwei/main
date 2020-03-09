@@ -27,15 +27,21 @@ public class GenderTest {
         // invalid genders
         assertFalse(Gender.isValidGender("")); // empty string
         assertFalse(Gender.isValidGender(" ")); // spaces only
+        assertFalse(Gender.isValidGender("tranny"));
+        assertFalse(Gender.isValidGender("shemale"));
         assertFalse(Gender.isValidGender("Other")); // match with Others
         assertFalse(Gender.isValidGender("23552")); // numeric
         assertFalse(Gender.isValidGender("MaleFemale")); // multiple
         assertFalse(Gender.isValidGender("Ma le")); // spaces within
+        assertFalse(Gender.isValidGender("feMa3le"));
+        
 
         // valid gender
         assertTrue(Gender.isValidGender("Male"));
         assertTrue(Gender.isValidGender("Female"));
         assertTrue(Gender.isValidGender("Others"));
         assertTrue(Gender.isValidGender("male"));
+        assertTrue(Gender.isValidGender("feMale"));
+        assertTrue(Gender.isValidGender("others"));
     }
 }
