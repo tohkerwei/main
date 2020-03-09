@@ -1,0 +1,44 @@
+package seedu.address.model.client;
+
+import static java.time.temporal.ChronoUnit.DAYS;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
+
+class BirthdayTest {
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Birthday(null));
+    }
+
+    @Test
+    public void constructor_invalidBirthday_throwsIllegalArgumentException() {
+        String invalidBirthday = "";
+        assertThrows(IllegalArgumentException.class, () -> new Birthday(invalidBirthday));
+    }
+
+    @Test
+    public void isValidBirthday() {
+        // null birthday
+        assertThrows(NullPointerException.class, () -> Birthday.isValidBirthday(null));
+
+        // invalid birthdays
+        assertFalse(Birthday.isValidBirthday("")); // empty string
+        assertFalse(Birthday.isValidBirthday(" ")); // spaces only
+        assertFalse(Birthday.isValidBirthday("91")); // random numbers
+        assertFalse(Birthday.isValidBirthday("not a birthday")); // non-numeric
+        assertFalse(Birthday.isValidBirthday("11-e33-1998")); // erroneous alphanumeric
+        assertFalse(Birthday.isValidBirthday(LocalDate.now().plus(1, DAYS)
+                .format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))); // birthday 1 day after current date
+        assertFalse(Birthday.isValidBirthday(LocalDate.now()
+                .format(DateTimeFormatter.ofPattern("dd-MM-yyyy")))); // birthday today
+
+        // valid birthday
+        assertTrue(Birthday.isValidBirthday("01-01-1980")); // birthday in 01-01-1980
+    }
+}
