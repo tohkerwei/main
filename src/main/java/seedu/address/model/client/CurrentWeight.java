@@ -16,7 +16,7 @@ public class CurrentWeight {
     /**
      * Constructs a {@code CurrentWeight}.
      *
-     * @param phone A valid weight.
+     * @param weight A valid weight.
      */
     public CurrentWeight(String weight) {
         checkArgument(isValidWeight(weight), MESSAGE_CONSTRAINTS);
