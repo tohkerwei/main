@@ -18,6 +18,11 @@ public enum Gender {
     public static boolean isValidGender(String test) {
         requireNonNull(test);
         String testInLowerCase = test.toLowerCase();
-        return testInLowerCase.equals("male") || testInLowerCase.equals("female") || testInLowerCase.equals("others");
+        return testInLowerCase.equals("male")
+            || testInLowerCase.equals("m")
+            || testInLowerCase.equals("female")
+            || testInLowerCase.equals("f")
+            || testInLowerCase.equals("others")
+            || testInLowerCase.equals("o");
     }
 }
