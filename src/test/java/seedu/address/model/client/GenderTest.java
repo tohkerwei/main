@@ -9,17 +9,6 @@ import org.junit.jupiter.api.Test;
 public class GenderTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Gender(null));
-    }
-
-    @Test
-    public void constructor_invalidGender_throwsIllegalArgumentException() {
-        String invalidGender = "";
-        assertThrows(IllegalArgumentException.class, () -> new Gender(invalidGender));
-    }
-
-    @Test
     public void isValidGender() {
         // null gender
         assertThrows(NullPointerException.class, () -> Gender.isValidGender(null));
@@ -35,6 +24,11 @@ public class GenderTest {
         assertFalse(Gender.isValidGender("Ma le")); // spaces within
         assertFalse(Gender.isValidGender("feMa3le"));
 
+        // different gender enum
+        assertFalse(Gender.MALE == Gender.FEMALE);
+        assertFalse(Gender.FEMALE == Gender.OTHERS);
+        assertFalse(Gender.MALE == Gender.OTHERS);
+
         // valid gender
         assertTrue(Gender.isValidGender("Male"));
         assertTrue(Gender.isValidGender("Female"));
@@ -42,5 +36,6 @@ public class GenderTest {
         assertTrue(Gender.isValidGender("male"));
         assertTrue(Gender.isValidGender("feMale"));
         assertTrue(Gender.isValidGender("others"));
+
     }
 }
