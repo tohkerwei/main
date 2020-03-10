@@ -1,5 +1,6 @@
 package seedu.address.model.client;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -19,6 +20,7 @@ public class Height {
      * @param height A valid height.
      */
     public Height(String height) {
+        requireNonNull(height);
         checkArgument(isValidHeight(height), MESSAGE_CONSTRAINTS);
         value = height;
     }
