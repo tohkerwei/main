@@ -10,7 +10,7 @@ public class CurrentWeight {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Input weight must either be whole or decimal number (eg. 65 or 86.22)";
-    public static final String VALIDATION_REGEX = "[0-9]+\\.?[0-9]+";
+    public static final String VALIDATION_REGEX = "[0-9]+(\\.[0-9]+)?";
     public final String value;
 
     /**

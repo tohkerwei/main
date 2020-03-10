@@ -27,14 +27,29 @@ public class CurrentWeightTest {
         // invalid weight
         assertFalse(CurrentWeight.isValidWeight("")); // empty string
         assertFalse(CurrentWeight.isValidWeight(" ")); // spaces only
-        assertFalse(CurrentWeight.isValidWeight("peter")); // contains no numbers
+        assertFalse(CurrentWeight.isValidWeight("ab")); // contains no numbers
+        assertFalse(CurrentWeight.isValidWeight("a.b")); // contains no numbers
         assertFalse(CurrentWeight.isValidWeight(".2")); // no leading number before decimal
         assertFalse(CurrentWeight.isValidWeight("2.2.2")); // too many decimal points
         assertFalse(CurrentWeight.isValidWeight("-23")); // negative numbers
         assertFalse(CurrentWeight.isValidWeight("-23.23")); // negative decimals
+        assertFalse(CurrentWeight.isValidWeight("as.23")); // inclusion of letters
+        assertFalse(CurrentWeight.isValidWeight("23.as")); // inclusion of letters
+        assertFalse(CurrentWeight.isValidWeight("23.a1")); // inclusion of letters
+        assertFalse(CurrentWeight.isValidWeight("23z1")); // inclusion of letters
+        assertFalse(CurrentWeight.isValidWeight("23,23")); // wrong symbols
+        assertFalse(CurrentWeight.isValidWeight("23|23")); // wrong symbols
+        assertFalse(CurrentWeight.isValidWeight("23/23")); // wrong symbols
+        assertFalse(CurrentWeight.isValidWeight("23./23")); // wrong symbols
+        assertFalse(CurrentWeight.isValidWeight("23/.23")); // wrong symbols
+        assertFalse(CurrentWeight.isValidWeight("2-3.23")); // wrong symbols
+        assertFalse(CurrentWeight.isValidWeight("23.2'3")); // wrong symbols
 
         // valid weight
-        assertTrue(CurrentWeight.isValidWeight("45")); // numbers only
+        assertTrue(CurrentWeight.isValidWeight("0")); // single digit
+        assertTrue(CurrentWeight.isValidWeight("5")); // single digit
+        assertTrue(CurrentWeight.isValidWeight("456")); // numbers only
+        assertTrue(CurrentWeight.isValidWeight("1.2")); // numbers with decimal points
         assertTrue(CurrentWeight.isValidWeight("45.23")); // numbers with decimal points
         assertTrue(CurrentWeight.isValidWeight("0.1")); // numbers with decimal points and leading 0
         assertTrue(CurrentWeight.isValidWeight("412343212384755.34573223138567385432")); // arbitrarily long numbers
