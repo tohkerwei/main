@@ -16,7 +16,7 @@ public class TargetWeight {
     /**
      * Constructs a {@code TargetWeight}.
      *
-     * @param phone A valid weight.
+     * @param weight A valid weight.
      */
     public TargetWeight(String weight) {
         checkArgument(isValidWeight(weight), MESSAGE_CONSTRAINTS);
