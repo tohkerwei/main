@@ -54,4 +54,23 @@ public class CurrentWeightTest {
         assertTrue(CurrentWeight.isValidWeight("0.1")); // numbers with decimal points and leading 0
         assertTrue(CurrentWeight.isValidWeight("412343212384755.34573223138567385432")); // arbitrarily long numbers
     }
+
+    @Test
+    public void equals_validWeight() {
+        CurrentWeight w1 = new CurrentWeight("12.2");
+
+        assertTrue(w1.equals(w1));
+        assertTrue(w1.equals(new CurrentWeight("12.2")));
+
+        assertFalse(w1.equals(new CurrentWeight("12")));
+    }
+
+    @Test
+    public void hashCode_validWeight() {
+        CurrentWeight w1 = new CurrentWeight("12.2");
+
+        assertTrue(w1.hashCode() == new CurrentWeight("12.2").hashCode());
+
+        assertFalse(w1.hashCode() == new CurrentWeight("12.1").hashCode());
+    }
 }
