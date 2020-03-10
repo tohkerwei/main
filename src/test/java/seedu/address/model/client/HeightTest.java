@@ -54,4 +54,23 @@ public class HeightTest {
         assertTrue(Height.isValidHeight("0.1")); // numbers with decimal points and leading 0
         assertTrue(Height.isValidHeight("412343212384755.34573223138567385432")); // arbitrarily long numbers
     }
+
+    @Test
+    public void equals_validHeight() {
+        Height h1 = new Height("152.2");
+
+        assertTrue(h1.equals(h1));
+        assertTrue(h1.equals(new Height("152.2")));
+
+        assertFalse(h1.equals(new Height("152")));
+    }
+
+    @Test
+    public void hashCode_validHeight() {
+        Height h1 = new Height("152.2");
+
+        assertTrue(h1.hashCode() == new Height("152.2").hashCode());
+
+        assertFalse(h1.hashCode() == new Height("152.1").hashCode());
+    }
 }
