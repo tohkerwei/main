@@ -1,5 +1,6 @@
 package seedu.address.model.client;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -19,6 +20,7 @@ public class CurrentWeight {
      * @param weight A valid weight.
      */
     public CurrentWeight(String weight) {
+        requireNonNull(weight);
         checkArgument(isValidWeight(weight), MESSAGE_CONSTRAINTS);
         value = weight;
     }
