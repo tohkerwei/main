@@ -34,6 +34,8 @@ public class SportsTest {
         assertTrue(Sports.isValidSports("hockey")); // one sport
         assertTrue(Sports.isValidSports("soccer, basketball")); // two sports
         assertTrue(Sports.isValidSports("track, frisbee, water polo")); // multiple sports
+        assertTrue(Sports.isValidSports("jengabuildingfreestyle81mountainskydivingswimveryfast")); // long sport
+        assertTrue(Sports.isValidSports("81xtwelveriiasdfmnklanl cccoccunut")); //
         assertTrue(Sports.isValidSports("Cross-country mountain biking, 10km run")); // sports with "-" and numbers
     }
 }
