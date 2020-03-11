@@ -30,7 +30,9 @@ public class SportsTest {
 
         // valid sports
         assertTrue(Sports.isValidSports("-")); // no sports
+        assertTrue(Sports.isValidSports("NIL")); // no sports
         assertTrue(Sports.isValidSports("hockey")); // one sport
+        assertTrue(Sports.isValidSports("soccer, basketball")); // two sports
         assertTrue(Sports.isValidSports("track, frisbee, water polo")); // multiple sports
         assertTrue(Sports.isValidSports("Cross-country mountain biking, 10km run")); // sports with "-" and numbers
     }
