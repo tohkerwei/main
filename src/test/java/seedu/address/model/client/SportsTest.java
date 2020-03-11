@@ -42,4 +42,23 @@ public class SportsTest {
         assertTrue(Sports.isValidSports("81xtwelveriiasdfmnklanl cccoccunut")); // long weird sport
         assertTrue(Sports.isValidSports("Cross-country mountain biking, 10km run")); // sports with "-" and numbers
     }
+
+    @Test
+    public void equals_validHeight() {
+        Sports h1 = new Sports("100000m race");
+
+        assertTrue(h1.equals(h1));
+        assertTrue(h1.equals(new Sports("100000m race")));
+
+        assertFalse(h1.equals(new Sports("100000mrace")));
+    }
+
+    @Test
+    public void hashCode_validHeight() {
+        Sports h1 = new Sports("100000m race");
+
+        assertTrue(h1.hashCode() == new Sports("100000m race").hashCode());
+
+        assertFalse(h1.hashCode() == new Sports("100000mrace").hashCode());
+    }
 }
