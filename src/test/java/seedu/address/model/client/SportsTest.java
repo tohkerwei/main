@@ -30,12 +30,16 @@ public class SportsTest {
 
         // valid sports
         assertTrue(Sports.isValidSports("-")); // no sports
+        assertTrue(Sports.isValidSports(".")); // no sport
         assertTrue(Sports.isValidSports("NIL")); // no sports
+        assertTrue(Sports.isValidSports("no sport")); // no sport
         assertTrue(Sports.isValidSports("hockey")); // one sport
         assertTrue(Sports.isValidSports("soccer, basketball")); // two sports
+        assertTrue(Sports.isValidSports("soccer, basketball, diving, sumo")); // four sports
         assertTrue(Sports.isValidSports("track, frisbee, water polo")); // multiple sports
+        assertTrue(Sports.isValidSports("Swim basketlball golf chess poker")); // multiple sports separated by space
         assertTrue(Sports.isValidSports("jengabuildingfreestyle81mountainskydivingswimveryfast")); // long sport
-        assertTrue(Sports.isValidSports("81xtwelveriiasdfmnklanl cccoccunut")); //
+        assertTrue(Sports.isValidSports("81xtwelveriiasdfmnklanl cccoccunut")); // long weird sport
         assertTrue(Sports.isValidSports("Cross-country mountain biking, 10km run")); // sports with "-" and numbers
     }
 }
