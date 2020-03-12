@@ -126,7 +126,7 @@ public class ParserUtil {
     /**
      * Parses a {@code String height} into an {@code Height}.
      * Leading and trailing whitespaces will be trimmed.
-     * 
+     *
      * @throws ParseException if the given {@code height} is invalid.
      */
     public static Height parseHeight(String height) throws ParseException {
