@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
@@ -120,5 +121,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String height} into an {@code Height}.
+     * Leading and trailing whitespaces will be trimmed.
+     * 
+     * @throws ParseException if the given {@code height} is invalid.
+     */
+    public static Height parseHeight(String height) throws ParseException {
+        requireNonNull(height);
+        String trimmedHeight = height.trim();
+        if (!Height.isValidHeight(trimmedHeight)) {
+            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+        }
+        return new Height(trimmedHeight);
     }
 }
