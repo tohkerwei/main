@@ -9,9 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Sports {
 
-    public static final String MESSAGE_CONSTRAINTS = "Sports can take any values and multiple sports "
-            + "should be separated with commas. It should not be blank";
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String MESSAGE_CONSTRAINTS = "Sports can take any value, it should not be blank";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
     public final String value;
 
     /**
