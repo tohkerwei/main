@@ -162,7 +162,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseGender_validValueWithoutWhitespace_returnsEmail() throws Exception {
+    public void parseGender_validValueWithoutWhitespace_returnsGender() throws Exception {
         Gender expectedGender = Gender.MALE;
         assertEquals(expectedGender, ParserUtil.parseGender(VALID_GENDER));
     }
