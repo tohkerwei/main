@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.client.Birthday.DATE_TIME_FORMATTER;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -120,5 +124,18 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String birthday} into a {@code Birthday}.
+     * Only birth dates earlier than the current date are allowed.
+     *
+     * @throws ParseException
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        LocalDate birthdayLocalDate = LocalDate.parse(birthday, DATE_TIME_FORMATTER);
+        checkArgument(Birthday.isValidBirthday(birthdayLocalDate), Birthday.MESSAGE_CONSTRAINTS);
+        return new Birthday(birthdayLocalDate);
     }
 }
