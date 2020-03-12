@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Gender;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
@@ -93,6 +94,33 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String gender} into an {@code Gender}.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        String trimmedGenderInLowercase = trimmedGender.toLowerCase();
+        switch (trimmedGenderInLowercase) {
+        case "male":
+        case "m":
+            return Gender.MALE;
+        case "female":
+        case "f":
+            return Gender.FEMALE;
+        case "others":
+        case "o":
+            return Gender.OTHERS;
+        default:
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**
