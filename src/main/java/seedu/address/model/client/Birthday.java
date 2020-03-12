@@ -1,5 +1,6 @@
 package seedu.address.model.client;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class Birthday {
      * @param birthday A valid birth date in the form DD-MM-YYYY.
      */
     public Birthday(String birthday) {
+        requireNonNull(birthday);
         checkArgument(isValidBirthday(birthday), MESSAGE_CONSTRAINTS);
         this.value = LocalDate.parse(birthday, DATE_TIME_FORMATTER);
     }
