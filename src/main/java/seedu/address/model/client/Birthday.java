@@ -5,10 +5,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Client's birthday in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidBirthday(LocalDate)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidBirthday(String)}
  */
 public class Birthday {
 
@@ -23,18 +24,23 @@ public class Birthday {
      *
      * @param birthday A valid birth date in the form DD-MM-YYYY.
      */
-    public Birthday(LocalDate birthday) {
+    public Birthday(String birthday) {
         requireNonNull(birthday);
         checkArgument(isValidBirthday(birthday), MESSAGE_CONSTRAINTS);
-        this.value = birthday;
+        this.value = LocalDate.parse(birthday, DATE_TIME_FORMATTER);
     }
 
     /**
      * Returns true if a given string is a valid birthday.
      */
-    public static boolean isValidBirthday(LocalDate test) {
-        requireNonNull(test);
-        return (LocalDate.now().compareTo(test) > 0);
+    public static boolean isValidBirthday(String test) {
+        LocalDate testBirthday;
+        try {
+            testBirthday = LocalDate.parse(test, DATE_TIME_FORMATTER);
+            return (LocalDate.now().compareTo(testBirthday) > 0);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override
