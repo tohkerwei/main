@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.model.client.Birthday.DATE_TIME_FORMATTER;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,6 +27,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -134,8 +133,7 @@ public class ParserUtil {
      */
     public static Birthday parseBirthday(String birthday) throws ParseException {
         requireNonNull(birthday);
-        LocalDate birthdayLocalDate = LocalDate.parse(birthday, DATE_TIME_FORMATTER);
-        checkArgument(Birthday.isValidBirthday(birthdayLocalDate), Birthday.MESSAGE_CONSTRAINTS);
-        return new Birthday(birthdayLocalDate);
+        checkArgument(Birthday.isValidBirthday(birthday), Birthday.MESSAGE_CONSTRAINTS);
+        return new Birthday(birthday);
     }
 }

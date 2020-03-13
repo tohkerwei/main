@@ -18,18 +18,11 @@ class BirthdayTest {
     }
 
     @Test
-    public void constructor_invalidBirthday_throwsIllegalArgumentException() {
-        String invalidBirthday = "";
-        assertThrows(IllegalArgumentException.class, () -> new Birthday(invalidBirthday));
-    }
-
-    @Test
     public void isValidBirthday() {
         // null birthday
         assertThrows(NullPointerException.class, () -> Birthday.isValidBirthday(null));
 
         // invalid birthdays
-        assertFalse(Birthday.isValidBirthday("")); // empty string
         assertFalse(Birthday.isValidBirthday(" ")); // spaces only
         assertFalse(Birthday.isValidBirthday("91")); // random numbers
         assertFalse(Birthday.isValidBirthday("not a birthday")); // non-numeric
@@ -49,6 +42,7 @@ class BirthdayTest {
         // valid birthday
         assertTrue(Birthday.isValidBirthday("01-01-1980")); // birthday in 01-01-1980
         assertTrue(Birthday.isValidBirthday("01-01-1970")); //birthday in 01-01-1979
+        assertTrue(Birthday.isValidBirthday((""))); //default empty birthday
 
         assertTrue(new Birthday("01-01-1980").hashCode() == new Birthday("01-01-1980").hashCode());
         assertTrue(new Birthday("01-01-1980").toString().equals("01-01-1980") == true);

@@ -24,6 +24,21 @@ public class Client {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    //Optional fields
+    private Birthday birthday = new Birthday("");
+
+    /**
+     * Overloaded Client constructor for FitBiz.
+     */
+    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday) {
+        requireAllNonNull(name, phone, email, address, tags, birthday);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.birthday = birthday;
+    }
+
     /**
      * Every field must be present and not null.
      */
@@ -50,6 +65,10 @@ public class Client {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Birthday getBirthday() {
+        return birthday;
     }
 
     /**

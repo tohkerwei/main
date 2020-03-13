@@ -1,5 +1,6 @@
 package seedu.address.model.client;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -18,6 +19,7 @@ public class Birthday {
             "Birthday input should be in the format DD-MM-YYYY, and not be more current than the current date";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final LocalDate value;
+    public final String displayValue;
 
     /**
      * Constructs a {@code Birthday}.
@@ -27,7 +29,8 @@ public class Birthday {
     public Birthday(String birthday) {
         requireNonNull(birthday);
         checkArgument(isValidBirthday(birthday), MESSAGE_CONSTRAINTS);
-        this.value = LocalDate.parse(birthday, DATE_TIME_FORMATTER);
+        this.value = birthday.isEmpty() ? null : LocalDate.parse(birthday, DATE_TIME_FORMATTER);
+        this.displayValue = birthday; //assuming birthday string is valid
     }
 
     /**
@@ -35,6 +38,9 @@ public class Birthday {
      */
     public static boolean isValidBirthday(String test) {
         LocalDate testBirthday;
+        if (test.isEmpty()) {
+            return true;
+        }
         try {
             testBirthday = LocalDate.parse(test, DATE_TIME_FORMATTER);
             return (LocalDate.now().compareTo(testBirthday) > 0);
@@ -58,6 +64,14 @@ public class Birthday {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public String getAge() {
+        if (this.value == null) {
+            return "-";
+        }
+        long age = DAYS.between(LocalDate.now(), this.value) / 365;
+        return Long.toString(age);
     }
 
 }
