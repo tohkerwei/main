@@ -22,6 +22,7 @@ public class Client {
 
     // Data fields
     private final Address address;
+    private Remark remark;                    // must be changed to final 
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -33,6 +34,16 @@ public class Client {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.tags.addAll(tags);
+    }
+
+    public Client(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, remark, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
         this.tags.addAll(tags);
     }
 
@@ -50,6 +61,10 @@ public class Client {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     /**
