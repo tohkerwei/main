@@ -131,6 +131,8 @@ public class Client {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Birthday: ")
+                .append(getBirthday())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

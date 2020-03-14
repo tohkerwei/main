@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -133,7 +132,10 @@ public class ParserUtil {
      */
     public static Birthday parseBirthday(String birthday) throws ParseException {
         requireNonNull(birthday);
-        checkArgument(Birthday.isValidBirthday(birthday), Birthday.MESSAGE_CONSTRAINTS);
-        return new Birthday(birthday);
+        String trimmedBirthday = birthday.trim();
+        if (!Birthday.isValidBirthday(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthday(trimmedBirthday);
     }
 }

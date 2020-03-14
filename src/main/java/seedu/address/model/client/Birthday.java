@@ -51,6 +51,9 @@ public class Birthday {
 
     @Override
     public String toString() {
+        if (this.value == null) {
+            return "";
+        }
         return this.value.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
