@@ -25,6 +25,24 @@ public class Client {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // Start of new/optional data fields
+    // TODO: change this to final and uninitialised
+    private Birthday birthday = new Birthday("");
+
+    // TODO: remove this overloaded constructor after finalising attributes
+    /**
+     * Overloaded Client constructor for FitBiz.
+     */
+    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday) {
+        requireAllNonNull(name, phone, email, address, tags, birthday);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.birthday = birthday;
+    }
+
     /**
      * Every field must be present and not null.
      */
@@ -67,6 +85,14 @@ public class Client {
         return address;
     }
 
+    public Birthday getBirthday() {
+        return birthday;
+    }
+
+    public String getBirthdayString() {
+        return birthday.toString();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -105,6 +131,7 @@ public class Client {
         }
 
         Client otherClient = (Client) other;
+        // TODO: add checks for new/optional attributes
         return otherClient.getName().equals(getName())
                 && otherClient.getPhone().equals(getPhone())
                 && otherClient.getEmail().equals(getEmail())
@@ -115,7 +142,7 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, birthday);
     }
 
     @Override
@@ -128,6 +155,8 @@ public class Client {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Birthday: ")
+                .append(getBirthday())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

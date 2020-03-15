@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -32,7 +33,8 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "owesMoney "
+            + PREFIX_BIRTHDAY + "26-01-1980";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in the address book";

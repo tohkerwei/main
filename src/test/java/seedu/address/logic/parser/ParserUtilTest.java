@@ -106,6 +106,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseBirthday_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseBirthday((String) null));
+    }
+
+    @Test
     public void parseAddress_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
     }

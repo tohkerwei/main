@@ -11,12 +11,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
-
 
 /**
  * Jackson-friendly version of {@link Client}.
@@ -31,13 +31,15 @@ class JsonAdaptedClient {
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
+    private final String birthday;
+
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
      */
     @JsonCreator
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +47,7 @@ class JsonAdaptedClient {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.birthday = birthday;
     }
 
     /**
@@ -58,12 +61,15 @@ class JsonAdaptedClient {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        birthday = source.getBirthday().displayValue;
     }
 
     /**
-     * Converts this Jackson-friendly adapted client object into the model's {@code Client} object.
+     * Converts this Jackson-friendly adapted client object into the model's
+     * {@code Client} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted client.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted client.
      */
     public Client toModelType() throws IllegalValueException {
         final List<Tag> clientTags = new ArrayList<>();
@@ -103,8 +109,17 @@ class JsonAdaptedClient {
         }
         final Address modelAddress = new Address(address);
 
+        if (birthday == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Birthday.class.getSimpleName()));
+        }
+        if (!Birthday.isValidBirthday(birthday)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        final Birthday modelBirthday = new Birthday(birthday);
+
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday);
     }
 
 }

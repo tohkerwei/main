@@ -37,6 +37,7 @@ public class EditClientDescriptorBuilder {
         descriptor.setPhone(client.getPhone());
         descriptor.setEmail(client.getEmail());
         descriptor.setAddress(client.getAddress());
+        descriptor.setBirthday(client.getBirthday());
         descriptor.setTags(client.getTags());
     }
 

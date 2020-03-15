@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
 import seedu.address.model.client.Name;
@@ -26,6 +27,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -148,5 +150,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String birthday} into a {@code Birthday}.
+     * Only birth dates earlier than the current date are allowed.
+     *
+     * @throws ParseException
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        if (!Birthday.isValidBirthday(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthday(trimmedBirthday);
     }
 }
