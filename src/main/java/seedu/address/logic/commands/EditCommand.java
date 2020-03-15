@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -24,6 +25,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Gender;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
@@ -40,12 +42,14 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_GENDER + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_GENDER + "MALE "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_BIRTHDAY + "26-01-1980";
@@ -77,13 +81,14 @@ public class EditCommand extends Command {
         assert clientToEdit != null;
 
         Name updatedName = editClientDescriptor.getName().orElse(clientToEdit.getName());
+        Gender updatedGender = editClientDescriptor.getGender().orElse(clientToEdit.getGender());
         Phone updatedPhone = editClientDescriptor.getPhone().orElse(clientToEdit.getPhone());
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
 
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday);
+        return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday);
     }
 
     @Override
@@ -131,6 +136,7 @@ public class EditCommand extends Command {
      */
     public static class EditClientDescriptor {
         private Name name;
+        private Gender gender;
         private Phone phone;
         private Email email;
         private Address address;
@@ -146,6 +152,7 @@ public class EditCommand extends Command {
          */
         public EditClientDescriptor(EditClientDescriptor toCopy) {
             setName(toCopy.name);
+            setGender(toCopy.gender);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -166,6 +173,14 @@ public class EditCommand extends Command {
 
         public void setName(Name name) {
             this.name = name;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
         }
 
         public Optional<Phone> getPhone() {
@@ -233,6 +248,7 @@ public class EditCommand extends Command {
             EditClientDescriptor e = (EditClientDescriptor) other;
 
             return getName().equals(e.getName())
+                    && getGender().equals(e.getGender())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
