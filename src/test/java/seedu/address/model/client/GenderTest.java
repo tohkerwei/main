@@ -15,7 +15,7 @@ public class GenderTest {
 
     @Test
     public void constructor_invalidGender_throwsIllegalArgumentException() {
-        String invalidGender = "";
+        String invalidGender = " ";
         assertThrows(IllegalArgumentException.class, () -> new Gender(invalidGender));
     }
 
@@ -25,7 +25,6 @@ public class GenderTest {
         assertThrows(NullPointerException.class, () -> Gender.isValidGender(null));
 
         // invalid genders
-        assertFalse(Gender.isValidGender("")); // empty string
         assertFalse(Gender.isValidGender(" ")); // spaces only
         assertFalse(Gender.isValidGender("tranny"));
         assertFalse(Gender.isValidGender("shemale"));

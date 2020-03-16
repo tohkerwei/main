@@ -15,6 +15,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -165,5 +166,19 @@ public class ParserUtil {
             throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
         }
         return new Birthday(trimmedBirthday);
+    }
+
+    /**
+     * Parses a {@code String target weight} into a {@code TargetWeight}.
+     *
+     * @throws ParseException
+     */
+    public static TargetWeight parseTargetWeight(String targetWeight) throws ParseException {
+        requireNonNull(targetWeight);
+        String trimmedTargetWeight = targetWeight.trim();
+        if (!TargetWeight.isValidWeight(trimmedTargetWeight)) {
+            throw new ParseException(TargetWeight.MESSAGE_CONSTRAINTS);
+        }
+        return new TargetWeight(trimmedTargetWeight);
     }
 }
