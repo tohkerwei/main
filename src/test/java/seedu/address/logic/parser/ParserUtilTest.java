@@ -206,7 +206,7 @@ public class ParserUtilTest {
         Gender expectedGender = new Gender(VALID_GENDER);
         assertEquals(expectedGender, ParserUtil.parseGender(genderWithWhitespace));
     }
-    
+
     @Test
     public void parseRemark_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseRemark((String) null));

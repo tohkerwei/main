@@ -114,7 +114,7 @@ public class ParserUtil {
         return new Remark(trimmedRemark);
     }
 
-    /** 
+    /**
      * Parses a {@code String gender} into an {@code Gender}.
      *
      * @throws ParseException if the given {@code gender} is invalid.
