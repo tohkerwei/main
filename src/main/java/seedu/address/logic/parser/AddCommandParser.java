@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -19,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
 import seedu.address.model.client.Name;
@@ -40,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
                 PREFIX_GENDER, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_TAG, PREFIX_BIRTHDAY, PREFIX_TARGET_WEIGHT);
+                PREFIX_TAG, PREFIX_BIRTHDAY, PREFIX_CURRENT_WEIGHT, PREFIX_TARGET_WEIGHT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME,
                 PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
@@ -62,12 +64,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         Birthday birthday = birthdayString.isPresent()
                 ? ParserUtil.parseBirthday(birthdayString.get())
                 : new Birthday("");
+        Optional<String> currentWeightString = argMultimap.getValue(PREFIX_CURRENT_WEIGHT);
+        CurrentWeight currentWeight = currentWeightString.isPresent()
+                ? ParserUtil.parseCurrentWeight(currentWeightString.get())
+                : new CurrentWeight("");
         Optional<String> targetWeightString = argMultimap.getValue(PREFIX_TARGET_WEIGHT);
         TargetWeight targetWeight = targetWeightString.isPresent()
                 ? ParserUtil.parseTargetWeight(targetWeightString.get())
                 : new TargetWeight("");
 
-        Client client = new Client(name, gender, phone, email, address, tagList, birthday, targetWeight);
+        Client client = new Client(name, gender, phone, email, address, tagList, birthday,
+                currentWeight, targetWeight);
 
         return new AddCommand(client);
     }

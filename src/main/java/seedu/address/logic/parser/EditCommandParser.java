@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -37,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENDER, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_BIRTHDAY, PREFIX_TARGET_WEIGHT);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_BIRTHDAY, PREFIX_CURRENT_WEIGHT, PREFIX_TARGET_WEIGHT);
 
         Index index;
 
@@ -65,6 +66,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_BIRTHDAY).isPresent()) {
             editClientDescriptor.setBirthday(ParserUtil.parseBirthday(argMultimap.getValue(PREFIX_BIRTHDAY).get()));
+        }
+        if (argMultimap.getValue(PREFIX_CURRENT_WEIGHT).isPresent()) {
+            editClientDescriptor.setCurrentWeight(ParserUtil.parseCurrentWeight(argMultimap
+                    .getValue(PREFIX_CURRENT_WEIGHT).get()));
         }
         if (argMultimap.getValue(PREFIX_TARGET_WEIGHT).isPresent()) {
             editClientDescriptor.setTargetWeight(ParserUtil.parseTargetWeight(argMultimap

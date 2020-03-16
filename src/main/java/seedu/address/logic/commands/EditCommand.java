@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -25,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
 import seedu.address.model.client.Name;
@@ -42,11 +44,20 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the client identified "
             + "by the index number used in the displayed client list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_GENDER
-            + "GENDER] " + "[" + PREFIX_PHONE + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_ADDRESS
-            + "ADDRESS] " + "[" + PREFIX_TAG + "TAG]... " + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] " + "["
-            + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT\n" + "Example: " + COMMAND_WORD + " 1 " + PREFIX_GENDER + "MALE "
-            + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com " + PREFIX_BIRTHDAY + "26-01-1980";
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
+            + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT] "
+            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com "
+            + PREFIX_BIRTHDAY + "26-01-1980";
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -81,11 +92,13 @@ public class EditCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
+        CurrentWeight updatedCurrentWeight = editClientDescriptor.getCurrentWeight()
+                .orElse(clientToEdit.getCurrentWeight());
         TargetWeight updatedTargetWeight = editClientDescriptor.getTargetWeight()
                 .orElse(clientToEdit.getTargetWeight());
 
         return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedBirthday, updatedTargetWeight);
+                updatedBirthday, updatedCurrentWeight, updatedTargetWeight);
     }
 
     @Override
@@ -138,6 +151,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Birthday birthday;
+        private CurrentWeight currentWeight;
         private TargetWeight targetWeight;
 
         public EditClientDescriptor() {
@@ -154,6 +168,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setBirthday(toCopy.birthday);
+            setCurrentWeight(toCopy.currentWeight);
             setTargetWeight(toCopy.targetWeight);
         }
 
@@ -161,7 +176,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, gender, phone, email, address, tags, birthday, targetWeight);
+            return CollectionUtil.isAnyNonNull(name, gender, phone, email, address, tags, birthday,
+                    currentWeight, targetWeight);
         }
 
         public Optional<Name> getName() {
@@ -212,6 +228,14 @@ public class EditCommand extends Command {
             this.birthday = birthday;
         }
 
+        public Optional<CurrentWeight> getCurrentWeight() {
+            return Optional.ofNullable(currentWeight);
+        }
+
+        public void setCurrentWeight(CurrentWeight currentWeight) {
+            this.currentWeight = currentWeight;
+        }
+
         public Optional<TargetWeight> getTargetWeight() {
             return Optional.ofNullable(targetWeight);
         }
@@ -252,9 +276,14 @@ public class EditCommand extends Command {
             // state check
             EditClientDescriptor e = (EditClientDescriptor) other;
 
-            return getName().equals(e.getName()) && getGender().equals(e.getGender()) && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail()) && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags()) && getBirthday().equals(e.getBirthday())
+            return getName().equals(e.getName())
+                    && getPhone().equals(e.getPhone())
+                    && getGender().equals(e.getGender())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getTags().equals(e.getTags())
+                    && getBirthday().equals(e.getBirthday())
+                    && getCurrentWeight().equals(e.getCurrentWeight())
                     && getTargetWeight().equals(e.getTargetWeight());
         }
     }

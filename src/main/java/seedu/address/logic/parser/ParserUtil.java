@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Birthday;
+import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
 import seedu.address.model.client.Name;
@@ -166,6 +167,20 @@ public class ParserUtil {
             throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
         }
         return new Birthday(trimmedBirthday);
+    }
+
+    /**
+     * Parses a {@code String current weight} into a {@code CurrentWeight}.
+     *
+     * @throws ParseException
+     */
+    public static CurrentWeight parseCurrentWeight(String currentWeight) throws ParseException {
+        requireNonNull(currentWeight);
+        String trimmedCurrentWeight = currentWeight.trim();
+        if (!CurrentWeight.isValidWeight(trimmedCurrentWeight)) {
+            throw new ParseException(CurrentWeight.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentWeight(trimmedCurrentWeight);
     }
 
     /**
