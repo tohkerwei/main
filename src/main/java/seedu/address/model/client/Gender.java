@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Gender {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Gender should be Male/Female/Others, and it should not be blank";
+        "Gender should be Male/Female/Others";
 
     public final String value;
 
