@@ -53,7 +53,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
             + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT] "
-            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT\n"
+            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
