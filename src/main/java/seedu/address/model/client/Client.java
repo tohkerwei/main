@@ -86,7 +86,7 @@ public class Client {
     public TargetWeight getTargetWeight() {
         return targetWeight;
     }
-    
+
     public Height getHeight() {
         return height;
     }

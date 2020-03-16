@@ -91,7 +91,7 @@ public class EditCommand extends Command {
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
         Height updatedHeight = editClientDescriptor.getHeight().orElse(clientToEdit.getHeight());
         TargetWeight updatedTargetWeight = editClientDescriptor.getTargetWeight()
-        .orElse(clientToEdit.getTargetWeight());
+                .orElse(clientToEdit.getTargetWeight());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday,
                 updatedTargetWeight, updatedHeight);
@@ -222,7 +222,7 @@ public class EditCommand extends Command {
         public void setHeight(Height height) {
             this.height = height;
         }
-        
+
         public Optional<TargetWeight> getTargetWeight() {
             return Optional.ofNullable(targetWeight);
         }

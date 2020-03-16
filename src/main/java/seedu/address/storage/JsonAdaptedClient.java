@@ -126,7 +126,7 @@ class JsonAdaptedClient {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Birthday modelBirthday = new Birthday(birthday);
-        
+
         if (height == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Height.class.getSimpleName()));
@@ -135,7 +135,7 @@ class JsonAdaptedClient {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Height modelHeight = new Height(height);
-       
+
         if (targetWeight == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     TargetWeight.class.getSimpleName()));
@@ -146,7 +146,8 @@ class JsonAdaptedClient {
         final TargetWeight modelTargetWeight = new TargetWeight(targetWeight);
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday, modelTargetWeight, modelHeight);
+        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
+                modelTargetWeight, modelHeight);
     }
 
 }

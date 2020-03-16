@@ -154,7 +154,7 @@ public class ParserUtil {
         }
         return new Height(trimmedHeight);
     }
-    
+
     /**
      * Parses a {@code String target weight} into a {@code TargetWeight}.
      *
