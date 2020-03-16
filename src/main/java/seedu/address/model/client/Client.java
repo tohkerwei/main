@@ -36,7 +36,7 @@ public class Client {
      */
     public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
             TargetWeight targetWeight, Height height) {
-        requireAllNonNull(name, phone, email, address, tags, birthday, height);
+        requireAllNonNull(name, phone, email, address, tags, birthday);
         this.name = name;
         this.phone = phone;
         this.email = email;
