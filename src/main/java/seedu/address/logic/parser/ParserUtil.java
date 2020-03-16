@@ -18,6 +18,7 @@ import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.TargetWeight;
+import seedu.address.model.client.Sport;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -210,5 +211,19 @@ public class ParserUtil {
             throw new ParseException(TargetWeight.MESSAGE_CONSTRAINTS);
         }
         return new TargetWeight(trimmedTargetWeight);
+    }
+
+    /**
+     * Parses a {@code String sport} into a {@code Sport}.
+     *
+     * @throws ParseException
+     */
+    public static Sport parseSport(String sport) throws ParseException {
+        requireNonNull(sport);
+        String trimmedSport = sport.trim();
+        if (!Address.isValidAddress(trimmedSport)) {
+            throw new ParseException(Sport.MESSAGE_CONSTRAINTS);
+        }
+        return new Sport(trimmedSport);
     }
 }

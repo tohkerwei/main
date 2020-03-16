@@ -20,6 +20,7 @@ import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.TargetWeight;
+import seedu.address.model.client.Sport;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,6 +41,7 @@ class JsonAdaptedClient {
     private final String height;
     private final String targetWeight;
     private final String currentWeight;
+    private final String sport;
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
@@ -50,7 +52,7 @@ class JsonAdaptedClient {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("currentWeight") String currentWeight, @JsonProperty("targetWeight") String targetWeight,
-            @JsonProperty("height") String height) {
+            @JsonProperty("height") String height, @JsonProperty("sport") String sport) {
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -63,6 +65,7 @@ class JsonAdaptedClient {
         this.height = height;
         this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
+        this.sport = sport;
     }
 
     /**
@@ -81,6 +84,7 @@ class JsonAdaptedClient {
         height = source.getHeight().value;
         currentWeight = source.getCurrentWeight().value;
         targetWeight = source.getTargetWeight().value;
+        sport = source.getSport().value;
     }
 
     /**
@@ -171,10 +175,18 @@ class JsonAdaptedClient {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final TargetWeight modelTargetWeight = new TargetWeight(targetWeight);
+        if (sport == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Sport.class.getSimpleName()));
+        }
+        if (!Sport.isValidSport(sport)) {
+            throw new IllegalValueException(Sport.MESSAGE_CONSTRAINTS);
+        }
+        final Sport modelSport = new Sport(sport);
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
-            modelCurrentWeight, modelTargetWeight, modelHeight);
+            modelCurrentWeight, modelTargetWeight, modelHeight, modelSport);
     }
 
 }

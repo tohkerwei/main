@@ -31,13 +31,14 @@ public class Client {
     private Gender gender;
     private TargetWeight targetWeight;
     private Height height;
+    private Sport sport;
 
     // TODO: remove this overloaded constructor after finalising attributes
     /**
      * Overloaded Client constructor for FitBiz.
      */
     public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
-            CurrentWeight currentWeight, TargetWeight targetWeight, Height height) {
+            CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Sport sport) {
         requireAllNonNull(name, phone, email, address, tags, birthday);
         this.name = name;
         this.gender = gender;
@@ -49,6 +50,7 @@ public class Client {
         this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
         this.height = height;
+        this.sport = sport;
     }
 
     /**
@@ -113,6 +115,10 @@ public class Client {
         return height;
     }
 
+    public Sport getSport() {
+        return sport;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -162,7 +168,7 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, phone, email, address, tags, birthday, currentWeight, targetWeight, height);
+        return Objects.hash(name, gender, phone, email, address, tags, birthday, currentWeight, targetWeight, height, sport);
     }
 
     @Override
@@ -185,6 +191,8 @@ public class Client {
                 .append(getTargetWeight())
                 .append(" Height: ")
                 .append(getHeight())
+                .append(" Sport: ")
+                .append(getSport())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

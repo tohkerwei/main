@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
@@ -35,6 +36,7 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.client.Sport;
 
 /**
  * Edits the details of an existing client in the address book.
@@ -53,6 +55,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_SPORT + "SPORT] "
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
             + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT] "
             + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT] "
@@ -101,9 +104,10 @@ public class EditCommand extends Command {
                 .orElse(clientToEdit.getCurrentWeight());
         TargetWeight updatedTargetWeight = editClientDescriptor.getTargetWeight()
                 .orElse(clientToEdit.getTargetWeight());
+        Sport updatedSport = editClientDescriptor.getSport().orElse(clientToEdit.getSport());
 
         return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight);
+                updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight, updatedSport);
     }
 
     @Override
@@ -159,6 +163,7 @@ public class EditCommand extends Command {
         private Height height;
         private CurrentWeight currentWeight;
         private TargetWeight targetWeight;
+        private Sport sport;
 
         public EditClientDescriptor() {
         }
@@ -177,6 +182,7 @@ public class EditCommand extends Command {
             setHeight(toCopy.height);
             setCurrentWeight(toCopy.currentWeight);
             setTargetWeight(toCopy.targetWeight);
+            setSport(toCopy.sport);
         }
 
         /**
@@ -184,7 +190,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, gender, phone, email, address, tags, birthday,
-                    currentWeight, targetWeight, height);
+                    currentWeight, targetWeight, height, sport);
         }
 
         public Optional<Name> getName() {
@@ -259,6 +265,10 @@ public class EditCommand extends Command {
             this.targetWeight = targetWeight;
         }
 
+        public Optional<Sport> getSport() { return Optional.ofNullable(sport); }
+
+        public void setSport(Sport sport) { this.sport = sport; }
+
         /**
          * Returns an unmodifiable tag set, which throws
          * {@code UnsupportedOperationException} if modification is attempted. Returns
@@ -300,7 +310,8 @@ public class EditCommand extends Command {
                     && getBirthday().equals(e.getBirthday())
                     && getHeight().equals(e.getHeight())
                     && getCurrentWeight().equals(e.getCurrentWeight())
-                    && getTargetWeight().equals(e.getTargetWeight());
+                    && getTargetWeight().equals(e.getTargetWeight())
+                    && getSport().equals(e.getSport());
         }
     }
 }
