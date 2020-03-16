@@ -34,9 +34,11 @@ public class EditClientDescriptorBuilder {
     public EditClientDescriptorBuilder(Client client) {
         descriptor = new EditCommand.EditClientDescriptor();
         descriptor.setName(client.getName());
+        descriptor.setGender(client.getGender());
         descriptor.setPhone(client.getPhone());
         descriptor.setEmail(client.getEmail());
         descriptor.setAddress(client.getAddress());
+        descriptor.setBirthday(client.getBirthday());
         descriptor.setTags(client.getTags());
     }
 

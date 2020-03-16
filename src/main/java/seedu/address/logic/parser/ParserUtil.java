@@ -10,10 +10,15 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Birthday;
+import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Gender;
+import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
+import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +31,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -108,6 +114,33 @@ public class ParserUtil {
         return new Remark(trimmedRemark);
     }
 
+    /** 
+     * Parses a {@code String gender} into an {@code Gender}.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        String trimmedGenderInLowercase = trimmedGender.toLowerCase();
+        switch (trimmedGenderInLowercase) {
+        case "male":
+        case "m":
+            return new Gender("Male");
+        case "female":
+        case "f":
+            return new Gender("Female");
+        case "others":
+        case "o":
+            return new Gender("Others");
+        default:
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+    }
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
@@ -133,5 +166,62 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /** Parses a {@code String birthday} into a {@code Birthday}.
+     * Only birth dates earlier than the current date are allowed.
+     *
+     * @throws ParseException
+     */
+    public static Birthday parseBirthday(String birthday) throws ParseException {
+        requireNonNull(birthday);
+        String trimmedBirthday = birthday.trim();
+        if (!Birthday.isValidBirthday(trimmedBirthday)) {
+            throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
+        }
+        return new Birthday(trimmedBirthday);
+    }
+
+    /**
+     * Parses a {@code String height} into an {@code Height}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code height} is invalid.
+     */
+    public static Height parseHeight(String height) throws ParseException {
+        requireNonNull(height);
+        String trimmedHeight = height.trim();
+        if (!Height.isValidHeight(trimmedHeight)) {
+            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+        }
+        return new Height(trimmedHeight);
+    }
+
+    /**
+     * Parses a {@code String current weight} into a {@code CurrentWeight}.
+     *
+     * @throws ParseException
+     */
+    public static CurrentWeight parseCurrentWeight(String currentWeight) throws ParseException {
+        requireNonNull(currentWeight);
+        String trimmedCurrentWeight = currentWeight.trim();
+        if (!CurrentWeight.isValidWeight(trimmedCurrentWeight)) {
+            throw new ParseException(CurrentWeight.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentWeight(trimmedCurrentWeight);
+    }
+
+    /**
+     * Parses a {@code String target weight} into a {@code TargetWeight}.
+     *
+     * @throws ParseException
+     */
+    public static TargetWeight parseTargetWeight(String targetWeight) throws ParseException {
+        requireNonNull(targetWeight);
+        String trimmedTargetWeight = targetWeight.trim();
+        if (!TargetWeight.isValidWeight(trimmedTargetWeight)) {
+            throw new ParseException(TargetWeight.MESSAGE_CONSTRAINTS);
+        }
+        return new TargetWeight(trimmedTargetWeight);
     }
 }

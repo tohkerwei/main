@@ -29,7 +29,7 @@ public class TargetWeight {
      * Returns true if a given string is a valid weight.
      */
     public static boolean isValidWeight(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.equals("") || test.matches(VALIDATION_REGEX);
     }
 
     @Override

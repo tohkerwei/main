@@ -22,8 +22,35 @@ public class Client {
 
     // Data fields
     private final Address address;
-    private Remark remark;                    // must be changed to final 
     private final Set<Tag> tags = new HashSet<>();
+
+    // Start of new/optional data fields
+    // TODO: change this to final and uninitialised
+    private Birthday birthday = new Birthday("");
+    private CurrentWeight currentWeight;
+    private Gender gender;
+    private TargetWeight targetWeight;
+    private Height height;
+    private Remark remark;
+
+    // TODO: remove this overloaded constructor after finalising attributes
+    /**
+     * Overloaded Client constructor for FitBiz.
+     */
+    public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
+            CurrentWeight currentWeight, TargetWeight targetWeight, Height height) {
+        requireAllNonNull(name, phone, email, address, tags, birthday);
+        this.name = name;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.birthday = birthday;
+        this.currentWeight = currentWeight;
+        this.targetWeight = targetWeight;
+        this.height = height;
+    }
 
     /**
      * Every field must be present and not null.
@@ -37,9 +64,10 @@ public class Client {
         this.tags.addAll(tags);
     }
 
-    public Client(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, remark, tags);
+    public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
+        this.gender = gender;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -49,6 +77,10 @@ public class Client {
 
     public Name getName() {
         return name;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     public Phone getPhone() {
@@ -65,6 +97,26 @@ public class Client {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public Birthday getBirthday() {
+        return birthday;
+    }
+
+    public String getBirthdayString() {
+        return birthday.toString();
+    }
+
+    public CurrentWeight getCurrentWeight() {
+        return currentWeight;
+    }
+
+    public TargetWeight getTargetWeight() {
+        return targetWeight;
+    }
+
+    public Height getHeight() {
+        return height;
     }
 
     /**
@@ -86,7 +138,8 @@ public class Client {
 
         return otherClient != null
                 && otherClient.getName().equals(getName())
-                && (otherClient.getPhone().equals(getPhone()) || otherClient.getEmail().equals(getEmail()));
+                && (otherClient.getPhone().equals(getPhone())
+                || otherClient.getEmail().equals(getEmail()));
     }
 
     /**
@@ -104,6 +157,7 @@ public class Client {
         }
 
         Client otherClient = (Client) other;
+        // TODO: add checks for new/optional attributes
         return otherClient.getName().equals(getName())
                 && otherClient.getPhone().equals(getPhone())
                 && otherClient.getEmail().equals(getEmail())
@@ -114,19 +168,29 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, gender, phone, email, address, tags, birthday, currentWeight, targetWeight, height);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Gender: ")
+                .append(getGender())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Birthday: ")
+                .append(getBirthday())
+                .append(" Current Weight: ")
+                .append(getCurrentWeight())
+                .append(" Target Weight: ")
+                .append(getTargetWeight())
+                .append(" Height: ")
+                .append(getHeight())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
