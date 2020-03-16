@@ -48,13 +48,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
-<<<<<<< HEAD
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY]"
+            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT]"
             + "[" + PREFIX_HEIGHT + "HEIGHT]\n"
-=======
-            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
-            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT\n"
->>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
@@ -93,17 +89,12 @@ public class EditCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
-<<<<<<< HEAD
         Height updatedHeight = editClientDescriptor.getHeight().orElse(clientToEdit.getHeight());
-
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday, updatedHeight);
-=======
         TargetWeight updatedTargetWeight = editClientDescriptor.getTargetWeight()
-                .orElse(clientToEdit.getTargetWeight());
+        .orElse(clientToEdit.getTargetWeight());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday,
-                updatedTargetWeight);
->>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
+                updatedTargetWeight, updatedHeight);
     }
 
     @Override
@@ -156,11 +147,8 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Birthday birthday;
-<<<<<<< HEAD
         private Height height;
-=======
         private TargetWeight targetWeight;
->>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
 
         public EditClientDescriptor() {
         }
@@ -176,22 +164,15 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setBirthday(toCopy.birthday);
-<<<<<<< HEAD
             setHeight(toCopy.height);
-=======
             setTargetWeight(toCopy.targetWeight);
->>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-<<<<<<< HEAD
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday, height);
-=======
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday, targetWeight);
->>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday, targetWeight, height);
         }
 
         public Optional<Name> getName() {
@@ -288,11 +269,8 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
                     && getBirthday().equals(e.getBirthday())
-<<<<<<< HEAD
-                    && getHeight().equals(e.getHeight());
-=======
+                    && getHeight().equals(e.getHeight())
                     && getTargetWeight().equals(e.getTargetWeight());
->>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
         }
     }
 }
