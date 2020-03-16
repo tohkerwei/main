@@ -27,6 +27,7 @@ public class Client {
     // Start of new/optional data fields
     // TODO: change this to final and uninitialised
     private Birthday birthday = new Birthday("");
+    private CurrentWeight currentWeight;
     private TargetWeight targetWeight;
 
     // TODO: remove this overloaded constructor after finalising attributes
@@ -34,7 +35,7 @@ public class Client {
      * Overloaded Client constructor for FitBiz.
      */
     public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
-            TargetWeight targetWeight) {
+            CurrentWeight currentWeight, TargetWeight targetWeight) {
         requireAllNonNull(name, phone, email, address, tags, birthday);
         this.name = name;
         this.phone = phone;
@@ -42,6 +43,7 @@ public class Client {
         this.address = address;
         this.tags.addAll(tags);
         this.birthday = birthday;
+        this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
     }
 
@@ -79,6 +81,10 @@ public class Client {
 
     public String getBirthdayString() {
         return birthday.toString();
+    }
+
+    public CurrentWeight getCurrentWeight() {
+        return currentWeight;
     }
 
     public TargetWeight getTargetWeight() {
@@ -133,7 +139,7 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, birthday, targetWeight);
+        return Objects.hash(name, phone, email, address, tags, birthday, currentWeight, targetWeight);
     }
 
     @Override
@@ -148,6 +154,8 @@ public class Client {
                 .append(getAddress())
                 .append(" Birthday: ")
                 .append(getBirthday())
+                .append(" Current Weight: ")
+                .append(getCurrentWeight())
                 .append(" Target Weight: ")
                 .append(getTargetWeight())
                 .append(" Tags: ");
