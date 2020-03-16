@@ -17,6 +17,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,6 +35,7 @@ class JsonAdaptedClient {
 
     private final String birthday;
     private final String height;
+    private final String targetWeight;
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
@@ -42,7 +44,7 @@ class JsonAdaptedClient {
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("height") String height) {
+            @JsonProperty("targetWeight") String targetWeight, @JsonProperty("height") String height) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -52,6 +54,7 @@ class JsonAdaptedClient {
         }
         this.birthday = birthday;
         this.height = height;
+        this.targetWeight = targetWeight;
     }
 
     /**
@@ -67,6 +70,7 @@ class JsonAdaptedClient {
                 .collect(Collectors.toList()));
         birthday = source.getBirthday().displayValue;
         height = source.getHeight().value;
+        targetWeight = source.getTargetWeight().value;
     }
 
     /**
@@ -122,6 +126,7 @@ class JsonAdaptedClient {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Birthday modelBirthday = new Birthday(birthday);
+        
         if (height == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Height.class.getSimpleName()));
@@ -130,8 +135,18 @@ class JsonAdaptedClient {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Height modelHeight = new Height(height);
+       
+        if (targetWeight == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TargetWeight.class.getSimpleName()));
+        }
+        if (!TargetWeight.isValidWeight(targetWeight)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        final TargetWeight modelTargetWeight = new TargetWeight(targetWeight);
+
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday, modelHeight);
+        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday, modelTargetWeight, modelHeight);
     }
 
 }

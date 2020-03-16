@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.Collections;
@@ -28,6 +29,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,8 +48,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
+<<<<<<< HEAD
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY]"
             + "[" + PREFIX_HEIGHT + "HEIGHT]\n"
+=======
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
+            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT\n"
+>>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
@@ -86,9 +93,17 @@ public class EditCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
+<<<<<<< HEAD
         Height updatedHeight = editClientDescriptor.getHeight().orElse(clientToEdit.getHeight());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday, updatedHeight);
+=======
+        TargetWeight updatedTargetWeight = editClientDescriptor.getTargetWeight()
+                .orElse(clientToEdit.getTargetWeight());
+
+        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday,
+                updatedTargetWeight);
+>>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
     }
 
     @Override
@@ -141,7 +156,11 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Birthday birthday;
+<<<<<<< HEAD
         private Height height;
+=======
+        private TargetWeight targetWeight;
+>>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
 
         public EditClientDescriptor() {
         }
@@ -157,14 +176,22 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setBirthday(toCopy.birthday);
+<<<<<<< HEAD
             setHeight(toCopy.height);
+=======
+            setTargetWeight(toCopy.targetWeight);
+>>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
+<<<<<<< HEAD
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday, height);
+=======
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday, targetWeight);
+>>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
         }
 
         public Optional<Name> getName() {
@@ -214,6 +241,14 @@ public class EditCommand extends Command {
         public void setHeight(Height height) {
             this.height = height;
         }
+        
+        public Optional<TargetWeight> getTargetWeight() {
+            return Optional.ofNullable(targetWeight);
+        }
+
+        public void setTargetWeight(TargetWeight targetWeight) {
+            this.targetWeight = targetWeight;
+        }
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
@@ -253,7 +288,11 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
                     && getBirthday().equals(e.getBirthday())
+<<<<<<< HEAD
                     && getHeight().equals(e.getHeight());
+=======
+                    && getTargetWeight().equals(e.getTargetWeight());
+>>>>>>> c4863ea7f22f22d1f1210baf2ad4ec85b4036a57
         }
     }
 }

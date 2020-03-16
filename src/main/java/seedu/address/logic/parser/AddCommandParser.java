@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 
 import java.util.Optional;
 import java.util.Set;
@@ -22,6 +23,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_BIRTHDAY, PREFIX_HEIGHT);
+                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_BIRTHDAY, PREFIX_HEIGHT, PREFIX_TARGET_WEIGHT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -57,7 +59,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Height height = heightString.isPresent() ? ParserUtil.parseHeight(heightString.get())
                 : new Height("");
 
-        Client client = new Client(name, phone, email, address, tagList, birthday, height);
+        Optional<String> targetWeightString = argMultimap.getValue(PREFIX_TARGET_WEIGHT);
+        TargetWeight targetWeight = targetWeightString.isPresent()
+                ? ParserUtil.parseTargetWeight(targetWeightString.get())
+                : new TargetWeight("");
+
+        Client client = new Client(name, phone, email, address, tagList, birthday, targetWeight, height);
 
         return new AddCommand(client);
     }
