@@ -15,7 +15,7 @@ public class CurrentWeightTest {
 
     @Test
     public void constructor_invalidCurrentWeight_throwsIllegalArgumentException() {
-        String invalidCurrentWeight = "";
+        String invalidCurrentWeight = "i";
         assertThrows(IllegalArgumentException.class, () -> new CurrentWeight(invalidCurrentWeight));
     }
 
@@ -25,7 +25,6 @@ public class CurrentWeightTest {
         assertThrows(NullPointerException.class, () -> CurrentWeight.isValidWeight(null));
 
         // invalid weight
-        assertFalse(CurrentWeight.isValidWeight("")); // empty string
         assertFalse(CurrentWeight.isValidWeight(" ")); // spaces only
         assertFalse(CurrentWeight.isValidWeight("ab")); // contains no numbers
         assertFalse(CurrentWeight.isValidWeight("a.b")); // contains no numbers
@@ -46,6 +45,7 @@ public class CurrentWeightTest {
         assertFalse(CurrentWeight.isValidWeight("23.2'3")); // wrong symbols
 
         // valid weight
+        assertTrue(CurrentWeight.isValidWeight("")); // empty string
         assertTrue(CurrentWeight.isValidWeight("0")); // single digit
         assertTrue(CurrentWeight.isValidWeight("5")); // single digit
         assertTrue(CurrentWeight.isValidWeight("456")); // numbers only

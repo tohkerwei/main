@@ -11,7 +11,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Birthday;
+import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -100,6 +102,33 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String gender} into an {@code Gender}.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        String trimmedGenderInLowercase = trimmedGender.toLowerCase();
+        switch (trimmedGenderInLowercase) {
+        case "male":
+        case "m":
+            return new Gender("Male");
+        case "female":
+        case "f":
+            return new Gender("Female");
+        case "others":
+        case "o":
+            return new Gender("Others");
+        default:
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -153,6 +182,20 @@ public class ParserUtil {
             throw new ParseException(Height.MESSAGE_CONSTRAINTS);
         }
         return new Height(trimmedHeight);
+    }
+
+    /**
+     * Parses a {@code String current weight} into a {@code CurrentWeight}.
+     *
+     * @throws ParseException
+     */
+    public static CurrentWeight parseCurrentWeight(String currentWeight) throws ParseException {
+        requireNonNull(currentWeight);
+        String trimmedCurrentWeight = currentWeight.trim();
+        if (!CurrentWeight.isValidWeight(trimmedCurrentWeight)) {
+            throw new ParseException(CurrentWeight.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentWeight(trimmedCurrentWeight);
     }
 
     /**
