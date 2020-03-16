@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -29,6 +30,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
+import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.TargetWeight;
@@ -53,11 +55,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
             + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT] "
-            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT]\n"
+            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT] "
+            + "[" + PREFIX_HEIGHT + "HEIGHT]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_BIRTHDAY + "26-01-1980";
+            + PREFIX_BIRTHDAY + "26-01-1980"
+            + PREFIX_HEIGHT + "156";
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -92,13 +96,14 @@ public class EditCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
+        Height updatedHeight = editClientDescriptor.getHeight().orElse(clientToEdit.getHeight());
         CurrentWeight updatedCurrentWeight = editClientDescriptor.getCurrentWeight()
                 .orElse(clientToEdit.getCurrentWeight());
         TargetWeight updatedTargetWeight = editClientDescriptor.getTargetWeight()
                 .orElse(clientToEdit.getTargetWeight());
 
         return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedBirthday, updatedCurrentWeight, updatedTargetWeight);
+                updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight);
     }
 
     @Override
@@ -151,6 +156,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Birthday birthday;
+        private Height height;
         private CurrentWeight currentWeight;
         private TargetWeight targetWeight;
 
@@ -168,6 +174,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setBirthday(toCopy.birthday);
+            setHeight(toCopy.height);
             setCurrentWeight(toCopy.currentWeight);
             setTargetWeight(toCopy.targetWeight);
         }
@@ -177,7 +184,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, gender, phone, email, address, tags, birthday,
-                    currentWeight, targetWeight);
+                    currentWeight, targetWeight, height);
         }
 
         public Optional<Name> getName() {
@@ -226,6 +233,14 @@ public class EditCommand extends Command {
 
         public void setBirthday(Birthday birthday) {
             this.birthday = birthday;
+        }
+
+        public Optional<Height> getHeight() {
+            return Optional.ofNullable(height);
+        }
+
+        public void setHeight(Height height) {
+            this.height = height;
         }
 
         public Optional<CurrentWeight> getCurrentWeight() {
@@ -283,6 +298,7 @@ public class EditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
                     && getBirthday().equals(e.getBirthday())
+                    && getHeight().equals(e.getHeight())
                     && getCurrentWeight().equals(e.getCurrentWeight())
                     && getTargetWeight().equals(e.getTargetWeight());
         }

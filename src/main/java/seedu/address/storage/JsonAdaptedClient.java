@@ -16,6 +16,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
+import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.TargetWeight;
@@ -36,6 +37,7 @@ class JsonAdaptedClient {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     private final String birthday;
+    private final String height;
     private final String targetWeight;
     private final String currentWeight;
 
@@ -47,7 +49,8 @@ class JsonAdaptedClient {
             @JsonProperty("gender") String gender, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("currentWeight") String currentWeight, @JsonProperty("targetWeight") String targetWeight) {
+            @JsonProperty("currentWeight") String currentWeight, @JsonProperty("targetWeight") String targetWeight,
+            @JsonProperty("height") String height) {
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -57,6 +60,7 @@ class JsonAdaptedClient {
             this.tagged.addAll(tagged);
         }
         this.birthday = birthday;
+        this.height = height;
         this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
     }
@@ -74,6 +78,7 @@ class JsonAdaptedClient {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         birthday = source.getBirthday().displayValue;
+        height = source.getHeight().value;
         currentWeight = source.getCurrentWeight().value;
         targetWeight = source.getTargetWeight().value;
     }
@@ -140,6 +145,15 @@ class JsonAdaptedClient {
         }
         final Birthday modelBirthday = new Birthday(birthday);
 
+        if (height == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Height.class.getSimpleName()));
+        }
+        if (!Height.isValidHeight(height)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        final Height modelHeight = new Height(height);
+
         if (currentWeight == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     CurrentWeight.class.getSimpleName()));
@@ -160,7 +174,7 @@ class JsonAdaptedClient {
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
-            modelCurrentWeight, modelTargetWeight);
+            modelCurrentWeight, modelTargetWeight, modelHeight);
     }
 
 }

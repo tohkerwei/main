@@ -14,6 +14,7 @@ import seedu.address.model.client.Birthday;
 import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
+import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.TargetWeight;
@@ -154,8 +155,7 @@ public class ParserUtil {
         return tagSet;
     }
 
-    /**
-     * Parses a {@code String birthday} into a {@code Birthday}.
+    /** Parses a {@code String birthday} into a {@code Birthday}.
      * Only birth dates earlier than the current date are allowed.
      *
      * @throws ParseException
@@ -167,6 +167,21 @@ public class ParserUtil {
             throw new ParseException(Birthday.MESSAGE_CONSTRAINTS);
         }
         return new Birthday(trimmedBirthday);
+    }
+
+    /**
+     * Parses a {@code String height} into an {@code Height}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code height} is invalid.
+     */
+    public static Height parseHeight(String height) throws ParseException {
+        requireNonNull(height);
+        String trimmedHeight = height.trim();
+        if (!Height.isValidHeight(trimmedHeight)) {
+            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+        }
+        return new Height(trimmedHeight);
     }
 
     /**
