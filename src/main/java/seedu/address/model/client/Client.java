@@ -38,7 +38,7 @@ public class Client {
      * Overloaded Client constructor for FitBiz.
      */
     public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
-            CurrentWeight currentWeight, TargetWeight targetWeight, Height height) {
+            CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Remark remark) {
         requireAllNonNull(name, phone, email, address, tags, birthday);
         this.name = name;
         this.gender = gender;
@@ -50,6 +50,7 @@ public class Client {
         this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
         this.height = height;
+        this.remark = remark;
     }
 
     /**
@@ -71,7 +72,6 @@ public class Client {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.remark = remark;
         this.tags.addAll(tags);
     }
 
@@ -168,7 +168,7 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, phone, email, address, tags, birthday, currentWeight, targetWeight, height);
+        return Objects.hash(name, gender, phone, email, address, tags, birthday, currentWeight, targetWeight, height, remark);
     }
 
     @Override
@@ -191,6 +191,8 @@ public class Client {
                 .append(getTargetWeight())
                 .append(" Height: ")
                 .append(getHeight())
+                .append(" Remark: ")
+                .append(getRemark())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
@@ -33,6 +34,7 @@ import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
@@ -56,7 +58,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
             + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT] "
             + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT] "
-            + "[" + PREFIX_HEIGHT + "HEIGHT]\n"
+            + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
@@ -101,9 +104,11 @@ public class EditCommand extends Command {
                 .orElse(clientToEdit.getCurrentWeight());
         TargetWeight updatedTargetWeight = editClientDescriptor.getTargetWeight()
                 .orElse(clientToEdit.getTargetWeight());
+        Remark updatedRemark = editClientDescriptor.getRemark()
+                .orElse(clientToEdit.getRemark());
 
         return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight);
+                updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight, updatedRemark);
     }
 
     @Override
@@ -159,6 +164,7 @@ public class EditCommand extends Command {
         private Height height;
         private CurrentWeight currentWeight;
         private TargetWeight targetWeight;
+        private Remark remark;
 
         public EditClientDescriptor() {
         }
@@ -177,6 +183,7 @@ public class EditCommand extends Command {
             setHeight(toCopy.height);
             setCurrentWeight(toCopy.currentWeight);
             setTargetWeight(toCopy.targetWeight);
+            setRemark(toCopy.remark);
         }
 
         /**
@@ -184,7 +191,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, gender, phone, email, address, tags, birthday,
-                    currentWeight, targetWeight, height);
+                    currentWeight, targetWeight, height, remark);
         }
 
         public Optional<Name> getName() {
@@ -259,6 +266,14 @@ public class EditCommand extends Command {
             this.targetWeight = targetWeight;
         }
 
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
+        }
+
+        public void setRemark(Remark remark) {
+            this.remark = remark;
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws
          * {@code UnsupportedOperationException} if modification is attempted. Returns
@@ -300,7 +315,8 @@ public class EditCommand extends Command {
                     && getBirthday().equals(e.getBirthday())
                     && getHeight().equals(e.getHeight())
                     && getCurrentWeight().equals(e.getCurrentWeight())
-                    && getTargetWeight().equals(e.getTargetWeight());
+                    && getTargetWeight().equals(e.getTargetWeight())
+                    && getRemark().equals(e.getRemark());
         }
     }
 }
