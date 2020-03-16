@@ -30,7 +30,7 @@ public class Gender {
      */
     public static boolean isValidGender(String test) {
         requireNonNull(test);
-        String testInLowerCase = test.toLowerCase();
+        String testInLowerCase = test.trim().toLowerCase();
         return testInLowerCase.equals("male")
             || testInLowerCase.equals("m")
             || testInLowerCase.equals("female")
