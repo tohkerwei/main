@@ -16,6 +16,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,6 +33,7 @@ class JsonAdaptedClient {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     private final String birthday;
+    private final String targetWeight;
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
@@ -39,7 +41,8 @@ class JsonAdaptedClient {
     @JsonCreator
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("targetWeight") String targetWeight) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,6 +51,7 @@ class JsonAdaptedClient {
             this.tagged.addAll(tagged);
         }
         this.birthday = birthday;
+        this.targetWeight = targetWeight;
     }
 
     /**
@@ -62,6 +66,7 @@ class JsonAdaptedClient {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         birthday = source.getBirthday().displayValue;
+        targetWeight = source.getTargetWeight().value;
     }
 
     /**
@@ -118,8 +123,17 @@ class JsonAdaptedClient {
         }
         final Birthday modelBirthday = new Birthday(birthday);
 
+        if (targetWeight == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TargetWeight.class.getSimpleName()));
+        }
+        if (!TargetWeight.isValidWeight(targetWeight)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        final TargetWeight modelTargetWeight = new TargetWeight(targetWeight);
+
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday);
+        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday, modelTargetWeight);
     }
 
 }

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.Collections;
@@ -26,6 +27,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,7 +46,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY]\n"
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
+            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
@@ -82,8 +85,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
+        TargetWeight updatedTargetWeight = editClientDescriptor.getTargetWeight()
+                .orElse(clientToEdit.getTargetWeight());
 
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday);
+        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday,
+                updatedTargetWeight);
     }
 
     @Override
@@ -136,6 +142,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Birthday birthday;
+        private TargetWeight targetWeight;
 
         public EditClientDescriptor() {
         }
@@ -151,13 +158,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setBirthday(toCopy.birthday);
+            setTargetWeight(toCopy.targetWeight);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday, targetWeight);
         }
 
         public Optional<Name> getName() {
@@ -200,6 +208,14 @@ public class EditCommand extends Command {
             this.birthday = birthday;
         }
 
+        public Optional<TargetWeight> getTargetWeight() {
+            return Optional.ofNullable(targetWeight);
+        }
+
+        public void setTargetWeight(TargetWeight targetWeight) {
+            this.targetWeight = targetWeight;
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -237,7 +253,8 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getBirthday().equals(e.getBirthday());
+                    && getBirthday().equals(e.getBirthday())
+                    && getTargetWeight().equals(e.getTargetWeight());
         }
     }
 }
