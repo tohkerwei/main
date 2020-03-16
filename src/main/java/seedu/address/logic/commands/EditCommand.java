@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENT_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -27,6 +28,7 @@ import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Gender;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.TargetWeight;
@@ -44,12 +46,13 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
-            + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT "
+            + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT] "
             + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -83,6 +86,7 @@ public class EditCommand extends Command {
         assert clientToEdit != null;
 
         Name updatedName = editClientDescriptor.getName().orElse(clientToEdit.getName());
+        Gender updatedGender = editClientDescriptor.getGender().orElse(clientToEdit.getGender());
         Phone updatedPhone = editClientDescriptor.getPhone().orElse(clientToEdit.getPhone());
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
@@ -93,8 +97,8 @@ public class EditCommand extends Command {
         TargetWeight updatedTargetWeight = editClientDescriptor.getTargetWeight()
                 .orElse(clientToEdit.getTargetWeight());
 
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday,
-                updatedCurrentWeight, updatedTargetWeight);
+        return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedBirthday, updatedCurrentWeight, updatedTargetWeight);
     }
 
     @Override
@@ -132,16 +136,16 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
-                && editClientDescriptor.equals(e.editClientDescriptor);
+        return index.equals(e.index) && editClientDescriptor.equals(e.editClientDescriptor);
     }
 
     /**
-     * Stores the details to edit the client with. Each non-empty field value will replace the
-     * corresponding field value of the client.
+     * Stores the details to edit the client with. Each non-empty field value will
+     * replace the corresponding field value of the client.
      */
     public static class EditClientDescriptor {
         private Name name;
+        private Gender gender;
         private Phone phone;
         private Email email;
         private Address address;
@@ -154,11 +158,11 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * Copy constructor. A defensive copy of {@code tags} is used internally.
          */
         public EditClientDescriptor(EditClientDescriptor toCopy) {
             setName(toCopy.name);
+            setGender(toCopy.gender);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -172,8 +176,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday, currentWeight,
-                    targetWeight);
+            return CollectionUtil.isAnyNonNull(name, gender, phone, email, address, tags, birthday,
+                    currentWeight, targetWeight);
         }
 
         public Optional<Name> getName() {
@@ -182,6 +186,14 @@ public class EditCommand extends Command {
 
         public void setName(Name name) {
             this.name = name;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
         }
 
         public Optional<Phone> getPhone() {
@@ -233,17 +245,17 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns an unmodifiable tag set, which throws
+         * {@code UnsupportedOperationException} if modification is attempted. Returns
+         * {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code tags} to this object's {@code tags}. A defensive copy of
+         * {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
@@ -266,6 +278,7 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
+                    && getGender().equals(e.getGender())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())

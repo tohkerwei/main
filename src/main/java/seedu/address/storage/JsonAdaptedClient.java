@@ -15,6 +15,7 @@ import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Gender;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.TargetWeight;
@@ -28,6 +29,7 @@ class JsonAdaptedClient {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Client's %s field is missing!";
 
     private final String name;
+    private final String gender;
     private final String phone;
     private final String email;
     private final String address;
@@ -41,11 +43,13 @@ class JsonAdaptedClient {
      * Constructs a {@code JsonAdaptedClient} with the given client details.
      */
     @JsonCreator
-    public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedClient(@JsonProperty("name") String name,
+            @JsonProperty("gender") String gender, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("currentWeight") String currentWeight, @JsonProperty("targetWeight") String targetWeight) {
         this.name = name;
+        this.gender = gender;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -62,6 +66,7 @@ class JsonAdaptedClient {
      */
     public JsonAdaptedClient(Client source) {
         name = source.getName().fullName;
+        gender = source.getGender().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -93,6 +98,14 @@ class JsonAdaptedClient {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (gender == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        final Gender modelGender = new Gender(gender);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -146,8 +159,8 @@ class JsonAdaptedClient {
         final TargetWeight modelTargetWeight = new TargetWeight(targetWeight);
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
-                modelCurrentWeight, modelTargetWeight);
+        return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
+            modelCurrentWeight, modelTargetWeight);
     }
 
 }
