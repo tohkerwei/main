@@ -42,7 +42,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_GENDER + "NAME] "
+            + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -164,7 +164,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday);
+            return CollectionUtil.isAnyNonNull(name, gender, phone, email, address, tags, birthday);
         }
 
         public Optional<Name> getName() {

@@ -113,13 +113,13 @@ public class ParserUtil {
         switch (trimmedGenderInLowercase) {
         case "male":
         case "m":
-            return Gender.MALE;
+            return new Gender("Male");
         case "female":
         case "f":
-            return Gender.FEMALE;
+            return new Gender("Female");
         case "others":
         case "o":
-            return Gender.OTHERS;
+            return new Gender("Others");
         default:
             throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
         }

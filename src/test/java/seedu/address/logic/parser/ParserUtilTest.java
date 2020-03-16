@@ -168,14 +168,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseGender_validValueWithoutWhitespace_returnsGender() throws Exception {
-        Gender expectedGender = Gender.MALE;
+        Gender expectedGender = new Gender(VALID_GENDER);
         assertEquals(expectedGender, ParserUtil.parseGender(VALID_GENDER));
     }
 
     @Test
     public void parseGender_validValueWithWhitespace_returnsTrimmedGender() throws Exception {
         String genderWithWhitespace = WHITESPACE + VALID_GENDER + WHITESPACE;
-        Gender expectedGender = Gender.MALE;
+        Gender expectedGender = new Gender(VALID_GENDER);
         assertEquals(expectedGender, ParserUtil.parseGender(genderWithWhitespace));
     }
 

@@ -59,7 +59,7 @@ class JsonAdaptedClient {
      */
     public JsonAdaptedClient(Client source) {
         name = source.getName().fullName;
-        gender = source.getGender().toString();
+        gender = source.getGender().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -96,11 +96,7 @@ class JsonAdaptedClient {
         if (!Gender.isValidGender(gender)) {
             throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
         }
-        String genderInLowercase = gender.toLowerCase();
-        // need better way to write this
-        final Gender modelGender = (genderInLowercase == "m" || genderInLowercase == "male") ? 
-            Gender.MALE : (genderInLowercase == "f" || genderInLowercase == "female") ? 
-            Gender.FEMALE : Gender.OTHERS;
+        final Gender modelGender = new Gender(gender);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
