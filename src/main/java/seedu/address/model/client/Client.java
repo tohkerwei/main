@@ -27,19 +27,21 @@ public class Client {
     // Start of new/optional data fields
     // TODO: change this to final and uninitialised
     private Birthday birthday = new Birthday("");
+    private Height height;
 
     // TODO: remove this overloaded constructor after finalising attributes
     /**
      * Overloaded Client constructor for FitBiz.
      */
-    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday) {
-        requireAllNonNull(name, phone, email, address, tags, birthday);
+    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday, Height height) {
+        requireAllNonNull(name, phone, email, address, tags, birthday, height);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.birthday = birthday;
+        this.height = height;
     }
 
     /**
@@ -76,6 +78,10 @@ public class Client {
 
     public String getBirthdayString() {
         return birthday.toString();
+    }
+
+    public Height getHeight() {
+        return height;
     }
 
     /**
@@ -126,7 +132,7 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, birthday);
+        return Objects.hash(name, phone, email, address, tags, birthday, height);
     }
 
     @Override
@@ -141,6 +147,8 @@ public class Client {
                 .append(getAddress())
                 .append(" Birthday: ")
                 .append(getBirthday())
+                .append(" Height: ")
+                .append(getHeight())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

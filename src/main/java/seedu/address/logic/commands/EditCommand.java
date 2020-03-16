@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -24,6 +25,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
@@ -44,11 +46,13 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY]\n"
+            + "[" + PREFIX_BIRTHDAY + "BIRTHDAY]"
+            + "[" + PREFIX_HEIGHT + "HEIGHT]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com "
-            + PREFIX_BIRTHDAY + "26-01-1980";
+            + PREFIX_BIRTHDAY + "26-01-1980"
+            + PREFIX_HEIGHT + "156";
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -82,8 +86,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
+        Height updatedHeight = editClientDescriptor.getHeight().orElse(clientToEdit.getHeight());
 
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday);
+        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday, updatedHeight);
     }
 
     @Override
@@ -136,6 +141,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Birthday birthday;
+        private Height height;
 
         public EditClientDescriptor() {
         }
@@ -151,13 +157,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setBirthday(toCopy.birthday);
+            setHeight(toCopy.height);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthday, height);
         }
 
         public Optional<Name> getName() {
@@ -200,6 +207,14 @@ public class EditCommand extends Command {
             this.birthday = birthday;
         }
 
+        public Optional<Height> getHeight() {
+            return Optional.ofNullable(height);
+        }
+
+        public void setHeight(Height height) {
+            this.height = height;
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -237,7 +252,8 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getBirthday().equals(e.getBirthday());
+                    && getBirthday().equals(e.getBirthday())
+                    && getHeight().equals(e.getHeight());
         }
     }
 }

@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -18,6 +19,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.tag.Tag;
@@ -35,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_BIRTHDAY);
+                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_BIRTHDAY, PREFIX_HEIGHT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -51,8 +53,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Optional<String> birthdayString = argMultimap.getValue(PREFIX_BIRTHDAY);
         Birthday birthday = birthdayString.isPresent() ? ParserUtil.parseBirthday(birthdayString.get())
                 : new Birthday("");
+        Optional<String> heightString = argMultimap.getValue(PREFIX_HEIGHT);
+        Height height = heightString.isPresent() ? ParserUtil.parseHeight(heightString.get())
+                : new Height("");
 
-        Client client = new Client(name, phone, email, address, tagList, birthday);
+        Client client = new Client(name, phone, email, address, tagList, birthday, height);
 
         return new AddCommand(client);
     }
