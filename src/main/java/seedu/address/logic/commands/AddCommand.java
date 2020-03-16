@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT] "
-            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT]"
+            + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT] "
             + "[" + PREFIX_HEIGHT + "HEIGHT]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
