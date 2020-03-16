@@ -20,7 +20,6 @@ import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.client.Sport;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -38,7 +37,6 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_HEIGHT = "152.2";
     private static final String VALID_GENDER = "Male";
-    private static final String VALID_SPORT = "Ultimate Frisbee";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 

@@ -168,7 +168,8 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, phone, email, address, tags, birthday, currentWeight, targetWeight, height, sport);
+        return Objects.hash(name, gender, phone, email, address, tags, birthday, currentWeight, targetWeight, height,
+                sport);
     }
 
     @Override

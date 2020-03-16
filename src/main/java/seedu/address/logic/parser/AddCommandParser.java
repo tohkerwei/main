@@ -9,9 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
 
 import java.util.Optional;
 import java.util.Set;
@@ -28,9 +28,9 @@ import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.client.Sport;
 
 /**
  * Parses input arguments and creates a new AddCommand object

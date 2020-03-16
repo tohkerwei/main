@@ -9,8 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
@@ -34,9 +34,9 @@ import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.client.Sport;
 
 /**
  * Edits the details of an existing client in the address book.
@@ -265,9 +265,13 @@ public class EditCommand extends Command {
             this.targetWeight = targetWeight;
         }
 
-        public Optional<Sport> getSport() { return Optional.ofNullable(sport); }
+        public Optional<Sport> getSport() {
+            return Optional.ofNullable(sport);
+        }
 
-        public void setSport(Sport sport) { this.sport = sport; }
+        public void setSport(Sport sport) {
+            this.sport = sport;
+        }
 
         /**
          * Returns an unmodifiable tag set, which throws

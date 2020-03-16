@@ -19,8 +19,8 @@ import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.client.TargetWeight;
 import seedu.address.model.client.Sport;
+import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
 /**
