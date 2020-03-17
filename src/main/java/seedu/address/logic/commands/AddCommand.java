@@ -47,8 +47,8 @@ public class AddCommand extends Command {
             + PREFIX_GENDER + "Male "
             + PREFIX_BIRTHDAY + "26-01-1980 "
             + PREFIX_CURRENT_WEIGHT + "96 "
-            + PREFIX_TARGET_WEIGHT + "69"
-            + PREFIX_HEIGHT + "156"
+            + PREFIX_TARGET_WEIGHT + "69 "
+            + PREFIX_HEIGHT + "156 "
             + PREFIX_REMARK + "need to do more pushups";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
