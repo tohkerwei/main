@@ -48,8 +48,8 @@ public class AddCommand extends Command {
             + PREFIX_BIRTHDAY + "26-01-1980 "
             + PREFIX_CURRENT_WEIGHT + "96 "
             + PREFIX_TARGET_WEIGHT + "69 "
-            + PREFIX_HEIGHT + "156 ";
-            + PREFIX_SPORT + "arm wrestling "
+            + PREFIX_HEIGHT + "156 "
+            + PREFIX_SPORT + "arm wrestling ";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in the address book";
