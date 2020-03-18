@@ -121,7 +121,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         Collection<String> sportSet = sport.size() == 1 && sport.contains("") ? Collections.emptySet() : sport;
-        return Optional.of(ParserUtil.parseSport(sportSet));
+        return Optional.of(ParserUtil.parseSports(sportSet));
     }
 
 }

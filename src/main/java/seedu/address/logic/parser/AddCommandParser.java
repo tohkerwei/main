@@ -86,7 +86,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Remark remark = remarkString.isPresent()
                 ? ParserUtil.parseRemark(remarkString.get())
                 : new Remark("");
-        Set<Sport> sportList = ParserUtil.parseSport(argMultimap.getAllValues(PREFIX_SPORT));
+        Set<Sport> sportList = ParserUtil.parseSports(argMultimap.getAllValues(PREFIX_SPORT));
         Client client = new Client(name, gender, phone, email, address, tagList, birthday,
                 currentWeight, targetWeight, height, remark, sportList);
 

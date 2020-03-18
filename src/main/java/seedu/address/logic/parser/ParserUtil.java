@@ -244,7 +244,7 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> sports} into a {@code Set<Sport>}.
      */
-    public static Set<Sport> parseSport(Collection<String> sports) throws ParseException {
+    public static Set<Sport> parseSports(Collection<String> sports) throws ParseException {
         requireNonNull(sports);
         final Set<Sport> sportSet = new HashSet<>();
         for (String sportName : sports) {
