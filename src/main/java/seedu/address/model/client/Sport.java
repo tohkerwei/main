@@ -28,7 +28,7 @@ public class Sport {
      * Returns true if a given string is a valid sport.
      */
     public static boolean isValidSport(String test) {
-        return test.matches(VALIDATION_REGEX) || test.equals("");
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
