@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Sport {
 
-    public static final String MESSAGE_CONSTRAINTS = "Sport can take any sportName, it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Sport can take on any name and can be left blank";
     public static final String VALIDATION_REGEX = "[^\\s].*";
     public final String sportName;
 
@@ -28,12 +28,15 @@ public class Sport {
      * Returns true if a given string is a valid sport.
      */
     public static boolean isValidSport(String test) {
-        return test.matches(VALIDATION_REGEX) || test.equals("");
+        return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Format state as text for viewing.
+     */
     @Override
     public String toString() {
-        return sportName;
+        return "[" + sportName + "]";
     }
 
     @Override

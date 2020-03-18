@@ -169,8 +169,7 @@ public class EditCommand extends Command {
         private TargetWeight targetWeight;
         private Set<Sport> sport;
         private Remark remark;
-        public EditClientDescriptor() {
-        }
+        public EditClientDescriptor() {}
 
         /**
          * Copy constructor. A defensive copy of {@code tags} is used internally.

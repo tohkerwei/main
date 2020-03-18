@@ -106,10 +106,16 @@ class JsonAdaptedClient {
      */
     public Client toModelType() throws IllegalValueException {
         final List<Tag> clientTags = new ArrayList<>();
-        final List<Sport> clientSports = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             clientTags.add(tag.toModelType());
         }
+        final Set<Tag> modelTags = new HashSet<>(clientTags);
+
+        final List<Sport> clientSports = new ArrayList<>();
+        for (JsonAdaptedSport sport : sports) {
+            clientSports.add(sport.toModelType());
+        }
+        final Set<Sport> modelSport = new HashSet<>(clientSports);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -186,13 +192,13 @@ class JsonAdaptedClient {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final TargetWeight modelTargetWeight = new TargetWeight(targetWeight);
+
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Remark.class.getSimpleName()));
         }
         final Remark modelRemark = new Remark(remark);
-        final Set<Tag> modelTags = new HashSet<>(clientTags);
-        final Set<Sport> modelSport = new HashSet<>(clientSports);
+
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
             modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport);
     }
