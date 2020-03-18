@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 
@@ -27,6 +28,7 @@ import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
@@ -45,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
                 PREFIX_GENDER, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_TAG, PREFIX_BIRTHDAY, PREFIX_CURRENT_WEIGHT, PREFIX_TARGET_WEIGHT,
-                PREFIX_HEIGHT);
+                PREFIX_HEIGHT, PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME,
                 PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
@@ -78,9 +80,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         TargetWeight targetWeight = targetWeightString.isPresent()
                 ? ParserUtil.parseTargetWeight(targetWeightString.get())
                 : new TargetWeight("");
+        Optional<String> remarkString = argMultimap.getValue(PREFIX_REMARK);
+        Remark remark = remarkString.isPresent()
+                ? ParserUtil.parseRemark(remarkString.get())
+                : new Remark("");
 
         Client client = new Client(name, gender, phone, email, address, tagList, birthday,
-                currentWeight, targetWeight, height);
+                currentWeight, targetWeight, height, remark);
 
         return new AddCommand(client);
     }

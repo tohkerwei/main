@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 
@@ -34,7 +35,8 @@ public class AddCommand extends Command {
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT] "
             + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT] "
-            + "[" + PREFIX_HEIGHT + "HEIGHT]\n"
+            + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -45,8 +47,9 @@ public class AddCommand extends Command {
             + PREFIX_GENDER + "Male "
             + PREFIX_BIRTHDAY + "26-01-1980 "
             + PREFIX_CURRENT_WEIGHT + "96 "
-            + PREFIX_TARGET_WEIGHT + "69"
-            + PREFIX_HEIGHT + "156";
+            + PREFIX_TARGET_WEIGHT + "69 "
+            + PREFIX_HEIGHT + "156 "
+            + PREFIX_REMARK + "need to do more pushups";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in the address book";
