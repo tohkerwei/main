@@ -15,7 +15,7 @@ public class SportTest {
 
     @Test
     public void constructor_invalidSport_throwsIllegalArgumentException() {
-        String invalidSport = "";
+        String invalidSport = " ";
         assertThrows(IllegalArgumentException.class, () -> new Sport(invalidSport));
     }
 
@@ -25,10 +25,10 @@ public class SportTest {
         assertThrows(NullPointerException.class, () -> Sport.isValidSport(null));
 
         // invalid sport
-        assertFalse(Sport.isValidSport("")); // empty string
         assertFalse(Sport.isValidSport(" ")); // spaces only
 
         // valid sport
+        assertTrue(Sport.isValidSport("")); // empty string
         assertTrue(Sport.isValidSport("-")); // no sport
         assertTrue(Sport.isValidSport(".")); // no sport
         assertTrue(Sport.isValidSport("NIL")); // no sport
