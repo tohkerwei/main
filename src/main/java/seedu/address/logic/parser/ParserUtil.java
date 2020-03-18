@@ -17,6 +17,7 @@ import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
@@ -100,6 +101,18 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String remark} into an {@code Remark}. Leading and trailing
+     * whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        return new Remark(trimmedRemark);
     }
 
     /**
@@ -215,15 +228,28 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String sport} into a {@code Sport}.
+     * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException
+     * @throws ParseException if the given {@code sport} is invalid.
      */
     public static Sport parseSport(String sport) throws ParseException {
         requireNonNull(sport);
         String trimmedSport = sport.trim();
-        if (!Address.isValidAddress(trimmedSport)) {
+        if (!Sport.isValidSport(trimmedSport)) {
             throw new ParseException(Sport.MESSAGE_CONSTRAINTS);
         }
         return new Sport(trimmedSport);
+    }
+
+    /**
+     * Parses {@code Collection<String> sports} into a {@code Set<Sport>}.
+     */
+    public static Set<Sport> parseSport(Collection<String> sports) throws ParseException {
+        requireNonNull(sports);
+        final Set<Sport> sportSet = new HashSet<>();
+        for (String sportName : sports) {
+            sportSet.add(parseSport(sportName));
+        }
+        return sportSet;
     }
 }

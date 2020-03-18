@@ -31,14 +31,15 @@ public class Client {
     private Gender gender;
     private TargetWeight targetWeight;
     private Height height;
-    private Sport sport;
+    private Sport sports;
+    private Remark remark;
 
     // TODO: remove this overloaded constructor after finalising attributes
     /**
      * Overloaded Client constructor for FitBiz.
      */
     public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
-            CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Sport sport) {
+            CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Remark remark, Set<Sport> sports) {
         requireAllNonNull(name, phone, email, address, tags, birthday);
         this.name = name;
         this.gender = gender;
@@ -50,7 +51,8 @@ public class Client {
         this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
         this.height = height;
-        this.sport = sport;
+        this.sports = sports;
+        this.remark = remark;
     }
 
     /**
@@ -95,6 +97,10 @@ public class Client {
         return address;
     }
 
+    public Remark getRemark() {
+        return remark;
+    }
+
     public Birthday getBirthday() {
         return birthday;
     }
@@ -115,8 +121,8 @@ public class Client {
         return height;
     }
 
-    public Sport getSport() {
-        return sport;
+    public Set<Sport> getSports() {
+        return Collections.unmodifiableSet(sports);
     }
 
     /**
@@ -168,8 +174,8 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, phone, email, address, tags, birthday, currentWeight, targetWeight, height,
-                sport);
+        return Objects.hash(name, gender, phone, email, address, tags, birthday,
+            currentWeight, targetWeight, height, remark, sports);
     }
 
     @Override
@@ -192,10 +198,12 @@ public class Client {
                 .append(getTargetWeight())
                 .append(" Height: ")
                 .append(getHeight())
-                .append(" Sport: ")
-                .append(getSport())
+                .append(" Remark: ")
+                .append(getRemark())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Sports: ");
+        getSports.forEach(builder::append);
         return builder.toString();
     }
 

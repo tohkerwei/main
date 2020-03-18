@@ -19,6 +19,7 @@ import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
@@ -41,7 +42,8 @@ class JsonAdaptedClient {
     private final String height;
     private final String targetWeight;
     private final String currentWeight;
-    private final String sport;
+    private final String remark;
+     private final List<JsonAdaptedSport> sports = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
@@ -52,7 +54,9 @@ class JsonAdaptedClient {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("currentWeight") String currentWeight, @JsonProperty("targetWeight") String targetWeight,
-            @JsonProperty("height") String height, @JsonProperty("sport") String sport) {
+            @JsonProperty("height") String height, @JsonProperty("remark") String remark, 
+            @JsonProperty("sports") List<JsonAdaptedSport> sports) {
+
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -65,8 +69,10 @@ class JsonAdaptedClient {
         this.height = height;
         this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
-        this.sport = sport;
-    }
+        this.remark = remark;
+        if (sports != null) {
+          this.sports.addAll(sports);
+        }
 
     /**
      * Converts a given {@code Client} into this class for Jackson use.
@@ -84,7 +90,10 @@ class JsonAdaptedClient {
         height = source.getHeight().value;
         currentWeight = source.getCurrentWeight().value;
         targetWeight = source.getTargetWeight().value;
-        sport = source.getSport().value;
+        remark = source.getRemark().value;
+        sports.addAll(source.getSport().stream()
+                  .map(JsonAdaptedSport::new)
+                  .collect(Collectors.toList()));
     }
 
     /**
@@ -179,14 +188,16 @@ class JsonAdaptedClient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Sport.class.getSimpleName()));
         }
-        if (!Sport.isValidSport(sport)) {
-            throw new IllegalValueException(Sport.MESSAGE_CONSTRAINTS);
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Remark.class.getSimpleName()));
         }
-        final Sport modelSport = new Sport(sport);
-
+        final Remark modelRemark = new Remark(remark);
         final Set<Tag> modelTags = new HashSet<>(clientTags);
+        final Set<Sport> modelSport = new HashSet<>(clientSports);
+      
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
-            modelCurrentWeight, modelTargetWeight, modelHeight, modelSport);
+            modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport);
     }
 
 }
