@@ -101,7 +101,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
-        Set<Sport> updatedSport = editClientDescriptor.getSport().orElse(clientToEdit.getSports());
+        Set<Sport> updatedSport = editClientDescriptor.getSports().orElse(clientToEdit.getSports());
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
         Height updatedHeight = editClientDescriptor.getHeight().orElse(clientToEdit.getHeight());
         CurrentWeight updatedCurrentWeight = editClientDescriptor.getCurrentWeight()
@@ -185,7 +185,7 @@ public class EditCommand extends Command {
             setHeight(toCopy.height);
             setCurrentWeight(toCopy.currentWeight);
             setTargetWeight(toCopy.targetWeight);
-            setSport(toCopy.sport);
+            setSports(toCopy.sport);
             setRemark(toCopy.remark);
         }
 
@@ -282,7 +282,7 @@ public class EditCommand extends Command {
          * {@code UnsupportedOperationException} if modification is attempted. Returns
          * {@code Optional#empty()} if {@code sports} is null.
          */
-        public Optional<Set<Sport>> getSport() {
+        public Optional<Set<Sport>> getSports() {
             return (sport != null) ? Optional.of(Collections.unmodifiableSet(sport)) : Optional.empty();
         }
 
@@ -290,7 +290,7 @@ public class EditCommand extends Command {
          * Sets {@code sports} to this object's {@code sports}. A defensive copy of
          * {@code sports} is used internally.
          */
-        public void setSport(Set<Sport> sport) {
+        public void setSports(Set<Sport> sport) {
             this.sport = (sport != null) ? new HashSet<>(sport) : null;
         }
 
@@ -337,7 +337,7 @@ public class EditCommand extends Command {
                     && getCurrentWeight().equals(e.getCurrentWeight())
                     && getTargetWeight().equals(e.getTargetWeight())
                     && getRemark().equals(e.getRemark())
-                    && getSport().equals(e.getSport());
+                    && getSports().equals(e.getSports());
         }
     }
 }
