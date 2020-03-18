@@ -31,6 +31,12 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="gender" styleClass="cell_small_label" text="\$gender" />
+      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
+      <Label fx:id="height" styleClass="cell_small_label" text="\$height" />
+      <Label fx:id="currentWeight" styleClass="cell_small_label" text="\$currentWeight" />
+      <Label fx:id="targetWeight" styleClass="cell_small_label" text="\$targetWeight" />
+      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
     </VBox>
   </GridPane>
 </HBox>

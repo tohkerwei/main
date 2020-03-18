@@ -39,6 +39,18 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label gender;
+    @FXML
+    private Label birthday;
+    @FXML
+    private Label currentWeight;
+    @FXML
+    private Label targetWeight;
+    @FXML
+    private Label height;
+    @FXML
+    private Label remark;
+    @FXML
     private FlowPane tags;
 
     public ClientCard(Client client, int displayedIndex) {
@@ -46,9 +58,42 @@ public class ClientCard extends UiPart<Region> {
         this.client = client;
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
-        phone.setText(client.getPhone().value);
-        address.setText(client.getAddress().value);
-        email.setText(client.getEmail().value);
+        String phoneLabel = "Phone: ";
+        String phoneAttributeForDisplay = getAttributeForDisplay(client.getPhone().value);
+        String fullPhoneForDisplay = phoneLabel + phoneAttributeForDisplay;
+        phone.setText(fullPhoneForDisplay);
+        String addressLabel = "Address: ";
+        String addressAttributeForDisplay = getAttributeForDisplay(client.getAddress().value);
+        String fullAddressForDisplay = addressLabel + addressAttributeForDisplay;
+        address.setText(fullAddressForDisplay);
+        String emailLabel = "Email: ";
+        String emailAttributeForDisplay = getAttributeForDisplay(client.getEmail().value);
+        String fullEmailForDisplay = emailLabel + emailAttributeForDisplay;
+        email.setText(fullEmailForDisplay);
+        String genderLabel = "Gender: ";
+        String genderAttributeForDisplay = getAttributeForDisplay(client.getGender().value);
+        String fullGenderForDisplay = genderLabel + genderAttributeForDisplay;
+        gender.setText(fullGenderForDisplay);
+        String birthdayLabel = "Birthday: ";
+        String birthdayAttributeForDisplay = getAttributeForDisplay(client.getBirthdayString());
+        String fullBirthdayForDisplay = birthdayLabel + birthdayAttributeForDisplay;
+        birthday.setText(fullBirthdayForDisplay);
+        String heightLabel = "Height: ";
+        String heightAttributeForDisplay = getAttributeForDisplay(client.getHeight().value);
+        String fullHeightForDisplay = heightLabel + heightAttributeForDisplay;
+        height.setText(fullHeightForDisplay);
+        String currentWeightLabel = "Current Weight: ";
+        String currentWeightAttributeForDisplay = getAttributeForDisplay(client.getCurrentWeight().value);
+        String fullCurrentWeightForDisplay = currentWeightLabel + currentWeightAttributeForDisplay;
+        currentWeight.setText(fullCurrentWeightForDisplay);
+        String targetWeightLabel = "Target Weight: ";
+        String targetWeightAttributeForDisplay = getAttributeForDisplay(client.getTargetWeight().value);
+        String fullTargetWeightForDisplay = targetWeightLabel + targetWeightAttributeForDisplay;
+        targetWeight.setText(fullTargetWeightForDisplay);
+        String remarkLabel = "Remark: ";
+        String remarkAttributeForDisplay = getAttributeForDisplay(client.getRemark().value);
+        String fullRemarkForDisplay = remarkLabel + remarkAttributeForDisplay;
+        remark.setText(fullRemarkForDisplay);
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -70,5 +115,10 @@ public class ClientCard extends UiPart<Region> {
         ClientCard card = (ClientCard) other;
         return id.getText().equals(card.id.getText())
                 && client.equals(card.client);
+    }
+
+    private String getAttributeForDisplay(String string) {
+        String emptyString = "";
+        return !string.equals(emptyString) ? string : "-";
     }
 }
