@@ -43,7 +43,7 @@ class JsonAdaptedClient {
     private final String targetWeight;
     private final String currentWeight;
     private final String remark;
-     private final List<JsonAdaptedSport> sports = new ArrayList<>();
+    private final List<JsonAdaptedSport> sports = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
@@ -54,9 +54,8 @@ class JsonAdaptedClient {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("currentWeight") String currentWeight, @JsonProperty("targetWeight") String targetWeight,
-            @JsonProperty("height") String height, @JsonProperty("remark") String remark, 
+            @JsonProperty("height") String height, @JsonProperty("remark") String remark,
             @JsonProperty("sports") List<JsonAdaptedSport> sports) {
-
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -71,8 +70,10 @@ class JsonAdaptedClient {
         this.targetWeight = targetWeight;
         this.remark = remark;
         if (sports != null) {
-          this.sports.addAll(sports);
+            this.sports.addAll(sports);
         }
+    }
+
 
     /**
      * Converts a given {@code Client} into this class for Jackson use.
@@ -91,7 +92,7 @@ class JsonAdaptedClient {
         currentWeight = source.getCurrentWeight().value;
         targetWeight = source.getTargetWeight().value;
         remark = source.getRemark().value;
-        sports.addAll(source.getSport().stream()
+        sports.addAll(source.getSports().stream()
                   .map(JsonAdaptedSport::new)
                   .collect(Collectors.toList()));
     }
@@ -105,6 +106,7 @@ class JsonAdaptedClient {
      */
     public Client toModelType() throws IllegalValueException {
         final List<Tag> clientTags = new ArrayList<>();
+        final List<Sport> clientSports = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             clientTags.add(tag.toModelType());
         }
@@ -184,10 +186,6 @@ class JsonAdaptedClient {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final TargetWeight modelTargetWeight = new TargetWeight(targetWeight);
-        if (sport == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Sport.class.getSimpleName()));
-        }
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Remark.class.getSimpleName()));
@@ -195,9 +193,7 @@ class JsonAdaptedClient {
         final Remark modelRemark = new Remark(remark);
         final Set<Tag> modelTags = new HashSet<>(clientTags);
         final Set<Sport> modelSport = new HashSet<>(clientSports);
-      
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
             modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport);
     }
-
 }

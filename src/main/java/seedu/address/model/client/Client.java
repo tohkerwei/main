@@ -31,7 +31,7 @@ public class Client {
     private Gender gender;
     private TargetWeight targetWeight;
     private Height height;
-    private Sport sports;
+    private final Set<Sport> sports = new HashSet<>();
     private Remark remark;
 
     // TODO: remove this overloaded constructor after finalising attributes
@@ -51,7 +51,7 @@ public class Client {
         this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
         this.height = height;
-        this.sports = sports;
+        this.sports.addAll(sports);
         this.remark = remark;
     }
 
@@ -121,16 +121,20 @@ public class Client {
         return height;
     }
 
-    public Set<Sport> getSports() {
-        return Collections.unmodifiableSet(sports);
-    }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable sport set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Sport> getSports() {
+        return Collections.unmodifiableSet(sports);
     }
 
     /**
@@ -203,7 +207,7 @@ public class Client {
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         builder.append(" Sports: ");
-        getSports.forEach(builder::append);
+        getSports().forEach(builder::append);
         return builder.toString();
     }
 

@@ -101,7 +101,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
-        Set<Sport> updatedSport = editCLientDescriptor.getSport().orElse(clientToEdit.getTags());
+        Set<Sport> updatedSport = editClientDescriptor.getSport().orElse(clientToEdit.getSports());
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
         Height updatedHeight = editClientDescriptor.getHeight().orElse(clientToEdit.getHeight());
         CurrentWeight updatedCurrentWeight = editClientDescriptor.getCurrentWeight()
@@ -270,21 +270,29 @@ public class EditCommand extends Command {
             this.targetWeight = targetWeight;
         }
 
-        public Optional<Set<Sport>> getSport() {
-            return (sport != null) ? Optional.of(Collections.unmodifiableSet(sport)) : Optional.empty();
-        }
-
-        public void setSport(Set<Sport> sport) {
-            this.sport = (sport != null) ? new HashSet<>(sport) : null;
-        }
-
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
         }
 
         public void setRemark(Remark remark) {
             this.remark = remark;
+        }
 
+        /**
+         * Returns an unmodifiable sport set, which throws
+         * {@code UnsupportedOperationException} if modification is attempted. Returns
+         * {@code Optional#empty()} if {@code sports} is null.
+         */
+        public Optional<Set<Sport>> getSport() {
+            return (sport != null) ? Optional.of(Collections.unmodifiableSet(sport)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code sports} to this object's {@code sports}. A defensive copy of
+         * {@code sports} is used internally.
+         */
+        public void setSport(Set<Sport> sport) {
+            this.sport = (sport != null) ? new HashSet<>(sport) : null;
         }
 
         /**
@@ -329,7 +337,7 @@ public class EditCommand extends Command {
                     && getHeight().equals(e.getHeight())
                     && getCurrentWeight().equals(e.getCurrentWeight())
                     && getTargetWeight().equals(e.getTargetWeight())
-                    && getRemark().equals(e.getRemark()
+                    && getRemark().equals(e.getRemark())
                     && getSport().equals(e.getSport());
         }
     }

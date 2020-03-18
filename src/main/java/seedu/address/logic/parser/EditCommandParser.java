@@ -24,6 +24,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.Sport;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -85,7 +86,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editClientDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editClientDescriptor::setTags);
-
+        parseSportForEdit(argMultimap.getAllValues(PREFIX_SPORT)).ifPresent(editClientDescriptor::setSport);
         if (!editClientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
@@ -107,7 +108,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-    
+
+    /**
+     * Parses {@code Collection<String> sports} into a {@code Set<Sport>} if {@code sports} is non-empty.
+     * If {@code sports} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Sport>} containing zero sports.
+     */
     private Optional<Set<Sport>> parseSportForEdit(Collection<String> sport) throws ParseException {
         assert sport != null;
 

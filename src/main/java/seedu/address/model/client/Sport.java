@@ -9,9 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Sport {
 
-    public static final String MESSAGE_CONSTRAINTS = "Sport can take any value, it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Sport can take any sportName, it should not be blank";
     public static final String VALIDATION_REGEX = "[^\\s].*";
-    public final String value;
+    public final String sportName;
 
     /**
      * Constructs an {@code Sport}.
@@ -21,7 +21,7 @@ public class Sport {
     public Sport(String sport) {
         requireNonNull(sport);
         checkArgument(isValidSport(sport), MESSAGE_CONSTRAINTS);
-        value = sport;
+        sportName = sport;
     }
 
     /**
@@ -33,19 +33,19 @@ public class Sport {
 
     @Override
     public String toString() {
-        return value;
+        return sportName;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Sport // instanceof handles nulls
-                && value.equals(((Sport) other).value)); // state check
+                && sportName.equals(((Sport) other).sportName)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return sportName.hashCode();
     }
 
 }
