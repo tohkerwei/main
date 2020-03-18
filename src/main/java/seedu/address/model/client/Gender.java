@@ -58,7 +58,7 @@ public class Gender {
     }
 
     /**
-     * Returns true if the first character of two string are the same.
+     * Returns true if the first character of two strings are the same.
      */
     private static boolean firstCharEquals(String string1, String string2) {
         if (string1.length() == 0 || string2.length() == 0) {
