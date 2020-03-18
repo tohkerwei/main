@@ -49,12 +49,23 @@ public class Gender {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Gender // instanceof handles nulls
-                        && value.equals(((Gender) other).value)); // state check
+                        && firstCharEquals(value, ((Gender) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Returns true if the first character of two string are the same.
+     */
+    private static boolean firstCharEquals(String string1, String string2) {
+        if (string1.length() == 0 || string2.length() == 0) {
+            return false;
+        } else {
+            return string1.toLowerCase().charAt(0) == string2.toLowerCase().charAt(0);
+        }
     }
 
 }
