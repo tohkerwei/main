@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
@@ -35,6 +36,7 @@ import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
+import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
@@ -55,6 +57,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_SPORT + "SPORT] "
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
             + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT] "
             + "[" + PREFIX_TARGET_WEIGHT + "TARGET_WEIGHT] "
@@ -98,6 +101,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
+        Set<Sport> updatedSport = editClientDescriptor.getSport().orElse(clientToEdit.getSports());
         Birthday updatedBirthday = editClientDescriptor.getBirthday().orElse(clientToEdit.getBirthday());
         Height updatedHeight = editClientDescriptor.getHeight().orElse(clientToEdit.getHeight());
         CurrentWeight updatedCurrentWeight = editClientDescriptor.getCurrentWeight()
@@ -106,9 +110,8 @@ public class EditCommand extends Command {
                 .orElse(clientToEdit.getTargetWeight());
         Remark updatedRemark = editClientDescriptor.getRemark()
                 .orElse(clientToEdit.getRemark());
-
         return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight, updatedRemark);
+                updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight, updatedRemark, updatedSport);
     }
 
     @Override
@@ -164,10 +167,9 @@ public class EditCommand extends Command {
         private Height height;
         private CurrentWeight currentWeight;
         private TargetWeight targetWeight;
+        private Set<Sport> sport;
         private Remark remark;
-
-        public EditClientDescriptor() {
-        }
+        public EditClientDescriptor() {}
 
         /**
          * Copy constructor. A defensive copy of {@code tags} is used internally.
@@ -183,6 +185,7 @@ public class EditCommand extends Command {
             setHeight(toCopy.height);
             setCurrentWeight(toCopy.currentWeight);
             setTargetWeight(toCopy.targetWeight);
+            setSport(toCopy.sport);
             setRemark(toCopy.remark);
         }
 
@@ -191,7 +194,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, gender, phone, email, address, tags, birthday,
-                    currentWeight, targetWeight, height, remark);
+                    currentWeight, targetWeight, height, sport, remark);
         }
 
         public Optional<Name> getName() {
@@ -275,6 +278,23 @@ public class EditCommand extends Command {
         }
 
         /**
+         * Returns an unmodifiable sport set, which throws
+         * {@code UnsupportedOperationException} if modification is attempted. Returns
+         * {@code Optional#empty()} if {@code sports} is null.
+         */
+        public Optional<Set<Sport>> getSport() {
+            return (sport != null) ? Optional.of(Collections.unmodifiableSet(sport)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code sports} to this object's {@code sports}. A defensive copy of
+         * {@code sports} is used internally.
+         */
+        public void setSport(Set<Sport> sport) {
+            this.sport = (sport != null) ? new HashSet<>(sport) : null;
+        }
+
+        /**
          * Returns an unmodifiable tag set, which throws
          * {@code UnsupportedOperationException} if modification is attempted. Returns
          * {@code Optional#empty()} if {@code tags} is null.
@@ -316,7 +336,8 @@ public class EditCommand extends Command {
                     && getHeight().equals(e.getHeight())
                     && getCurrentWeight().equals(e.getCurrentWeight())
                     && getTargetWeight().equals(e.getTargetWeight())
-                    && getRemark().equals(e.getRemark());
+                    && getRemark().equals(e.getRemark())
+                    && getSport().equals(e.getSport());
         }
     }
 }

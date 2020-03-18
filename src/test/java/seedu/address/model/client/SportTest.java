@@ -15,7 +15,7 @@ public class SportTest {
 
     @Test
     public void constructor_invalidSport_throwsIllegalArgumentException() {
-        String invalidSport = "";
+        String invalidSport = " ";
         assertThrows(IllegalArgumentException.class, () -> new Sport(invalidSport));
     }
 

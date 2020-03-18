@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 
@@ -31,6 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_SPORT + "SPORT]... "
             + "[" + PREFIX_BIRTHDAY + "BIRTHDAY] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_CURRENT_WEIGHT + "CURRENT_WEIGHT] "
@@ -49,6 +51,7 @@ public class AddCommand extends Command {
             + PREFIX_CURRENT_WEIGHT + "96 "
             + PREFIX_TARGET_WEIGHT + "69 "
             + PREFIX_HEIGHT + "156 "
+            + PREFIX_SPORT + "arm wrestling "
             + PREFIX_REMARK + "need to do more pushups";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";

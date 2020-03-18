@@ -31,6 +31,7 @@ public class Client {
     private Gender gender;
     private TargetWeight targetWeight;
     private Height height;
+    private final Set<Sport> sports = new HashSet<>();
     private Remark remark;
 
     // TODO: remove this overloaded constructor after finalising attributes
@@ -38,7 +39,7 @@ public class Client {
      * Overloaded Client constructor for FitBiz.
      */
     public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
-            CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Remark remark) {
+            CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Remark remark, Set<Sport> sports) {
         requireAllNonNull(name, phone, email, address, tags, birthday);
         this.name = name;
         this.gender = gender;
@@ -50,6 +51,7 @@ public class Client {
         this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
         this.height = height;
+        this.sports.addAll(sports);
         this.remark = remark;
     }
 
@@ -128,6 +130,14 @@ public class Client {
     }
 
     /**
+     * Returns an immutable sport set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Sport> getSports() {
+        return Collections.unmodifiableSet(sports);
+    }
+
+    /**
      * Returns true if both clients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two clients.
      */
@@ -169,7 +179,7 @@ public class Client {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, gender, phone, email, address, tags, birthday,
-            currentWeight, targetWeight, height, remark);
+            currentWeight, targetWeight, height, remark, sports);
     }
 
     @Override
@@ -196,6 +206,8 @@ public class Client {
                 .append(getRemark())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Sports: ");
+        getSports().forEach(builder::append);
         return builder.toString();
     }
 
