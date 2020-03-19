@@ -162,7 +162,7 @@ class JsonAdaptedClient {
                     Birthday.class.getSimpleName()));
         }
         if (!Birthday.isValidBirthday(birthday)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
         }
         final Birthday modelBirthday = new Birthday(birthday);
 
@@ -171,7 +171,7 @@ class JsonAdaptedClient {
                     Height.class.getSimpleName()));
         }
         if (!Height.isValidHeight(height)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
         }
         final Height modelHeight = new Height(height);
 
@@ -180,7 +180,7 @@ class JsonAdaptedClient {
                     CurrentWeight.class.getSimpleName()));
         }
         if (!CurrentWeight.isValidWeight(currentWeight)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(CurrentWeight.MESSAGE_CONSTRAINTS);
         }
         final CurrentWeight modelCurrentWeight = new CurrentWeight(currentWeight);
 
@@ -189,7 +189,7 @@ class JsonAdaptedClient {
                     TargetWeight.class.getSimpleName()));
         }
         if (!TargetWeight.isValidWeight(targetWeight)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(TargetWeight.MESSAGE_CONSTRAINTS);
         }
         final TargetWeight modelTargetWeight = new TargetWeight(targetWeight);
 
