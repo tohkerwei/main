@@ -30,7 +30,9 @@ public class TypicalClients {
     public static final Client BENSON = new ClientBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withBirthday("12-03-1980")
+            .withCurrentWeight("70.3").withGender("m").withTargetWeight("90")
+            .withHeight("180").withSports("Hockey", "Skating").withRemark("Thicc").build();
     public static final Client CARL = new ClientBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Client DANIEL = new ClientBuilder().withName("Daniel Meier").withPhone("87652533")

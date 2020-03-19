@@ -67,16 +67,6 @@ public class Client {
         this.tags.addAll(tags);
     }
 
-    public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.gender = gender;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-    }
-
     public Name getName() {
         return name;
     }
@@ -149,7 +139,7 @@ public class Client {
         return otherClient != null
                 && otherClient.getName().equals(getName())
                 && (otherClient.getPhone().equals(getPhone())
-                || otherClient.getEmail().equals(getEmail()));
+                        || otherClient.getEmail().equals(getEmail()));
     }
 
     /**

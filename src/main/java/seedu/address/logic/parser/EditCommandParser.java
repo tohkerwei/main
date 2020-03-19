@@ -86,7 +86,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editClientDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editClientDescriptor::setTags);
-        parseSportForEdit(argMultimap.getAllValues(PREFIX_SPORT)).ifPresent(editClientDescriptor::setSport);
+        parseSportForEdit(argMultimap.getAllValues(PREFIX_SPORT)).ifPresent(editClientDescriptor::setSports);
         if (!editClientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

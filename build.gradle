@@ -39,6 +39,8 @@ jacocoTestReport {
 
 test {
     useJUnitPlatform()
+    // uncomment this to enable printing to stdout in tests
+    // testLogging.showStandardStreams = true
 }
 
 dependencies {
