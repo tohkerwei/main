@@ -11,9 +11,14 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Birthday;
+import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.Gender;
+import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
+import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
@@ -99,6 +104,45 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String remark} into an {@code Remark}. Leading and trailing
+     * whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String gender} into an {@code Gender}.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        String trimmedGenderInLowercase = trimmedGender.toLowerCase();
+        switch (trimmedGenderInLowercase) {
+        case "male":
+        case "m":
+            return new Gender("Male");
+        case "female":
+        case "f":
+            return new Gender("Female");
+        case "others":
+        case "o":
+            return new Gender("Others");
+        default:
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -125,8 +169,7 @@ public class ParserUtil {
         return tagSet;
     }
 
-    /**
-     * Parses a {@code String birthday} into a {@code Birthday}.
+    /** Parses a {@code String birthday} into a {@code Birthday}.
      * Only birth dates earlier than the current date are allowed.
      *
      * @throws ParseException
@@ -141,6 +184,35 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String height} into an {@code Height}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code height} is invalid.
+     */
+    public static Height parseHeight(String height) throws ParseException {
+        requireNonNull(height);
+        String trimmedHeight = height.trim();
+        if (!Height.isValidHeight(trimmedHeight)) {
+            throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+        }
+        return new Height(trimmedHeight);
+    }
+
+    /**
+     * Parses a {@code String current weight} into a {@code CurrentWeight}.
+     *
+     * @throws ParseException
+     */
+    public static CurrentWeight parseCurrentWeight(String currentWeight) throws ParseException {
+        requireNonNull(currentWeight);
+        String trimmedCurrentWeight = currentWeight.trim();
+        if (!CurrentWeight.isValidWeight(trimmedCurrentWeight)) {
+            throw new ParseException(CurrentWeight.MESSAGE_CONSTRAINTS);
+        }
+        return new CurrentWeight(trimmedCurrentWeight);
+    }
+
+    /**
      * Parses a {@code String target weight} into a {@code TargetWeight}.
      *
      * @throws ParseException
@@ -152,5 +224,32 @@ public class ParserUtil {
             throw new ParseException(TargetWeight.MESSAGE_CONSTRAINTS);
         }
         return new TargetWeight(trimmedTargetWeight);
+    }
+
+    /**
+     * Parses a {@code String sport} into a {@code Sport}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sport} is invalid.
+     */
+    public static Sport parseSport(String sport) throws ParseException {
+        requireNonNull(sport);
+        String trimmedSport = sport.trim();
+        if (!Sport.isValidSport(trimmedSport)) {
+            throw new ParseException(Sport.MESSAGE_CONSTRAINTS);
+        }
+        return new Sport(trimmedSport);
+    }
+
+    /**
+     * Parses {@code Collection<String> sports} into a {@code Set<Sport>}.
+     */
+    public static Set<Sport> parseSports(Collection<String> sports) throws ParseException {
+        requireNonNull(sports);
+        final Set<Sport> sportSet = new HashSet<>();
+        for (String sportName : sports) {
+            sportSet.add(parseSport(sportName));
+        }
+        return sportSet;
     }
 }

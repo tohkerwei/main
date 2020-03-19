@@ -15,7 +15,7 @@ public class HeightTest {
 
     @Test
     public void constructor_invalidHeight_throwsIllegalArgumentException() {
-        String invalidHeight = "";
+        String invalidHeight = "i";
         assertThrows(IllegalArgumentException.class, () -> new Height(invalidHeight));
     }
 
@@ -25,7 +25,6 @@ public class HeightTest {
         assertThrows(NullPointerException.class, () -> Height.isValidHeight(null));
 
         // invalid height
-        assertFalse(Height.isValidHeight("")); // empty string
         assertFalse(Height.isValidHeight(" ")); // spaces only
         assertFalse(Height.isValidHeight("ab")); // contains no numbers
         assertFalse(Height.isValidHeight("a.b")); // contains no numbers
@@ -46,6 +45,7 @@ public class HeightTest {
         assertFalse(Height.isValidHeight("23.2'3")); // wrong symbols
 
         // valid height
+        assertTrue(Height.isValidHeight("")); // empty string
         assertTrue(Height.isValidHeight("0")); // single digit
         assertTrue(Height.isValidHeight("5")); // single digit
         assertTrue(Height.isValidHeight("456")); // numbers only

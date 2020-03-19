@@ -29,7 +29,7 @@ public class Height {
      * Returns true if a given string is a valid height.
      */
     public static boolean isValidHeight(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.equals("") || test.matches(VALIDATION_REGEX);
     }
 
     @Override
