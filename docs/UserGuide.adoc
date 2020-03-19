@@ -63,7 +63,7 @@ Examples:
 
 Initialises and adds a new client profile.
 
-Format: `add-c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GENDER] [h/HEIGHT] [cw/CURRENT_WEIGHT] [tw/TARGET_WEIGHT] [s/SPORT]… [t/TAG]…`
+Format: `add-c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GENDER] [h/HEIGHT] [cw/CURRENT_WEIGHT] [tw/TARGET_WEIGHT] [r/REMARK] [s/SPORT]… [t/TAG]…`
 
 * `n/NAME` is case insensitive. e.g `hans` will match `Hans`
 * The order of words will matter. e.g `Hans Ong` will not match `Ong Hans`
@@ -97,7 +97,7 @@ Examples:
 
 Edits the client’s cliental details by specifying the attribute and the new value.
 
-Format: `edit-c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [h/HEIGHT] [cw/CURRENT_WEIGHT] [tw/TARGET_WEIGHT] [s/SPORT]… [t/TAG]...`
+Format: `edit-c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [h/HEIGHT] [cw/CURRENT_WEIGHT] [tw/TARGET_WEIGHT] [r/REMARK] [s/SPORT]… [t/TAG]...`
 
 * `INDEX` refers to the index number shown in the displayed client list
 * `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
