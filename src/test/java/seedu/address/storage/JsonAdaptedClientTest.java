@@ -1,4 +1,3 @@
-// TODO: create tests for other attributes
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,17 +13,15 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.client.Address;
-// import seedu.address.model.client.Birthday;
-// import seedu.address.model.client.CurrentWeight;
+import seedu.address.model.client.Birthday;
+import seedu.address.model.client.CurrentWeight;
 import seedu.address.model.client.Email;
-// import seedu.address.model.client.Gender;
-// import seedu.address.model.client.Height;
+import seedu.address.model.client.Gender;
+import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-// import seedu.address.model.client.Remark;
-// import seedu.address.model.client.Sport;
-// import seedu.address.model.client.TargetWeight;
-// import seedu.address.model.tag.Tag;
+import seedu.address.model.client.Remark;
+import seedu.address.model.client.TargetWeight;
 
 public class JsonAdaptedClientTest {
     private static final String INVALID_NAME = "R@chel";
@@ -32,6 +29,11 @@ public class JsonAdaptedClientTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_BIRTHDAY = "happy bday!";
+    private static final String INVALID_CURRENT_WEIGHT = "eighty 2";
+    private static final String INVALID_GENDER = "helicopter";
+    private static final String INVALID_TARGET_WEIGHT = "tree fiddy";
+    private static final String INVALID_HEIGHT = "fiddy 3";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -136,4 +138,102 @@ public class JsonAdaptedClientTest {
         assertThrows(IllegalValueException.class, client::toModelType);
     }
 
+    @Test
+    public void toModelType_invalidBirthday_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_GENDER, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, INVALID_BIRTHDAY, VALID_TAGS, VALID_CURRENT_WEIGHT, VALID_TARGET_WEIGHT, VALID_HEIGHT,
+                VALID_REMARK, VALID_SPORTS);
+        String expectedMessage = Birthday.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullBirthday_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_GENDER, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, null, VALID_TAGS, VALID_CURRENT_WEIGHT, VALID_TARGET_WEIGHT, VALID_HEIGHT, VALID_REMARK,
+                VALID_SPORTS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthday.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidCurrentWeight_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_GENDER, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_BIRTHDAY, VALID_TAGS, INVALID_CURRENT_WEIGHT, VALID_TARGET_WEIGHT, VALID_HEIGHT,
+                VALID_REMARK, VALID_SPORTS);
+        String expectedMessage = CurrentWeight.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullCurrentWeight_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_GENDER, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_BIRTHDAY, VALID_TAGS, null, VALID_TARGET_WEIGHT, VALID_HEIGHT, VALID_REMARK,
+                VALID_SPORTS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, CurrentWeight.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidGender_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, INVALID_GENDER, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_BIRTHDAY, VALID_TAGS, VALID_CURRENT_WEIGHT, VALID_TARGET_WEIGHT, VALID_HEIGHT,
+                VALID_REMARK, VALID_SPORTS);
+        String expectedMessage = Gender.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullGender_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_BIRTHDAY, VALID_TAGS, VALID_CURRENT_WEIGHT, VALID_TARGET_WEIGHT, VALID_HEIGHT, VALID_REMARK,
+                VALID_SPORTS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTargetWeight_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_GENDER, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_BIRTHDAY, VALID_TAGS, VALID_CURRENT_WEIGHT, INVALID_TARGET_WEIGHT, VALID_HEIGHT,
+                VALID_REMARK, VALID_SPORTS);
+        String expectedMessage = TargetWeight.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullTargetWeight_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_GENDER, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_BIRTHDAY, VALID_TAGS, VALID_CURRENT_WEIGHT, null, VALID_HEIGHT, VALID_REMARK,
+                VALID_SPORTS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, TargetWeight.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidHeight_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_GENDER, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_BIRTHDAY, VALID_TAGS, VALID_CURRENT_WEIGHT, VALID_TARGET_WEIGHT, INVALID_HEIGHT,
+                VALID_REMARK, VALID_SPORTS);
+        String expectedMessage = Height.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullHeight_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_GENDER, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_BIRTHDAY, VALID_TAGS, VALID_CURRENT_WEIGHT, VALID_TARGET_WEIGHT, null,
+                VALID_REMARK, VALID_SPORTS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullRemark_throwsIllegalValueException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_GENDER, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_BIRTHDAY, VALID_TAGS, VALID_CURRENT_WEIGHT, VALID_TARGET_WEIGHT, VALID_HEIGHT,
+                null, VALID_SPORTS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
+    }
 }
