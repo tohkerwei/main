@@ -20,6 +20,10 @@ mainClassName = 'seedu.address.Main'
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
+application {
+    applicationDefaultJvmArgs = ['-Dglass.gtk.uiScale=1.25']
+}
+
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
