@@ -31,17 +31,17 @@ This program is primarily a desktop application and optimised for those who pref
 . Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.
 . Some example commands you can try:
 * `list` : lists all clients
-* `add client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-: adds a contact named John Doe to the Address Book
+* `add-c n/John Doe g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/24-12-1997 h/170 cw/70 tw/75`
+: adds a client named John Doe to FitBiz
 * `exit` : exits the app
 . Refer to <<Features>> below for details of each command
 
 == Features
-
+s
 *Format of Commands*
 
 * Words in `UPPER_SNAKE_CASE` are the parameters to be supplied by the user
-e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
+e.g. in `add-c n/NAME`, `NAME` is a parameter which can be used as `add-c n/John Doe`
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`
 * Items with `…` after them can be used multiple times including zero times e.g. `[t/TAG]…` can be used as (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable
@@ -56,14 +56,14 @@ Examples:
 
 * `help`
 ** Lists all commands
-* `help add client`
-** Shows a detailed explanation of the `add client` command
+* `help add-c`
+** Shows a detailed explanation of the `add-c` command
 
 === Add a new client profile: `add-c`
 
 Initialises and adds a new client profile.
 
-Format: `add-c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…`
+Format: `add-c n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GENDER] [h/HEIGHT] [cw/CURRENT_WEIGHT] [tw/TARGET_WEIGHT] [r/REMARK] [s/SPORT]… [t/TAG]…`
 
 * `n/NAME` is case insensitive. e.g `hans` will match `Hans`
 * The order of words will matter. e.g `Hans Ong` will not match `Ong Hans`
@@ -88,16 +88,16 @@ Format: `view-c INDEX`
 
 Examples:
 
-* `view client 3`
+* `view-c 3`
 ** Shows information about the 3rd client
-* `view client 45`
+* `view-c 45`
 ** Shows information about the 45th client
 
 === Edit a client’s profile: `edit-c`
 
 Edits the client’s cliental details by specifying the attribute and the new value.
 
-Format: `edit-c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit-c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [h/HEIGHT] [cw/CURRENT_WEIGHT] [tw/TARGET_WEIGHT] [r/REMARK] [s/SPORT]… [t/TAG]...`
 
 * `INDEX` refers to the index number shown in the displayed client list
 * `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
