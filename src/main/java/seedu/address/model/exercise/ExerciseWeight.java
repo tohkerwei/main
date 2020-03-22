@@ -14,7 +14,7 @@ public class ExerciseWeight {
     public final String value;
 
     /**
-     * Constructs a {ExerciseWeight}.
+     * Constructs a {@code ExerciseWeight}.
      *
      * @param exerciseWeight A valid exerise weight.
      */
