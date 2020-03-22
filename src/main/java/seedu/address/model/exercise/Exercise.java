@@ -1,7 +1,6 @@
 package seedu.address.model.exercise;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
@@ -55,7 +54,7 @@ public class Exercise {
     // }
 
     /**
-     * Returns true if both exercise have the attribute values. 
+     * Returns true if both exercise have the attribute values.
      */
     @Override
     public boolean equals(Object other) {
@@ -68,8 +67,10 @@ public class Exercise {
         }
 
         Exercise otherExercise = (Exercise) other;
-        return otherExercise.getExerciseName().equals(getExerciseName()) && otherExercise.getReps().equals(getReps())
-                && otherExercise.getSets().equals(getSets()) && otherExercise.getExerciseWeight().equals(getExerciseWeight()));
+        return otherExercise.getExerciseName().equals(getExerciseName())
+            && otherExercise.getReps().equals(getReps())
+            && otherExercise.getSets().equals(getSets())
+            && otherExercise.getExerciseWeight().equals(getExerciseWeight());
     }
 
     @Override
@@ -88,7 +89,7 @@ public class Exercise {
             .append(" Reps: ")
             .append(getReps())
             .append(" Exercise Weight: ")
-            .append(getExerciseWeight());;
+            .append(getExerciseWeight());
         return builder.toString();
     }
 

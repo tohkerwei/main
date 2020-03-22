@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents the number of Sets a client does for an exercise. Guarantees:
  * immutable; is valid as declared in {@link #isValidSets(String)}
  */
-public class Sets{
+public class Sets {
 
     public static final String MESSAGE_CONSTRAINTS = "Input Sets must either be whole number (eg. 65)";
     public static final String VALIDATION_REGEX = "[0-9]?";
