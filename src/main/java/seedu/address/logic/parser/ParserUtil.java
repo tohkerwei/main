@@ -271,7 +271,7 @@ public class ParserUtil {
         }
         return new ExerciseName(trimmedExerciseName);
     }
-    
+
     /**
      * Parses a {@code String reps} into an {@code Reps}. Leading
      * and trailing whitespaces will be trimmed.
@@ -316,5 +316,5 @@ public class ParserUtil {
         }
         return new ExerciseWeight(trimmedExerciseWeight);
     }
-    
+
 }

@@ -18,11 +18,17 @@ public class AddExerciseCommand extends Command {
 
     public static final String COMMAND_WORD = "add-e";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exercise done by a client in FitBiz. " + "Parameters: "
-            + PREFIX_NAME + "EXERCISE NAME " + PREFIX_REPS + "REPS " + PREFIX_EXERCISE_WEIGHT + "EXERCISE WEIGHT "
-            + PREFIX_SETS + "SETS\n" + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "bench press " + PREFIX_REPS + "12 "
-            + PREFIX_EXERCISE_WEIGHT + "50 "
-            + PREFIX_SETS + "8";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exercise done by a client in FitBiz. "
+        + "Parameters: "
+        + PREFIX_NAME + "EXERCISE NAME "
+        + PREFIX_REPS + "REPS "
+        + PREFIX_EXERCISE_WEIGHT + "EXERCISE WEIGHT "
+        + PREFIX_SETS + "SETS\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_NAME + "bench press "
+        + PREFIX_REPS + "12 "
+        + PREFIX_EXERCISE_WEIGHT + "50 "
+        + PREFIX_SETS + "8";
 
     public static final String MESSAGE_SUCCESS = "New exercise added: %1$s";
     public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in FitBiz";

@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.exercise.Exercise;
 import seedu.address.testutil.ClientBuilder;
 
 public class AddCommandTest {
@@ -145,6 +146,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredClientList(Predicate<Client> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addExercise(Exercise exercise) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasExercise(Exercise exercise) {
             throw new AssertionError("This method should not be called.");
         }
     }

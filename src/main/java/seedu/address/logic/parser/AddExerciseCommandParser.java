@@ -29,8 +29,8 @@ public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddExerciseCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_REPS, PREFIX_EXERCISE_WEIGHT,
-                PREFIX_SETS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
+                PREFIX_REPS, PREFIX_EXERCISE_WEIGHT, PREFIX_SETS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -42,7 +42,8 @@ public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
         Reps reps = repsString.isPresent() ? ParserUtil.parseReps(argMultimap.getValue(PREFIX_REPS).get())
                 : new Reps("");
         Optional<String> exerciseWeightString = argMultimap.getValue(PREFIX_REPS);
-        ExerciseWeight exerciseWeight = exerciseWeightString.isPresent() ? ParserUtil.parseExerciseWeight(argMultimap.getValue(PREFIX_EXERCISE_WEIGHT).get())
+        ExerciseWeight exerciseWeight = exerciseWeightString.isPresent()
+                ? ParserUtil.parseExerciseWeight(argMultimap.getValue(PREFIX_EXERCISE_WEIGHT).get())
                 : new ExerciseWeight("");
         Optional<String> setsString = argMultimap.getValue(PREFIX_REPS);
         Sets sets = setsString.isPresent() ? ParserUtil.parseSets(argMultimap.getValue(PREFIX_SETS).get())
