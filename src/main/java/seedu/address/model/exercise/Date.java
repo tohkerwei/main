@@ -13,7 +13,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Date {
 
-    public static final String MESSAGE_CONSTRAINTS = "Date input should be in the format DD-MM-YYYY and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS =
+        "Date input should be in the format DD-MM-YYYY and it should not be blank";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final LocalDate value;
     public final String displayValue;

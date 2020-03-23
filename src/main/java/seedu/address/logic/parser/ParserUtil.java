@@ -326,7 +326,7 @@ public class ParserUtil {
      */
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate= date.trim();
+        String trimmedDate = date.trim();
         if (!Date.isValidDate(trimmedDate)) {
             throw new ParseException(ExerciseWeight.MESSAGE_CONSTRAINTS);
         }
