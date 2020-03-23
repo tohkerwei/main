@@ -45,19 +45,20 @@ public class Exercise {
         return date;
     }
 
-    // /**
-    //  * Returns true if both clients of the same name have at least one other
-    //  * identity field that is the same. This defines a weaker notion of equality
-    //  * between two clients.
-    //  */
-    // public boolean isSameClient(Client otherClient) {
-    //     if (otherClient == this) {
-    //         return true;
-    //     }
+    /**
+     * Returns true if both exercises of the same name, reps and weight.
+     * This defines a weaker notion of equality between two exercises.
+     */
+    public boolean isSameExercise(Exercise otherExercise) {
+        if (otherExercise == this) {
+            return true;
+        }
 
-    //     return otherClient != null && otherClient.getName().equals(getName())
-    //             && (otherClient.getPhone().equals(getPhone()) || otherClient.getEmail().equals(getEmail()));
-    // }
+        return otherExercise != null
+            && otherExercise.getExerciseName().equals(getExerciseName())
+            && otherExercise.getReps().equals(getReps())
+            && otherExercise.getExerciseWeight().equals(getExerciseWeight());
+    }
 
     /**
      * Returns true if both exercise have the attribute values.
