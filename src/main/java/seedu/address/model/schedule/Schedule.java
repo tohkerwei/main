@@ -11,8 +11,9 @@ import seedu.address.model.schedule.DayEnum.WeekDay;
  * Represents a Schedule in the Client.
  */
 public class Schedule {
-    public static final String MESSAGE_CONSTRAINTS = "Schedule timings should be given in 24 hour timing, in"
-            + " 30 minute denominations";
+    public static final String MESSAGE_CONSTRAINTS = "Schedule day should be the first 3 letters of the day. "
+            + "Timings should be given in 24 hour format and in 30 minute denominations. "
+            + "Start time cannot be later than end time.";
 
     private String startTime;
     private String endTime;
@@ -21,7 +22,7 @@ public class Schedule {
     public Schedule(String day, String startTime, String endTime) {
         requireAllNonNull(day, startTime, endTime);
         isValidDay(day);
-        isValidTimingFormat(startTime, endTime);
+        isValidTimeFrame(startTime, endTime);
         assignDay(day);
         assignTimes(startTime, endTime);
         this.startTime = startTime;
@@ -51,18 +52,15 @@ public class Schedule {
     }
 
     /**
-     * Checks if the input timings are of valid "hhmm" format.
+     * Checks if the input timing is of valid "hhmm" format.
      *
-     * @param startTime
-     * @param endTime
+     * @param time
      * @return
      */
-    public static boolean isValidTimingFormat(String startTime, String endTime) {
+    public static boolean isValidTimingFormat(String time) {
         try {
-            String formattedStartTime = startTime.substring(0, 2) + ":" + startTime.substring(2, 4);
-            String formattedEndTime = endTime.substring(0, 2) + ":" + endTime.substring(2, 4);
-            LocalTime.parse(formattedStartTime);
-            LocalTime.parse(formattedEndTime);
+            String formattedTime = time.substring(0, 2) + ":" + time.substring(2, 4);
+            LocalTime.parse(formattedTime);
         } catch (Exception e) {
             return false;
         }
