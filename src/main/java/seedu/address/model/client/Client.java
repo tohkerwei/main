@@ -31,13 +31,15 @@ public class Client {
     private Gender gender;
     private TargetWeight targetWeight;
     private Height height;
+    private final Set<Sport> sports = new HashSet<>();
+    private Remark remark;
 
     // TODO: remove this overloaded constructor after finalising attributes
     /**
      * Overloaded Client constructor for FitBiz.
      */
     public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
-            CurrentWeight currentWeight, TargetWeight targetWeight, Height height) {
+            CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Remark remark, Set<Sport> sports) {
         requireAllNonNull(name, phone, email, address, tags, birthday);
         this.name = name;
         this.gender = gender;
@@ -49,6 +51,8 @@ public class Client {
         this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
         this.height = height;
+        this.sports.addAll(sports);
+        this.remark = remark;
     }
 
     /**
@@ -57,16 +61,6 @@ public class Client {
     public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-    }
-
-    public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.gender = gender;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -91,6 +85,10 @@ public class Client {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Remark getRemark() {
+        return remark;
     }
 
     public Birthday getBirthday() {
@@ -122,6 +120,14 @@ public class Client {
     }
 
     /**
+     * Returns an immutable sport set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Sport> getSports() {
+        return Collections.unmodifiableSet(sports);
+    }
+
+    /**
      * Returns true if both clients of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two clients.
      */
@@ -133,7 +139,7 @@ public class Client {
         return otherClient != null
                 && otherClient.getName().equals(getName())
                 && (otherClient.getPhone().equals(getPhone())
-                || otherClient.getEmail().equals(getEmail()));
+                        || otherClient.getEmail().equals(getEmail()));
     }
 
     /**
@@ -162,7 +168,8 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, phone, email, address, tags, birthday, currentWeight, targetWeight, height);
+        return Objects.hash(name, gender, phone, email, address, tags, birthday,
+            currentWeight, targetWeight, height, remark, sports);
     }
 
     @Override
@@ -185,8 +192,12 @@ public class Client {
                 .append(getTargetWeight())
                 .append(" Height: ")
                 .append(getHeight())
+                .append(" Remark: ")
+                .append(getRemark())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Sports: ");
+        getSports().forEach(builder::append);
         return builder.toString();
     }
 

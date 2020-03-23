@@ -19,6 +19,8 @@ import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Remark;
+import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.tag.Tag;
 
@@ -40,6 +42,8 @@ class JsonAdaptedClient {
     private final String height;
     private final String targetWeight;
     private final String currentWeight;
+    private final String remark;
+    private final List<JsonAdaptedSport> sports = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
@@ -50,7 +54,8 @@ class JsonAdaptedClient {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("currentWeight") String currentWeight, @JsonProperty("targetWeight") String targetWeight,
-            @JsonProperty("height") String height) {
+            @JsonProperty("height") String height, @JsonProperty("remark") String remark,
+            @JsonProperty("sports") List<JsonAdaptedSport> sports) {
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -63,7 +68,12 @@ class JsonAdaptedClient {
         this.height = height;
         this.currentWeight = currentWeight;
         this.targetWeight = targetWeight;
+        this.remark = remark;
+        if (sports != null) {
+            this.sports.addAll(sports);
+        }
     }
+
 
     /**
      * Converts a given {@code Client} into this class for Jackson use.
@@ -81,6 +91,10 @@ class JsonAdaptedClient {
         height = source.getHeight().value;
         currentWeight = source.getCurrentWeight().value;
         targetWeight = source.getTargetWeight().value;
+        remark = source.getRemark().value;
+        sports.addAll(source.getSports().stream()
+                  .map(JsonAdaptedSport::new)
+                  .collect(Collectors.toList()));
     }
 
     /**
@@ -95,6 +109,13 @@ class JsonAdaptedClient {
         for (JsonAdaptedTag tag : tagged) {
             clientTags.add(tag.toModelType());
         }
+        final Set<Tag> modelTags = new HashSet<>(clientTags);
+
+        final List<Sport> clientSports = new ArrayList<>();
+        for (JsonAdaptedSport sport : sports) {
+            clientSports.add(sport.toModelType());
+        }
+        final Set<Sport> modelSport = new HashSet<>(clientSports);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -141,7 +162,7 @@ class JsonAdaptedClient {
                     Birthday.class.getSimpleName()));
         }
         if (!Birthday.isValidBirthday(birthday)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
         }
         final Birthday modelBirthday = new Birthday(birthday);
 
@@ -150,7 +171,7 @@ class JsonAdaptedClient {
                     Height.class.getSimpleName()));
         }
         if (!Height.isValidHeight(height)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
         }
         final Height modelHeight = new Height(height);
 
@@ -159,7 +180,7 @@ class JsonAdaptedClient {
                     CurrentWeight.class.getSimpleName()));
         }
         if (!CurrentWeight.isValidWeight(currentWeight)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(CurrentWeight.MESSAGE_CONSTRAINTS);
         }
         final CurrentWeight modelCurrentWeight = new CurrentWeight(currentWeight);
 
@@ -168,13 +189,17 @@ class JsonAdaptedClient {
                     TargetWeight.class.getSimpleName()));
         }
         if (!TargetWeight.isValidWeight(targetWeight)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(TargetWeight.MESSAGE_CONSTRAINTS);
         }
         final TargetWeight modelTargetWeight = new TargetWeight(targetWeight);
 
-        final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
-            modelCurrentWeight, modelTargetWeight, modelHeight);
-    }
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Remark.class.getSimpleName()));
+        }
+        final Remark modelRemark = new Remark(remark);
 
+        return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
+            modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport);
+    }
 }

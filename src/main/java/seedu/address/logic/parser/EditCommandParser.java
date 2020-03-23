@@ -10,6 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 
@@ -22,6 +24,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.Sport;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,8 +43,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENDER, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_BIRTHDAY, PREFIX_CURRENT_WEIGHT, PREFIX_TARGET_WEIGHT,
-                        PREFIX_HEIGHT);
-
+                        PREFIX_HEIGHT, PREFIX_REMARK, PREFIX_SPORT);
         Index index;
 
         try {
@@ -80,8 +82,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             editClientDescriptor.setTargetWeight(ParserUtil.parseTargetWeight(argMultimap
                     .getValue(PREFIX_TARGET_WEIGHT).get()));
         }
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            editClientDescriptor.setRemark(ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()));
+        }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editClientDescriptor::setTags);
-
+        parseSportForEdit(argMultimap.getAllValues(PREFIX_SPORT)).ifPresent(editClientDescriptor::setSports);
         if (!editClientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
@@ -102,6 +107,21 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> sports} into a {@code Set<Sport>} if {@code sports} is non-empty.
+     * If {@code sports} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Sport>} containing zero sports.
+     */
+    private Optional<Set<Sport>> parseSportForEdit(Collection<String> sport) throws ParseException {
+        assert sport != null;
+
+        if (sport.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> sportSet = sport.size() == 1 && sport.contains("") ? Collections.emptySet() : sport;
+        return Optional.of(ParserUtil.parseSports(sportSet));
     }
 
 }
