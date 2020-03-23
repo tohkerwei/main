@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Reps {
 
-    public static final String MESSAGE_CONSTRAINTS = "Input Reps must either be whole number (eg. 65)";
+    public static final String MESSAGE_CONSTRAINTS = "Input Reps must be whole number (eg. 65)";
     public static final String VALIDATION_REGEX = "[0-9]?";
     public final String value;
 
