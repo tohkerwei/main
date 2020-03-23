@@ -20,11 +20,11 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
-import seedu.address.model.exercise.Date;
+import seedu.address.model.exercise.ExerciseDate;
 import seedu.address.model.exercise.ExerciseName;
+import seedu.address.model.exercise.ExerciseReps;
+import seedu.address.model.exercise.ExerciseSets;
 import seedu.address.model.exercise.ExerciseWeight;
-import seedu.address.model.exercise.Reps;
-import seedu.address.model.exercise.Sets;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -274,33 +274,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String reps} into an {@code Reps}. Leading
-     * and trailing whitespaces will be trimmed.
+     * Parses a {@code String reps} into an {@code ExerciseReps}. Leading and
+     * trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code reps} is invalid.
      */
-    public static Reps parseReps(String reps) throws ParseException {
+    public static ExerciseReps parseExerciseReps(String reps) throws ParseException {
         requireNonNull(reps);
         String trimmedReps = reps.trim();
-        if (!Reps.isValidReps(trimmedReps)) {
-            throw new ParseException(Reps.MESSAGE_CONSTRAINTS);
+        if (!ExerciseReps.isValidExerciseReps(trimmedReps)) {
+            throw new ParseException(ExerciseReps.MESSAGE_CONSTRAINTS);
         }
-        return new Reps(trimmedReps);
+        return new ExerciseReps(trimmedReps);
     }
 
     /**
-     * Parses a {@code String sets} into an {@code Sets}. Leading and trailing
-     * whitespaces will be trimmed.
+     * Parses a {@code String sets} into an {@code ExerciseSets}. Leading and
+     * trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code sets} is invalid.
      */
-    public static Sets parseSets(String sets) throws ParseException {
+    public static ExerciseSets parseExerciseSets(String sets) throws ParseException {
         requireNonNull(sets);
         String trimmedSets = sets.trim();
-        if (!Sets.isValidSets(trimmedSets)) {
-            throw new ParseException(Sets.MESSAGE_CONSTRAINTS);
+        if (!ExerciseSets.isValidExerciseSets(trimmedSets)) {
+            throw new ParseException(ExerciseSets.MESSAGE_CONSTRAINTS);
         }
-        return new Sets(trimmedSets);
+        return new ExerciseSets(trimmedSets);
     }
 
     /**
@@ -319,17 +319,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String date} into an {@code Date}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String date} into an {@code ExerciseDate}. Leading and
+     * trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseDate(String date) throws ParseException {
+    public static ExerciseDate parseExerciseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
+        if (!ExerciseDate.isValidExerciseDate(trimmedDate)) {
             throw new ParseException(ExerciseWeight.MESSAGE_CONSTRAINTS);
         }
-        return new Date(date);
+        return new ExerciseDate(date);
     }
 }

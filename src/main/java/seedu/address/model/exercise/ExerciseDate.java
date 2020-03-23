@@ -9,9 +9,9 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents the data of an exercise done by client. Guarantees: immutable; is
- * valid as declared in {@link #isValidDate(String)}
+ * valid as declared in {@link #isValidExerciseDate(String)}
  */
-public class Date {
+public class ExerciseDate {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Date input should be in the format DD-MM-YYYY and it should not be blank";
@@ -22,11 +22,11 @@ public class Date {
     /**
      * Constructs a {@code Date}.
      *
-     * @param birthday A valid date in the form DD-MM-YYYY.
+     * @param date A valid date in the form DD-MM-YYYY.
      */
-    public Date(String date) {
+    public ExerciseDate(String date) {
         requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidExerciseDate(date), MESSAGE_CONSTRAINTS);
         this.value = LocalDate.parse(date, DATE_TIME_FORMATTER);
         this.displayValue = date; // assuming birthday string is valid
     }
@@ -34,7 +34,7 @@ public class Date {
     /**
      * Returns true if a given string is a valid date.
      */
-    public static boolean isValidDate(String test) {
+    public static boolean isValidExerciseDate(String test) {
         try {
             LocalDate.parse(test, DATE_TIME_FORMATTER);
             return true;
@@ -51,8 +51,8 @@ public class Date {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                        && value.equals(((Date) other).value)); // state check
+                || (other instanceof ExerciseDate // instanceof handles nulls
+                        && value.equals(((ExerciseDate) other).value)); // state check
     }
 
     @Override

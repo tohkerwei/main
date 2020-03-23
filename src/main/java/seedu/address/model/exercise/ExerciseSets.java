@@ -5,29 +5,29 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the number of Sets a client does for an exercise. Guarantees:
- * immutable; is valid as declared in {@link #isValidSets(String)}
+ * immutable; is valid as declared in {@link #isValidExerciseSets(String)}
  */
-public class Sets {
+public class ExerciseSets {
 
     public static final String MESSAGE_CONSTRAINTS = "Input Sets must be whole number (eg. 65)";
     public static final String VALIDATION_REGEX = "[0-9]?";
     public final String value;
 
     /**
-     * Constructs a {@code Sets}.
+     * Constructs a {@code ExerciseSets}.
      *
-     * @param sets A whole number.
+     * @param exerciseSets A whole number.
      */
-    public Sets(String sets) {
-        requireNonNull(sets);
-        checkArgument(isValidSets(sets), MESSAGE_CONSTRAINTS);
-        value = sets;
+    public ExerciseSets(String xerciseSets) {
+        requireNonNull(xerciseSets);
+        checkArgument(isValidExerciseSets(xerciseSets), MESSAGE_CONSTRAINTS);
+        value = xerciseSets;
     }
 
     /**
-     * Returns true if a given string is a valid sets.
+     * Returns true if a given string is a valid exercise sets.
      */
-    public static boolean isValidSets(String test) {
+    public static boolean isValidExerciseSets(String test) {
         return test.equals("") || test.matches(VALIDATION_REGEX);
     }
 
@@ -39,8 +39,8 @@ public class Sets {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Sets // instanceof handles nulls
-                        && value.equals(((Sets) other).value)); // state check
+                || (other instanceof ExerciseSets // instanceof handles nulls
+                        && value.equals(((ExerciseSets) other).value)); // state check
     }
 
     @Override

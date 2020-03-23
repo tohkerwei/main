@@ -12,12 +12,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddExerciseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.exercise.Date;
 import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.ExerciseDate;
 import seedu.address.model.exercise.ExerciseName;
+import seedu.address.model.exercise.ExerciseReps;
+import seedu.address.model.exercise.ExerciseSets;
 import seedu.address.model.exercise.ExerciseWeight;
-import seedu.address.model.exercise.Reps;
-import seedu.address.model.exercise.Sets;
 
 /**
  * Parses input arguments and creates a new AddExerciseCommand object
@@ -41,16 +41,18 @@ public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
 
         ExerciseName name = ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_NAME).get());
         Optional<String> repsString = argMultimap.getValue(PREFIX_REPS);
-        Reps reps = repsString.isPresent() ? ParserUtil.parseReps(argMultimap.getValue(PREFIX_REPS).get())
-                : new Reps("");
+        ExerciseReps reps = repsString.isPresent()
+                ? ParserUtil.parseExerciseReps(argMultimap.getValue(PREFIX_REPS).get())
+                : new ExerciseReps("");
         Optional<String> exerciseWeightString = argMultimap.getValue(PREFIX_REPS);
         ExerciseWeight exerciseWeight = exerciseWeightString.isPresent()
                 ? ParserUtil.parseExerciseWeight(argMultimap.getValue(PREFIX_EXERCISE_WEIGHT).get())
                 : new ExerciseWeight("");
         Optional<String> setsString = argMultimap.getValue(PREFIX_REPS);
-        Sets sets = setsString.isPresent() ? ParserUtil.parseSets(argMultimap.getValue(PREFIX_SETS).get())
-                : new Sets("");
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        ExerciseSets sets = setsString.isPresent()
+                ? ParserUtil.parseExerciseSets(argMultimap.getValue(PREFIX_SETS).get())
+                : new ExerciseSets("");
+        ExerciseDate date = ParserUtil.parseExerciseDate(argMultimap.getValue(PREFIX_DATE).get());
         Exercise exercise = new Exercise(name, reps, sets, exerciseWeight, date);
 
         return new AddExerciseCommand(exercise);

@@ -11,38 +11,39 @@ import java.util.Objects;
 public class Exercise {
 
     public final ExerciseName exerciseName;
-    public final Reps reps;
-    public final Sets sets;
+    public final ExerciseReps exerciseReps;
+    public final ExerciseSets exerciseSets;
     public final ExerciseWeight exerciseWeight;
-    public final Date date;
+    public final ExerciseDate exerciseDate;
 
-    public Exercise(ExerciseName exerciseName, Reps reps, Sets sets, ExerciseWeight exerciseWeight, Date date) {
+    public Exercise(ExerciseName exerciseName, ExerciseReps exerciseReps, ExerciseSets exerciseSets,
+        ExerciseWeight exerciseWeight, ExerciseDate exerciseDate) {
         requireAllNonNull(exerciseName);
         this.exerciseName = exerciseName;
-        this.reps = reps;
-        this.sets = sets;
+        this.exerciseReps = exerciseReps;
+        this.exerciseSets = exerciseSets;
         this.exerciseWeight = exerciseWeight;
-        this.date = date;
+        this.exerciseDate = exerciseDate;
     }
 
     public ExerciseName getExerciseName() {
         return exerciseName;
     }
 
-    public Reps getReps() {
-        return reps;
+    public ExerciseReps getReps() {
+        return exerciseReps;
     }
 
-    public Sets getSets() {
-        return sets;
+    public ExerciseSets getSets() {
+        return exerciseSets;
     }
 
     public ExerciseWeight getExerciseWeight() {
         return exerciseWeight;
     }
 
-    public Date getDate() {
-        return date;
+    public ExerciseDate getDate() {
+        return exerciseDate;
     }
 
     /**
@@ -84,7 +85,7 @@ public class Exercise {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(exerciseName, reps, sets, exerciseWeight, date);
+        return Objects.hash(exerciseName, exerciseReps, exerciseSets, exerciseWeight, exerciseDate);
     }
 
     @Override
@@ -96,7 +97,7 @@ public class Exercise {
             .append(getSets())
             .append(" Reps: ")
             .append(getReps())
-            .append(" Exercise Weight: ")
+            .append(" Weight: ")
             .append(getExerciseWeight())
             .append(" Date: ")
             .append(getDate());

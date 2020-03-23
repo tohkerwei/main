@@ -5,29 +5,29 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the number of Reps a client does for an exercise. Guarantees:
- * immutable; is valid as declared in {@link #isValidReps(String)}
+ * immutable; is valid as declared in {@link #isValidExerciseReps(String)}
  */
-public class Reps {
+public class ExerciseReps {
 
     public static final String MESSAGE_CONSTRAINTS = "Input Reps must be whole number (eg. 65)";
     public static final String VALIDATION_REGEX = "[0-9]?";
     public final String value;
 
     /**
-     * Constructs a {@code Reps}.
+     * Constructs a {@code ExerciseReps}.
      *
-     * @param sets A whole number.
+     * @param exerciseReps A whole number.
      */
-    public Reps(String reps) {
-        requireNonNull(reps);
-        checkArgument(isValidReps(reps), MESSAGE_CONSTRAINTS);
-        value = reps;
+    public ExerciseReps(String exerciseReps) {
+        requireNonNull(exerciseReps);
+        checkArgument(isValidExerciseReps(exerciseReps), MESSAGE_CONSTRAINTS);
+        value = exerciseReps;
     }
 
     /**
-     * Returns true if a given string is a valid reps.
+     * Returns true if a given string is a valid exercise reps.
      */
-    public static boolean isValidReps(String test) {
+    public static boolean isValidExerciseReps(String test) {
         return test.equals("") || test.matches(VALIDATION_REGEX);
     }
 
@@ -39,8 +39,8 @@ public class Reps {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Reps // instanceof handles nulls
-                        && value.equals(((Reps) other).value)); // state check
+                || (other instanceof ExerciseReps // instanceof handles nulls
+                        && value.equals(((ExerciseReps) other).value)); // state check
     }
 
     @Override
