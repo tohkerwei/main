@@ -20,6 +20,7 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -252,4 +253,33 @@ public class ParserUtil {
         }
         return sportSet;
     }
+
+    /** Parses a {@code String day} into a {@code String day}.
+     * Only correct day of the week is allowed
+     *
+     * @throws ParseException
+     */
+    public static String parseDay(String day) throws ParseException {
+        requireNonNull(day);
+        String trimmedDay = day.trim();
+        if (!Schedule.isValidDay(trimmedDay)) {
+            throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedDay;
+    }
+
+    /** Parses a {@code String time} into a {@code String time}.
+     * Only time in 24 hour format is allowed
+     *
+     * @throws ParseException
+     */
+    public static String parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!Schedule.isValidTimingFormat(trimmedTime)) {
+            throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedTime;
+    }
+
 }
