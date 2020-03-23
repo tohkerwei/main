@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.exercise.Exercise;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredClientList(Predicate<Client> predicate);
+
+    /**
+     * Returns true if an exercise with the same identity as {@code exercise} exists in
+     * FitBiz.
+     */
+    boolean hasExercise(Exercise exercise);
+
+    /**
+     * Adds the given exercise. {@code exercise} must not already exist in FitBiz.
+     */
+    void addExercise(Exercise exercise);
 }

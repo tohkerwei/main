@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.exercise.Exercise;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -146,6 +147,21 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredClients.equals(other.filteredClients);
+    }
+
+    //=========== Exercise ======================================================================================
+
+    @Override
+    public boolean hasExercise(Exercise exercise) {
+        requireNonNull(exercise);
+        //return addressBook.hasExercise(exercise);
+        return true;
+    }
+
+    @Override
+    public void addExercise(Exercise exercise) {
+        // addressBook.addExercise(exercise);
+        // updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
     }
 
 }
