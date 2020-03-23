@@ -20,6 +20,10 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
+import seedu.address.model.exercise.ExerciseName;
+import seedu.address.model.exercise.ExerciseWeight;
+import seedu.address.model.exercise.Reps;
+import seedu.address.model.exercise.Sets;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -252,4 +256,65 @@ public class ParserUtil {
         }
         return sportSet;
     }
+
+    /**
+     * Parses a {@code String exercise name} into an {@code ExerciseName}. Leading
+     * and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code exercise name} is invalid.
+     */
+    public static ExerciseName parseExerciseName(String exerciseName) throws ParseException {
+        requireNonNull(exerciseName);
+        String trimmedExerciseName = exerciseName.trim();
+        if (!ExerciseName.isValidExerciseName(trimmedExerciseName)) {
+            throw new ParseException(ExerciseName.MESSAGE_CONSTRAINTS);
+        }
+        return new ExerciseName(trimmedExerciseName);
+    }
+    
+    /**
+     * Parses a {@code String reps} into an {@code Reps}. Leading
+     * and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code reps} is invalid.
+     */
+    public static Reps parseReps(String reps) throws ParseException {
+        requireNonNull(reps);
+        String trimmedReps = reps.trim();
+        if (!Reps.isValidReps(trimmedReps)) {
+            throw new ParseException(Reps.MESSAGE_CONSTRAINTS);
+        }
+        return new Reps(trimmedReps);
+    }
+
+    /**
+     * Parses a {@code String sets} into an {@code Sets}. Leading and trailing
+     * whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sets} is invalid.
+     */
+    public static Sets parseSets(String sets) throws ParseException {
+        requireNonNull(sets);
+        String trimmedSets = sets.trim();
+        if (!Sets.isValidSets(trimmedSets)) {
+            throw new ParseException(Sets.MESSAGE_CONSTRAINTS);
+        }
+        return new Sets(trimmedSets);
+    }
+
+    /**
+     * Parses a {@code String exercise weight} into an {@code ExerciseWeight}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code exercise weight} is invalid.
+     */
+    public static ExerciseWeight parseExerciseWeight(String exerciseWeight) throws ParseException {
+        requireNonNull(exerciseWeight);
+        String trimmedExerciseWeight = exerciseWeight.trim();
+        if (!ExerciseWeight.isValidExerciseWeight(trimmedExerciseWeight)) {
+            throw new ParseException(ExerciseWeight.MESSAGE_CONSTRAINTS);
+        }
+        return new ExerciseWeight(trimmedExerciseWeight);
+    }
+    
 }
