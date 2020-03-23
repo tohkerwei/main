@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REPS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
 
@@ -11,6 +12,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddExerciseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.exercise.Date;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseName;
 import seedu.address.model.exercise.ExerciseWeight;
@@ -48,7 +50,8 @@ public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
         Optional<String> setsString = argMultimap.getValue(PREFIX_REPS);
         Sets sets = setsString.isPresent() ? ParserUtil.parseSets(argMultimap.getValue(PREFIX_SETS).get())
                 : new Sets("");
-        Exercise exercise = new Exercise(name, reps, sets, exerciseWeight);
+        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Exercise exercise = new Exercise(name, reps, sets, exerciseWeight, date);
 
         return new AddExerciseCommand(exercise);
     }

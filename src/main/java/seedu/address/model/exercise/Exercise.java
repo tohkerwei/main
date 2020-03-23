@@ -14,13 +14,15 @@ public class Exercise {
     public final Reps reps;
     public final Sets sets;
     public final ExerciseWeight exerciseWeight;
+    public final Date date;
 
-    public Exercise(ExerciseName exerciseName, Reps reps, Sets sets, ExerciseWeight exerciseWeight) {
+    public Exercise(ExerciseName exerciseName, Reps reps, Sets sets, ExerciseWeight exerciseWeight, Date date) {
         requireAllNonNull(exerciseName);
         this.exerciseName = exerciseName;
         this.reps = reps;
         this.sets = sets;
         this.exerciseWeight = exerciseWeight;
+        this.date = date;
     }
 
     public ExerciseName getExerciseName() {
@@ -37,6 +39,10 @@ public class Exercise {
 
     public ExerciseWeight getExerciseWeight() {
         return exerciseWeight;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
     // /**
@@ -70,13 +76,14 @@ public class Exercise {
         return otherExercise.getExerciseName().equals(getExerciseName())
             && otherExercise.getReps().equals(getReps())
             && otherExercise.getSets().equals(getSets())
-            && otherExercise.getExerciseWeight().equals(getExerciseWeight());
+            && otherExercise.getExerciseWeight().equals(getExerciseWeight())
+            && otherExercise.getDate().equals(getDate());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(exerciseName, reps, sets, exerciseWeight);
+        return Objects.hash(exerciseName, reps, sets, exerciseWeight, date);
     }
 
     @Override
@@ -89,7 +96,9 @@ public class Exercise {
             .append(" Reps: ")
             .append(getReps())
             .append(" Exercise Weight: ")
-            .append(getExerciseWeight());
+            .append(getExerciseWeight())
+            .append(" Date: ")
+            .append(getDate());
         return builder.toString();
     }
 

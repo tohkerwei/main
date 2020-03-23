@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REPS;
@@ -23,12 +24,14 @@ public class AddExerciseCommand extends Command {
         + PREFIX_NAME + "EXERCISE NAME "
         + PREFIX_REPS + "REPS "
         + PREFIX_EXERCISE_WEIGHT + "EXERCISE WEIGHT "
-        + PREFIX_SETS + "SETS\n"
+        + PREFIX_SETS + "SETS "
+        + PREFIX_DATE + "DATE\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_NAME + "bench press "
         + PREFIX_REPS + "12 "
         + PREFIX_EXERCISE_WEIGHT + "50 "
-        + PREFIX_SETS + "8";
+        + PREFIX_SETS + "8 "
+        + PREFIX_DATE + "10-12-2020";
 
     public static final String MESSAGE_SUCCESS = "New exercise added: %1$s";
     public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in FitBiz";
