@@ -9,8 +9,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.CommandHistory;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.CommandHistory;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -36,11 +36,11 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
                 if (ke.getCode() == KeyCode.UP) {
-                    String prevCommand = commandHistory.getPrevCommand(); 
+                    String prevCommand = commandHistory.getPrevCommand();
                     commandTextField.setText(prevCommand);
                     commandTextField.positionCaret(CARET_POSITION_INDEX);
                 } else if (ke.getCode() == KeyCode.DOWN) {
-                    String nextCommand = commandHistory.getNextCommand(); 
+                    String nextCommand = commandHistory.getNextCommand();
                     commandTextField.setText(nextCommand);
                     commandTextField.positionCaret(CARET_POSITION_INDEX);
                 }

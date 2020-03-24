@@ -9,12 +9,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * This represents the storage for the command history.
+ */
 public class CommandHistoryStorage {
 
     private Path commandHistoryPath = Paths.get("data", "command.txt");
 
+    /**
+     * Creates an empty new file for use in this class later.
+     */
     private void createNewFile() {
-        File file =  commandHistoryPath.toFile();
+        File file = commandHistoryPath.toFile();
         file.getParentFile().mkdirs();
         try {
             file.createNewFile();
@@ -46,7 +52,7 @@ public class CommandHistoryStorage {
 
     /**
      * Saves the given command history to the storage.
-     * 
+     *
      * @param history cannot be null.
      */
     public void saveCommandHistory(ArrayList<String> history) {

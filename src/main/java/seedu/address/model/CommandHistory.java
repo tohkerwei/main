@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import seedu.address.storage.CommandHistoryStorage;
 
+/**
+ * This represents the model of the command history.
+ */
 public class CommandHistory {
 
     private static final int START_INDEX = 0;
@@ -13,11 +16,17 @@ public class CommandHistory {
     private int index;
     private CommandHistoryStorage commandHistoryStorage;
 
+    /**
+     * Default constructor for this class.
+     */
     public CommandHistory() {
         this.commandHistoryStorage = new CommandHistoryStorage();
         initialiseCommandHistory();
     }
 
+    /**
+     * Initialises the history from the storage.
+     */
     public void initialiseCommandHistory() {
         history = new ArrayList<String>(commandHistoryStorage.readCommandHistory());
         index = history.size();
@@ -43,6 +52,13 @@ public class CommandHistory {
         return toTest.equals("");
     }
 
+    /**
+     * Returns true iff the parameter {@code toTest} is different from the most
+     * recent command, or if no history exists.
+     *
+     * @param toTest parameter to test.
+     * @return true iff toTest is different from the most recent command.
+     */
     private boolean isSimilarToMostRecentCommand(String toTest) {
         if (hasNoHistory()) {
             return false; // no history means toTest is unique
@@ -57,7 +73,7 @@ public class CommandHistory {
     /**
      * Adds the user input {@code command} String to this model and to the
      * {@code commandHistoryStorage}.
-     * 
+     *
      * @param command the user input command.
      */
     public void add(String command) {
