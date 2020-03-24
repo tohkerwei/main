@@ -37,7 +37,7 @@ This program is primarily a desktop application and optimised for those who pref
 . Refer to <<Features>> below for details of each command
 
 == Features
-s
+
 *Format of Commands*
 
 * Words in `UPPER_SNAKE_CASE` are the parameters to be supplied by the user
@@ -240,3 +240,37 @@ Examples:
 
 *Q*: How do I transfer my data to another Computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FitBiz folder.
+
+== Command Summary
+
+=== General Commands
+
+[width="100%",cols="20%,<30%",options="header",]
+|=======================================================================
+|Command | Summary
+|`export INDEX`| Exports client's training record to a CSV file.
+|`help`| Shows all available commands and their description.
+|=======================================================================
+
+=== Client Commands
+
+[width="100%",cols="20%,<30%",options="header",]
+|=======================================================================
+|Command | Summary
+|`add-c n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…`| Adds a new client into FitBiz.
+|`delete-c INDEX`| Deletes a client and its associated exercises.
+|`edit-c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​ `| Edits an existing client.
+|`filter-c KEYWORD [MORE_KEYWORDS]`| Filters a client based on specified keywords.
+|`list-c`| Shows the list of clients in FitBiz.
+|`view-c INDEX`| Shows detailed information of a client.
+|=======================================================================
+
+=== Exercise Commands
+
+[width="100%",cols="20%,<30%",options="header",]
+|=======================================================================
+|Command | Summary
+|`add-e n/NAME d/DATE reps/REPS sets/SETS…`| Adds a new exercise to a client.
+|`graph e/Push Ups`| Shows a graph of the exercise progress done by a client.
+|`view-pb INDEX`| Shows the personal best for all exercises done by client.
+|=======================================================================
