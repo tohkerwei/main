@@ -136,4 +136,13 @@ public class UniqueExerciseList implements Iterable<Exercise> {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        String toReturn = "";
+        for (Exercise ex : internalList) {
+            toReturn += ex.toString() + "\n";
+        }
+        return toReturn.trim();
+    }
 }

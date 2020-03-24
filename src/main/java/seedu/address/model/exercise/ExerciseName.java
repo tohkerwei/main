@@ -11,7 +11,7 @@ public class ExerciseName {
 
     public static final String MESSAGE_CONSTRAINTS =
         "Exercise names should only contain alphanumeric characters and spaces, and it should not be blank";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9 ]*$";
     public final String value;
 
     /**

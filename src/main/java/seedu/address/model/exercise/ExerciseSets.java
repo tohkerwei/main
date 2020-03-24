@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ExerciseSets {
 
     public static final String MESSAGE_CONSTRAINTS = "Input Sets must be whole number (eg. 65)";
-    public static final String VALIDATION_REGEX = "[0-9]?";
+    public static final String VALIDATION_REGEX = "\\d+";
     public final String value;
 
     /**

@@ -58,7 +58,8 @@ public class Exercise {
         return otherExercise != null
             && otherExercise.getExerciseName().equals(getExerciseName())
             && otherExercise.getReps().equals(getReps())
-            && otherExercise.getExerciseWeight().equals(getExerciseWeight());
+            && otherExercise.getExerciseWeight().equals(getExerciseWeight())
+            && otherExercise.getDate().equals(getDate());
     }
 
     /**
@@ -91,7 +92,7 @@ public class Exercise {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Exercise Name: ")
+        builder.append("Exercise Name: ")
             .append(getExerciseName())
             .append(" Sets: ")
             .append(getSets())

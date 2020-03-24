@@ -22,6 +22,7 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
+import seedu.address.model.exercise.UniqueExerciseList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -199,7 +200,9 @@ class JsonAdaptedClient {
         }
         final Remark modelRemark = new Remark(remark);
 
+        final UniqueExerciseList exerciseList = new UniqueExerciseList();
+
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
-            modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport);
+            modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport, exerciseList);
     }
 }

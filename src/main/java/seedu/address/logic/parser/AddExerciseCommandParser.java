@@ -10,6 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddExerciseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exercise.Exercise;
@@ -25,18 +27,26 @@ import seedu.address.model.exercise.ExerciseWeight;
 public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddExerciseCommand
-     * and returns an AddExerciseCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the
+     * AddExerciseCommand and returns an AddExerciseCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddExerciseCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME,
-                PREFIX_REPS, PREFIX_EXERCISE_WEIGHT, PREFIX_SETS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_REPS,
+                PREFIX_EXERCISE_WEIGHT, PREFIX_SETS, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE));
+        }
+
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IllegalValueException ive) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE),
+                    ive);
         }
 
         ExerciseName name = ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -55,7 +65,7 @@ public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
         ExerciseDate date = ParserUtil.parseExerciseDate(argMultimap.getValue(PREFIX_DATE).get());
         Exercise exercise = new Exercise(name, reps, sets, exerciseWeight, date);
 
-        return new AddExerciseCommand(exercise);
+        return new AddExerciseCommand(index, exercise);
     }
 
     /*

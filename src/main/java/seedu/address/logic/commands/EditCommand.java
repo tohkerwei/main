@@ -38,6 +38,7 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
+import seedu.address.model.exercise.UniqueExerciseList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -110,8 +111,10 @@ public class EditCommand extends Command {
                 .orElse(clientToEdit.getTargetWeight());
         Remark updatedRemark = editClientDescriptor.getRemark()
                 .orElse(clientToEdit.getRemark());
+        UniqueExerciseList exerciseList = clientToEdit.getExerciseList();
         return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight, updatedRemark, updatedSport);
+                updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight, updatedRemark, updatedSport,
+                exerciseList);
     }
 
     @Override
