@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.history.CommandHistory;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -21,6 +22,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @FXML
     private TextField commandTextField;
@@ -33,9 +35,9 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
                 if (ke.getCode() == KeyCode.UP) {
-                    System.out.println("UP");
+                    System.out.println(commandHistory.getPrevCommand());
                 } else if (ke.getCode() == KeyCode.DOWN) {
-                    System.out.println("DOWN");
+                    System.out.println(commandHistory.getNextCommand());
                 }
             }
         });
@@ -46,12 +48,14 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
+        String enteredCommand = commandTextField.getText();
         try {
-            commandExecutor.execute(commandTextField.getText());
+            commandExecutor.execute(enteredCommand);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+        commandHistory.add(enteredCommand);
     }
 
     /**
