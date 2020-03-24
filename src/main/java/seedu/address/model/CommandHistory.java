@@ -7,6 +7,7 @@ import seedu.address.storage.CommandHistoryStorage;
 public class CommandHistory {
 
     private static final int START_INDEX = 0;
+    private static final int MAX_HISTORY_SIZE = 100;
 
     private ArrayList<String> history;
     private int index;
@@ -49,12 +50,25 @@ public class CommandHistory {
         return getMostRecentCommand().equals(toTest);
     }
 
+    private boolean isAtMaxCapacity() {
+        return history.size() >= MAX_HISTORY_SIZE;
+    }
+
+    /**
+     * Adds the user input {@code command} String to this model and to the
+     * {@code commandHistoryStorage}.
+     * 
+     * @param command the user input command.
+     */
     public void add(String command) {
         if (isEmptyString(command)) {
             return;
         }
         if (isSimilarToMostRecentCommand(command)) {
             return;
+        }
+        if (isAtMaxCapacity()) {
+            history.remove(0);
         }
 
         history.add(command);
