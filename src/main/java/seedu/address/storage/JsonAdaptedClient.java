@@ -128,7 +128,7 @@ class JsonAdaptedClient {
         final UniqueExerciseList modelExerciseList = new UniqueExerciseList();
         for (JsonAdaptedExercise ex : exerciseList) {
             modelExerciseList.add(ex.toModelType());
-        } 
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
