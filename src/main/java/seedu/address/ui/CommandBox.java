@@ -20,6 +20,8 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    // A generous estimate for the length of the user input string
+    private static final int CARET_POSITION_INDEX = Integer.MAX_VALUE;
 
     private final CommandExecutor commandExecutor;
     private final CommandHistory commandHistory = new CommandHistory();
@@ -35,9 +37,13 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
                 if (ke.getCode() == KeyCode.UP) {
-                    System.out.println(commandHistory.getPrevCommand());
+                    String prevCommand = commandHistory.getPrevCommand(); 
+                    commandTextField.setText(prevCommand);
+                    commandTextField.positionCaret(CARET_POSITION_INDEX);
                 } else if (ke.getCode() == KeyCode.DOWN) {
-                    System.out.println(commandHistory.getNextCommand());
+                    String nextCommand = commandHistory.getNextCommand(); 
+                    commandTextField.setText(nextCommand);
+                    commandTextField.positionCaret(CARET_POSITION_INDEX);
                 }
             }
         });
@@ -50,8 +56,8 @@ public class CommandBox extends UiPart<Region> {
     private void handleCommandEntered() {
         String enteredCommand = commandTextField.getText();
         try {
-            commandExecutor.execute(enteredCommand);
             commandTextField.setText("");
+            commandExecutor.execute(enteredCommand);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }

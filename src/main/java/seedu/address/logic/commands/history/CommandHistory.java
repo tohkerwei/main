@@ -21,8 +21,31 @@ public class CommandHistory {
         return history.size() == START_INDEX;
     }
 
-    public void add(String str) {
-        history.add(str);
+    private String getMostRecentCommand() {
+        return history.get(history.size() - 1);
+    }
+
+    private boolean isEmptyString(String toTest) {
+        return toTest.equals("");
+    }
+
+    private boolean isSimilarToMostRecentCommand(String toTest) {
+        if (hasNoHistory()) {
+            return false; // no history means toTest is unique
+        }
+        return getMostRecentCommand().equals(toTest);
+    }
+
+    public void add(String command) {
+        if (isEmptyString(command)) {
+            return; // don't add
+        }
+
+        if (isSimilarToMostRecentCommand(command)) {
+            return; // don't add
+        }
+
+        history.add(command);
         index = history.size();
     }
 
