@@ -38,7 +38,7 @@ public class ClientListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ClientCard(client, getIndex() + 1).getRoot());
+                setGraphic(new ViewClientCard(client).getRoot());
             }
         }
     }
