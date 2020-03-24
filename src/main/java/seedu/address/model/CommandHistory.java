@@ -2,12 +2,25 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 
+import seedu.address.storage.CommandHistoryStorage;
+
 public class CommandHistory {
 
     private static final int START_INDEX = 0;
 
-    private ArrayList<String> history = new ArrayList<>();
-    private int index = 0;
+    private ArrayList<String> history;
+    private int index;
+    private CommandHistoryStorage commandHistoryStorage;
+
+    public CommandHistory() {
+        this.commandHistoryStorage = new CommandHistoryStorage();
+        initialiseCommandHistory();
+    }
+
+    public void initialiseCommandHistory() {
+        history = new ArrayList<String>(commandHistoryStorage.readCommandHistory());
+        index = history.size();
+    }
 
     private boolean isAtStart() {
         return index == START_INDEX;
@@ -38,15 +51,15 @@ public class CommandHistory {
 
     public void add(String command) {
         if (isEmptyString(command)) {
-            return; // don't add
+            return;
         }
-
         if (isSimilarToMostRecentCommand(command)) {
-            return; // don't add
+            return;
         }
 
         history.add(command);
         index = history.size();
+        commandHistoryStorage.saveCommandHistory(history);
     }
 
     public String getPrevCommand() {
