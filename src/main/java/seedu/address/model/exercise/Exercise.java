@@ -92,16 +92,16 @@ public class Exercise {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Exercise Name: ")
+        builder.append("Exercise name: ")
             .append(getExerciseName())
+            .append(" Date: ")
+            .append(getDate())
             .append(" Sets: ")
             .append(getSets())
             .append(" Reps: ")
             .append(getReps())
             .append(" Weight: ")
-            .append(getExerciseWeight())
-            .append(" Date: ")
-            .append(getDate());
+            .append(getExerciseWeight());
         return builder.toString();
     }
 

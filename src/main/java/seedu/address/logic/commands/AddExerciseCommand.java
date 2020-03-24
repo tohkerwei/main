@@ -39,7 +39,7 @@ public class AddExerciseCommand extends Command {
         + PREFIX_EXERCISE_WEIGHT + "50 "
         + PREFIX_SETS + "8";
 
-    public static final String MESSAGE_SUCCESS = "New exercise added.\n%1$s";
+    public static final String MESSAGE_SUCCESS = "New exercise added. Current recorded exercises:\n%1$s";
     public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in FitBiz";
 
     private final Index index;
@@ -65,7 +65,8 @@ public class AddExerciseCommand extends Command {
         }
 
         Client clientToEdit = lastShownList.get(index.getZeroBased());
-        clientToEdit.getExerciseList().add(toAdd); // add the exercise
+        // mutates the list belonging to the client by adding the exercise
+        clientToEdit.getExerciseList().add(toAdd);
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
                 clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
                 clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),

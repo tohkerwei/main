@@ -45,18 +45,19 @@ class JsonAdaptedClient {
     private final String currentWeight;
     private final String remark;
     private final List<JsonAdaptedSport> sports = new ArrayList<>();
+    private final List<JsonAdaptedExercise> exerciseList = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
      */
     @JsonCreator
-    public JsonAdaptedClient(@JsonProperty("name") String name,
-            @JsonProperty("gender") String gender, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("birthday") String birthday, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("currentWeight") String currentWeight, @JsonProperty("targetWeight") String targetWeight,
-            @JsonProperty("height") String height, @JsonProperty("remark") String remark,
-            @JsonProperty("sports") List<JsonAdaptedSport> sports) {
+    public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("gender") String gender,
+            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+            @JsonProperty("address") String address, @JsonProperty("birthday") String birthday,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("currentWeight") String currentWeight,
+            @JsonProperty("targetWeight") String targetWeight, @JsonProperty("height") String height,
+            @JsonProperty("remark") String remark, @JsonProperty("sports") List<JsonAdaptedSport> sports,
+            @JsonProperty("exerciseList") List<JsonAdaptedExercise> exerciseList) {
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -73,8 +74,10 @@ class JsonAdaptedClient {
         if (sports != null) {
             this.sports.addAll(sports);
         }
+        if (exerciseList != null) {
+            this.exerciseList.addAll(exerciseList);
+        }
     }
-
 
     /**
      * Converts a given {@code Client} into this class for Jackson use.
@@ -94,8 +97,12 @@ class JsonAdaptedClient {
         targetWeight = source.getTargetWeight().value;
         remark = source.getRemark().value;
         sports.addAll(source.getSports().stream()
-                  .map(JsonAdaptedSport::new)
-                  .collect(Collectors.toList()));
+                .map(JsonAdaptedSport::new)
+                .collect(Collectors.toList()));
+        exerciseList.addAll(source.getExerciseList()
+                .asUnmodifiableObservableList().stream()
+                .map(JsonAdaptedExercise::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -117,6 +124,11 @@ class JsonAdaptedClient {
             clientSports.add(sport.toModelType());
         }
         final Set<Sport> modelSport = new HashSet<>(clientSports);
+
+        final UniqueExerciseList modelExerciseList = new UniqueExerciseList();
+        for (JsonAdaptedExercise ex : exerciseList) {
+            modelExerciseList.add(ex.toModelType());
+        } 
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -159,8 +171,8 @@ class JsonAdaptedClient {
         final Address modelAddress = new Address(address);
 
         if (birthday == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Birthday.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Birthday.class.getSimpleName()));
         }
         if (!Birthday.isValidBirthday(birthday)) {
             throw new IllegalValueException(Birthday.MESSAGE_CONSTRAINTS);
@@ -168,8 +180,7 @@ class JsonAdaptedClient {
         final Birthday modelBirthday = new Birthday(birthday);
 
         if (height == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Height.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
         }
         if (!Height.isValidHeight(height)) {
             throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
@@ -177,8 +188,8 @@ class JsonAdaptedClient {
         final Height modelHeight = new Height(height);
 
         if (currentWeight == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    CurrentWeight.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, CurrentWeight.class.getSimpleName()));
         }
         if (!CurrentWeight.isValidWeight(currentWeight)) {
             throw new IllegalValueException(CurrentWeight.MESSAGE_CONSTRAINTS);
@@ -186,8 +197,8 @@ class JsonAdaptedClient {
         final CurrentWeight modelCurrentWeight = new CurrentWeight(currentWeight);
 
         if (targetWeight == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    TargetWeight.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TargetWeight.class.getSimpleName()));
         }
         if (!TargetWeight.isValidWeight(targetWeight)) {
             throw new IllegalValueException(TargetWeight.MESSAGE_CONSTRAINTS);
@@ -195,14 +206,11 @@ class JsonAdaptedClient {
         final TargetWeight modelTargetWeight = new TargetWeight(targetWeight);
 
         if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Remark.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
         final Remark modelRemark = new Remark(remark);
 
-        final UniqueExerciseList exerciseList = new UniqueExerciseList();
-
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
-            modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport, exerciseList);
+                modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport, modelExerciseList);
     }
 }

@@ -180,11 +180,17 @@ public class Client {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName()).append(" Gender: ").append(getGender()).append(" Phone: ").append(getPhone())
-                .append(" Email: ").append(getEmail()).append(" Address: ").append(getAddress()).append(" Birthday: ")
-                .append(getBirthday()).append(" Current Weight: ").append(getCurrentWeight()).append(" Target Weight: ")
-                .append(getTargetWeight()).append(" Height: ").append(getHeight()).append(" Remark: ")
-                .append(getRemark()).append(" Tags: ");
+        builder.append(getName())
+                .append(" Gender: ").append(getGender())
+                .append(" Phone: ").append(getPhone())
+                .append(" Email: ").append(getEmail())
+                .append(" Address: ").append(getAddress())
+                .append(" Birthday: ").append(getBirthday())
+                .append(" Current Weight: ").append(getCurrentWeight())
+                .append(" Target Weight: ").append(getTargetWeight())
+                .append(" Height: ").append(getHeight())
+                .append(" Remark: ").append(getRemark())
+                .append(" Tags: ");
         getTags().forEach(builder::append);
         builder.append(" Sports: ");
         getSports().forEach(builder::append);
