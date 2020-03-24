@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.history;
+package seedu.address.model;
 
 import java.util.ArrayList;
 
