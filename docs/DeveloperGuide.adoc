@@ -162,7 +162,7 @@ This feature allows users to save their previously entered commands and to retri
 This command history mechanism is facilitated by the model `CommandHistory`, and the storage code in `CommandHistoryStorage`. It mimics most modern CLIs in terms of what kind of user input the `CommandHistory` will store:
 
 * The empty string, `""`, will not be stored
-* Commands that are similar with the most recently stored command in the history will not be stored
+* Commands that are similar to the most recently stored command in the history will not be stored
 * All other user input, be it valid or invalid commands, will be stored
 * The history has a maximum size of 100 strings (for performance reasons)
 * Pressing the up arrow key will return the
@@ -180,7 +180,7 @@ In designing this feature, we had to decide on the underlying data structure to 
 
 [cols="30%, 70%", options='header']
 |====================
-| Data Strucutre | Pros and Cons
+| Data Structure | Pros and Cons
 | Array list |
 *Pros*: Much easier to manipulate using indices
 
