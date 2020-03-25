@@ -13,23 +13,24 @@ import seedu.address.model.client.Client;
 /**
  * Panel containing the list of clients.
  */
-public class ClientListPanel extends UiPart<Region> {
-    private static final String FXML = "ClientListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(ClientListPanel.class);
+public class ViewClientPanel extends UiPart<Region> {
+    private static final String FXML = "ViewClientPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ViewClientPanel.class);
 
     @FXML
-    private ListView<Client> clientListView;
+    private ListView<Client> clientView;
 
-    public ClientListPanel(ObservableList<Client> clientList) {
+    public ViewClientPanel(ObservableList<Client> clientList) {
         super(FXML);
-        clientListView.setItems(clientList);
-        clientListView.setCellFactory(listView -> new ClientListViewCell());
+        clientView.setItems(clientList);
+        clientView.setCellFactory(listView -> new ViewClientCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Client} using a {@code ClientCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Client} using
+     * a {@code ClientCard}.
      */
-    class ClientListViewCell extends ListCell<Client> {
+    class ViewClientCell extends ListCell<Client> {
         @Override
         protected void updateItem(Client client, boolean empty) {
             super.updateItem(client, empty);
@@ -38,7 +39,7 @@ public class ClientListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ClientCard(client, getIndex() + 1).getRoot());
+                setGraphic(new ViewClientCard(client).getRoot());
             }
         }
     }
