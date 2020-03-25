@@ -164,7 +164,7 @@ This command history mechanism is facilitated by the model `CommandHistory`, and
 * The empty string, `""`, will not be stored in the history
 * Commands that are similar to the most recently stored command in the history will not be stored (ie. duplicate commands will not be stored)
 * All other user input, be it valid or invalid commands, will be stored
-* There is a maximum size of the stored history (100 in this case, for performance reasons discussed in the later secion)
+* There is a maximum size of the stored history (100 in this case, for performance reasons discussed in the later section)
 * Pressing the "up" arrow key will browse backwards towards the least recently entered commands
 * Pressing the "down" arrow key will browse forwards towards the most recently entered commands
 * The caret position must be at the end of the command when browsing the history
