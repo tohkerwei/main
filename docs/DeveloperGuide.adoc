@@ -159,26 +159,26 @@ This feature allows users to save their previously entered commands and to retri
 
 ==== Implementation
 
-This command history mechanism is facilitated by the model `CommandHistory`, and the storage code in `CommandHistoryStorage`. It mimics most modern CLIs in terms of what kind of user input the `CommandHistory` will store:
+This command history mechanism is facilitated by the model `CommandHistory`, and the storage code in `CommandHistoryStorage`. The behaviour of this feature mimics most modern CLIs, namely:
 
-* The empty string, `""`, will not be stored
-* Commands that are similar to the most recently stored command in the history will not be stored
+* The empty string, `""`, will not be stored in the history
+* Commands that are similar to the most recently stored command in the history will not be stored (ie. duplicate commands will not be stored)
 * All other user input, be it valid or invalid commands, will be stored
-* The history has a maximum size of 100 strings (for performance reasons)
-* Pressing the up arrow key will return the
-* The caret position must be at the end of the user input when browsing the history
+* There is a maximum size of the stored history (100 in this case, for performance reasons discussed in the later secion)
+* Pressing the "up" arrow key will browse backwards towards the least recently entered commands
+* Pressing the "down" arrow key will browse forwards towards the most recently entered commands
+* The caret position must be at the end of the command when browsing the history
+* Persistent storage of the command history is supported (ie. a user can quit the app and come back to the same history as his previous usage of the app)
 
-Persistent storage of the command history is also supported. In other words, a user can quit the app and come back to the same history as his previous usage of the app.
-
-Since detection of the "up" and "down" arrow keys must occur in the `CommandBox` class found in the UI, we have decided to let `CommandBox` directly interact with `CommandHistory`. In other words, `CommandBox` will directly call `CommandHistory#add`, `CommandHistory#getNextCommand`, and `CommandHistory#getPrevCommand`. A simplified class diagram of the classes involved in this feature is given below:
+Since all entered user inputs should be stored, be it valid or invalid commands, and since detection of the "up" and "down" arrow keys must occur in the `CommandBox` class found in the UI, we have decided to let `CommandBox` directly interact with `CommandHistory`. In other words, `CommandBox` will call `CommandHistory#add`, `CommandHistory#getNextCommand`, and `CommandHistory#getPrevCommand`. A simplified class diagram of the classes involved in this feature is given below:
 
 image::CommandHistoryClassDiagram.png[]
 
 ==== Design Considerations
 
-In designing this feature, we had to decide on the underlying data structure to store the command history. Currently, each line of command is stored in an `ArrayList<String>`. Alternatives include storing it in a `LinkedList<String>`.
+In designing this feature, we had to decide on the underlying data structure to store the command history. Currently, each line of command is stored in an `ArrayList<String>`. The alternative is to store the commands in a `LinkedList<String>`.
 
-[cols="30%, 70%", options='header']
+[options='header']
 |====================
 | Data Structure | Pros and Cons
 | Array list |
@@ -191,11 +191,11 @@ In designing this feature, we had to decide on the underlying data structure to 
 *Cons*: Harder to implement as pointers have to be manipulated
 |====================
 
-In the interest of saving developement time and better code readability, we decided that use an array list to store the commands. Since we have capped the maximum size of history to be 100, we found out through testing that this causes no observable nor significant lag when the list reaches the maximum capacity and has to reassign all 100 indices.
+In the interest of saving developement time and better code readability, we decided to use an array list to store the commands. Since we have capped the maximum size of history to be 100, we found out through testing that this causes no observable nor significant lag when the list reaches the maximum capacity and has to reassign all 100 indices.
 
-Moreover, the implementation of `CommandHistoryStorage#saveCommandHistory` will rewrite the whole data file in storage (as opposed to appending the file with the newly entered command). This decision was made to protect the integrity of the data file, making sure that it always has the exact same data as what is stored in the `CommandHistory` model. As such, this rewriting of the file during maximum capacity of the history will be the bigger bottleneck in term of performance, as opposed to the reassignment of indices.
+Moreover, the implementation of `CommandHistoryStorage#saveCommandHistory` will rewrite the whole data file in storage (as opposed to appending the file with the newly entered command). This decision was made to protect the integrity of the storage file, making sure that it always has the exact same data as what is stored in the `CommandHistory` model. As such, this rewriting of the file during maximum capacity of the history will be the bigger bottleneck in term of performance, as opposed to the reassignment of indices.
 
-As such, the choice of 100 as the maximum size of the command history is thus chosen. This number must be small enough to not cause the app to lag when then whole history is being written to storage, as well as be big enough to satisfy a user. We ultimately felt that 100 is a very generous estimate given that a user really only needs the past few commands at any point of time.
+As such, the choice of 100 as the maximum size of the command history is thus chosen. This number must be small enough to not cause the app to lag when the whole history is being written to storage, as well as be big enough to satisfy the user. Ultimately, we felt that 100 is a very generous estimate given that a user really only needs the past few commands at any point of time.
 
 === Logging
 
