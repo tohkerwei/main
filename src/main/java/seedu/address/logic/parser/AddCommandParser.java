@@ -61,7 +61,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Optional<String> genderString = argMultimap.getValue(PREFIX_GENDER);
         Gender gender = genderString.isPresent()
                 ? ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get())
-                : new Gender("male");
+                : new Gender("");
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
