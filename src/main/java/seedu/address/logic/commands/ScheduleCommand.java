@@ -1,10 +1,16 @@
 package seedu.address.logic.commands;
 
-import java.util.ArrayList;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
 
 /**
@@ -28,13 +34,31 @@ public class ScheduleCommand extends Command {
 
 
     public ScheduleCommand(Index index, ArrayList<Schedule> toAdd) {
+        requireNonNull(index);
+        requireNonNull(toAdd);
+
         this.index = index;
         this.toAdd = toAdd;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        //TO DO
-        return null;
+        requireNonNull(model);
+        List<Client> lastShownList = model.getFilteredClientList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+        }
+
+        Client clientToEdit = lastShownList.get(index.getZeroBased());
+        Client editedClient = createEditedClient(clientToEdit, editClientDescriptor);
+
+        if (!clientToEdit.isSameClient(editedClient) && model.hasClient(editedClient)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CLIENT);
+        }
+
+        model.setClient(clientToEdit, editedClient);
+        model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient));
     }
 }
