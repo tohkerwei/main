@@ -147,6 +147,21 @@ public class AddCommandTest {
         public void updateFilteredClientList(Predicate<Client> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Client getClientInView() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setClientInView(Client client) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasClientInView() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
