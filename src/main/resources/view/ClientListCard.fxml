@@ -37,7 +37,7 @@
       <Label fx:id="currentWeight" styleClass="cell_small_label" text="\$currentWeight" />
       <Label fx:id="targetWeight" styleClass="cell_small_label" text="\$targetWeight" />
       <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
-      <FlowPane fx:id="sports" />
+      <Label fx:id="sports" styleClass="cell_small_label" text="\$sports" />
     </VBox>
   </GridPane>
 </HBox>

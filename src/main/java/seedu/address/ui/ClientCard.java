@@ -51,7 +51,7 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private FlowPane sports;
+    private Label sports;
     @FXML
     private FlowPane tags;
 
@@ -96,12 +96,13 @@ public class ClientCard extends UiPart<Region> {
         String remarkAttributeForDisplay = getAttributeForDisplay(client.getRemark().value);
         String fullRemarkForDisplay = remarkLabel + remarkAttributeForDisplay;
         remark.setText(fullRemarkForDisplay);
+        String sportsLabel = "Sports: ";
+        String sportsAttributeForDisplay = getAttributeForDisplay(client.getSportsString());
+        String fullSportsForDisplay = sportsLabel + sportsAttributeForDisplay;
+        sports.setText(fullSportsForDisplay);
         client.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        client.getSports().stream()
-            .sorted(Comparator.comparing(sport -> sport.sportName))
-            .forEach(sport -> sports.getChildren().add(new Label(sport.sportName)));
     }
 
     @Override

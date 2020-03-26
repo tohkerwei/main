@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.tag.Tag;
 
@@ -125,6 +126,10 @@ public class Client {
      */
     public Set<Sport> getSports() {
         return Collections.unmodifiableSet(sports);
+    }
+
+    public String getSportsString() {
+        return getSports().stream().map(sport -> sport.getSportName()).collect(Collectors.joining(", "));
     }
 
     /**
