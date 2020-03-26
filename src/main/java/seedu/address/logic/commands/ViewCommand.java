@@ -13,8 +13,9 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view-c";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
-    public static final String MESSAGE_USAGE = COMMAND_WORD 
-            + ": Views all available information of the client identified by the index number used in the displayed client list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Views all available information of the client identified by the index number used in "
+            + "the displayed client list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
@@ -49,5 +50,5 @@ public class ViewCommand extends Command {
         ViewCommand e = (ViewCommand) other;
         return index.equals(e.index);
     }
-    
+
 }
