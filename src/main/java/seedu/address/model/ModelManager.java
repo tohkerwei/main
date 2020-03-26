@@ -22,11 +22,12 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
+    private final ClientInView clientInView;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ClientInView clientInView) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -34,11 +35,12 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.clientInView = clientInView;
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new ClientInView());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -127,6 +129,20 @@ public class ModelManager implements Model {
     public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
+    }
+
+    //=========== ClientInView ================================================================================
+
+    public Client getClientInView() {
+        return clientInView.getClient();
+    }
+
+    public void setClientInView(Client client) {
+        clientInView.setClient(client);
+    }
+
+    public boolean hasClientInView() {
+        return clientInView.hasClientInView();
     }
 
     @Override

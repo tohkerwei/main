@@ -44,6 +44,8 @@ public class ViewCommand extends Command {
         }
 
         Client client = lastShownList.get(index.getZeroBased());
+        model.setClientInView(client);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, client.getName().fullName));
     }
 
