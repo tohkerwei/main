@@ -7,5 +7,6 @@ public class DayEnum {
     /**
      * Enumerates the seven days of the week.
      */
-    public enum WeekDay { SUN, MON, TUE, WED, THU, FRI, SAT }
+    public enum Weekday { SUN, MON, TUE, WED, THU, FRI, SAT }
+
 }
