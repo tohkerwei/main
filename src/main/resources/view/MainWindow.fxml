@@ -12,7 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="700.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="700.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage"
+  xmlns="http://javafx.com/javafx/11.0.1"
+  xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/bicep.png" />
   </icons>
@@ -33,36 +35,37 @@
           </Menu>
         </MenuBar>
 
-                    <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-                                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" prefWidth="310.0" styleClass="pane-with-border">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" prefWidth="310.0" styleClass="pane-with-border">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <SplitPane dividerPositions="0.5" prefWidth="608.0" VBox.vgrow="ALWAYS">
-              <items>
-                  <VBox prefWidth="340.0">
-                     <children>
-            
-                    <VBox fx:id="clientList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-                      <padding>
-                        <Insets bottom="10" left="10" right="10" top="10" />
-                      </padding>
-                      <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                    </VBox>
-                     </children>
-                  </VBox>
-                  <VBox fx:id="viewClient" prefWidth="256.0" styleClass="pane-with-border">
-                     <children>
-                        <StackPane fx:id="viewClientPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                     </children></VBox>
-              </items>
-            </SplitPane>
+        <SplitPane dividerPositions="0.5" prefWidth="608.0" VBox.vgrow="ALWAYS">
+          <items>
+            <VBox prefWidth="340.0">
+              <children>
+
+                <VBox fx:id="clientList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                  <padding>
+                    <Insets bottom="10" left="10" right="10" top="10" />
+                  </padding>
+                  <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                </VBox>
+              </children>
+            </VBox>
+            <VBox fx:id="viewClient" prefWidth="256.0" styleClass="pane-with-border">
+              <children>
+                <StackPane fx:id="viewClientPanelPlaceholder" VBox.vgrow="ALWAYS" />
+              </children>
+            </VBox>
+          </items>
+        </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" prefWidth="608.0" VBox.vgrow="NEVER" />
       </VBox>
