@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
-import seedu.address.model.exercise.Exercise;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,11 +22,12 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
+    private final ClientInView clientInView;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ClientInView clientInView) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -35,11 +35,12 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.clientInView = clientInView;
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new ClientInView());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -130,6 +131,20 @@ public class ModelManager implements Model {
         filteredClients.setPredicate(predicate);
     }
 
+    //=========== ClientInView ================================================================================
+
+    public Client getClientInView() {
+        return clientInView.getClient();
+    }
+
+    public void setClientInView(Client client) {
+        clientInView.setClient(client);
+    }
+
+    public boolean hasClientInView() {
+        return clientInView.hasClientInView();
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -147,21 +162,6 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredClients.equals(other.filteredClients);
-    }
-
-    //=========== Exercise ======================================================================================
-
-    @Override
-    public boolean hasExercise(Exercise exercise) {
-        requireNonNull(exercise);
-        //return addressBook.hasExercise(exercise);
-        return true;
-    }
-
-    @Override
-    public void addExercise(Exercise exercise) {
-        // addressBook.addExercise(exercise);
-        // updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
     }
 
 }

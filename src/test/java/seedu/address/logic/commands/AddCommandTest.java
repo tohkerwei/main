@@ -150,12 +150,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addExercise(Exercise exercise) {
+        public Client getClientInView() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasExercise(Exercise exercise) {
+        public void setClientInView(Client client) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasClientInView() {
             throw new AssertionError("This method should not be called.");
         }
     }
