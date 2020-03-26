@@ -63,7 +63,7 @@ public class ScheduleCommand extends Command {
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToEdit.getScheduleList().toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedClient.getScheduleList().toString()));
     }
 
     @Override

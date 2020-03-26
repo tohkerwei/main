@@ -55,6 +55,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             EndTime endTime = endTimeList.get(i);
             Schedule schedule = new Schedule(day, startTime, endTime);
             scheduleList.add(schedule);
+            System.out.println(schedule);
         }
 
         return new ScheduleCommand(index, scheduleList);
