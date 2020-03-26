@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private ClientListPanel clientListPanel;
     private ViewClientPanel viewClientPanel;
+    private SchedulePanel schedulePanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -47,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane viewClientPanelPlaceholder;
+
+    @FXML
+    private StackPane schedulePanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -117,6 +121,9 @@ public class MainWindow extends UiPart<Stage> {
 
         viewClientPanel = new ViewClientPanel(logic.getFilteredClientList());
         viewClientPanelPlaceholder.getChildren().add(viewClientPanel.getRoot());
+
+        schedulePanel = new SchedulePanel(logic.getFilteredClientList());
+        schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

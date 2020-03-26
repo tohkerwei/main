@@ -6,13 +6,13 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="700.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="1050.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/bicep.png" />
   </icons>
@@ -23,7 +23,7 @@
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox prefHeight="600.0" prefWidth="608.0">
+      <VBox prefHeight="600.0" prefWidth="950.0">
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
@@ -44,25 +44,35 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <SplitPane dividerPositions="0.5" prefWidth="608.0" VBox.vgrow="ALWAYS">
-              <items>
-                  <VBox prefWidth="340.0">
+            <HBox prefHeight="557.0" VBox.vgrow="ALWAYS">
+               <children>
+      
+                          <VBox fx:id="clientList" minWidth="355.0" prefHeight="455.0" prefWidth="355.0" styleClass="pane-with-border">
+                <padding>
+                  <Insets bottom="10" left="10" right="10" top="10" />
+                </padding>
                      <children>
-            
-                    <VBox fx:id="clientList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-                      <padding>
+                   <StackPane fx:id="clientListPanelPlaceholder" prefHeight="433.0" prefWidth="335.0" VBox.vgrow="ALWAYS" />
+                     </children>
+              </VBox>
+                  <VBox fx:id="viewClient" layoutX="10.0" layoutY="10.0" minWidth="450.0" prefHeight="455.0" prefWidth="400.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+                     <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
-                      </padding>
-                      <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                    </VBox>
+                     </padding>
+                     <children>
+                        <StackPane fx:id="viewClientPanelPlaceholder" prefHeight="433.0" prefWidth="276.0" VBox.vgrow="ALWAYS" />
                      </children>
                   </VBox>
-                  <VBox fx:id="viewClient" prefWidth="256.0" styleClass="pane-with-border">
+                  <VBox fx:id="schedule" layoutX="560.0" layoutY="10.0" minWidth="240.0" prefWidth="240.0" styleClass="pane-with-border">
+                     <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                     </padding>
                      <children>
-                        <StackPane fx:id="viewClientPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                     </children></VBox>
-              </items>
-            </SplitPane>
+                        <StackPane fx:id="schedulePanelPlaceholder" minWidth="220.0" prefWidth="220.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" prefWidth="608.0" VBox.vgrow="NEVER" />
       </VBox>
