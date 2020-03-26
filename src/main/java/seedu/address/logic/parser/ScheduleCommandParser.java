@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.schedule.Day;
@@ -32,12 +34,17 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
                 PREFIX_START_TIME, PREFIX_END_TIME);
         Index index;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DAY)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DAY, PREFIX_END_TIME, PREFIX_START_TIME)
+                || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
 
-        index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch(ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE), pe);
+        }
+
         ArrayList<Day> dayList = ParserUtil.parseDay(argMultimap.getAllValues(PREFIX_DAY));
         ArrayList<StartTime> startTimeList = ParserUtil.parseStartTime(argMultimap.getAllValues(PREFIX_START_TIME));
         ArrayList<EndTime> endTimeList = ParserUtil.parseEndTime(argMultimap.getAllValues(PREFIX_END_TIME));
