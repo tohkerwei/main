@@ -2,6 +2,9 @@ package seedu.address.model;
 
 import seedu.address.model.client.Client;
 
+/**
+ * This represents the model of the client currently in view.
+ */
 public class ClientInView {
 
     private Client client;
