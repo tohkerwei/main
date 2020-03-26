@@ -10,14 +10,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
 
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
-import java.util.List;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.UniqueExerciseList;
 
 /**
  * Adds an exercise done by a client in FitBiz.
@@ -41,17 +38,17 @@ public class AddExerciseCommand extends Command {
         + PREFIX_SETS + "8";
 
     public static final String MESSAGE_SUCCESS = "New exercise added. Current recorded exercises:\n%1$s";
-    public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in FitBiz";
+    public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in this client";
+    public static final String MESSAGE_CLIENT_NOT_IN_VIEW = "You currently do not have a client in view, "
+            + "use the view-c command to view a client first";
 
-    private final Index index;
     private final Exercise toAdd;
 
     /**
      * Creates an AddExerciseCommand to add the specified {@code Exercise}
      */
-    public AddExerciseCommand(Index index, Exercise exercise) {
+    public AddExerciseCommand(Exercise exercise) {
         requireNonNull(exercise);
-        this.index = index;
         this.toAdd = exercise;
     }
 
@@ -59,19 +56,24 @@ public class AddExerciseCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Client> lastShownList = model.getFilteredClientList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+        if (!model.hasClientInView()) {
+            throw new CommandException(MESSAGE_CLIENT_NOT_IN_VIEW);
         }
 
-        Client clientToEdit = lastShownList.get(index.getZeroBased());
+        Client clientToEdit = model.getClientInView();
+        UniqueExerciseList clientToEditExerciseList = clientToEdit.getExerciseList();
+
+        if (clientToEditExerciseList.contains(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EXERCISE);
+        }
+
         // mutates the list belonging to the client by adding the exercise
-        clientToEdit.getExerciseList().add(toAdd);
+        clientToEditExerciseList.add(toAdd);
+
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
                 clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
                 clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
-                clientToEdit.getRemark(), clientToEdit.getSports(), clientToEdit.getExerciseList());
+                clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList);
 
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);

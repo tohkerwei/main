@@ -10,8 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddExerciseCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exercise.Exercise;
@@ -40,15 +38,6 @@ public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE));
         }
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE),
-                    ive);
-        }
-
         ExerciseName name = ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_NAME).get());
         Optional<String> repsString = argMultimap.getValue(PREFIX_REPS);
         ExerciseReps reps = repsString.isPresent()
@@ -65,7 +54,7 @@ public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
         ExerciseDate date = ParserUtil.parseExerciseDate(argMultimap.getValue(PREFIX_DATE).get());
         Exercise exercise = new Exercise(name, reps, sets, exerciseWeight, date);
 
-        return new AddExerciseCommand(index, exercise);
+        return new AddExerciseCommand(exercise);
     }
 
     /*
