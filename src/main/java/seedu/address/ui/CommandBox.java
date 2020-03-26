@@ -54,13 +54,13 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         String enteredCommand = commandTextField.getText();
+        commandHistory.add(enteredCommand);
         try {
             commandTextField.setText("");
             commandExecutor.execute(enteredCommand);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
-        commandHistory.add(enteredCommand);
     }
 
     /**
