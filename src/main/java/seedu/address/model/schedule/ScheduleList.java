@@ -20,6 +20,10 @@ public class ScheduleList {
         scheduleList = newScheduleList;
     }
 
+    public void add(Schedule schedule) {
+        scheduleList.add(schedule);
+    }
+
     public ArrayList<Schedule> getScheduleList() {
         return scheduleList;
     }

@@ -102,10 +102,9 @@ class JsonAdaptedClient {
         sports.addAll(source.getSports().stream()
                   .map(JsonAdaptedSport::new)
                   .collect(Collectors.toList()));
-        for (Schedule s : source.getScheduleList().getScheduleList()) {
-            scheduleList.add(new JsonAdaptedSchedule(s.getDay().value.toString(), s.getStartTime().getTime(),
-                    s.getEndTime().getTime()));
-        }
+        scheduleList.addAll(source.getScheduleList().getScheduleList().stream()
+                    .map(JsonAdaptedSchedule::new)
+                    .collect(Collectors.toList()));
     }
 
     /**
@@ -127,6 +126,11 @@ class JsonAdaptedClient {
             clientSports.add(sport.toModelType());
         }
         final Set<Sport> modelSport = new HashSet<>(clientSports);
+
+        final ScheduleList modelScheduleList = new ScheduleList();
+        for (JsonAdaptedSchedule schedule : scheduleList) {
+            modelScheduleList.add(schedule.toModelType());
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -209,7 +213,6 @@ class JsonAdaptedClient {
                     Remark.class.getSimpleName()));
         }
         final Remark modelRemark = new Remark(remark);
-        final ScheduleList modelScheduleList = new ScheduleList();
 
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
             modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport, modelScheduleList);
