@@ -4,8 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
-import seedu.address.model.schedule.DayEnum.WeekDay;
 
 /**
  * Represents a Schedule in the Client.
@@ -15,56 +15,15 @@ public class Schedule {
             + "Timings should be given in 24 hour format and in 30 minute denominations. "
             + "Start time cannot be later than end time.";
 
-    private String startTime;
-    private String endTime;
-    private WeekDay day;
+    private final Day day;
+    private final StartTime startTime;
+    private final EndTime endTime;
 
-    public Schedule(String day, String startTime, String endTime) {
+    public Schedule(Day day, StartTime startTime, EndTime endTime) {
         requireAllNonNull(day, startTime, endTime);
-        isValidDay(day);
-        isValidTimeFrame(startTime, endTime);
-        assignDay(day);
-        assignTimes(startTime, endTime);
+        this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
-    }
-
-    /**
-     * Checks if input String is a valid three-lettered day.
-     *
-     * @param test
-     * @return
-     */
-    public static boolean isValidDay(String test) {
-        String lowerCaseTest = test.toLowerCase();
-        switch (lowerCaseTest) {
-        case "sun":
-        case "mon":
-        case "tue":
-        case "wed":
-        case "thu":
-        case "fri":
-        case "sat":
-            return true;
-        default:
-            return false;
-        }
-    }
-
-    /**
-     * Checks if the input timing is of valid "hhmm" format.
-     *
-     * @param time
-     * @return
-     */
-    public static boolean isValidTimingFormat(String time) {
-        try {
-            String formattedTime = time.substring(0, 2) + ":" + time.substring(2, 4);
-            LocalTime.parse(formattedTime);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -82,60 +41,58 @@ public class Schedule {
         return (Integer.parseInt(endTime) - Integer.parseInt(startTime) > 0);
     }
 
-    /**
-     * Assigns day to this Schedule object.
-     *
-     * @param day
-     */
-    private void assignDay(String day) {
-        switch (day) {
-        case "sun":
-            this.day = WeekDay.SUN;
-            return;
-        case "mon":
-            this.day = WeekDay.MON;
-            return;
-        case "tue":
-            this.day = WeekDay.TUE;
-            return;
-        case "wed":
-            this.day = WeekDay.WED;
-            return;
-        case "thu":
-            this.day = WeekDay.THU;
-            return;
-        case "fri":
-            this.day = WeekDay.FRI;
-            return;
-        case "sat":
-            this.day = WeekDay.SAT;
-            return;
-        default:
-            return;
-        }
-    }
-
-    /**
-     * Assigns start time and end time to this Schedule object.
-     *
-     * @param startTime
-     * @param endTime
-     */
-    private void assignTimes(String startTime, String endTime) {
-        String formattedStartTime = startTime.substring(0, 2) + ":" + startTime.substring(2, 4);
-        String formattedEndTime = endTime.substring(0, 2) + ":" + endTime.substring(2, 4);
-        this.startTime = formattedStartTime;
-        this.endTime = formattedEndTime;
-    }
-
-    public WeekDay getDay() {
+    public Day getDay() {
         return this.day;
     }
 
+    public StartTime getStartTime() {
+        return this.startTime;
+    }
+
+    public EndTime getEndTime() {
+        return this.endTime;
+    }
+
     public double getHours() {
-        LocalTime start = LocalTime.parse(this.startTime);
-        LocalTime end = LocalTime.parse(this.endTime);
+        LocalTime start = LocalTime.parse(this.startTime.getTime());
+        LocalTime end = LocalTime.parse(this.endTime.getTime());
         return (double) ChronoUnit.HOURS.between(start, end);
+    }
+
+    /**
+     * Returns true if both schedule have the same attribute values
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Schedule)) {
+            return false;
+        }
+
+        Schedule otherSchedule = (Schedule) other;
+        return otherSchedule.getDay().equals(getDay())
+                && otherSchedule.getStartTime().equals(getStartTime())
+                && otherSchedule.getEndTime().equals(getEndTime());
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(day, startTime, endTime);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getDay())
+                .append(" Time: ")
+                .append(getStartTime())
+                .append(" - ")
+                .append(getEndTime());
+        return builder.toString();
     }
 
 }

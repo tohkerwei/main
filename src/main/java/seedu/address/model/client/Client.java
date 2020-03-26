@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,13 +34,15 @@ public class Client {
     private Height height;
     private final Set<Sport> sports = new HashSet<>();
     private Remark remark;
+    private ScheduleList scheduleList;
 
     // TODO: remove this overloaded constructor after finalising attributes
     /**
      * Overloaded Client constructor for FitBiz.
      */
     public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
-            CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Remark remark, Set<Sport> sports) {
+                  CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Remark remark,
+                  Set<Sport> sports, ScheduleList scheduleList) {
         requireAllNonNull(name, phone, email, address, tags, birthday);
         this.name = name;
         this.gender = gender;
@@ -53,6 +56,7 @@ public class Client {
         this.height = height;
         this.sports.addAll(sports);
         this.remark = remark;
+        this.scheduleList = scheduleList;
     }
 
     /**
@@ -109,6 +113,10 @@ public class Client {
 
     public Height getHeight() {
         return height;
+    }
+
+    public ScheduleList getScheduleList() {
+        return scheduleList;
     }
 
     /**

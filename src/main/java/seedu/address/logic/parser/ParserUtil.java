@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -20,7 +22,10 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
+import seedu.address.model.schedule.Day;
+import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.StartTime;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -254,32 +259,58 @@ public class ParserUtil {
         return sportSet;
     }
 
-    /** Parses a {@code String day} into a {@code String day}.
+    /** Parses a {@code List<String> days} into a {@code ArrayList<Day> dayList}.
      * Only correct day of the week is allowed
      *
      * @throws ParseException
      */
-    public static String parseDay(String day) throws ParseException {
-        requireNonNull(day);
-        String trimmedDay = day.trim();
-        if (!Schedule.isValidDay(trimmedDay)) {
-            throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
+    public static ArrayList<Day> parseDay(List<String> days) throws ParseException {
+        requireNonNull(days);
+        ArrayList<Day> dayList = new ArrayList<Day>();
+        for (String day : days) {
+            String trimmedDay = day.trim();
+            if (!Day.isValidDay(trimmedDay)) {
+                throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
+            }
+            dayList.add(new Day(trimmedDay));
         }
-        return trimmedDay;
+        return dayList;
     }
 
-    /** Parses a {@code String time} into a {@code String time}.
-     * Only time in 24 hour format is allowed
+    /** Parses a {@code List<String> time} into a {@code ArrayList<StartTime> startTimeList}.
+     * Only time in 24 hour format is allowed.
      *
      * @throws ParseException
      */
-    public static String parseTime(String time) throws ParseException {
+    public static ArrayList parseStartTime(List<String> time) throws ParseException {
         requireNonNull(time);
-        String trimmedTime = time.trim();
-        if (!Schedule.isValidTimingFormat(trimmedTime)) {
-            throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
+        ArrayList<StartTime> startTimeList = new ArrayList<StartTime>();
+        for (String startTime : time) {
+            String trimmedTime = startTime.trim();
+            if (!StartTime.isValidTimingFormat(trimmedTime)) {
+                throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
+            }
+            startTimeList.add(new StartTime(trimmedTime));
         }
-        return trimmedTime;
+        return startTimeList;
+    }
+
+    /** Parses a {@code List<String> time} into a {@code ArrayList<EndTime> endTimeList}.
+     * Only time in 24 hour format is allowed.
+     *
+     * @throws ParseException
+     */
+    public static ArrayList parseEndTime(List<String> time) throws ParseException {
+        requireNonNull(time);
+        ArrayList<EndTime> endTimeList = new ArrayList<EndTime>();
+        for (String endTime : time) {
+            String trimmedTime = endTime.trim();
+            if (!StartTime.isValidTimingFormat(trimmedTime)) {
+                throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
+            }
+            endTimeList.add(new EndTime(trimmedTime));
+        }
+        return endTimeList;
     }
 
 }

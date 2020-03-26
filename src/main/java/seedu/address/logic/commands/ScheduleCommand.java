@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.ArrayList;
@@ -12,9 +13,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleList;
 
 /**
- * Adds the training schedule of the client
+ * Adds the training schedule of the client in FitBiz.
  */
 public class ScheduleCommand extends Command {
 
@@ -33,12 +35,10 @@ public class ScheduleCommand extends Command {
     private final ArrayList<Schedule> toAdd;
 
 
-    public ScheduleCommand(Index index, ArrayList<Schedule> toAdd) {
-        requireNonNull(index);
-        requireNonNull(toAdd);
-
+    public ScheduleCommand(Index index, ArrayList<Schedule> scheduleList) {
+        requireNonNull(scheduleList);
         this.index = index;
-        this.toAdd = toAdd;
+        this.toAdd = scheduleList;
     }
 
     @Override
@@ -51,14 +51,24 @@ public class ScheduleCommand extends Command {
         }
 
         Client clientToEdit = lastShownList.get(index.getZeroBased());
-        Client editedClient = createEditedClient(clientToEdit, editClientDescriptor);
+        ScheduleList newScheduleList = new ScheduleList();
+        newScheduleList.setSchedule(toAdd);
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
+                clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
+                clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
+                clientToEdit.getRemark(), clientToEdit.getSports(), newScheduleList);
 
-        if (!clientToEdit.isSameClient(editedClient) && model.hasClient(editedClient)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CLIENT);
-        }
 
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToEdit.getScheduleList().toString()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ScheduleCommand // instanceof handles nulls
+                && toAdd.equals(((ScheduleCommand) other).toAdd));
     }
 }

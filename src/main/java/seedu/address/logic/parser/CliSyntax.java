@@ -18,5 +18,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_SPORT = new Prefix("s/");
     public static final Prefix PREFIX_TARGET_WEIGHT = new Prefix("tw/");
     public static final Prefix PREFIX_CURRENT_WEIGHT = new Prefix("cw/");
-
+    public static final Prefix PREFIX_DAY = new Prefix("d/");
+    public static final Prefix PREFIX_START_TIME = new Prefix("st/");
+    public static final Prefix PREFIX_END_TIME = new Prefix("et/");
 }
