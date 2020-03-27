@@ -153,94 +153,49 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
-=== [Proposed] Undo/Redo feature
-==== Proposed Implementation
+=== Command History
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
+This feature allows users to save their previously entered commands and to retrieve them using the "up" and "down" arrow keys, similar to what most modern CLIs offer.
 
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
+==== Implementation
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+This command history mechanism is facilitated by the model `CommandHistory`, and the storage code in `CommandHistoryStorage`. The behaviour of this feature mimics most modern CLIs, namely:
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+* The empty string, `""`, will not be stored in the history
+* Commands that are similar to the most recently stored command in the history will not be stored (ie. duplicate commands will not be stored)
+* All other user input, be it valid or invalid commands, will be stored
+* There is a maximum size of the stored history (100 in this case, for performance reasons discussed in the later section)
+* Pressing the "up" arrow key will browse backwards towards the least recently entered commands
+* Pressing the "down" arrow key will browse forwards towards the most recently entered commands
+* The caret position must be at the end of the command when browsing the history
+* Persistent storage of the command history is supported (ie. a user can quit the app and come back to the same history as his previous usage of the app)
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Since all entered user inputs should be stored, be it valid or invalid commands, and since detection of the "up" and "down" arrow keys must occur in the `CommandBox` class found in the UI, we have decided to let `CommandBox` directly interact with `CommandHistory`. In other words, `CommandBox` will call `CommandHistory#add`, `CommandHistory#getNextCommand`, and `CommandHistory#getPrevCommand`. A simplified class diagram of the classes involved in this feature is given below:
 
-image::UndoRedoState0.png[]
-
-Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-image::UndoRedoState1.png[]
-
-Step 3. The user executes `add n/David ...` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-image::UndoRedoState2.png[]
-
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-image::UndoRedoState3.png[]
-
-[NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-
-The following sequence diagram shows how the undo operation works:
-
-image::UndoSequenceDiagram.png[]
-
-NOTE: The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-[NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-image::UndoRedoState4.png[]
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
-
-image::UndoRedoState5.png[]
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-image::CommitActivityDiagram.png[]
+image::CommandHistoryClassDiagram.png[]
 
 ==== Design Considerations
 
-===== Aspect: How undo & redo executes
+In designing this feature, we had to decide on the underlying data structure to store the command history. Currently, each line of command is stored in an `ArrayList<String>`. The alternative is to store the commands in a `LinkedList<String>`.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
+[options='header']
+|====================
+| Data Structure | Pros and Cons
+| Array list |
+*Pros*: Much easier to manipulate using indices
 
-===== Aspect: Data structure to support the undo/redo commands
+*Cons*: Slower performance when list has the maximum number of commands stored and has to shift all indices back by 1 when removing the oldest command
+| Linked list |
+*Pros*: Fast removal of the oldest command
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-// end::undoredo[]
+*Cons*: Harder to implement as pointers have to be manipulated
+|====================
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
+In the interest of saving developement time and better code readability, we decided to use an array list to store the commands. Since we have capped the maximum size of history to be 100, we found out through testing that this causes no observable nor significant lag when the list reaches the maximum capacity and has to reassign all 100 indices.
 
-_{Explain here how the data encryption feature will be implemented}_
+Moreover, the implementation of `CommandHistoryStorage#saveCommandHistory` will rewrite the whole data file in storage (as opposed to appending the file with the newly entered command). This decision was made to protect the integrity of the storage file, making sure that it always has the exact same data as what is stored in the `CommandHistory` model. As such, this rewriting of the file during maximum capacity of the history will be the bigger bottleneck in term of performance, as opposed to the reassignment of indices.
 
-// end::dataencryption[]
+As such, the choice of 100 as the maximum size of the command history is thus chosen. This number must be small enough to not cause the app to lag when the whole history is being written to storage, as well as be big enough to satisfy the user. Ultimately, we felt that 100 is a very generous estimate given that a user really only needs the past few commands at any point of time.
 
 === Logging
 
