@@ -22,7 +22,6 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
-import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 

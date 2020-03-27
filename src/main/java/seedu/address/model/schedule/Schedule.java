@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Represents a Schedule in the Client.
  */
-public class Schedule implements Comparable<Schedule>{
+public class Schedule implements Comparable<Schedule> {
     public static final String MESSAGE_CONSTRAINTS = "Schedule day should be the first 3 letters of the day. "
             + "Timings should be given in 24 hour format and in HHmm format. "
             + "Start time cannot be later than end time. Maximum range is 0000-2359";
@@ -29,10 +29,10 @@ public class Schedule implements Comparable<Schedule>{
     }
 
     /**
+     * @author Dban1
      * @param startTime
      * @param endTime
      * @return
-     * @author Dban1
      * Checks if end time is later than start time, assuming they are of valid format "hhmm". End time
      * and start time cannot be simultaneously 0000. If end time is 0000, it is assumed as the next day.
      */
@@ -84,8 +84,8 @@ public class Schedule implements Comparable<Schedule>{
         Schedule otherSchedule = (Schedule) other;
         int otherSt = Integer.parseInt(otherSchedule.getStartTime().toString());
         int otherEt = Integer.parseInt(otherSchedule.getEndTime().toString());
-        int thisSt  = Integer.parseInt(this.getStartTime().toString());
-        int thisEt  = Integer.parseInt(this.getEndTime().toString());
+        int thisSt = Integer.parseInt(this.getStartTime().toString());
+        int thisEt = Integer.parseInt(this.getEndTime().toString());
 
         // Checks if there are overlaps between 2 schedules.
         return otherSchedule.getDay().equals(getDay())
@@ -115,11 +115,11 @@ public class Schedule implements Comparable<Schedule>{
         Schedule otherSchedule = other;
         int otherSt = other.getStartTime().getDirectTimeInt();
         int otherEt = other.getEndTime().getDirectTimeInt();
-        int thisSt  = this.getStartTime().getDirectTimeInt();
-        int thisEt  = this.getEndTime().getDirectTimeInt();
+        int thisSt = this.getStartTime().getDirectTimeInt();
+        int thisEt = this.getEndTime().getDirectTimeInt();
         // Checks if there are overlaps between 2 schedules.
         if (otherSchedule.getDay().equals(getDay())) {
-            if( ((otherSt < thisSt) && (otherEt < thisSt)) || (otherSt > thisEt) ) {
+            if (((otherSt < thisSt) && (otherEt < thisSt)) || (otherSt > thisEt)) {
                 return otherSt - thisSt;
             } else {
                 return 0;

@@ -30,12 +30,15 @@ public class StartTime {
 
     /**
      * Checks if the input timing is of valid "HHMM" format.
-     ** @param time
+     * * @param time
+     *
      * @return true if time is of correct format of "HHMM"
      */
     public static boolean isValidTimingFormat(String time) {
         try {
-            if (time.length() != 4) { return false; }
+            if (time.length() != 4) {
+                return false;
+            }
             String formattedTime = time.substring(0, 2) + ":" + time.substring(2, 4);
             LocalTime.parse(formattedTime);
         } catch (Exception e) {
@@ -46,6 +49,7 @@ public class StartTime {
 
     /**
      * Formats a time into HH:MM format
+     *
      * @param time
      * @return formatted time in HH:MM format
      */

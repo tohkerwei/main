@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
 
@@ -30,7 +29,14 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-    //returns false if overlap
+
+    /**
+     * @author Dban1
+     * Checks for any overlaps in given schedule with all existing schedules in input set.
+     * @param schedule
+     * @param set
+     * @return
+     */
     private static boolean checkIfOverlaps(Schedule schedule, TreeSet<Schedule> set) {
         if (set.size() == 0) {
             set.add(schedule);
