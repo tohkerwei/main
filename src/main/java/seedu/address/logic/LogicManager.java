@@ -67,6 +67,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Boolean hasClientInView() {
+        return model.hasClientInView();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }

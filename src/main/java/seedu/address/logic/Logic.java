@@ -34,6 +34,8 @@ public interface Logic {
     ObservableList<Client> getFilteredClientList();
 
     Client getClientInView();
+
+    Boolean hasClientInView();
     
     /**
      * Returns the user prefs' address book file path.

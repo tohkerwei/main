@@ -23,7 +23,7 @@ public class ViewClient extends UiPart<Region> {
      *      issue on AddressBook level 4</a>
      */
 
-    public Client client;
+    private Client client;
 
     @FXML
     private HBox cardPane;
@@ -52,59 +52,59 @@ public class ViewClient extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public ViewClient(Client client) {
+    public ViewClient() {
         super(FXML);
-        if(client == null){
-            name.setText("");
-            phone.setText("");
-            address.setText("");
-            email.setText("");
-            gender.setText("");
-            birthday.setText("");
-            height.setText("");
-            currentWeight.setText("");
-            targetWeight.setText("");
-            remark.setText("");
-        } else {
-            this.client = client;
-            name.setText(client.getName().fullName);
-            String phoneLabel = "Phone: ";
-            String phoneAttributeForDisplay = getAttributeForDisplay(client.getPhone().value);
-            String fullPhoneForDisplay = phoneLabel + phoneAttributeForDisplay;
-            phone.setText(fullPhoneForDisplay);
-            String addressLabel = "Address: ";
-            String addressAttributeForDisplay = getAttributeForDisplay(client.getAddress().value);
-            String fullAddressForDisplay = addressLabel + addressAttributeForDisplay;
-            address.setText(fullAddressForDisplay);
-            String emailLabel = "Email: ";
-            String emailAttributeForDisplay = getAttributeForDisplay(client.getEmail().value);
-            String fullEmailForDisplay = emailLabel + emailAttributeForDisplay;
-            email.setText(fullEmailForDisplay);
-            String genderLabel = "Gender: ";
-            String genderAttributeForDisplay = getAttributeForDisplay(client.getGender().value);
-            String fullGenderForDisplay = genderLabel + genderAttributeForDisplay;
-            gender.setText(fullGenderForDisplay);
-            String birthdayLabel = "Birthday: ";
-            String birthdayAttributeForDisplay = getAttributeForDisplay(client.getBirthdayString());
-            String fullBirthdayForDisplay = birthdayLabel + birthdayAttributeForDisplay;
-            birthday.setText(fullBirthdayForDisplay);
-            String heightLabel = "Height: ";
-            String heightAttributeForDisplay = getAttributeForDisplay(client.getHeight().value);
-            String fullHeightForDisplay = heightLabel + heightAttributeForDisplay;
-            height.setText(fullHeightForDisplay);
-            String currentWeightLabel = "Current Weight: ";
-            String currentWeightAttributeForDisplay = getAttributeForDisplay(client.getCurrentWeight().value);
-            String fullCurrentWeightForDisplay = currentWeightLabel + currentWeightAttributeForDisplay;
-            currentWeight.setText(fullCurrentWeightForDisplay);
-            String targetWeightLabel = "Target Weight: ";
-            String targetWeightAttributeForDisplay = getAttributeForDisplay(client.getTargetWeight().value);
-            String fullTargetWeightForDisplay = targetWeightLabel + targetWeightAttributeForDisplay;
-            targetWeight.setText(fullTargetWeightForDisplay);
-            String remarkLabel = "Remark: ";
-            String remarkAttributeForDisplay = getAttributeForDisplay(client.getRemark().value);
-            String fullRemarkForDisplay = remarkLabel + remarkAttributeForDisplay;
-            remark.setText(fullRemarkForDisplay);
-        }
+        name.setText("");
+        phone.setText("");
+        address.setText("");
+        email.setText("");
+        gender.setText("");
+        birthday.setText("");
+        height.setText("");
+        currentWeight.setText("");
+        targetWeight.setText("");
+        remark.setText("");
+    }
+
+    public void update(Client client) {
+        this.client = client;
+        name.setText(client.getName().fullName);
+        String phoneLabel = "Phone: ";
+        String phoneAttributeForDisplay = getAttributeForDisplay(client.getPhone().value);
+        String fullPhoneForDisplay = phoneLabel + phoneAttributeForDisplay;
+        phone.setText(fullPhoneForDisplay);
+        String addressLabel = "Address: ";
+        String addressAttributeForDisplay = getAttributeForDisplay(client.getAddress().value);
+        String fullAddressForDisplay = addressLabel + addressAttributeForDisplay;
+        address.setText(fullAddressForDisplay);
+        String emailLabel = "Email: ";
+        String emailAttributeForDisplay = getAttributeForDisplay(client.getEmail().value);
+        String fullEmailForDisplay = emailLabel + emailAttributeForDisplay;
+        email.setText(fullEmailForDisplay);
+        String genderLabel = "Gender: ";
+        String genderAttributeForDisplay = getAttributeForDisplay(client.getGender().value);
+        String fullGenderForDisplay = genderLabel + genderAttributeForDisplay;
+        gender.setText(fullGenderForDisplay);
+        String birthdayLabel = "Birthday: ";
+        String birthdayAttributeForDisplay = getAttributeForDisplay(client.getBirthdayString());
+        String fullBirthdayForDisplay = birthdayLabel + birthdayAttributeForDisplay;
+        birthday.setText(fullBirthdayForDisplay);
+        String heightLabel = "Height: ";
+        String heightAttributeForDisplay = getAttributeForDisplay(client.getHeight().value);
+        String fullHeightForDisplay = heightLabel + heightAttributeForDisplay;
+        height.setText(fullHeightForDisplay);
+        String currentWeightLabel = "Current Weight: ";
+        String currentWeightAttributeForDisplay = getAttributeForDisplay(client.getCurrentWeight().value);
+        String fullCurrentWeightForDisplay = currentWeightLabel + currentWeightAttributeForDisplay;
+        currentWeight.setText(fullCurrentWeightForDisplay);
+        String targetWeightLabel = "Target Weight: ";
+        String targetWeightAttributeForDisplay = getAttributeForDisplay(client.getTargetWeight().value);
+        String fullTargetWeightForDisplay = targetWeightLabel + targetWeightAttributeForDisplay;
+        targetWeight.setText(fullTargetWeightForDisplay);
+        String remarkLabel = "Remark: ";
+        String remarkAttributeForDisplay = getAttributeForDisplay(client.getRemark().value);
+        String fullRemarkForDisplay = remarkLabel + remarkAttributeForDisplay;
+        remark.setText(fullRemarkForDisplay);
     }
 
     @Override

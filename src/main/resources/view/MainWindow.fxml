@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="1050.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="1450.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/bicep.png" />
   </icons>
@@ -47,7 +47,7 @@
         <HBox prefHeight="557.0" VBox.vgrow="ALWAYS">
           <children>
 
-            <VBox fx:id="clientList" minWidth="355.0" prefHeight="455.0" prefWidth="355.0" styleClass="pane-with-border">
+            <VBox fx:id="clientList" maxWidth="450.0" minWidth="355.0" prefHeight="455.0" prefWidth="355.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
@@ -61,7 +61,7 @@
                      </padding>
                   </StackPane>
 
-            <VBox fx:id="schedule" layoutX="560.0" layoutY="10.0" minWidth="240.0" prefWidth="240.0" styleClass="pane-with-border">
+            <VBox fx:id="schedule" layoutX="560.0" layoutY="10.0" maxWidth="300.0" minWidth="240.0" prefWidth="240.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>

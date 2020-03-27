@@ -52,8 +52,4 @@ public class ScheduleCard extends UiPart<Region> {
         return client.equals(card.client);
     }
 
-    private String getAttributeForDisplay(String string) {
-        String emptyString = "";
-        return !string.equals(emptyString) ? string : "-";
-    }
 }
