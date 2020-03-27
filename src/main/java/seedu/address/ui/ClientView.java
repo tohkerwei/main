@@ -9,10 +9,11 @@ import seedu.address.model.client.Client;
 
 /**
  * An UI component that displays detailed information of a {@code Client}.
+ * For e.g. personal bests and age.
  */
-public class ViewClient extends UiPart<Region> {
+public class ClientView extends UiPart<Region> {
 
-    private static final String FXML = "ViewClientCard.fxml";
+    private static final String FXML = "ClientView.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved
@@ -52,7 +53,7 @@ public class ViewClient extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public ViewClient() {
+    public ClientView() {
         super(FXML);
         name.setText("");
         phone.setText("");
@@ -66,6 +67,11 @@ public class ViewClient extends UiPart<Region> {
         remark.setText("");
     }
 
+    /** @author @yonggie
+     * Replaces the client in ClientView to be shown in FitBiz.
+     *
+     * @param client client to be displayed
+     */
     public void update(Client client) {
         this.client = client;
         name.setText(client.getName().fullName);
@@ -115,12 +121,12 @@ public class ViewClient extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ViewClient)) {
+        if (!(other instanceof ClientView)) {
             return false;
         }
 
         // state check
-        ViewClient card = (ViewClient) other;
+        ClientView card = (ClientView) other;
         return client.equals(card.client);
     }
 

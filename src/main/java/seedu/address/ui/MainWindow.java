@@ -32,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private ClientListPanel clientListPanel;
-    private ViewClientFull viewClientFull;
+    private ClientViewDisplay clientViewDisplay;
     private SchedulePanel schedulePanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -47,7 +47,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane clientListPanelPlaceholder;
 
     @FXML
-    private StackPane viewClientPanelPlaceholder;
+    private StackPane clientViewPanelPlaceholder;
 
     @FXML
     private StackPane schedulePanelPlaceholder;
@@ -119,8 +119,8 @@ public class MainWindow extends UiPart<Stage> {
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
-        viewClientFull = new ViewClientFull(new ViewClient());
-        viewClientPanelPlaceholder.getChildren().add(viewClientFull.getViewClient().getRoot());
+        clientViewDisplay= new ClientViewDisplay(new ClientView());
+        clientViewPanelPlaceholder.getChildren().add(clientViewDisplay.getClientView().getRoot());
 
         schedulePanel = new SchedulePanel(logic.getFilteredClientList());
         schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
@@ -191,7 +191,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (logic.hasClientInView()) {
-                viewClientFull.updateViewClient(logic.getClientInView());
+                clientViewDisplay.updateClientView(logic.getClientInView());
             }
 
             if (commandResult.isShowHelp()) {
