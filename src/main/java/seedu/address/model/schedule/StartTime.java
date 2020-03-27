@@ -35,6 +35,7 @@ public class StartTime {
      */
     public static boolean isValidTimingFormat(String time) {
         try {
+            if (time.length() != 4) { return false; }
             String formattedTime = time.substring(0, 2) + ":" + time.substring(2, 4);
             LocalTime.parse(formattedTime);
         } catch (Exception e) {

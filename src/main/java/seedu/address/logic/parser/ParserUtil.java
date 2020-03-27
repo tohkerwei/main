@@ -282,7 +282,7 @@ public class ParserUtil {
      *
      * @throws ParseException
      */
-    public static ArrayList parseStartTime(List<String> time) throws ParseException {
+    public static ArrayList<StartTime> parseStartTime(List<String> time) throws ParseException {
         requireNonNull(time);
         ArrayList<StartTime> startTimeList = new ArrayList<StartTime>();
         for (String startTime : time) {
@@ -300,7 +300,7 @@ public class ParserUtil {
      *
      * @throws ParseException
      */
-    public static ArrayList parseEndTime(List<String> time) throws ParseException {
+    public static ArrayList<EndTime> parseEndTime(List<String> time) throws ParseException {
         requireNonNull(time);
         ArrayList<EndTime> endTimeList = new ArrayList<EndTime>();
         for (String endTime : time) {
