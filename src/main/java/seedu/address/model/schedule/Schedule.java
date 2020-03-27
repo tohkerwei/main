@@ -1,7 +1,9 @@
 package seedu.address.model.schedule;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
@@ -21,12 +23,13 @@ public class Schedule {
 
     public Schedule(Day day, StartTime startTime, EndTime endTime) {
         requireAllNonNull(day, startTime, endTime);
+        checkArgument(isValidTimeFrame(startTime.toString(), endTime.toString()), MESSAGE_CONSTRAINTS);
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    /**
+    /** @author Dban1
      * Checks if end time is later than start time, assuming they are of valid format "hhmm". End time
      * and start time cannot be simultaneously 0000. If end time is 0000, it is assumed as the next day.
      *
@@ -35,10 +38,14 @@ public class Schedule {
      * @return
      */
     public static boolean isValidTimeFrame(String startTime, String endTime) {
-        if (startTime.equals("0000") && endTime.equals("0000")) {
+        // End time cannot be 0000
+        if (endTime.equals("00:00")) {
             return false;
         }
-        return (Integer.parseInt(endTime) - Integer.parseInt(startTime) > 0);
+        // Start time cannot equal End time
+        if (startTime.equals(endTime)) { return false; }
+        // Check if End time is later than Start time
+        return (LocalTime.parse(endTime).compareTo(LocalTime.parse(startTime)) > 0);
     }
 
     public Day getDay() {
