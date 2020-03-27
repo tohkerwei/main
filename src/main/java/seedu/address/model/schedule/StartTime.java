@@ -14,6 +14,7 @@ public class StartTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Date input should be in the format DD-MM-YYYY and it should not be blank";
     public final String value;
+    public final int directTimeInt;
 
     /**
      * Constructs a {@code Date}.
@@ -24,6 +25,7 @@ public class StartTime {
         requireNonNull(startTime);
         checkArgument(isValidTimingFormat(startTime), MESSAGE_CONSTRAINTS);
         this.value = formatTime(startTime);
+        this.directTimeInt = Integer.parseInt(startTime);
     }
 
     /**
@@ -54,6 +56,10 @@ public class StartTime {
     public String getTime() {
         String time = value.substring(0, 2) + value.substring(3, 5);
         return time;
+    }
+
+    public int getDirectTimeInt() {
+        return this.directTimeInt;
     }
 
     @Override

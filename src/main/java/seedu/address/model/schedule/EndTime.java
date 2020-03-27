@@ -14,6 +14,7 @@ public class EndTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Date input should be in the format DD-MM-YYYY and it should not be blank";
     public final String value;
+    public final int directTimeInt;
 
     /**
      * Constructs a {@code Date}.
@@ -24,6 +25,7 @@ public class EndTime {
         requireNonNull(endTime);
         checkArgument(isValidTimingFormat(endTime), MESSAGE_CONSTRAINTS);
         this.value = formatTime(endTime);
+        this.directTimeInt = Integer.parseInt(endTime);
     }
 
     /**
@@ -66,6 +68,10 @@ public class EndTime {
         return other == this // short circuit if same object
                 || (other instanceof EndTime // instanceof handles nulls
                 && value.equals(((EndTime) other).value)); // state check
+    }
+
+    public int getDirectTimeInt() {
+        return this.directTimeInt;
     }
 
     @Override

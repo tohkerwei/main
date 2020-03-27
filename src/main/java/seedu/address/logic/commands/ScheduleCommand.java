@@ -30,6 +30,13 @@ public class ScheduleCommand extends Command {
             + "Parameters: INDEX (a positive integer) d/DAY st/START_TIME et/END_TIME [MORE_SCHEDULE]...\n"
             + "Example: " + COMMAND_WORD + " 1 d/mon st/1200 et/1400 d/fri st/1330 et/1500";
 
+    public static final String MESSAGE_INVALID_ARG_COUNT = "Invalid number of arguments found for adding schedules."
+            + "Please check you have entered the right amount of Day(s), Start Time(s) and End Time(s). You have"
+            + " entered %1$s Day(s), %2$s Start Time(s), %3$s End Time(s).";
+
+    public static final String MESSAGE_CONTAINS_DUPLICATES = "One or more of your input schedules have overlapping"
+            + " time periods. Please check again.";
+
     public static final String MESSAGE_SUCCESS = "Training schedule has been added for %1$s";
 
     private final Index index;
