@@ -73,7 +73,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'FitBiz.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
