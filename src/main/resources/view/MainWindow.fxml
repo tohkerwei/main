@@ -55,11 +55,22 @@
                 <StackPane fx:id="clientListPanelPlaceholder" prefHeight="433.0" prefWidth="335.0" VBox.vgrow="ALWAYS" />
               </children>
             </VBox>
-                              <StackPane fx:id="clientViewPanelPlaceholder" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+                  <VBox maxWidth="450.0" minWidth="355.0" prefHeight="455.0" prefWidth="355.0" styleClass="pane-with-border">
                      <padding>
-                        <Insets bottom="5" left="10" right="10" top="5" />
+                        <Insets bottom="10" left="10" right="10" top="10" />
                      </padding>
-                  </StackPane>
+                     <children>
+                                    <StackPane fx:id="clientViewPanelPlaceholder" prefHeight="211.0" prefWidth="333.0" styleClass="pane-with-border">
+                           <padding>
+                              <Insets bottom="5" left="10" right="10" top="5" />
+                           </padding>
+                        </StackPane>
+                        <StackPane fx:id="ExerciseListPanelPlaceholder" minWidth="300.0" prefHeight="433.0" prefWidth="335.0" VBox.vgrow="ALWAYS">
+                           <padding>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                           </padding></StackPane>
+                     </children>
+                  </VBox>
 
             <VBox fx:id="schedule" layoutX="560.0" layoutY="10.0" maxWidth="300.0" minWidth="240.0" prefWidth="240.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
               <padding>

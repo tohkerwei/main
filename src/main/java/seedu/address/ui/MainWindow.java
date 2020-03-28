@@ -50,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane clientViewPanelPlaceholder;
 
     @FXML
+    private StackPane exerciseListPanelPlaceholder;
+
+    @FXML
     private StackPane schedulePanelPlaceholder;
 
     @FXML
@@ -119,8 +122,9 @@ public class MainWindow extends UiPart<Stage> {
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
-        clientViewDisplay= new ClientViewDisplay(new ClientView());
+        clientViewDisplay= new ClientViewDisplay(new ClientView(), new ExerciseListPanel());
         clientViewPanelPlaceholder.getChildren().add(clientViewDisplay.getClientView().getRoot());
+        //exerciseListPanelPlaceholder.getChildren().add(clientViewDisplay.getExerciseListPanel().getRoot());
 
         schedulePanel = new SchedulePanel(logic.getFilteredClientList());
         schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
@@ -192,6 +196,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (logic.hasClientInView()) {
                 clientViewDisplay.updateClientView(logic.getClientInView());
+                exerciseListPanelPlaceholder.getChildren().add(new ExerciseListPanel(logic.getClientInView().getExerciseList().asUnmodifiableObservableList()
+                ).getRoot());
             }
 
             if (commandResult.isShowHelp()) {
