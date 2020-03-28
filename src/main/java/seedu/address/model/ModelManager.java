@@ -145,6 +145,13 @@ public class ModelManager implements Model {
         return clientInView.hasClientInView();
     }
 
+    public void updateClientViewIfApplicable(Client clientToEdit, Client editedClient) {
+        Client currentClientInView = clientInView.getClient();
+        if (currentClientInView.equals(clientToEdit)) {
+            clientInView.setClient(editedClient);
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
