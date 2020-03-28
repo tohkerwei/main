@@ -124,7 +124,10 @@ public class Schedule implements Comparable<Schedule> {
             } else {
                 return 0;
             }
+        } else {
+            DayEnum.Weekday otherWeekday = otherSchedule.getDay().getDayEnum();
+            DayEnum.Weekday thisWeekday = this.getDay().getDayEnum();
+            return otherWeekday.compareTo(thisWeekday);
         }
-        return otherSt - thisSt;
     }
 }
