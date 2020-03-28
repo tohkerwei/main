@@ -14,6 +14,7 @@ public class EndTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Date input should be in the format DD-MM-YYYY and it should not be blank";
     public final String value;
+    public final int directTimeInt;
 
     /**
      * Constructs a {@code Date}.
@@ -24,15 +25,20 @@ public class EndTime {
         requireNonNull(endTime);
         checkArgument(isValidTimingFormat(endTime), MESSAGE_CONSTRAINTS);
         this.value = formatTime(endTime);
+        this.directTimeInt = Integer.parseInt(endTime);
     }
 
     /**
      * Checks if the input timing is of valid "HHMM" format.
-     ** @param time
+     * * @param time
+     *
      * @return true if time is of correct format of "HHMM"
      */
     public static boolean isValidTimingFormat(String time) {
         try {
+            if (time.length() != 4) {
+                return false;
+            }
             String formattedTime = time.substring(0, 2) + ":" + time.substring(2, 4);
             LocalTime.parse(formattedTime);
         } catch (Exception e) {
@@ -43,6 +49,7 @@ public class EndTime {
 
     /**
      * Formats a HHMM time to HH:MM
+     *
      * @param time
      * @return formatted time in HH:MM
      */
@@ -66,6 +73,10 @@ public class EndTime {
         return other == this // short circuit if same object
                 || (other instanceof EndTime // instanceof handles nulls
                 && value.equals(((EndTime) other).value)); // state check
+    }
+
+    public int getDirectTimeInt() {
+        return this.directTimeInt;
     }
 
     @Override

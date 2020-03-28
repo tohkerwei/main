@@ -84,4 +84,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredClientList(Predicate<Client> predicate);
+
+    public Client getClientInView();
+
+    public void setClientInView(Client client);
+
+    public boolean hasClientInView();
 }

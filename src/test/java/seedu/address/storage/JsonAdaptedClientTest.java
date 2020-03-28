@@ -49,6 +49,8 @@ public class JsonAdaptedClientTest {
             .collect(Collectors.toList());
     private static final List<JsonAdaptedSport> VALID_SPORTS = BENSON.getSports().stream().map(JsonAdaptedSport::new)
             .collect(Collectors.toList());
+    private static final List<JsonAdaptedSchedule> VALID_SCHEDULE_LIST = BENSON.getScheduleList().getScheduleList()
+            .stream().map(JsonAdaptedSchedule::new).collect(Collectors.toList());
 
     @Test
     public void toModelType_validClientDetails_returnsClient() throws Exception {

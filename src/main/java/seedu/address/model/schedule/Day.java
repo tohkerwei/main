@@ -24,6 +24,7 @@ public class Day {
         requireNonNull(day);
         checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
         this.value = assignDay(day);
+        System.out.println(this.value);
     }
 
     /**
@@ -53,33 +54,25 @@ public class Day {
      * @return day of the week
      */
     private Weekday assignDay(String day) {
-        Weekday weekday = null;
-        switch (day) {
+        String lowerCaseDay = day.toLowerCase();
+        switch (lowerCaseDay) {
         case "sun":
-            weekday = Weekday.SUN;
-            break;
+            return Weekday.SUN;
         case "mon":
-            weekday = Weekday.MON;
-            break;
+            return Weekday.MON;
         case "tue":
-            weekday = Weekday.TUE;
-            break;
+            return Weekday.TUE;
         case "wed":
-            weekday = Weekday.WED;
-            break;
+            return Weekday.WED;
         case "thu":
-            weekday = Weekday.THU;
-            break;
+            return Weekday.THU;
         case "fri":
-            weekday = Weekday.FRI;
-            break;
+            return Weekday.FRI;
         case "sat":
-            weekday = Weekday.SAT;
-            break;
+            return Weekday.SAT;
         default:
-            break;
+            return null;
         }
-        return weekday;
     }
 
     public String getDay() {
