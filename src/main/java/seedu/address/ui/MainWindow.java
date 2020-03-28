@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -16,6 +17,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.exercise.Exercise;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -50,7 +52,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane clientViewPanelPlaceholder;
 
     @FXML
-    private StackPane exerciseListPanelPlaceholder;
+    private StackPane exerciseListTablePlaceholder;
 
     @FXML
     private StackPane schedulePanelPlaceholder;
@@ -195,7 +197,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (logic.hasClientInView()) {
                 clientViewDisplay.updateClientView(logic.getClientInView());
-                exerciseListPanelPlaceholder.getChildren().add(clientViewDisplay.getExerciseListPanel().getRoot());
+                ExerciseListTable e = new ExerciseListTable(logic.getClientInView().getExerciseList().asUnmodifiableObservableList());
+                exerciseListTablePlaceholder.getChildren().add(e.getRoot());
             }
 
             if (commandResult.isShowHelp()) {

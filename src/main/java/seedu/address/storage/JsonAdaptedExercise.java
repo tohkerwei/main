@@ -44,10 +44,10 @@ class JsonAdaptedExercise {
      */
     public JsonAdaptedExercise(Exercise source) {
         exerciseName = source.getExerciseName().value;
-        exerciseReps = source.getReps().value;
-        exerciseSets = source.getSets().value;
+        exerciseReps = source.getExerciseReps().value;
+        exerciseSets = source.getExerciseSets().value;
         exerciseWeight = source.getExerciseWeight().value;
-        exerciseDate = source.getDate().displayValue;
+        exerciseDate = source.getExerciseDate().displayValue;
     }
 
     /**

@@ -30,11 +30,11 @@ public class Exercise {
         return exerciseName;
     }
 
-    public ExerciseReps getReps() {
+    public ExerciseReps getExerciseReps() {
         return exerciseReps;
     }
 
-    public ExerciseSets getSets() {
+    public ExerciseSets getExerciseSets() {
         return exerciseSets;
     }
 
@@ -42,7 +42,7 @@ public class Exercise {
         return exerciseWeight;
     }
 
-    public ExerciseDate getDate() {
+    public ExerciseDate getExerciseDate() {
         return exerciseDate;
     }
 
@@ -57,9 +57,9 @@ public class Exercise {
 
         return otherExercise != null
             && otherExercise.getExerciseName().equals(getExerciseName())
-            && otherExercise.getReps().equals(getReps())
+            && otherExercise.getExerciseReps().equals(getExerciseReps())
             && otherExercise.getExerciseWeight().equals(getExerciseWeight())
-            && otherExercise.getDate().equals(getDate());
+            && otherExercise.getExerciseDate().equals(getExerciseDate());
     }
 
     /**
@@ -77,10 +77,10 @@ public class Exercise {
 
         Exercise otherExercise = (Exercise) other;
         return otherExercise.getExerciseName().equals(getExerciseName())
-            && otherExercise.getReps().equals(getReps())
-            && otherExercise.getSets().equals(getSets())
+            && otherExercise.getExerciseReps().equals(getExerciseReps())
+            && otherExercise.getExerciseSets().equals(getExerciseSets())
             && otherExercise.getExerciseWeight().equals(getExerciseWeight())
-            && otherExercise.getDate().equals(getDate());
+            && otherExercise.getExerciseDate().equals(getExerciseDate());
     }
 
     @Override
@@ -95,11 +95,11 @@ public class Exercise {
         builder.append("Exercise name: ")
             .append(getExerciseName())
             .append(" Date: ")
-            .append(getDate())
+            .append(getExerciseDate())
             .append(" Sets: ")
-            .append(getSets())
+            .append(getExerciseSets())
             .append(" Reps: ")
-            .append(getReps())
+            .append(getExerciseReps())
             .append(" Weight: ")
             .append(getExerciseWeight());
         return builder.toString();
