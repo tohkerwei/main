@@ -20,12 +20,6 @@ public class ExerciseListPanel extends UiPart<Region> {
     @FXML
     private ListView<Exercise> exerciseListView;
 
-    public ExerciseListPanel(ObservableList<Exercise> exerciseList){
-        super(FXML);
-        exerciseListView.setItems(exerciseList);
-        exerciseListView.setCellFactory(listView -> new ExerciseListViewCell());
-    }
-
     public ExerciseListPanel() {
         super(FXML);
     }

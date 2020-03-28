@@ -124,7 +124,6 @@ public class MainWindow extends UiPart<Stage> {
 
         clientViewDisplay= new ClientViewDisplay(new ClientView(), new ExerciseListPanel());
         clientViewPanelPlaceholder.getChildren().add(clientViewDisplay.getClientView().getRoot());
-        //exerciseListPanelPlaceholder.getChildren().add(clientViewDisplay.getExerciseListPanel().getRoot());
 
         schedulePanel = new SchedulePanel(logic.getFilteredClientList());
         schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
@@ -196,8 +195,7 @@ public class MainWindow extends UiPart<Stage> {
 
             if (logic.hasClientInView()) {
                 clientViewDisplay.updateClientView(logic.getClientInView());
-                exerciseListPanelPlaceholder.getChildren().add(new ExerciseListPanel(logic.getClientInView().getExerciseList().asUnmodifiableObservableList()
-                ).getRoot());
+                exerciseListPanelPlaceholder.getChildren().add(clientViewDisplay.getExerciseListPanel().getRoot());
             }
 
             if (commandResult.isShowHelp()) {

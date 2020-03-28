@@ -31,7 +31,7 @@ public class ClientViewDisplay {
     public void updateClientView(Client client) {
         clientView.update(client);
         ObservableList<Exercise> e = client.getExerciseList().asUnmodifiableObservableList();
-        this.exerciseListPanel = new ExerciseListPanel(e);
+        updateExerciseList(e);
     }
 
     public void updateExerciseList(ObservableList<Exercise> exerciseList) {
