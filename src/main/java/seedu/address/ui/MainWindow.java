@@ -124,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
-        clientViewDisplay= new ClientViewDisplay(new ClientView(), new ExerciseListPanel());
+        clientViewDisplay= new ClientViewDisplay(new ClientView());
         clientViewPanelPlaceholder.getChildren().add(clientViewDisplay.getClientView().getRoot());
 
         schedulePanel = new SchedulePanel(logic.getFilteredClientList());

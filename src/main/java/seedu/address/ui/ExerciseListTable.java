@@ -25,16 +25,25 @@ public class ExerciseListTable extends UiPart<Region> {
      */
 
     @FXML
-    public TableView<Exercise> tableView;
+    private TableView<Exercise> tableView;
     @FXML
     private TableColumn<Exercise, String> exerciseName;
     @FXML
     private TableColumn<Exercise, String> exerciseDate;
+    @FXML
+    private TableColumn<Exercise, String> exerciseSets;
+    @FXML
+    private TableColumn<Exercise, String> exerciseReps;
+    @FXML
+    private TableColumn<Exercise, String> exerciseWeight;
 
     public ExerciseListTable(ObservableList<Exercise> e) {
         super(FXML);
         exerciseName.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseName"));
         exerciseDate.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseDate"));
+        exerciseSets.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseSets"));
+        exerciseReps.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseReps"));
+        exerciseWeight.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseWeight"));
         tableView.setItems(e);
     }
 }
