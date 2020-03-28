@@ -17,7 +17,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.exercise.Exercise;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -124,8 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
-        clientViewDisplay= new ClientViewDisplay(new ClientView());
-        clientViewPanelPlaceholder.getChildren().add(clientViewDisplay.getClientView().getRoot());
+        clientViewDisplay= new ClientViewDisplay();
 
         schedulePanel = new SchedulePanel(logic.getFilteredClientList());
         schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
@@ -180,8 +178,16 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public ClientListPanel getClientListPanel() {
-        return clientListPanel;
+    private void refreshClientInViewDisplay(){
+        clientViewDisplay.update(logic.getClientInView());
+
+        ClientView clientView = clientViewDisplay.getClientView();
+        clientViewPanelPlaceholder.getChildren().clear();
+        clientViewPanelPlaceholder.getChildren().add(clientView.getRoot());
+
+        ExerciseListTable exerciseListTable = clientViewDisplay.getExerciseListTable();
+        exerciseListTablePlaceholder.getChildren().clear();
+        exerciseListTablePlaceholder.getChildren().add(exerciseListTable.getRoot());
     }
 
     /**
@@ -196,9 +202,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (logic.hasClientInView()) {
-                clientViewDisplay.updateClientView(logic.getClientInView());
-                ExerciseListTable e = new ExerciseListTable(logic.getClientInView().getExerciseList().asUnmodifiableObservableList());
-                exerciseListTablePlaceholder.getChildren().add(e.getRoot());
+                refreshClientInViewDisplay();
             }
 
             if (commandResult.isShowHelp()) {

@@ -53,26 +53,8 @@ public class ClientView extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public ClientView() {
+    public ClientView(Client client) {
         super(FXML);
-        name.setText("");
-        phone.setText("");
-        address.setText("");
-        email.setText("");
-        gender.setText("");
-        birthday.setText("");
-        height.setText("");
-        currentWeight.setText("");
-        targetWeight.setText("");
-        remark.setText("");
-    }
-
-    /** @author @yonggie
-     * Replaces the client in ClientView to be shown in FitBiz.
-     *
-     * @param client client to be displayed
-     */
-    public void update(Client client) {
         this.client = client;
         name.setText(client.getName().fullName);
         String phoneLabel = "Phone: ";
