@@ -31,7 +31,7 @@ public class StartTime {
     @Override
     public StartTime clone() {
         String rawStartTime = this.value.substring(0,2) + this.value.substring(3);
-        return new StartTime()
+        return new StartTime();
     }
 
     /**
