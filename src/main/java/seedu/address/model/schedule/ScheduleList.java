@@ -24,7 +24,7 @@ public class ScheduleList {
         scheduleList.add(schedule);
     }
 
-    public ArrayList<Schedule> getScheduleList() {
+    public ArrayList<Schedule> getArrayList() {
         return scheduleList;
     }
 

@@ -101,7 +101,7 @@ class JsonAdaptedClient {
         sports.addAll(source.getSports().stream()
                   .map(JsonAdaptedSport::new)
                   .collect(Collectors.toList()));
-        scheduleList.addAll(source.getScheduleList().getScheduleList().stream()
+        scheduleList.addAll(source.getScheduleList().getArrayList().stream()
                     .map(JsonAdaptedSchedule::new)
                     .collect(Collectors.toList()));
     }
