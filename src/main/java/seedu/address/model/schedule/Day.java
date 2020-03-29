@@ -28,6 +28,20 @@ public class Day {
     }
 
     /**
+     * @author Dban1
+     * Private constructor for cloning Day using the Weekday enum.
+     * @param day
+     */
+    private Day(Weekday day) {
+        this.value = day;
+    }
+
+    @Override
+    public Day clone() {
+        return new Day(this.value);
+    }
+
+    /**
      * Checks if input String is a valid three-lettered day.
      * @param test
      * @return true if is valid day

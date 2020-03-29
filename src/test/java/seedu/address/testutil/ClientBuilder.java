@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,8 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -47,6 +50,7 @@ public class ClientBuilder {
     private Remark remark;
     private Set<Sport> sports;
     private TargetWeight targetWeight;
+    private ScheduleList scheduleList;
 
     public ClientBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -61,6 +65,7 @@ public class ClientBuilder {
         targetWeight = new TargetWeight(DEFAULT_TARGET_WEIGHT);
         tags = new HashSet<>();
         sports = new HashSet<>();
+        scheduleList = new ScheduleList();
     }
 
     /**
@@ -79,6 +84,7 @@ public class ClientBuilder {
         targetWeight = clientToCopy.getTargetWeight();
         sports = new HashSet<>(clientToCopy.getSports());
         tags = new HashSet<>(clientToCopy.getTags());
+        scheduleList = clientToCopy.getScheduleList();
     }
 
     /**
@@ -175,6 +181,10 @@ public class ClientBuilder {
     public ClientBuilder withSports(String ... sports) {
         this.sports = SampleDataUtil.getSportSet(sports);
         return this;
+    }
+
+    public ClientBuilder withScheduleList(ScheduleList scheduleList) {
+        this.sche
     }
 
     /**
