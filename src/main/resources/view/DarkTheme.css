@@ -40,6 +40,7 @@
 }
 
 .table-view {
+  -fx-font-size: 11pt;
   -fx-base: #1d1d1d;
   -fx-control-inner-background: #1d1d1d;
   -fx-background-color: #1d1d1d;
@@ -62,7 +63,7 @@
 }
 
 .table-view .column-header .label {
-  -fx-font-size: 10pt;
+  -fx-font-size: 11pt;
   -fx-font-family: "Segoe UI Light";
   -fx-text-fill: white;
   -fx-alignment: center-left;
