@@ -32,7 +32,7 @@ public class ViewCommandTest {
         Client clientToView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_CLIENT);
 
-        String expectedMessage = String.format(ViewCommand.MESSAGE_SUCCESS, clientToView);
+        String expectedMessage = String.format(ViewCommand.MESSAGE_SUCCESS, clientToView.getName().fullName);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new ClientInView());
         expectedModel.setClientInView(clientToView);
@@ -50,14 +50,16 @@ public class ViewCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        // showClientAtIndex(model, INDEX_FIRST_CLIENT);
+        showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
         Client clientToView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         ViewCommand viewCommand = new ViewCommand(INDEX_FIRST_CLIENT);
 
-        String expectedMessage = String.format(ViewCommand.MESSAGE_SUCCESS, clientToView);
+        String expectedMessage = String.format(ViewCommand.MESSAGE_SUCCESS, clientToView.getName().fullName);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new ClientInView());
+
+        showClientAtIndex(expectedModel, INDEX_FIRST_CLIENT);
         expectedModel.setClientInView(clientToView);
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
