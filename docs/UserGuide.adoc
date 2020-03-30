@@ -16,11 +16,28 @@ endif::[]
 
 By: `CS2103T-F11-2` Since: `Feb 2020` Licence: `MIT`
 
-== Introduction
+== Overview
+
+=== About FitBiz
 
 FitBiz is a business management tool tailor made for fitness coaches to manage their clients. From managing your client's profile to planning your schedules, FitBiz will surely ease the pain and monotony of managing a small to medium client portfolio.
 
 This program is primarily a desktop application and optimised for those who prefer to work with a Command Line Interface (CLI). If you can type fast, and have clients to train and manage, FitBiz is definitely for you!
+
+=== About this User Guide
+
+This User Guide explains how to use the FitBiz CLI, as well as provides an understanding of the features and commands and some common use cases.
+
+In this guide, we cover:
+
+* Syntax of the commands available in FitBiz
+* Common use cases for each command
+
+=== Miscellaneous Features
+
+As this is primarily a CLI based application, some features are included to make the user experience better. The following features are provided to simplify the use of FitBiz:
+
+* Command History: similar to most modern CLIs, users can press the kbd:[Up] and kbd:[Down] arrow key to cycle through their previously entered commands
 
 == Quick Start
 
@@ -28,15 +45,15 @@ This program is primarily a desktop application and optimised for those who pref
 . Download the latest `FitBiz.jar` link:{repoURL}/releases[here]
 . Copy the file to the folder you want to use as the home folder for your Fitness Manager
 . Double-click the file to start the app. The GUI should appear in a few seconds
-. Type the command in the command box and press Enter to execute it. e.g. typing help and pressing Enter will open the help window.
+. Type the command in the command box and press kbd:[Enter] to execute it. e.g. typing `help` and pressing kbd:[Enter] will open the help window.
 . Some example commands you can try:
-* `list` : lists all clients
+* `list-c` : lists all clients
 * `add-c n/John Doe g/Male p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/24-12-1997 h/170 cw/70 tw/75`
 : adds a client named John Doe to FitBiz
 * `exit` : exits the app
-. Refer to <<Features>> below for details of each command
+. Refer to <<Commands>> below for details of each command
 
-== Features
+== Commands
 
 *Format of Commands*
 

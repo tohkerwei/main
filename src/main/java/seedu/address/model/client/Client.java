@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.exercise.UniqueExerciseList;
+import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +37,7 @@ public class Client {
     private final Set<Sport> sports = new HashSet<>();
     private Remark remark;
     private UniqueExerciseList exerciseList;
+    private ScheduleList scheduleList;
 
     // TODO: remove this overloaded constructor after finalising attributes
     /**
@@ -43,7 +45,7 @@ public class Client {
      */
     public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
             CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Remark remark, Set<Sport> sports,
-            UniqueExerciseList exerciseList) {
+            UniqueExerciseList exerciseList, ScheduleList scheduleList) {
         requireAllNonNull(name, phone, email, address, tags, birthday);
         this.name = name;
         this.gender = gender;
@@ -58,6 +60,7 @@ public class Client {
         this.sports.addAll(sports);
         this.remark = remark;
         this.exerciseList = exerciseList;
+        this.scheduleList = scheduleList;
     }
 
     /**
@@ -114,6 +117,10 @@ public class Client {
 
     public Height getHeight() {
         return height;
+    }
+
+    public ScheduleList getScheduleList() {
+        return scheduleList;
     }
 
     /**

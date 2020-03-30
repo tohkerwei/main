@@ -19,6 +19,7 @@ import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.exercise.UniqueExerciseList;
+import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -51,7 +52,7 @@ public class SampleDataUtil {
                     new Email("amyyyy@example.com"), new Address("Blk 90 Sunset Way, #20-18"),
                     getTagSet("Normal"), new Birthday("12-05-1970"), new CurrentWeight("61.2"),
                     new TargetWeight("60"), new Height("165"), new Remark("History of past injuries"),
-                    getSportSet("Fencing"), new UniqueExerciseList()) };
+                    getSportSet("Fencing"), new UniqueExerciseList())};
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {

@@ -26,5 +26,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_SETS = new Prefix("sets/");
     public static final Prefix PREFIX_EXERCISE_WEIGHT = new Prefix("ew/");
     public static final Prefix PREFIX_DATE = new Prefix("d/");
-
+    public static final Prefix PREFIX_DAY = new Prefix("wd/");
+    public static final Prefix PREFIX_START_TIME = new Prefix("st/");
+    public static final Prefix PREFIX_END_TIME = new Prefix("et/");
 }
