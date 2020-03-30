@@ -51,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane clientViewPanelPlaceholder;
 
     @FXML
+    private StackPane exercisePBTablePlaceholder;
+
+    @FXML
     private StackPane exerciseListTablePlaceholder;
 
     @FXML
@@ -178,7 +181,12 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void refreshClientInViewDisplay(){
+    /**
+     * Updates {@code clientInView}.
+     *
+     * @author @yonggiee
+     */
+    private void refreshClientInViewDisplay() {
         clientViewDisplay.update(logic.getClientInView());
 
         ClientView clientView = clientViewDisplay.getClientView();
