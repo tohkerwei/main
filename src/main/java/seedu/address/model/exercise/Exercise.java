@@ -18,7 +18,7 @@ public class Exercise {
 
     public Exercise(ExerciseName exerciseName, ExerciseReps exerciseReps, ExerciseSets exerciseSets,
         ExerciseWeight exerciseWeight, ExerciseDate exerciseDate) {
-        requireAllNonNull(exerciseName);
+        requireAllNonNull(exerciseName, exerciseDate, exerciseReps, exerciseSets, exerciseWeight);
         this.exerciseName = exerciseName;
         this.exerciseReps = exerciseReps;
         this.exerciseSets = exerciseSets;
@@ -92,16 +92,11 @@ public class Exercise {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Exercise name: ")
-            .append(getExerciseName())
-            .append(" Date: ")
-            .append(getExerciseDate())
-            .append(" Sets: ")
-            .append(getExerciseSets())
-            .append(" Reps: ")
-            .append(getExerciseReps())
-            .append(" Weight: ")
-            .append(getExerciseWeight());
+        builder.append("Exercise name: ").append(getExerciseName())
+            .append(" Date: ").append(getExerciseDate())
+            .append(" Sets: ").append(getExerciseSets())
+            .append(" Reps: ").append(getExerciseReps())
+            .append(" Weight: ").append(getExerciseWeight());
         return builder.toString();
     }
 

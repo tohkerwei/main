@@ -133,18 +133,22 @@ public class ModelManager implements Model {
 
     //=========== ClientInView ================================================================================
 
+    @Override
     public Client getClientInView() {
         return clientInView.getClient();
     }
 
+    @Override
     public void setClientInView(Client client) {
         clientInView.setClient(client);
     }
 
+    @Override
     public boolean hasClientInView() {
         return clientInView.hasClientInView();
     }
 
+    @Override
     public void updateClientViewIfApplicable(Client clientToEdit, Client editedClient) {
         Client currentClientInView = clientInView.getClient();
         if (currentClientInView.equals(clientToEdit)) {

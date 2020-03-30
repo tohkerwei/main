@@ -32,25 +32,29 @@ public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
      */
     public AddExerciseCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_REPS,
-                PREFIX_EXERCISE_WEIGHT, PREFIX_SETS, PREFIX_DATE);
+            PREFIX_EXERCISE_WEIGHT, PREFIX_SETS, PREFIX_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE));
         }
 
         ExerciseName name = ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_NAME).get());
+
         Optional<String> repsString = argMultimap.getValue(PREFIX_REPS);
         ExerciseReps reps = repsString.isPresent()
-                ? ParserUtil.parseExerciseReps(argMultimap.getValue(PREFIX_REPS).get())
-                : new ExerciseReps("");
+            ? ParserUtil.parseExerciseReps(argMultimap.getValue(PREFIX_REPS).get())
+            : new ExerciseReps("");
+
         Optional<String> exerciseWeightString = argMultimap.getValue(PREFIX_REPS);
         ExerciseWeight exerciseWeight = exerciseWeightString.isPresent()
-                ? ParserUtil.parseExerciseWeight(argMultimap.getValue(PREFIX_EXERCISE_WEIGHT).get())
-                : new ExerciseWeight("");
+            ? ParserUtil.parseExerciseWeight(argMultimap.getValue(PREFIX_EXERCISE_WEIGHT).get())
+            : new ExerciseWeight("");
+
         Optional<String> setsString = argMultimap.getValue(PREFIX_REPS);
         ExerciseSets sets = setsString.isPresent()
-                ? ParserUtil.parseExerciseSets(argMultimap.getValue(PREFIX_SETS).get())
-                : new ExerciseSets("");
+            ? ParserUtil.parseExerciseSets(argMultimap.getValue(PREFIX_SETS).get())
+            : new ExerciseSets("");
+            
         ExerciseDate date = ParserUtil.parseExerciseDate(argMultimap.getValue(PREFIX_DATE).get());
         Exercise exercise = new Exercise(name, reps, sets, exerciseWeight, date);
 

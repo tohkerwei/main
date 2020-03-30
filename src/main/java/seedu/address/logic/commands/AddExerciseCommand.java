@@ -40,7 +40,7 @@ public class AddExerciseCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New exercise added. Current recorded exercises:\n%1$s";
     public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in this client";
     public static final String MESSAGE_CLIENT_NOT_IN_VIEW = "You currently do not have a client in view, "
-            + "use the view-c command to view a client first";
+        + "use the view-c command to view a client first";
 
     private final Exercise toAdd;
 
@@ -71,9 +71,9 @@ public class AddExerciseCommand extends Command {
         clientToEditExerciseList.add(toAdd);
 
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
-                clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
-                clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
-                clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList);
+            clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
+            clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
+            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList);
 
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);

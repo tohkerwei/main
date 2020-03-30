@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents the data of an exercise done by client. Guarantees: immutable; is
+ * Represents the date of an exercise done by client. Guarantees: immutable; is
  * valid as declared in {@link #isValidExerciseDate(String)}
  */
 public class ExerciseDate {
