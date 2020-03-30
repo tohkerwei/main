@@ -124,10 +124,22 @@
   -fx-text-fill: #010504;
 }
 
+.cell_big_label_white {
+  -fx-font-family: "Segoe UI Bold";
+  -fx-font-size: 18px;
+  -fx-text-fill: white;
+}
+
 .cell_small_label {
   -fx-font-family: "Segoe UI";
   -fx-font-size: 13px;
   -fx-text-fill: #010504;
+}
+
+.cell_small_label_white {
+  -fx-font-family: "Segoe UI";
+  -fx-font-size: 15px;
+  -fx-text-fill: #ffffff;
 }
 
 .stack-pane {
@@ -358,7 +370,7 @@
 }
 
 #clientView {
-  -fx-background-color: white;
+  -fx-background-color: #3c3e3f;
 }
 
 .pane-with-no-border {
