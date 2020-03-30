@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -49,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane clientViewPanelPlaceholder;
+
+    @FXML
+    private StackPane exercisePbTablePlaceholder;
 
     @FXML
     private StackPane exerciseListTablePlaceholder;
@@ -123,7 +125,7 @@ public class MainWindow extends UiPart<Stage> {
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
-        clientViewDisplay= new ClientViewDisplay();
+        clientViewDisplay = new ClientViewDisplay();
 
         schedulePanel = new SchedulePanel(logic.getFilteredClientList());
         schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
@@ -178,7 +180,12 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void refreshClientInViewDisplay(){
+    /**
+     * Updates {@code clientInView}.
+     *
+     * @author @yonggiee
+     */
+    private void refreshClientInViewDisplay() {
         clientViewDisplay.update(logic.getClientInView());
 
         ClientView clientView = clientViewDisplay.getClientView();

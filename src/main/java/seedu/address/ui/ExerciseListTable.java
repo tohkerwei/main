@@ -9,7 +9,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.exercise.Exercise;
 
 /**
- * An UI component that displays information of a {@code Client}.
+ * An UI component that displays exercises of a {@code Client} in a TableView.
  */
 public class ExerciseListTable extends UiPart<Region> {
 

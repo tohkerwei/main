@@ -74,7 +74,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ? ParserUtil.parseBirthday(birthdayString.get())
                 : new Birthday("");
         Optional<String> heightString = argMultimap.getValue(PREFIX_HEIGHT);
-        Height height = heightString.isPresent() 
+        Height height = heightString.isPresent()
                 ? ParserUtil.parseHeight(heightString.get())
                 : new Height("");
         Optional<String> currentWeightString = argMultimap.getValue(PREFIX_CURRENT_WEIGHT);

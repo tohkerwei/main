@@ -142,7 +142,7 @@ public class Client {
     public String getSportsString() {
         return getSports().stream().map(sport -> sport.getSportName()).collect(Collectors.joining(", "));
     }
-    
+
     public UniqueExerciseList getExerciseList() {
         return exerciseList;
     }

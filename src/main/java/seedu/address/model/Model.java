@@ -87,14 +87,14 @@ public interface Model {
 
     /**
      * Returns the client in {@code clientInView}.
-     * 
+     *
      * @author @yonggie
      */
     Client getClientInView();
 
     /**
      * Updates the client in {@code clientInView}.
-     * 
+     *
      * @author @yonggie
      */
     void setClientInView(Client client);
