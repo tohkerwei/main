@@ -178,7 +178,12 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void refreshClientInViewDisplay(){
+    /**
+     * Updates {@code clientInView}.
+     *
+     * @author @yonggiee
+     */
+    private void refreshClientInViewDisplay() {
         clientViewDisplay.update(logic.getClientInView());
 
         ClientView clientView = clientViewDisplay.getClientView();
