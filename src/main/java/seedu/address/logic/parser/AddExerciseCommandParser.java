@@ -54,7 +54,7 @@ public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
         ExerciseSets sets = setsString.isPresent()
             ? ParserUtil.parseExerciseSets(argMultimap.getValue(PREFIX_SETS).get())
             : new ExerciseSets("");
-            
+
         ExerciseDate date = ParserUtil.parseExerciseDate(argMultimap.getValue(PREFIX_DATE).get());
         Exercise exercise = new Exercise(name, reps, sets, exerciseWeight, date);
 

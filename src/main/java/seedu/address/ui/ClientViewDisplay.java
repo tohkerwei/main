@@ -16,7 +16,7 @@ public class ClientViewDisplay {
     private ClientView clientView;
     private ExerciseListTable exerciseListTable;
 
-    public ClientView getClientView(){
+    public ClientView getClientView() {
         return clientView;
     }
 

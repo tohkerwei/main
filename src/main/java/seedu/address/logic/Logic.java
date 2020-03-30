@@ -35,7 +35,7 @@ public interface Logic {
 
     /**
      * Returns the client required by {@code ViewCommand} from {@code ModelManager}.
-     * 
+     *
      * @author @yonggiee
      */
     Client getClientInView();
@@ -43,11 +43,11 @@ public interface Logic {
     /**
      * Returns true if there is a client in {@code clientInView} in
      * {@code ModelManager}.
-     * 
+     *
      * @author @yonggiee
      */
     Boolean hasClientInView();
-    
+
     /**
      * Returns the user prefs' address book file path.
      */
