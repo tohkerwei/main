@@ -113,13 +113,10 @@ public class EditCommand extends Command {
         Remark updatedRemark = editClientDescriptor.getRemark()
                 .orElse(clientToEdit.getRemark());
         UniqueExerciseList exerciseList = clientToEdit.getExerciseList();
-        return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight, updatedRemark, updatedSport,
-                exerciseList);
         ScheduleList scheduleList = clientToEdit.getScheduleList();
         return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight, updatedRemark, updatedSport,
-                scheduleList);
+                exerciseList, scheduleList);
     }
 
     @Override

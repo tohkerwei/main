@@ -16,8 +16,7 @@ public class ScheduleList {
     }
 
     /**
-     * Replaces the contents of this list with {@code exercises}. {@code exercises} must
-     * not contain duplicate exercises.
+     * Sets schedule using an ArrayList of Schedule.
      */
     public void setSchedule(ArrayList<Schedule> newScheduleList) {
         requireAllNonNull(newScheduleList);
@@ -26,7 +25,7 @@ public class ScheduleList {
 
     public ScheduleList duplicate() {
         ScheduleList copiedList = new ScheduleList();
-        copiedList.setSchedule();
+        copiedList.setSchedule(this.scheduleList);
         return new ScheduleList();
     }
 

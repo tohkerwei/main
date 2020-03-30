@@ -79,6 +79,7 @@ class JsonAdaptedClient {
         }
         if (exerciseList != null) {
             this.exerciseList.addAll(exerciseList);
+        }
         if (scheduleList != null) {
             this.scheduleList.addAll(scheduleList);
         }
@@ -136,6 +137,7 @@ class JsonAdaptedClient {
         final UniqueExerciseList modelExerciseList = new UniqueExerciseList();
         for (JsonAdaptedExercise ex : exerciseList) {
             modelExerciseList.add(ex.toModelType());
+        }
         
         final ScheduleList modelScheduleList = new ScheduleList();
         for (JsonAdaptedSchedule schedule : scheduleList) {
