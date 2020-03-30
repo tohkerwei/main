@@ -129,6 +129,7 @@ class JsonAdaptedClient {
         for (JsonAdaptedExercise ex : exerciseList) {
             modelExerciseList.add(ex.toModelType());
         }
+        modelExerciseList.sortByExerciseDate(); // do a sanity presort to ensure initial list is sorted
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));

@@ -3,6 +3,7 @@ package seedu.address.model.exercise;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,6 +69,16 @@ public class UniqueExerciseList implements Iterable<Exercise> {
         }
 
         internalList.set(index, editedExercise);
+    }
+
+    /**
+     * Sorts the list by the exercise date in descending order.
+     */
+    public void sortByExerciseDate() {
+        Comparator<Exercise> byExerciseDate = (Exercise e1, Exercise e2) -> {
+            return e2.getExerciseDate().value.compareTo(e1.getExerciseDate().value);
+        };
+        FXCollections.sort(internalList, byExerciseDate);
     }
 
     /**
