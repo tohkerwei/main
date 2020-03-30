@@ -68,7 +68,7 @@ public class AddExerciseCommand extends Command {
         }
 
         // mutates the list belonging to the client by adding the exercise
-        clientToEditExerciseList.add(toAdd);
+        clientToEditExerciseList.addToSorted(toAdd);
 
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
             clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),

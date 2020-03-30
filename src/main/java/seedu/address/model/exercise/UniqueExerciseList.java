@@ -3,6 +3,7 @@ package seedu.address.model.exercise;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -48,6 +49,22 @@ public class UniqueExerciseList implements Iterable<Exercise> {
             throw new DuplicateExerciseException();
         }
         internalList.add(toAdd);
+    }
+
+    public void addToSorted(Exercise toAdd) {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateExerciseException();
+        }
+        int idx = 0;
+        for (Exercise curr : internalList) {
+            LocalDate toAddDate = toAdd.getExerciseDate().value;
+            LocalDate currDate = curr.getExerciseDate().value;
+            if (toAddDate.compareTo(currDate) < 0) {
+                idx++;
+            }
+        }
+        internalList.add(idx, toAdd);
     }
 
     /**
