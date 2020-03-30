@@ -21,10 +21,10 @@ public class ExerciseRepsTest {
 
     @Test
     public void isValidExerciseReps() {
-        // null weight
+        // null reps
         assertThrows(NullPointerException.class, () -> ExerciseReps.isValidExerciseReps(null));
 
-        // invalid weight
+        // invalid reps
         assertFalse(ExerciseReps.isValidExerciseReps(" ")); // spaces only
         assertFalse(ExerciseReps.isValidExerciseReps("ab")); // contains no numbers
         assertFalse(ExerciseReps.isValidExerciseReps(".2")); // decimal numbers
@@ -38,7 +38,7 @@ public class ExerciseRepsTest {
         assertFalse(ExerciseReps.isValidExerciseReps("2-3.23")); // inclusion of symbols
         assertFalse(ExerciseReps.isValidExerciseReps("23.2'3")); // inclusion of symbols
 
-        // valid weight
+        // valid reps
         assertTrue(ExerciseReps.isValidExerciseReps("")); // empty string
         assertTrue(ExerciseReps.isValidExerciseReps("0")); // single digit
         assertTrue(ExerciseReps.isValidExerciseReps("5")); // single digit
