@@ -1,11 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.ScheduleDay;
+import seedu.address.model.schedule.ScheduleList;
 
 /**
  * The API of the Model component.
@@ -112,4 +115,12 @@ public interface Model {
      * @author @yonggiee
      */
     void updateClientViewIfApplicable(Client clientToEdit, Client editedClient);
+
+    /**
+     * Returns a view of the schedule list from across all clients.
+     * @return
+     *
+     * @author @Dban1
+     */
+    ObservableList<ScheduleDay> getScheduleDayList();
 }
