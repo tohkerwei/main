@@ -3,22 +3,26 @@ package seedu.address.model.exercise;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.exercise.exceptions.DuplicateExerciseException;
 import seedu.address.model.exercise.exceptions.ExerciseNotFoundException;
 
 /**
- * A list of exercises that enforces uniqueness between its elements and does not
- * allow nulls. A exercise is considered unique by comparing using
- * {@code Exercise#isSameexercise(Exercise)}. As such, adding and updating of exercises
- * uses Exercise#isSameexercise(Exercise) for equality so as to ensure that the exercise
- * being added or updated is unique in terms of identity in the
- * UniqueexerciseList. However, the removal of a exercise uses Exercise#equals(Object)
- * so as to ensure that the exercise with exactly the same fields will be removed.
+ * A list of exercises that enforces uniqueness between its elements and does
+ * not allow nulls. A exercise is considered unique by comparing using
+ * {@code Exercise#isSameexercise(Exercise)}. As such, adding and updating of
+ * exercises uses Exercise#isSameexercise(Exercise) for equality so as to ensure
+ * that the exercise being added or updated is unique in terms of identity in
+ * the UniqueexerciseList. However, the removal of a exercise uses
+ * Exercise#equals(Object) so as to ensure that the exercise with exactly the
+ * same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
@@ -31,7 +35,8 @@ public class UniqueExerciseList implements Iterable<Exercise> {
             .unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent exercise as the given argument.
+     * Returns true if the list contains an equivalent exercise as the given
+     * argument.
      */
     public boolean contains(Exercise toCheck) {
         requireNonNull(toCheck);
@@ -39,7 +44,16 @@ public class UniqueExerciseList implements Iterable<Exercise> {
     }
 
     /**
-     * Adds a exercise to the list. The exercise must not already exist in the list.
+     * Returns {@code Exercise} specified by the {@code Index}.
+     */
+    public Exercise getExercise(Index index) {
+        requireNonNull(index);
+        return internalList.get(index.getZeroBased());
+    }
+
+    /**
+     * Adds an exercise to the list without ensuring any order. The exercise must
+     * not already exist in the list.
      */
     public void add(Exercise toAdd) {
         requireNonNull(toAdd);
@@ -50,10 +64,36 @@ public class UniqueExerciseList implements Iterable<Exercise> {
     }
 
     /**
+     * Inserts an exercise to the list while ensuring list is sorted by the exercise
+     * dates.
+     *
+     * <p>
+     * The exercise must not already exist in the list. This basically does
+     * insertion sort based on the fact that the list must already be sorted in the
+     * first place. Do not use this method to add many exercises at once as it is
+     * inefficient.
+     */
+    public void addToSorted(Exercise toAdd) {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateExerciseException();
+        }
+        int idx = 0;
+        for (Exercise curr : internalList) {
+            LocalDate toAddDate = toAdd.getExerciseDate().value;
+            LocalDate currDate = curr.getExerciseDate().value;
+            if (toAddDate.compareTo(currDate) < 0) {
+                idx++;
+            }
+        }
+        internalList.add(idx, toAdd);
+    }
+
+    /**
      * Replaces the exercise {@code target} in the list with {@code editedExercise}.
      * {@code target} must exist in the list. The exercise identity of
-     * {@code editedExercise} must not be the same as another existing exercise in the
-     * list.
+     * {@code editedExercise} must not be the same as another existing exercise in
+     * the list.
      */
     public void setExercise(Exercise target, Exercise editedExercise) {
         requireAllNonNull(target, editedExercise);
@@ -68,6 +108,16 @@ public class UniqueExerciseList implements Iterable<Exercise> {
         }
 
         internalList.set(index, editedExercise);
+    }
+
+    /**
+     * Sorts the list by the exercise date in descending order.
+     */
+    public void sortByExerciseDate() {
+        Comparator<Exercise> byExerciseDate = (Exercise e1, Exercise e2) -> {
+            return e2.getExerciseDate().value.compareTo(e1.getExerciseDate().value);
+        };
+        FXCollections.sort(internalList, byExerciseDate);
     }
 
     /**
@@ -87,8 +137,8 @@ public class UniqueExerciseList implements Iterable<Exercise> {
     }
 
     /**
-     * Replaces the contents of this list with {@code exercises}. {@code exercises} must
-     * not contain duplicate exercises.
+     * Replaces the contents of this list with {@code exercises}. {@code exercises}
+     * must not contain duplicate exercises.
      */
     public void setExercises(List<Exercise> exercises) {
         requireAllNonNull(exercises);

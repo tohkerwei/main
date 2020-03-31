@@ -45,12 +45,12 @@ public class AddExerciseCommandParser implements Parser<AddExerciseCommand> {
             ? ParserUtil.parseExerciseReps(argMultimap.getValue(PREFIX_REPS).get())
             : new ExerciseReps("");
 
-        Optional<String> exerciseWeightString = argMultimap.getValue(PREFIX_REPS);
+        Optional<String> exerciseWeightString = argMultimap.getValue(PREFIX_EXERCISE_WEIGHT);
         ExerciseWeight exerciseWeight = exerciseWeightString.isPresent()
             ? ParserUtil.parseExerciseWeight(argMultimap.getValue(PREFIX_EXERCISE_WEIGHT).get())
             : new ExerciseWeight("");
 
-        Optional<String> setsString = argMultimap.getValue(PREFIX_REPS);
+        Optional<String> setsString = argMultimap.getValue(PREFIX_SETS);
         ExerciseSets sets = setsString.isPresent()
             ? ParserUtil.parseExerciseSets(argMultimap.getValue(PREFIX_SETS).get())
             : new ExerciseSets("");
