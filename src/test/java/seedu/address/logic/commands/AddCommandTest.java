@@ -162,6 +162,11 @@ public class AddCommandTest {
         public boolean hasClientInView() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateClientViewIfApplicable(Client clientToEdit, Client editedClient) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

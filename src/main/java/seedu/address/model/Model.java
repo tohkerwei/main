@@ -85,9 +85,31 @@ public interface Model {
      */
     void updateFilteredClientList(Predicate<Client> predicate);
 
-    public Client getClientInView();
+    /**
+     * Returns the client in {@code clientInView}.
+     *
+     * @author @yonggie
+     */
+    Client getClientInView();
 
-    public void setClientInView(Client client);
+    /**
+     * Updates the client in {@code clientInView}.
+     *
+     * @author @yonggie
+     */
+    void setClientInView(Client client);
 
-    public boolean hasClientInView();
+    /**
+     * Returns true if a client with the same identity as {@code client} exists in
+     * the address book.
+     * @author @yonggie
+     */
+    boolean hasClientInView();
+
+    /**
+     * Updates client in ClientInView in the case of an EditCommand. Before updating, checks if
+     * {@code editedClient} is the same client as client in ClientInView.
+     * @author @yonggiee
+     */
+    void updateClientViewIfApplicable(Client clientToEdit, Client editedClient);
 }

@@ -31,6 +31,10 @@ public class Sport {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getSportName() {
+        return sportName;
+    }
+
     /**
      * Format state as text for viewing.
      */
