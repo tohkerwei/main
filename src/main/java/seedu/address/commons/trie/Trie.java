@@ -1,5 +1,7 @@
 package seedu.address.commons.trie;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -22,6 +24,7 @@ public class Trie {
      * @param word
      */
     public void insert(String word) {
+        requireNonNull(word);
         Node current = root;
 
         for (char letter : word.toCharArray()) {
@@ -45,6 +48,7 @@ public class Trie {
      * @return the longest prefix or an empty string if it does not exist
      */
     private Node getLongestPrefixNode(String word) {
+        requireNonNull(word);
         Node current = root;
 
         // this loop should end prematurely if word is not a proper substring
@@ -71,6 +75,7 @@ public class Trie {
      * @return an object of type {@code SimilarWordsResult}
      */
     public SimilarWordsResult listAllSimilarWords(String word) {
+        requireNonNull(word);
         Node longestPrefixNode = getLongestPrefixNode(word);
 
         ArrayList<String> similarWords = new ArrayList<>();
