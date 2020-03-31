@@ -47,7 +47,7 @@ public class Exercise {
     }
 
     /**
-     * Returns true if both exercises of the same name, reps and weight.
+     * Returns true if both exercises of the same name, date, reps and weight.
      * This defines a weaker notion of equality between two exercises.
      */
     public boolean isSameExercise(Exercise otherExercise) {
