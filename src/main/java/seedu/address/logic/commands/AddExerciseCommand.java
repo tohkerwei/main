@@ -75,7 +75,6 @@ public class AddExerciseCommand extends Command {
             clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList);
 
         model.setClient(clientToEdit, editedClient);
-        model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, clientToEdit.getExerciseList().toString()));
     }
