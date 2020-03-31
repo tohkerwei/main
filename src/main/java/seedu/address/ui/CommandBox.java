@@ -25,8 +25,8 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
     private final ResultDisplay resultDisplay;
-    private final CommandHistory commandHistory = new CommandHistory();
-    private final AutoComplete autoComplete = new AutoComplete();
+    private final CommandHistory commandHistory;
+    private final AutoComplete autoComplete;
 
     @FXML
     private TextField commandTextField;
@@ -35,8 +35,13 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.commandExecutor = commandExecutor;
         this.resultDisplay = resultDisplay;
+        commandHistory = new CommandHistory();
+        autoComplete = new AutoComplete();
+
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+
+        // handles the up and down arrow keys for command history
         commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
                 if (ke.getCode() == KeyCode.UP) {
@@ -50,7 +55,8 @@ public class CommandBox extends UiPart<Region> {
                 }
             }
         });
-        // disables tab key native JavaFX behaviour for our own use
+
+        // handles the tab key for auto complete
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, ke -> {
             if (ke.getCode() == KeyCode.TAB) {
                 String currCommand = commandTextField.getText();
