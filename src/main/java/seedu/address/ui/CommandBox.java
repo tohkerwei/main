@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
-
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -9,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
-import seedu.address.commons.trie.SimilarWordsResult;
 import seedu.address.logic.autocomplete.AutoComplete;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,7 +24,6 @@ public class CommandBox extends UiPart<Region> {
     private static final int CARET_POSITION_INDEX = Integer.MAX_VALUE;
 
     private final CommandExecutor commandExecutor;
-    private final ResultDisplay resultDisplay;
     private final CommandHistory commandHistory;
     private final AutoComplete autoComplete;
 
@@ -37,7 +33,6 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor, ResultDisplay resultDisplay) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        this.resultDisplay = resultDisplay;
         commandHistory = new CommandHistory();
         autoComplete = new AutoComplete(commandTextField, resultDisplay);
 

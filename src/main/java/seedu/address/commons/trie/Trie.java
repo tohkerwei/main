@@ -16,6 +16,11 @@ public class Trie {
         root = new Node();
     }
 
+    /**
+     * Inserts the given string {@code word} into this trie.
+     *
+     * @param word
+     */
     public void insert(String word) {
         Node current = root;
 
@@ -57,22 +62,30 @@ public class Trie {
         return current;
     }
 
+    /**
+     * Returns a {@code SimilarWordsResult} object containing the list of similar
+     * words in this trie that starts with the parameter {@code word} and the
+     * longest similar prefix of these commands.
+     *
+     * @param word string to match
+     * @return an object of type {@code SimilarWordsResult}
+     */
     public SimilarWordsResult listAllSimilarWords(String word) {
         Node longestPrefixNode = getLongestPrefixNode(word);
 
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> similarWords = new ArrayList<>();
         Node subtrie = longestPrefixNode;
 
         // case 1: longest prefix does not exist
         if (subtrie == null) {
-            return new SimilarWordsResult(EMPTY_STRING, list);
+            return new SimilarWordsResult(EMPTY_STRING, similarWords);
         }
 
         // case 2: longest prefix is actually the completed word
         String longestPrefixString = longestPrefixNode.constructWord();
         if (subtrie.isWordEnd()) {
-            list.add(longestPrefixString);
-            return new SimilarWordsResult(longestPrefixString, list);
+            similarWords.add(longestPrefixString);
+            return new SimilarWordsResult(longestPrefixString, similarWords);
         }
 
         // case 3: longest prefix is not a completed word
@@ -82,12 +95,12 @@ public class Trie {
         while (!stack.isEmpty()) {
             Node current = stack.pop();
             if (current.isWordEnd()) {
-                list.add(current.constructWord());
+                similarWords.add(current.constructWord());
             } else {
                 stack.addAll(current.getChildren().values());
             }
         }
 
-        return new SimilarWordsResult(longestPrefixString, list);
+        return new SimilarWordsResult(longestPrefixString, similarWords);
     }
 }

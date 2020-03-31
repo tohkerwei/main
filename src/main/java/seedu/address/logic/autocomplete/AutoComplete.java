@@ -37,6 +37,9 @@ public class AutoComplete {
         addAllCommands();
     }
 
+    /**
+     * Adds all the commands included in FitBiz to the {@code Trie}.
+     */
     private void addAllCommands() {
         trie.insert(AddCommand.COMMAND_WORD);
         trie.insert(ClearCommand.COMMAND_WORD);
@@ -49,6 +52,10 @@ public class AutoComplete {
         trie.insert(ViewCommand.COMMAND_WORD);
     }
 
+    /**
+     * Executes the main logic behind the autocomplete. Should be called when the
+     * user presses "tab".
+     */
     public void execute() {
         String currCommand = commandTextField.getText();
 
@@ -58,8 +65,8 @@ public class AutoComplete {
         }
 
         SimilarWordsResult similarWords = trie.listAllSimilarWords(currCommand);
-        String longestPrefix = similarWords.longestPrefix;
-        ArrayList<String> similarCommands = similarWords.list;
+        String longestPrefix = similarWords.longestPrefixString;
+        ArrayList<String> similarCommands = similarWords.similarWords;
         if (similarCommands.isEmpty()) {
             resultDisplay.setFeedbackToUser("No commands found");
         } else if (similarCommands.size() == 1) {

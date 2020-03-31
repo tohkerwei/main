@@ -68,6 +68,11 @@ public class Node {
         return letter;
     }
 
+    /**
+     * Constructs the word by recursively going up the parent node.
+     *
+     * @return the constructed word string
+     */
     public String constructWord() {
         if (parent == null) {
             return "";
