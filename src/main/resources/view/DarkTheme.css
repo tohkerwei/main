@@ -40,6 +40,7 @@
 }
 
 .table-view {
+  -fx-font-size: 11pt;
   -fx-base: #1d1d1d;
   -fx-control-inner-background: #1d1d1d;
   -fx-background-color: #1d1d1d;
@@ -62,7 +63,7 @@
 }
 
 .table-view .column-header .label {
-  -fx-font-size: 10pt;
+  -fx-font-size: 11pt;
   -fx-font-family: "Segoe UI Light";
   -fx-text-fill: white;
   -fx-alignment: center-left;
@@ -123,10 +124,22 @@
   -fx-text-fill: #010504;
 }
 
+.cell_big_label_white {
+  -fx-font-family: "Segoe UI Bold";
+  -fx-font-size: 18px;
+  -fx-text-fill: white;
+}
+
 .cell_small_label {
   -fx-font-family: "Segoe UI";
   -fx-font-size: 13px;
   -fx-text-fill: #010504;
+}
+
+.cell_small_label_white {
+  -fx-font-family: "Segoe UI";
+  -fx-font-size: 15px;
+  -fx-text-fill: #ffffff;
 }
 
 .stack-pane {
@@ -357,5 +370,10 @@
 }
 
 #clientView {
-  -fx-background-color: white;
+  -fx-background-color: #3c3e3f;
+}
+
+.pane-with-no-border {
+  -fx-background-color: derive(#1d1d1d, 20%);
+  -fx-border-top-width: 1px;
 }
