@@ -26,6 +26,22 @@ public class Node {
         return children.containsKey(letter);
     }
 
+    public boolean hasSingleChild() {
+        return children.size() == 1;
+    }
+
+    /**
+     * Returns the only child of this node. {@code children} must only have a single
+     * child to start with.
+     */
+    public Node getSingleChild() {
+        assert hasSingleChild();
+        for (Node node : children.values()) {
+            return node;
+        }
+        return null;
+    }
+
     public void addChild(char letter, Node child) {
         children.put(letter, child);
     }

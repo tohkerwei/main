@@ -24,6 +24,28 @@ public class Trie {
         current.setIsWordEnd(true);
     }
 
+    public String getLongestPrefix(String word) {
+        String longestPrefix = "";
+
+        Node current = root;
+
+        // this loop should end prematurely if word is not a proper substring
+        for (char letter : word.toCharArray()) {
+            if (!current.hasChild(letter)) {
+                return "";
+            }
+            current = current.getChild(letter);
+            longestPrefix += current.getLetter();
+        }
+
+        while (current.hasSingleChild()) {
+            current = current.getSingleChild();
+            longestPrefix += current.getLetter();
+        }
+
+        return longestPrefix;
+    }
+
     public boolean find(String word) {
         Node current = root;
 
