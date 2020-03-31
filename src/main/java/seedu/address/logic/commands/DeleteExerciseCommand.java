@@ -4,14 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.exercise.Exercise;
-import seedu.address.model.exercise.UniqueExerciseList;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.UniqueExerciseList;
 
 /**
  * Deletes an {@code Exercise} identified using it's displayed index from the exercise list.
- * 
+ *
  * @author @yonggiee
  */
 public class DeleteExerciseCommand extends Command {
