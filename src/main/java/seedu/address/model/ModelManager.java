@@ -150,6 +150,9 @@ public class ModelManager implements Model {
 
     @Override
     public void updateClientViewIfApplicable(Client clientToEdit, Client editedClient) {
+        if (!clientInView.hasClientInView()) {
+            return;
+        }
         Client currentClientInView = clientInView.getClient();
         if (currentClientInView.equals(clientToEdit)) {
             clientInView.setClient(editedClient);
