@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -7,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import seedu.address.commons.trie.SimilarWordsResult;
 import seedu.address.logic.autocomplete.AutoComplete;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -59,10 +62,29 @@ public class CommandBox extends UiPart<Region> {
         // handles the tab key for auto complete
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, ke -> {
             if (ke.getCode() == KeyCode.TAB) {
-                String currCommand = commandTextField.getText();
-                commandTextField.setText(autoComplete.getLongestPrefix(currCommand));
-                commandTextField.positionCaret(CARET_POSITION_INDEX);
                 ke.consume();
+
+                String currCommand = commandTextField.getText();
+
+                // command has already been completed
+                if (currCommand.contains(" ")) {
+                    return;
+                }
+
+                SimilarWordsResult similarWords = autoComplete.listAllSimilarCommands(currCommand);
+                String longestPrefix = similarWords.longestPrefix;
+                ArrayList<String> similarCommands = similarWords.list;
+                if (similarCommands.isEmpty()) {
+                    resultDisplay.setFeedbackToUser("No commands found");
+                } else if (similarCommands.size() == 1) {
+                    resultDisplay.setFeedbackToUser("");
+                    commandTextField.setText(similarCommands.get(0));
+                    commandTextField.positionCaret(CARET_POSITION_INDEX);
+                } else {
+                    commandTextField.setText(longestPrefix);
+                    commandTextField.positionCaret(CARET_POSITION_INDEX);
+                    resultDisplay.setFeedbackToUser("Similar commands found: " + similarCommands.toString());
+                }
             }
         });
     }

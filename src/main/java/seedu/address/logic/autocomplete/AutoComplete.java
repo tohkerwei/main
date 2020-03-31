@@ -1,5 +1,8 @@
 package seedu.address.logic.autocomplete;
 
+import java.util.ArrayList;
+
+import seedu.address.commons.trie.SimilarWordsResult;
 import seedu.address.commons.trie.Trie;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -38,11 +41,7 @@ public class AutoComplete {
         trie.insert(ViewCommand.COMMAND_WORD);
     }
 
-    public String getLongestPrefix(String command) {
-        String result = trie.getLongestPrefix(command);
-        if (result.equals(EMPTY_STRING)) {
-            return command;
-        }
-        return result;
+    public SimilarWordsResult listAllSimilarCommands(String command) {
+        return trie.listAllSimilarWords(command);
     }
 }

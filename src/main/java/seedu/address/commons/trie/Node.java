@@ -25,6 +25,10 @@ public class Node {
         return children.get(letter);
     }
 
+    public HashMap<Character, Node> getChildren() {
+        return children;
+    }
+
     public boolean hasChild(char letter) {
         return children.containsKey(letter);
     }
