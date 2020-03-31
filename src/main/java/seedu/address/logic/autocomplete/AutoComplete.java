@@ -17,6 +17,8 @@ import seedu.address.logic.commands.ViewCommand;
  */
 public class AutoComplete {
 
+    private static final String EMPTY_STRING = "";
+
     private final Trie trie;
 
     public AutoComplete() {
@@ -37,6 +39,10 @@ public class AutoComplete {
     }
 
     public String getLongestPrefix(String command) {
-        return trie.getLongestPrefix(command);
+        String result = trie.getLongestPrefix(command);
+        if (result.equals(EMPTY_STRING)) {
+            return command;
+        }
+        return result;
     }
 }

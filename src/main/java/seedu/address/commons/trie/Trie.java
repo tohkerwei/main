@@ -5,6 +5,8 @@ package seedu.address.commons.trie;
  */
 public class Trie {
 
+    private static final String EMPTY_STRING = "";
+
     private Node root;
 
     public Trie() {
@@ -28,21 +30,21 @@ public class Trie {
     }
 
     /**
-     * Returns the longest prefix of the argument {@code word}, or {@code word}
-     * itself if no such prefix can be found.
+     * Returns the longest prefix of the argument {@code word}, or an empty string
+     * if no such prefix can be found.
      *
      * @param word String to search for
-     * @return the longest prefix or {@code word} if it does not exist
+     * @return the longest prefix or an empty string if it does not exist
      */
     public String getLongestPrefix(String word) {
-        String longestPrefix = "";
+        String longestPrefix = EMPTY_STRING;
 
         Node current = root;
 
         // this loop should end prematurely if word is not a proper substring
         for (char letter : word.toCharArray()) {
             if (!current.hasChild(letter)) {
-                return word;
+                return EMPTY_STRING;
             }
             current = current.getChild(letter);
             longestPrefix += current.getLetter();
