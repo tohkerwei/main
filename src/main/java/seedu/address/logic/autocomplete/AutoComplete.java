@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import seedu.address.commons.trie.SimilarWordsResult;
 import seedu.address.commons.trie.Trie;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddExerciseCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -48,6 +49,7 @@ public class AutoComplete {
      */
     private void addAllCommands() {
         trie.insert(AddCommand.COMMAND_WORD);
+        trie.insert(AddExerciseCommand.COMMAND_WORD);
         trie.insert(ClearCommand.COMMAND_WORD);
         trie.insert(DeleteCommand.COMMAND_WORD);
         trie.insert(EditCommand.COMMAND_WORD);
