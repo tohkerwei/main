@@ -24,13 +24,12 @@ public class AddExerciseCommand extends Command {
     public static final String COMMAND_WORD = "add-e";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exercise done by a client in FitBiz. "
-        + "Parameters: INDEX (must be a positive integer) "
         + PREFIX_NAME + "EXERCISE_NAME "
         + PREFIX_DATE + "DATE "
         + "[" + PREFIX_REPS + "REPS] "
         + "[" + PREFIX_EXERCISE_WEIGHT + "EXERCISE_WEIGHT] "
         + "[" + PREFIX_SETS + "SETS]\n"
-        + "Example: " + COMMAND_WORD + " 1 "
+        + "Example: "
         + PREFIX_NAME + "bench press "
         + PREFIX_DATE + "10-12-2020 "
         + PREFIX_REPS + "12 "
