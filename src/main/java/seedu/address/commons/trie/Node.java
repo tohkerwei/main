@@ -6,6 +6,10 @@ import java.util.HashMap;
  * This class represents a single node of the trie data structure.
  */
 public class Node {
+
+    private static final String EMPTY_STRING = "";
+    private static final int SIZE_OF_ONE = 1;
+
     private char letter;
     private Node parent;
     private HashMap<Character, Node> children;
@@ -37,7 +41,7 @@ public class Node {
     }
 
     public boolean hasSingleChild() {
-        return children.size() == 1;
+        return children.size() == SIZE_OF_ONE;
     }
 
     /**
@@ -75,7 +79,7 @@ public class Node {
      */
     public String constructWord() {
         if (parent == null) {
-            return "";
+            return EMPTY_STRING;
         }
         return parent.constructWord() + this.getLetter();
     }
