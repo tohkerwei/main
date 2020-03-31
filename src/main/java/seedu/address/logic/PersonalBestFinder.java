@@ -8,7 +8,11 @@ import seedu.address.model.exercise.UniqueExerciseList;
 import java.util.HashMap;
 
 public class PersonalBestFinder {
-    
+
+    public PersonalBestFinder() {
+
+    }
+
     // create a new hashmap of personal bests when view-c is called
     public HashMap<ExerciseName, Exercise> createPbList(Client clientInView) {
         UniqueExerciseList exerciseList = clientInView.getExerciseList();        
@@ -23,7 +27,7 @@ public class PersonalBestFinder {
 
             if (pbTable.containsKey(name)) {
                 pbWeight = Integer.parseInt(pbTable.get(name).getExerciseWeight().toString());
-                
+
                 if (pbWeight < weight) {
                     pbTable.put(name, ex);
                 }
@@ -33,9 +37,21 @@ public class PersonalBestFinder {
         }
         return pbTable;
     }
-    
-    // update personal best hashmap if view-c is called
-    public void updatePersonalBest() {
 
+    // update personal best hashmap if add-e is called
+    public void updatePersonalBest(HashMap<ExerciseName, Exercise> pbTable, Exercise toAdd) {
+        ExerciseName name = toAdd.getExerciseName();
+        int weight = Integer.parseInt(toAdd.getExerciseWeight().toString());
+        int pbWeight;
+
+        if (pbTable.containsKey(name)) {
+            pbWeight = Integer.parseInt(pbTable.get(name).getExerciseWeight().toString());
+
+                if (pbWeight < weight) {
+                    pbTable.put(name, toAdd);
+                }
+        } else {
+            pbTable.put(name, toAdd);
+        }
     }
 }
