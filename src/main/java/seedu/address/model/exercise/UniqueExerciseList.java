@@ -57,7 +57,7 @@ public class UniqueExerciseList implements Iterable<Exercise> {
     /**
      * Inserts an exercise to the list while ensuring list is sorted by the exercise
      * dates.
-     * 
+     *
      * <p>
      * The exercise must not already exist in the list. This basically does
      * insertion sort based on the fact that the list must already be sorted in the
