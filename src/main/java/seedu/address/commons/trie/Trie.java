@@ -8,16 +8,6 @@ import java.util.Stack;
  */
 public class Trie {
 
-    private final static class LongestPrefixResult {
-        public final String word;
-        public final Node node;
-
-        public LongestPrefixResult(String word, Node node) {
-            this.word = word;
-            this.node = node;
-        }
-    }
-
     private static final String EMPTY_STRING = "";
 
     private Node root;
@@ -33,7 +23,7 @@ public class Trie {
             if (current.hasChild(letter)) {
                 current = current.getChild(letter);
             } else {
-                Node newChild = new Node(letter);
+                Node newChild = new Node(letter, current);
                 current.addChild(letter, newChild);
                 current = newChild;
             }
@@ -49,61 +39,55 @@ public class Trie {
      * @param word String to search for
      * @return the longest prefix or an empty string if it does not exist
      */
-    private LongestPrefixResult getLongestPrefix(String word) {
-        String longestPrefix = EMPTY_STRING;
-
+    private Node getLongestPrefixNode(String word) {
         Node current = root;
 
         // this loop should end prematurely if word is not a proper substring
         for (char letter : word.toCharArray()) {
             if (!current.hasChild(letter)) {
-                return new LongestPrefixResult(EMPTY_STRING, null);
+                return null;
             }
             current = current.getChild(letter);
-            longestPrefix += current.getLetter();
         }
 
         while (current.hasSingleChild()) {
             current = current.getSingleChild();
-            longestPrefix += current.getLetter();
         }
 
-        return new LongestPrefixResult(longestPrefix, current);
+        return current;
     }
 
     public SimilarWordsResult listAllSimilarWords(String word) {
-        LongestPrefixResult longestPrefix = getLongestPrefix(word);
+        Node longestPrefixNode = getLongestPrefixNode(word);
 
         ArrayList<String> list = new ArrayList<>();
-        Node subtrie = longestPrefix.node;
+        Node subtrie = longestPrefixNode;
 
         // case 1: longest prefix does not exist
         if (subtrie == null) {
-            return new SimilarWordsResult(longestPrefix.word, list);
+            return new SimilarWordsResult(EMPTY_STRING, list);
         }
 
-        // case 2: longest prefix is actually a completed word
+        // case 2: longest prefix is actually the completed word
+        String longestPrefixString = longestPrefixNode.constructWord();
         if (subtrie.isWordEnd()) {
-            list.add(longestPrefix.word);
-            return new SimilarWordsResult(longestPrefix.word, list);
+            list.add(longestPrefixString);
+            return new SimilarWordsResult(longestPrefixString, list);
         }
 
         // case 3: longest prefix is not a completed word
         // dfs approach
         Stack<Node> stack = new Stack<>();
-        stack.addAll(subtrie.getChildren().values());
-        String currWord = longestPrefix.word;
+        stack.push(subtrie);
         while (!stack.isEmpty()) {
-            Node curr = stack.pop();
-            currWord += curr.getLetter();
-            if (curr.isWordEnd()) {
-                list.add(currWord);
-                currWord = longestPrefix.word; // reset currWord
+            Node current = stack.pop();
+            if (current.isWordEnd()) {
+                list.add(current.constructWord());
             } else {
-                stack.addAll(curr.getChildren().values());
+                stack.addAll(current.getChildren().values());
             }
         }
 
-        return new SimilarWordsResult(longestPrefix.word, list);
+        return new SimilarWordsResult(longestPrefixString, list);
     }
 }

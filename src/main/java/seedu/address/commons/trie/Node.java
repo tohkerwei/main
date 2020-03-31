@@ -7,16 +7,19 @@ import java.util.HashMap;
  */
 public class Node {
     private char letter;
+    private Node parent;
     private HashMap<Character, Node> children;
     private boolean isWordEnd;
 
     public Node() {
         children = new HashMap<>();
         isWordEnd = false;
+        parent = null;
     }
 
-    public Node(char letter) {
+    public Node(char letter, Node parent) {
         this.letter = letter;
+        this.parent = parent;
         children = new HashMap<>();
         isWordEnd = false;
     }
@@ -63,5 +66,12 @@ public class Node {
 
     public char getLetter() {
         return letter;
+    }
+
+    public String constructWord() {
+        if (parent == null) {
+            return "";
+        }
+        return parent.constructWord() + this.getLetter();
     }
 }

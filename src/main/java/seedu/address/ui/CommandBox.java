@@ -39,7 +39,7 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         this.resultDisplay = resultDisplay;
         commandHistory = new CommandHistory();
-        autoComplete = new AutoComplete();
+        autoComplete = new AutoComplete(commandTextField, resultDisplay);
 
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
@@ -63,28 +63,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, ke -> {
             if (ke.getCode() == KeyCode.TAB) {
                 ke.consume();
-
-                String currCommand = commandTextField.getText();
-
-                // command has already been completed
-                if (currCommand.contains(" ")) {
-                    return;
-                }
-
-                SimilarWordsResult similarWords = autoComplete.listAllSimilarCommands(currCommand);
-                String longestPrefix = similarWords.longestPrefix;
-                ArrayList<String> similarCommands = similarWords.list;
-                if (similarCommands.isEmpty()) {
-                    resultDisplay.setFeedbackToUser("No commands found");
-                } else if (similarCommands.size() == 1) {
-                    resultDisplay.setFeedbackToUser("");
-                    commandTextField.setText(similarCommands.get(0));
-                    commandTextField.positionCaret(CARET_POSITION_INDEX);
-                } else {
-                    commandTextField.setText(longestPrefix);
-                    commandTextField.positionCaret(CARET_POSITION_INDEX);
-                    resultDisplay.setFeedbackToUser("Similar commands found: " + similarCommands.toString());
-                }
+                autoComplete.execute();
             }
         });
     }
