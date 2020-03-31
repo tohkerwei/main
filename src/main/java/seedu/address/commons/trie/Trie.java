@@ -1,5 +1,8 @@
 package seedu.address.commons.trie;
 
+/**
+ * This class represents the trie data structure.
+ */
 public class Trie {
 
     private Node root;
@@ -24,6 +27,13 @@ public class Trie {
         current.setIsWordEnd(true);
     }
 
+    /**
+     * Returns the longest prefix of the argument {@code word}, or {@code word}
+     * itself if no such prefix can be found.
+     *
+     * @param word String to search for
+     * @return the longest prefix or {@code word} if it does not exist
+     */
     public String getLongestPrefix(String word) {
         String longestPrefix = "";
 
@@ -32,7 +42,7 @@ public class Trie {
         // this loop should end prematurely if word is not a proper substring
         for (char letter : word.toCharArray()) {
             if (!current.hasChild(letter)) {
-                return "";
+                return word;
             }
             current = current.getChild(letter);
             longestPrefix += current.getLetter();

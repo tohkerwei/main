@@ -2,6 +2,9 @@ package seedu.address.commons.trie;
 
 import java.util.HashMap;
 
+/**
+ * This class represents a single node of the trie data structure.
+ */
 public class Node {
     private char letter;
     private HashMap<Character, Node> children;
