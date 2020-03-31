@@ -82,7 +82,7 @@ public class ExerciseBuilder {
         this.exerciseDate = new ExerciseDate(exerciseDate);
         return this;
     }
-    
+
     /**
      * Builds and returns the Exercise.
      */

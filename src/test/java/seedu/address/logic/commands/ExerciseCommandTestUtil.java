@@ -18,7 +18,7 @@ public class ExerciseCommandTestUtil {
     public static final String VALID_EXERCISE_SETS_PUSHUP = "5";
     public static final String VALID_EXERCISE_SETS_BENCH = "4";
     public static final String VALID_EXERCISE_WEIGHT_PUSHUP = "";
-    public static final String VALID_EXERCISE_WEIGHT_BENCH= "100";
+    public static final String VALID_EXERCISE_WEIGHT_BENCH = "100";
     public static final String VALID_EXERCISE_DATE_PUSHUP = "12-12-2012";
     public static final String VALID_EXERCISE_DATE_BENCH = "13-01-2014";
 
@@ -28,9 +28,9 @@ public class ExerciseCommandTestUtil {
         " " + PREFIX_NAME + VALID_EXERCISE_NAME_BENCH;
     public static final String EXERCISE_REPS_DESC_PUSHUP =
         " " + PREFIX_REPS + VALID_EXERCISE_REPS_PUSHUP;
-    public static final String EXERCISE_REPS_DESC_BENCH = 
+    public static final String EXERCISE_REPS_DESC_BENCH =
         " " + PREFIX_REPS + VALID_EXERCISE_REPS_BENCH;
-    public static final String EXERCISE_SETS_DESC_PUSHUP = 
+    public static final String EXERCISE_SETS_DESC_PUSHUP =
         " " + PREFIX_SETS + VALID_EXERCISE_SETS_PUSHUP;
     public static final String EXERCISE_SETS_DESC_BENCH =
         " " + PREFIX_SETS + VALID_EXERCISE_SETS_BENCH;
@@ -38,7 +38,7 @@ public class ExerciseCommandTestUtil {
         " " + PREFIX_EXERCISE_WEIGHT + VALID_EXERCISE_WEIGHT_PUSHUP;
     public static final String EXERCISE_WEIGHT_DESC_BENCH =
         " " + PREFIX_EXERCISE_WEIGHT + VALID_EXERCISE_WEIGHT_BENCH;
-    public static final String EXERCISE_DATE_DESC_PUSHUP = 
+    public static final String EXERCISE_DATE_DESC_PUSHUP =
         " " + PREFIX_DATE + VALID_EXERCISE_DATE_PUSHUP;
     public static final String EXERCISE_DATE_DESC_BENCH =
         " " + PREFIX_DATE + VALID_EXERCISE_DATE_BENCH;
@@ -60,12 +60,12 @@ public class ExerciseCommandTestUtil {
     // public static final EditCommand.EditClientDescriptor DESC_AMY;
     // public static final EditCommand.EditClientDescriptor DESC_BOB;
 
-    
     // static {
     //     DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_PUSHUP).withPhone(VALID_PHONE_AMY)
     //             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
     //     DESC_BOB = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-    //             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+    //             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+    //             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
     //             .build();
     // }
     //

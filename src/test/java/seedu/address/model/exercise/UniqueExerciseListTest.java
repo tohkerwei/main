@@ -14,8 +14,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.exercise.exceptions.ExerciseNotFoundException;
 import seedu.address.model.exercise.exceptions.DuplicateExerciseException;
+import seedu.address.model.exercise.exceptions.ExerciseNotFoundException;
 import seedu.address.testutil.ExerciseBuilder;
 
 public class UniqueExerciseListTest {
@@ -28,18 +28,18 @@ public class UniqueExerciseListTest {
     }
 
     @Test
-    public void contains_ExerciseNotInList_returnsFalse() {
+    public void contains_exerciseNotInList_returnsFalse() {
         assertFalse(uniqueExerciseList.contains(PUSHUP));
     }
 
     @Test
-    public void contains_ExerciseInList_returnsTrue() {
+    public void contains_exerciseInList_returnsTrue() {
         uniqueExerciseList.add(PUSHUP);
         assertTrue(uniqueExerciseList.contains(PUSHUP));
     }
 
     @Test
-    public void contains_ExerciseWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_exerciseWithSameIdentityFieldsInList_returnsTrue() {
         uniqueExerciseList.add(PUSHUP);
         Exercise editedPushup = new ExerciseBuilder(PUSHUP).withExerciseSets(VALID_EXERCISE_SETS_BENCH).build();
         assertTrue(uniqueExerciseList.contains(editedPushup));
@@ -83,10 +83,10 @@ public class UniqueExerciseListTest {
     @Test
     public void setExercise_editedExerciseHasSameIdentity_success() {
         uniqueExerciseList.add(PUSHUP);
-        Exercise editedPUSHUP = new ExerciseBuilder(PUSHUP).withExerciseSets(VALID_EXERCISE_SETS_BENCH).build();
-        uniqueExerciseList.setExercise(PUSHUP, editedPUSHUP);
+        Exercise editedPushup = new ExerciseBuilder(PUSHUP).withExerciseSets(VALID_EXERCISE_SETS_BENCH).build();
+        uniqueExerciseList.setExercise(PUSHUP, editedPushup);
         UniqueExerciseList expectedUniqueExerciseList = new UniqueExerciseList();
-        expectedUniqueExerciseList.add(editedPUSHUP);
+        expectedUniqueExerciseList.add(editedPushup);
         assertEquals(expectedUniqueExerciseList, uniqueExerciseList);
     }
 
@@ -112,7 +112,7 @@ public class UniqueExerciseListTest {
     }
 
     @Test
-    public void remove_ExerciseDoesNotExist_throwsExerciseNotFoundException() {
+    public void remove_exerciseDoesNotExist_throwsExerciseNotFoundException() {
         assertThrows(ExerciseNotFoundException.class, () -> uniqueExerciseList.remove(PUSHUP));
     }
 
@@ -146,8 +146,8 @@ public class UniqueExerciseListTest {
     @Test
     public void setExercises_list_replacesOwnListWithProvidedList() {
         uniqueExerciseList.add(PUSHUP);
-        List<Exercise> ExerciseList = Collections.singletonList(BENCH);
-        uniqueExerciseList.setExercises(ExerciseList);
+        List<Exercise> exerciseList = Collections.singletonList(BENCH);
+        uniqueExerciseList.setExercises(exerciseList);
         UniqueExerciseList expectedUniqueExerciseList = new UniqueExerciseList();
         expectedUniqueExerciseList.add(BENCH);
         assertEquals(expectedUniqueExerciseList, uniqueExerciseList);
@@ -156,12 +156,13 @@ public class UniqueExerciseListTest {
     @Test
     public void setExercises_listWithDuplicateExercises_throwsDuplicateExerciseException() {
         List<Exercise> listWithDuplicateExercises = Arrays.asList(PUSHUP, PUSHUP);
-        assertThrows(DuplicateExerciseException.class, () -> uniqueExerciseList.setExercises(listWithDuplicateExercises));
+        assertThrows(DuplicateExerciseException.class, () ->
+            uniqueExerciseList.setExercises(listWithDuplicateExercises));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class,
-                () -> uniqueExerciseList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+            uniqueExerciseList.asUnmodifiableObservableList().remove(0));
     }
 }
