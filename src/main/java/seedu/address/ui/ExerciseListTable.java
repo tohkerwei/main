@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -27,6 +28,8 @@ public class ExerciseListTable extends UiPart<Region> {
     @FXML
     private TableView<Exercise> tableView;
     @FXML
+    private TableColumn<Exercise, String> id;
+    @FXML
     private TableColumn<Exercise, String> exerciseName;
     @FXML
     private TableColumn<Exercise, String> exerciseDate;
@@ -39,6 +42,11 @@ public class ExerciseListTable extends UiPart<Region> {
 
     public ExerciseListTable(ObservableList<Exercise> e) {
         super(FXML);
+        id.setCellValueFactory(data -> {
+            Exercise exercise = data.getValue();
+            int index = e.indexOf(exercise) + 1;
+            return new SimpleStringProperty(Integer.toString(index));
+        });
         exerciseName.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseName"));
         exerciseDate.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseDate"));
         exerciseSets.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseSets"));
