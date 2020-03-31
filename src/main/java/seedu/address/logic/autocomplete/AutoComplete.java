@@ -1,5 +1,7 @@
 package seedu.address.logic.autocomplete;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 
 import javafx.scene.control.TextField;
@@ -22,8 +24,11 @@ import seedu.address.ui.ResultDisplay;
  */
 public class AutoComplete {
 
+    public static final String FEEDBACK_EMPTY_STRING = "";
+    public static final String FEEDBACK_MULTIPLE_COMMANDS = "Commands found:\n";
+    public static final String FEEDBACK_NO_COMMANDS = "No commands found";
+
     private static final int CARET_POSITION_INDEX = Integer.MAX_VALUE;
-    private static final String EMPTY_STRING = "";
     private static final String WHITE_SPACE_STRING = " ";
 
     private final Trie trie;
@@ -31,6 +36,7 @@ public class AutoComplete {
     private final ResultDisplay resultDisplay;
 
     public AutoComplete(TextField commandTextField, ResultDisplay resultDisplay) {
+        requireAllNonNull(commandTextField, resultDisplay);
         trie = new Trie();
         this.commandTextField = commandTextField;
         this.resultDisplay = resultDisplay;
@@ -68,15 +74,15 @@ public class AutoComplete {
         String longestPrefix = similarWords.longestPrefixString;
         ArrayList<String> similarCommands = similarWords.similarWords;
         if (similarCommands.isEmpty()) {
-            resultDisplay.setFeedbackToUser("No commands found");
+            resultDisplay.setFeedbackToUser(FEEDBACK_NO_COMMANDS);
         } else if (similarCommands.size() == 1) {
-            resultDisplay.setFeedbackToUser(EMPTY_STRING);
+            resultDisplay.setFeedbackToUser(FEEDBACK_EMPTY_STRING);
             commandTextField.setText(similarCommands.get(0));
             commandTextField.positionCaret(CARET_POSITION_INDEX);
         } else {
             commandTextField.setText(longestPrefix);
             commandTextField.positionCaret(CARET_POSITION_INDEX);
-            resultDisplay.setFeedbackToUser("Commands found:\n" + similarCommands.toString());
+            resultDisplay.setFeedbackToUser(FEEDBACK_MULTIPLE_COMMANDS + similarCommands.toString());
         }
     }
 }
