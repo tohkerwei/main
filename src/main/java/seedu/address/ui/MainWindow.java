@@ -25,7 +25,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static final String GOOGLE_FONT_URL = 
+    private static final String GOOGLE_FONT_URL =
             "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Ubuntu+Mono&display=swap";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
