@@ -36,7 +36,11 @@ public class ScheduleCard extends UiPart<Region> {
         this.scheduleDay = scheduleDay;
         name.setText(scheduleDay.getDayName());
         scheduleList.setText(scheduleDay.getDayScheduleString());
+        scheduleList.setPrefWidth(200);
+        scheduleList.setPrefHeight(60 + scheduleDay.getNumberOfSchedules() * 15);
+        cardPane.setPrefHeight(75 + scheduleDay.getNumberOfSchedules() * 15);
     }
+
 
     @Override
     public boolean equals(Object other) {

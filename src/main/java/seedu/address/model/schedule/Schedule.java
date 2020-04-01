@@ -123,6 +123,11 @@ public class Schedule implements Comparable<Schedule> {
         return builder.toString();
     }
 
+    public String getTimeFrame() {
+        String timeFrame = getStartTime().toString() + " - " + getEndTime().toString();
+        return timeFrame;
+    }
+
     @Override
     public int compareTo(Schedule other) {
         Schedule otherSchedule = other;

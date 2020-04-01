@@ -17,7 +17,7 @@ public class ScheduleDay {
     public ScheduleDay(ArrayList<Schedule> scheduleList, String dayName) {
         this.scheduleList = scheduleList;
         this.scheduleList.sort((o1, o2) ->
-                o2.getStartTime().getDirectTimeInt() - o1.getStartTime().getDirectTimeInt());
+                o1.getStartTime().getDirectTimeInt() - o2.getStartTime().getDirectTimeInt());
         this.dayName = dayName;
     }
 
@@ -78,9 +78,13 @@ public class ScheduleDay {
     public String getDayScheduleString() {
         final StringBuilder sb = new StringBuilder();
         for (Schedule s: scheduleList) {
-            sb.append(s.toString() + "\n");
+            sb.append(s.getTimeFrame() + "\n");
         }
         System.out.println(sb.toString() + "im here");
         return sb.toString();
+    }
+
+    public int getNumberOfSchedules() {
+        return this.scheduleList.size();
     }
 }
