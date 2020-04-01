@@ -200,10 +200,9 @@
   -fx-text-fill: white;
 }
 
-/*
 .scroll-bar .thumb {
-  -fx-background-color: #ECEFF1;
-  -fx-background-insets: 10;
+  -fx-background-color: #9E9E9E;
+  -fx-background-insets: 3;
 }
 
 .scroll-bar .increment-button,
@@ -219,14 +218,13 @@
 
 .scroll-bar:vertical .increment-arrow,
 .scroll-bar:vertical .decrement-arrow {
-  -fx-padding: 1 8 1 8;
+  -fx-padding: 0 5 0 5;
 }
 
 .scroll-bar:horizontal .increment-arrow,
 .scroll-bar:horizontal .decrement-arrow {
-  -fx-padding: 8 1 8 1;
+  -fx-padding: 5 0 5 0;
 }
-*/
 
 #commandTextField {
   -fx-font-size: 15pt;
