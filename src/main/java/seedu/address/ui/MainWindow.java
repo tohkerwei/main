@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -24,6 +25,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String GOOGLE_FONT_URL = 
+            "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Ubuntu+Mono&display=swap";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -76,6 +79,9 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        // set the font
+        setFont(primaryStage);
+
         helpWindow = new HelpWindow();
     }
 
@@ -85,6 +91,12 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+    }
+
+    private void setFont(Stage stage) {
+        Scene scene = primaryStage.getScene();
+
+        scene.getStylesheets().add(GOOGLE_FONT_URL);
     }
 
     /**
