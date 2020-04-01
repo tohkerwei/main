@@ -37,8 +37,12 @@
   -fx-background-color: -fx-focus-color;
 }
 
+/* clientView is the id of a scroll-pane (which has some quirks) */
 #clientView {
-  -fx-background-color: #FAFAFA;
+  /* this sets the background color */
+  -fx-background: #FAFAFA;
+  /* this sets the border color */
+  -fx-background-color: transparent; /* transparent will prevent focus style */
   -fx-effect: dropshadow(gaussian, #9E9E9E, 8, 0, 0, 5);
 }
 
@@ -134,7 +138,7 @@
   -fx-border-color: #9E9E9E;
 }
 
-/* 
+/*
 .button {
   -fx-padding: 5 22 5 22;
   -fx-border-color: #e2e2e2;
