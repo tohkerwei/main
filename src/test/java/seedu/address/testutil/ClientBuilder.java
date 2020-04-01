@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +16,6 @@ import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.exercise.UniqueExerciseList;
-import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -101,7 +99,7 @@ public class ClientBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Client} that we are building.
      */
-    public ClientBuilder withTags(String ... tags) {
+    public ClientBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -181,13 +179,17 @@ public class ClientBuilder {
     /**
      * Parses the {@code sports} into a {@code Set<Sport>} and set it to the {@code Client} that we are building.
      */
-    public ClientBuilder withSports(String ... sports) {
+    public ClientBuilder withSports(String... sports) {
         this.sports = SampleDataUtil.getSportSet(sports);
         return this;
     }
 
+    /**
+     * Sets the {@code scheduleList} to the {@code Client} that we are building.
+     */
     public ClientBuilder withScheduleList(ScheduleList scheduleList) {
-        this.scheduleList = new ScheduleList();
+        this.scheduleList = scheduleList;
+        return this;
     }
 
     /**
@@ -195,7 +197,7 @@ public class ClientBuilder {
      */
     public Client build() {
         return new Client(name, gender, phone, email, address, tags, birthday, currentWeight,
-                targetWeight, height, remark, sports, exerciseList);
+                targetWeight, height, remark, sports, exerciseList, scheduleList);
     }
 
 }
