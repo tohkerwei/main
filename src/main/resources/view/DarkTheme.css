@@ -1,42 +1,6 @@
 .root {
   -fx-font-family: "Open Sans", sans-serif;
-}
-
-.background {
-  -fx-background-color: derive(#1d1d1d, 20%);
-  background-color: #383838; /* Used in the default.html file */
-}
-
-.label {
-  -fx-font-size: 11pt;
-  -fx-text-fill: #555555;
-  -fx-opacity: 0.9;
-}
-
-.label-bright {
-  -fx-font-size: 11pt;
-  -fx-text-fill: white;
-  -fx-opacity: 1;
-}
-
-.label-header {
-  -fx-font-size: 32pt;
-  -fx-text-fill: white;
-  -fx-opacity: 1;
-}
-
-.text-field {
-  -fx-font-size: 12pt;
-}
-
-.tab-pane {
-  -fx-padding: 0 0 0 1;
-}
-
-.tab-pane .tab-header-area {
-  -fx-padding: 0 0 0 0;
-  -fx-min-height: 0;
-  -fx-max-height: 0;
+  -fx-background-color: #282a36;
 }
 
 .table-view {
@@ -71,17 +35,6 @@
 
 .table-view:focused .table-row-cell:filled:focused:selected {
   -fx-background-color: -fx-focus-color;
-}
-
-.split-pane:horizontal .split-pane-divider {
-  -fx-background-color: derive(#1d1d1d, 20%);
-  -fx-border-color: transparent transparent transparent #4d4d4d;
-}
-
-.split-pane {
-  -fx-border-radius: 1;
-  -fx-border-width: 1;
-  -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .list-view {
@@ -137,10 +90,6 @@
   -fx-text-fill: #ffffff;
 }
 
-.stack-pane {
-  -fx-background-color: derive(#1d1d1d, 20%);
-}
-
 .pane-with-border {
   -fx-background-color: derive(#1d1d1d, 20%);
   -fx-border-color: derive(#1d1d1d, 10%);
@@ -175,16 +124,6 @@
 
 .status-bar-with-border .label {
   -fx-text-fill: white;
-}
-
-.grid-pane {
-  -fx-background-color: derive(#1d1d1d, 30%);
-  -fx-border-color: derive(#1d1d1d, 30%);
-  -fx-border-width: 1px;
-}
-
-.grid-pane .stack-pane {
-  -fx-background-color: derive(#1d1d1d, 30%);
 }
 
 .context-menu {
@@ -330,8 +269,9 @@
   -fx-border-color: #383838 #383838 #ffffff #383838;
   -fx-border-insets: 0;
   -fx-border-width: 1;
-  -fx-font-size: 13pt;
+  -fx-font-size: 15pt;
   -fx-text-fill: white;
+  -fx-font-family: "Ubuntu Mono", monospace
 }
 
 #filterField,
@@ -361,6 +301,10 @@
 
 #clientView {
   -fx-background-color: #3c3e3f;
+}
+
+#name, #id {
+  -fx-font-weight: 700
 }
 
 .pane-with-no-border {
