@@ -174,6 +174,11 @@ public class AddCommandTest {
         public void updateClientViewIfApplicable(Client clientToEdit, Client editedClient) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteExercise(Exercise exercise) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -13,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.UniqueExerciseList;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.ScheduleDay;
 import seedu.address.model.schedule.ScheduleList;
@@ -175,6 +177,24 @@ public class ModelManager implements Model {
         }
         return ScheduleDay.weeklySchedule(fullScheduleList);
     };
+  
+    //=========== Exercise ================================================================================
+
+    @Override
+    public void deleteExercise (Exercise exercise) {
+        Client clientToEdit = getClientInView();
+        UniqueExerciseList clientToEditExerciseList = clientToEdit.getExerciseList();
+
+        // mutates the list belonging to the client by removing the exercise
+        clientToEditExerciseList.remove(exercise);
+
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
+            clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
+            clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
+            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList);
+
+        setClient(clientToEdit, editedClient);
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -192,7 +212,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredClients.equals(other.filteredClients);
+                && filteredClients.equals(other.filteredClients)
+                && clientInView.equals(other.clientInView);
     }
 
 }

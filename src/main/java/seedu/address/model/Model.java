@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.exercise.Exercise;
 import seedu.address.model.schedule.ScheduleDay;
 
 /**
@@ -129,5 +130,12 @@ public interface Model {
      *
      * @return
      */
-    ObservableList<ScheduleDay> getScheduleDayList();
+     ObservableList<ScheduleDay> getScheduleDayList();
+  
+     /**
+     * Deletes the given exercise in clientInView exercise list.
+     * There must be client in clientInView.
+     */
+    void deleteExercise (Exercise exercise);
+
 }

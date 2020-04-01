@@ -161,6 +161,13 @@ public class UniqueExerciseList implements Iterable<Exercise> {
         return internalList.iterator();
     }
 
+    /**
+     * Return size of the exercise list.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
