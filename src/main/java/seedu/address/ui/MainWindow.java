@@ -18,8 +18,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar
+ * and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
 
@@ -32,6 +32,8 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private ClientListPanel clientListPanel;
+    private ClientViewDisplay clientViewDisplay;
+    private SchedulePanel schedulePanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +45,18 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane clientListPanelPlaceholder;
+
+    @FXML
+    private StackPane clientViewPanelPlaceholder;
+
+    @FXML
+    private StackPane exercisePbTablePlaceholder;
+
+    @FXML
+    private StackPane exerciseListTablePlaceholder;
+
+    @FXML
+    private StackPane schedulePanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -83,18 +97,18 @@ public class MainWindow extends UiPart<Stage> {
 
         /*
          * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
+         * https://bugs.openjdk.java.net/browse/JDK-8131666 is fixed in later version of
+         * SDK.
          *
          * According to the bug report, TextInputControl (TextField, TextArea) will
          * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
+         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will not
+         * work when the focus is in them because the key event is consumed by the
+         * TextInputControl(s).
          *
          * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
+         * help window purposely so to support accelerators even when focus is in
+         * CommandBox or ResultDisplay.
          */
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
@@ -111,13 +125,18 @@ public class MainWindow extends UiPart<Stage> {
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
+        clientViewDisplay = new ClientViewDisplay();
+
+        schedulePanel = new SchedulePanel(logic.getFilteredClientList());
+        schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, resultDisplay);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -161,8 +180,21 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public ClientListPanel getClientListPanel() {
-        return clientListPanel;
+    /**
+     * Updates {@code clientInView}.
+     *
+     * @author @yonggiee
+     */
+    private void refreshClientInViewDisplay() {
+        clientViewDisplay.update(logic.getClientInView());
+
+        ClientView clientView = clientViewDisplay.getClientView();
+        clientViewPanelPlaceholder.getChildren().clear();
+        clientViewPanelPlaceholder.getChildren().add(clientView.getRoot());
+
+        ExerciseListTable exerciseListTable = clientViewDisplay.getExerciseListTable();
+        exerciseListTablePlaceholder.getChildren().clear();
+        exerciseListTablePlaceholder.getChildren().add(exerciseListTable.getRoot());
     }
 
     /**
@@ -175,6 +207,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (logic.hasClientInView()) {
+                refreshClientInViewDisplay();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

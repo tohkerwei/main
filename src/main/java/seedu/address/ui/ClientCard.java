@@ -35,23 +35,11 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
     private Label gender;
     @FXML
     private Label birthday;
     @FXML
-    private Label currentWeight;
-    @FXML
-    private Label targetWeight;
-    @FXML
-    private Label height;
-    @FXML
-    private Label remark;
-    @FXML
-    private FlowPane sports;
+    private Label sports;
     @FXML
     private FlowPane tags;
 
@@ -64,14 +52,6 @@ public class ClientCard extends UiPart<Region> {
         String phoneAttributeForDisplay = getAttributeForDisplay(client.getPhone().value);
         String fullPhoneForDisplay = phoneLabel + phoneAttributeForDisplay;
         phone.setText(fullPhoneForDisplay);
-        String addressLabel = "Address: ";
-        String addressAttributeForDisplay = getAttributeForDisplay(client.getAddress().value);
-        String fullAddressForDisplay = addressLabel + addressAttributeForDisplay;
-        address.setText(fullAddressForDisplay);
-        String emailLabel = "Email: ";
-        String emailAttributeForDisplay = getAttributeForDisplay(client.getEmail().value);
-        String fullEmailForDisplay = emailLabel + emailAttributeForDisplay;
-        email.setText(fullEmailForDisplay);
         String genderLabel = "Gender: ";
         String genderAttributeForDisplay = getAttributeForDisplay(client.getGender().value);
         String fullGenderForDisplay = genderLabel + genderAttributeForDisplay;
@@ -80,28 +60,13 @@ public class ClientCard extends UiPart<Region> {
         String birthdayAttributeForDisplay = getAttributeForDisplay(client.getBirthdayString());
         String fullBirthdayForDisplay = birthdayLabel + birthdayAttributeForDisplay;
         birthday.setText(fullBirthdayForDisplay);
-        String heightLabel = "Height: ";
-        String heightAttributeForDisplay = getAttributeForDisplay(client.getHeight().value);
-        String fullHeightForDisplay = heightLabel + heightAttributeForDisplay;
-        height.setText(fullHeightForDisplay);
-        String currentWeightLabel = "Current Weight: ";
-        String currentWeightAttributeForDisplay = getAttributeForDisplay(client.getCurrentWeight().value);
-        String fullCurrentWeightForDisplay = currentWeightLabel + currentWeightAttributeForDisplay;
-        currentWeight.setText(fullCurrentWeightForDisplay);
-        String targetWeightLabel = "Target Weight: ";
-        String targetWeightAttributeForDisplay = getAttributeForDisplay(client.getTargetWeight().value);
-        String fullTargetWeightForDisplay = targetWeightLabel + targetWeightAttributeForDisplay;
-        targetWeight.setText(fullTargetWeightForDisplay);
-        String remarkLabel = "Remark: ";
-        String remarkAttributeForDisplay = getAttributeForDisplay(client.getRemark().value);
-        String fullRemarkForDisplay = remarkLabel + remarkAttributeForDisplay;
-        remark.setText(fullRemarkForDisplay);
+        String sportsLabel = "Sports: ";
+        String sportsAttributeForDisplay = getAttributeForDisplay(client.getSportsString());
+        String fullSportsForDisplay = sportsLabel + sportsAttributeForDisplay;
+        sports.setText(fullSportsForDisplay);
         client.getTags().stream()
             .sorted(Comparator.comparing(tag -> tag.tagName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        client.getSports().stream()
-            .sorted(Comparator.comparing(sport -> sport.sportName))
-            .forEach(sport -> sports.getChildren().add(new Label(sport.sportName)));
     }
 
     @Override
