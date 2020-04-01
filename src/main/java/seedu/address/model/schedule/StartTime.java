@@ -19,7 +19,6 @@ public class StartTime extends Time {
      *
      * @param time A valid start time in the form HHMM
      */
-  
     public StartTime(String time) {
         super(time);
         this.value = formatTime(time);

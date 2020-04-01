@@ -1,6 +1,8 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,6 +20,7 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 
@@ -76,6 +79,14 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Sport::new)
                 .collect(Collectors.toSet());
+    }
+
+    public static ScheduleList getScheduleList(String... strings) {
+        ArrayList<Schedule> scheduleArrayList = Arrays.stream(strings).map(Schedule::stringToSchedule).
+                collect(Collectors.toCollection(ArrayList::new));
+        ScheduleList newScheduleList = new ScheduleList();
+        newScheduleList.setSchedule(scheduleArrayList);
+        return newScheduleList;
     }
 
 }

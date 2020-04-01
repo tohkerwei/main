@@ -24,10 +24,9 @@ public class ScheduleList {
         scheduleList = newScheduleList;
     }
 
-    public ScheduleList duplicate() {
-        ScheduleList copiedList = new ScheduleList();
-        copiedList.setSchedule();
-        return new ScheduleList();
+    public ArrayList<Schedule> getDuplicate() {
+        ArrayList<Schedule> duplicateArrayList = this.scheduleList;
+        return duplicateArrayList;
     }
 
     public void add(Schedule schedule) {

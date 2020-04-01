@@ -185,8 +185,9 @@ public class ClientBuilder {
         return this;
     }
 
-    public ClientBuilder withScheduleList(ScheduleList scheduleList) {
-        this.sche
+    public ClientBuilder withScheduleList(String ... scheduleList) {
+        this.scheduleList = SampleDataUtil.getScheduleList(scheduleList);
+        return this;
     }
 
     /**
