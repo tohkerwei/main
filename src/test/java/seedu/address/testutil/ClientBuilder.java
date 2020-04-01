@@ -186,6 +186,14 @@ public class ClientBuilder {
     }
 
     /**
+     * Adds the {@code exercise} to {@code UniqueExerciseList}.
+     */
+    public ClientBuilder withExercisesInExerciseList(Exercise exercise) {
+        this.exerciseList.add(exercise);
+        return this;
+    }
+
+    /**
      * Sets the {@code scheduleList} to the {@code Client} that we are building.
      */
     public ClientBuilder withScheduleList(ScheduleList scheduleList) {
