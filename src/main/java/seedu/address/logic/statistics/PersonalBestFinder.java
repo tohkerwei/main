@@ -16,12 +16,12 @@ public class PersonalBestFinder {
 
         for (Exercise ex : exerciseList) {
             ExerciseName name = ex.getExerciseName();
-            int weight = convertToInt(ex.getExerciseWeight().toString());
-            int reps = convertToInt(ex.getExerciseReps().toString());
+            int weight = ex.getExerciseWeight().convertToInt();
+            int reps = ex.getExerciseReps().convertToInt();
 
             if (pbTable.containsKey(name)) {
-                int pbWeight = convertToInt(pbTable.get(name).getExerciseWeight().toString());
-                int pbReps = convertToInt(pbTable.get(name).getExerciseReps().toString());
+                int pbWeight = pbTable.get(name).getExerciseWeight().convertToInt();
+                int pbReps = pbTable.get(name).getExerciseReps().convertToInt();
 
                 if (pbWeight < weight) {
                     pbTable.put(name, ex);
@@ -38,12 +38,7 @@ public class PersonalBestFinder {
         return pbTable;
     }
 
-    private static int convertToInt(String string) {
-        if (string.equals("")) {
-            return 0;
-        }
-        return Integer.parseInt(string);
-    }
+    
 
     private static boolean hasWeightOrReps(Exercise ex) {
         boolean hasWeight = !ex.getExerciseWeight().toString().equals("");
