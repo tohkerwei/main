@@ -15,6 +15,7 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
+import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.UniqueExerciseList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -177,6 +178,14 @@ public class ClientBuilder {
      */
     public ClientBuilder withSports(String ... sports) {
         this.sports = SampleDataUtil.getSportSet(sports);
+        return this;
+    }
+
+    /**
+     * Adds the {@code exercise} to {@code UniqueExerciseList}.
+     */
+    public ClientBuilder withExercisesInExerciseList(Exercise exercise) {
+        this.exerciseList.add(exercise);
         return this;
     }
 
