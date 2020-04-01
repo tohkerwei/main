@@ -10,6 +10,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.exercise.exceptions.DuplicateExerciseException;
 import seedu.address.model.exercise.exceptions.ExerciseNotFoundException;
 
@@ -40,6 +41,14 @@ public class UniqueExerciseList implements Iterable<Exercise> {
     public boolean contains(Exercise toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameExercise);
+    }
+
+    /**
+     * Returns {@code Exercise} specified by the {@code Index}.
+     */
+    public Exercise getExercise(Index index) {
+        requireNonNull(index);
+        return internalList.get(index.getZeroBased());
     }
 
     /**
@@ -150,6 +159,13 @@ public class UniqueExerciseList implements Iterable<Exercise> {
     @Override
     public Iterator<Exercise> iterator() {
         return internalList.iterator();
+    }
+
+    /**
+     * Return size of the exercise list.
+     */
+    public int size() {
+        return internalList.size();
     }
 
     @Override
