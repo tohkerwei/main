@@ -24,4 +24,11 @@ public class StartTime extends Time {
         super(time);
         this.value = formatTime(time);
         this.directTimeInt = Integer.parseInt(time);
+    }
+
+    @Override
+    public StartTime clone() {
+        String rawStartTime = this.value.substring(0,2) + this.value.substring(3);
+        return new StartTime(rawStartTime);
+    }
 }

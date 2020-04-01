@@ -25,5 +25,11 @@ public class EndTime extends Time{
         this.directTimeInt = Integer.parseInt(time);
     }
 
+    @Override
+    public EndTime clone() {
+        String rawStartTime = this.value.substring(0,2) + this.value.substring(3);
+        return new EndTime(rawStartTime);
+    }
+
 }
 

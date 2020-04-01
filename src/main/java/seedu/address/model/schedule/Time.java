@@ -60,6 +60,9 @@ public abstract class Time {
     }
 
     @Override
+    public abstract Time clone();
+
+    @Override
     public String toString() {
         return this.value;
     }
