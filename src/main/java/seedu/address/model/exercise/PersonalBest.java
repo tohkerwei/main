@@ -6,13 +6,14 @@ import seedu.address.logic.PersonalBestFinder;
 import seedu.address.model.client.Client;
 
 public class PersonalBest {
-    HashMap<ExerciseName, Exercise> pbTable;
-    Client client;
-    PersonalBestFinder personalBestFinder;
+    private HashMap<ExerciseName, Exercise> pbTable;
 
-    public PersonalBest(HashMap<ExerciseName, Exercise> pbTable, Client client) {
+    public PersonalBest(HashMap<ExerciseName, Exercise> pbTable) {
         this.pbTable = pbTable;
-        this.client = client;
+    }
+
+    public void createPbList(Client client) {
+        pbTable = PersonalBestFinder.createPbList(client);
     }
 
     @Override

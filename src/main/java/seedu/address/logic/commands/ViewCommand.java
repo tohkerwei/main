@@ -27,8 +27,6 @@ public class ViewCommand extends Command {
             + "the displayed client list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
-    
-    private PersonalBest personalBest;
 
     public static final String MESSAGE_SUCCESS = "Currently viewing: %1$s";
 
@@ -52,9 +50,10 @@ public class ViewCommand extends Command {
         Client client = lastShownList.get(index.getZeroBased());
         model.setClientInView(client);
 
-        personalBest = new PersonalBest(new HashMap<ExerciseName, Exercise>(), model.getClientInView());
+        PersonalBest personalBest = new PersonalBest(new HashMap<ExerciseName, Exercise>());
+        personalBest.createPbList(model.getClientInView());
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, client.getName().fullName));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, client.getName().fullName) + personalBest.toString());
     }
 
     @Override
