@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package seedu.address.logic.statistics;
 
 import java.util.HashMap;
 
@@ -39,11 +39,10 @@ public class PersonalBestFinder {
     }
 
     private static int convertToInt(String string) {
-        int result = 0;
-        if (!string.equals("")) {
-            result = Integer.parseInt(string);
+        if (string.equals("")) {
+            return 0;
         }
-        return result;
+        return Integer.parseInt(string);
     }
 
     private static boolean hasWeightOrReps(Exercise ex) {

@@ -2,7 +2,7 @@ package seedu.address.model.exercise;
 
 import java.util.HashMap;
 
-import seedu.address.logic.PersonalBestFinder;
+import seedu.address.logic.statistics.PersonalBestFinder;
 import seedu.address.model.client.Client;
 
 public class PersonalBest {
