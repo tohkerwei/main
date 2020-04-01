@@ -11,6 +11,10 @@ public class ScheduleList {
 
     private ArrayList<Schedule> scheduleList = new ArrayList<>();
 
+    public ScheduleList() {
+        this.scheduleList = new ArrayList<Schedule>();
+    }
+
     /**
      * Replaces the contents of this list with {@code exercises}. {@code exercises} must
      * not contain duplicate exercises.
@@ -18,6 +22,12 @@ public class ScheduleList {
     public void setSchedule(ArrayList<Schedule> newScheduleList) {
         requireAllNonNull(newScheduleList);
         scheduleList = newScheduleList;
+    }
+
+    public ScheduleList duplicate() {
+        ScheduleList copiedList = new ScheduleList();
+        copiedList.setSchedule();
+        return new ScheduleList()
     }
 
     public void add(Schedule schedule) {

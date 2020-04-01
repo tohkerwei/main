@@ -81,6 +81,19 @@ public class Schedule implements Comparable<Schedule> {
     }
 
     /**
+     * @author Dban1
+     * Returns a clone of Schedule.
+     * @return
+     */
+    @Override
+    public Schedule clone() {
+        Day clonedDay = this.day.clone();
+        StartTime clonedStartTime = this.startTime.clone();
+        EndTime clonedEndTime = this.endTime.clone();
+
+        return new Schedule(clonedDay, clonedStartTime, clonedEndTime);
+    }
+    /**
      * Returns true if both schedule have the same attribute values
      */
     @Override
@@ -137,7 +150,10 @@ public class Schedule implements Comparable<Schedule> {
             } else {
                 return 0;
             }
+        } else {
+            DayEnum.Weekday otherWeekday = otherSchedule.getDay().getDayEnum();
+            DayEnum.Weekday thisWeekday = this.getDay().getDayEnum();
+            return otherWeekday.compareTo(thisWeekday);
         }
-        return otherSt - thisSt;
     }
 }

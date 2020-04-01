@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -182,6 +183,10 @@ public class ClientBuilder {
     public ClientBuilder withSports(String ... sports) {
         this.sports = SampleDataUtil.getSportSet(sports);
         return this;
+    }
+
+    public ClientBuilder withScheduleList(ScheduleList scheduleList) {
+        this.sche
     }
 
     /**
