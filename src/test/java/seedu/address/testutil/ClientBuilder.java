@@ -16,7 +16,6 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
-import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -37,6 +36,7 @@ public class ClientBuilder {
     public static final String DEFAULT_HEIGHT = "175";
     public static final String DEFAULT_REMARK = "Some remarks";
     public static final String DEFAULT_SPORT = "Coding";
+    public static final String DEFAULT_SCHEDULE = "mon Time: 12:00 - 14:00";
 
     private Name name;
     private Phone phone;
@@ -84,7 +84,9 @@ public class ClientBuilder {
         targetWeight = clientToCopy.getTargetWeight();
         sports = new HashSet<>(clientToCopy.getSports());
         tags = new HashSet<>(clientToCopy.getTags());
-        scheduleList = clientToCopy.getScheduleList();
+        ScheduleList newScheduleList = new ScheduleList();
+        newScheduleList = clientToCopy.getScheduleList();
+        scheduleList = newScheduleList;
     }
 
     /**
@@ -192,7 +194,7 @@ public class ClientBuilder {
      */
     public Client build() {
         return new Client(name, gender, phone, email, address, tags, birthday, currentWeight,
-                targetWeight, height, remark, sports);
+                targetWeight, height, remark, sports, scheduleList);
     }
 
 }
