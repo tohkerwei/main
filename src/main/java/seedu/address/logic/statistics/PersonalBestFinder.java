@@ -38,8 +38,6 @@ public class PersonalBestFinder {
         return pbTable;
     }
 
-    
-
     private static boolean hasWeightOrReps(Exercise ex) {
         boolean hasWeight = !ex.getExerciseWeight().toString().equals("");
         boolean hasReps = !ex.getExerciseReps().toString().equals("");
