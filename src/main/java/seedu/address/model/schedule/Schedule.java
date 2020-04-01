@@ -30,20 +30,10 @@ public class Schedule implements Comparable<Schedule> {
     }
 
     /**
-     * Returns a schedule with a client name tagged to it.
-     * @param s
-     * @return
-     */
-    public void assignClientName(String s) {
-        this.clientName = s;
-    }
-
-    /**
      * @author Dban1
      * @param startTime
      * @param endTime
-     * @return
-     * Checks if end time is later than start time, assuming they are of valid format "hhmm". End time
+     * @return Checks if end time is later than start time, assuming they are of valid format "hhmm". End time
      * and start time cannot be simultaneously 0000. If end time is 0000, it is assumed as the next day.
      */
     public static boolean isValidTimeFrame(String startTime, String endTime) {
@@ -57,6 +47,17 @@ public class Schedule implements Comparable<Schedule> {
         }
         // Check if End time is later than Start time
         return (LocalTime.parse(endTime).compareTo(LocalTime.parse(startTime)) > 0);
+    }
+
+    /**
+     * @author @Dban1
+     * Returns a schedule with a client name tagged to it.
+     *
+     * @param s
+     * @return
+     */
+    public void assignClientName(String s) {
+        this.clientName = s;
     }
 
     public Day getDay() {
@@ -78,9 +79,9 @@ public class Schedule implements Comparable<Schedule> {
     }
 
     /**
+     * @return
      * @author Dban1
      * Returns a clone of Schedule.
-     * @return
      */
     @Override
     public Schedule clone() {
@@ -94,6 +95,7 @@ public class Schedule implements Comparable<Schedule> {
 
         return clonedSchedule;
     }
+
     /**
      * Returns true if both schedule have the same attribute values
      */

@@ -23,6 +23,11 @@ public class ScheduleList {
         scheduleList = newScheduleList;
     }
 
+    /**
+     * @author @Dban1
+     * Returns a deep copy of this ScheduleList.
+     * @return
+     */
     public ScheduleList duplicate() {
         ScheduleList copiedList = new ScheduleList();
         copiedList.setSchedule(this.scheduleList);

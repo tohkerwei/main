@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.ScheduleList;
 import seedu.address.testutil.ClientBuilder;
 
 public class AddCommandTest {

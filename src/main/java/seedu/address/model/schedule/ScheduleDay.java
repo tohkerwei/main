@@ -21,6 +21,12 @@ public class ScheduleDay {
         this.dayName = dayName;
     }
 
+    /**
+     * @author @Dban1
+     * Returns a list of weekly schedule
+     * @param allClientScheduleList
+     * @return
+     */
     public static ObservableList<ScheduleDay> weeklySchedule(ArrayList<ScheduleList> allClientScheduleList) {
         ObservableList<ScheduleDay> scheduleDayList = FXCollections.observableArrayList();
 
@@ -32,9 +38,9 @@ public class ScheduleDay {
         ArrayList<Schedule> saturdaySchedule = new ArrayList<>();
         ArrayList<Schedule> sundaySchedule = new ArrayList<>();
 
-        for(ScheduleList sl: allClientScheduleList) {
-            for(Schedule s: sl.getScheduleList()) {
-                switch(s.getDay().getDayEnum()) {
+        for (ScheduleList sl : allClientScheduleList) {
+            for (Schedule s : sl.getScheduleList()) {
+                switch (s.getDay().getDayEnum()) {
                 case MON:
                     mondaySchedule.add(s);
                     break;
@@ -55,6 +61,8 @@ public class ScheduleDay {
                     break;
                 case SUN:
                     sundaySchedule.add(s);
+                    break;
+                default:
                     break;
                 }
             }
@@ -77,7 +85,7 @@ public class ScheduleDay {
 
     public String getDayScheduleString() {
         final StringBuilder sb = new StringBuilder();
-        for (Schedule s: scheduleList) {
+        for (Schedule s : scheduleList) {
             sb.append(s.getTimeFrame() + " " + s.getClientName() + "\n");
         }
         System.out.println(sb.toString() + "im here");

@@ -2,7 +2,6 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -17,7 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.ScheduleDay;
-import seedu.address.model.schedule.ScheduleList;
 import seedu.address.storage.Storage;
 
 /**
@@ -90,5 +88,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<ScheduleDay> getScheduleDayList() { return model.getScheduleDayList(); }
+    public ObservableList<ScheduleDay> getScheduleDayList() {
+        return model.getScheduleDayList();
+    }
 }

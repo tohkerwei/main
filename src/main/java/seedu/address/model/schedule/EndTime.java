@@ -28,12 +28,6 @@ public class EndTime {
         this.directTimeInt = Integer.parseInt(endTime);
     }
 
-    @Override
-    public EndTime clone() {
-        String rawEndTime = this.value.substring(0,2) + this.value.substring(3);
-        return new EndTime(rawEndTime);
-    }
-
     /**
      * Checks if the input timing is of valid "HHMM" format.
      * * @param time
@@ -51,6 +45,12 @@ public class EndTime {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public EndTime clone() {
+        String rawEndTime = this.value.substring(0, 2) + this.value.substring(3);
+        return new EndTime(rawEndTime);
     }
 
     /**

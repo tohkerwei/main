@@ -93,7 +93,9 @@ public class Day {
         return value.toString();
     }
 
-    public Weekday getDayEnum() { return value; }
+    public Weekday getDayEnum() {
+        return value;
+    }
 
     @Override
     public String toString() {

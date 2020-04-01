@@ -139,7 +139,7 @@ class JsonAdaptedClient {
             modelExerciseList.add(ex.toModelType());
         }
         modelExerciseList.sortByExerciseDate(); // do a sanity presort to ensure initial list is sorted
-        
+
         final ScheduleList modelScheduleList = new ScheduleList();
         for (JsonAdaptedSchedule schedule : scheduleList) {
             modelScheduleList.add(schedule.toModelType());

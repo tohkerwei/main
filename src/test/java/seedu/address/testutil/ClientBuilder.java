@@ -187,7 +187,7 @@ public class ClientBuilder {
     }
 
     public ClientBuilder withScheduleList(ScheduleList scheduleList) {
-        this.sche
+        this.scheduleList = new ScheduleList();
     }
 
     /**

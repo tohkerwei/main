@@ -1,12 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -60,9 +58,6 @@ public class ScheduleCommand extends Command {
         }
 
         Client clientToEdit = lastShownList.get(index.getZeroBased());
-//        for (Schedule s: toAdd) {
-//            s.assignClientName(clientToEdit.getName().fullName);
-//        }
         ScheduleList newScheduleList = new ScheduleList();
         newScheduleList.setSchedule(toAdd);
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),

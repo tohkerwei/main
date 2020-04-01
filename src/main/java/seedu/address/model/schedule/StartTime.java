@@ -28,12 +28,6 @@ public class StartTime {
         this.directTimeInt = Integer.parseInt(startTime);
     }
 
-    @Override
-    public StartTime clone() {
-        String rawStartTime = this.value.substring(0,2) + this.value.substring(3);
-        return new StartTime(rawStartTime);
-    }
-
     /**
      * Checks if the input timing is of valid "HHMM" format.
      * * @param time
@@ -51,6 +45,12 @@ public class StartTime {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public StartTime clone() {
+        String rawStartTime = this.value.substring(0, 2) + this.value.substring(3);
+        return new StartTime(rawStartTime);
     }
 
     /**

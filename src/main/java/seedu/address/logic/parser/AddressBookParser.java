@@ -74,7 +74,7 @@ public class AddressBookParser {
 
         case AddExerciseCommand.COMMAND_WORD:
             return new AddExerciseCommandParser().parse(arguments);
-            
+
         case ScheduleCommand.COMMAND_WORD:
             return new ScheduleCommandParser().parse(arguments);
 
