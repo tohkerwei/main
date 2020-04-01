@@ -117,7 +117,7 @@
 }
 
 .menu-bar {
-  -fx-background-color: derive(#ECEFF1, 20%);
+  -fx-background-color: #E0E0E0;
 }
 
 .menu-bar .label {
