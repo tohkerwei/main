@@ -66,7 +66,6 @@ public class ScheduleCommand extends Command {
                 clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
                 clientToEdit.getRemark(), clientToEdit.getSports(), newScheduleList);
 
-
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
