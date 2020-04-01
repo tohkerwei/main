@@ -7,6 +7,8 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
+
+    // ======================= client =====================================
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
@@ -18,5 +20,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_SPORT = new Prefix("s/");
     public static final Prefix PREFIX_TARGET_WEIGHT = new Prefix("tw/");
     public static final Prefix PREFIX_CURRENT_WEIGHT = new Prefix("cw/");
+
+    //======================= exercise =====================================
+    public static final Prefix PREFIX_REPS = new Prefix("reps/");
+    public static final Prefix PREFIX_SETS = new Prefix("sets/");
+    public static final Prefix PREFIX_EXERCISE_WEIGHT = new Prefix("ew/");
+    public static final Prefix PREFIX_DATE = new Prefix("d/");
 
 }

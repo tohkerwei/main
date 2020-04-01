@@ -79,9 +79,11 @@ public class CommandHistory {
      */
     public void add(String command) {
         if (isEmptyString(command)) {
+            index = history.size();
             return;
         }
         if (isSimilarToMostRecentCommand(command)) {
+            index = history.size();
             return;
         }
         if (isAtMaxCapacity()) {

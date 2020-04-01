@@ -73,7 +73,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'FitBiz.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
@@ -83,8 +83,8 @@ task coverage(type: JacocoReport) {
     classDirectories.from files(sourceSets.main.output)
     executionData.from files(jacocoTestReport.executionData)
     afterEvaluate {
-        classDirectories.from files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: ['**/*.jar'])
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ['seedu/address/ui', 'seedu/address/model/util'])
         })
     }
     reports {
