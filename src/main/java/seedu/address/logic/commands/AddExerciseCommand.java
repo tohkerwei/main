@@ -74,7 +74,8 @@ public class AddExerciseCommand extends Command {
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
             clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
             clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
-            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList, clientToEdit.getPersonalBest());
+            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList, 
+            clientToEdit.getPersonalBest());
 
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);

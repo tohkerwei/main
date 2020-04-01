@@ -1,8 +1,6 @@
 package seedu.address.model.client;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
