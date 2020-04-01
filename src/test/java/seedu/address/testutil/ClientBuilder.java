@@ -17,6 +17,7 @@ import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.UniqueExerciseList;
+import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -51,6 +52,7 @@ public class ClientBuilder {
     private TargetWeight targetWeight;
     // TODO: change this later
     private UniqueExerciseList exerciseList = new UniqueExerciseList();
+    private ScheduleList scheduleList;
 
     public ClientBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -65,6 +67,7 @@ public class ClientBuilder {
         targetWeight = new TargetWeight(DEFAULT_TARGET_WEIGHT);
         tags = new HashSet<>();
         sports = new HashSet<>();
+        scheduleList = new ScheduleList();
     }
 
     /**
@@ -83,6 +86,7 @@ public class ClientBuilder {
         targetWeight = clientToCopy.getTargetWeight();
         sports = new HashSet<>(clientToCopy.getSports());
         tags = new HashSet<>(clientToCopy.getTags());
+        scheduleList = clientToCopy.getScheduleList();
     }
 
     /**
@@ -96,7 +100,7 @@ public class ClientBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Client} that we are building.
      */
-    public ClientBuilder withTags(String ... tags) {
+    public ClientBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -176,16 +180,16 @@ public class ClientBuilder {
     /**
      * Parses the {@code sports} into a {@code Set<Sport>} and set it to the {@code Client} that we are building.
      */
-    public ClientBuilder withSports(String ... sports) {
+    public ClientBuilder withSports(String... sports) {
         this.sports = SampleDataUtil.getSportSet(sports);
         return this;
     }
 
     /**
-     * Adds the {@code exercise} to {@code UniqueExerciseList}.
+     * Sets the {@code scheduleList} to the {@code Client} that we are building.
      */
-    public ClientBuilder withExercisesInExerciseList(Exercise exercise) {
-        this.exerciseList.add(exercise);
+    public ClientBuilder withScheduleList(ScheduleList scheduleList) {
+        this.scheduleList = scheduleList;
         return this;
     }
 
@@ -194,7 +198,7 @@ public class ClientBuilder {
      */
     public Client build() {
         return new Client(name, gender, phone, email, address, tags, birthday, currentWeight,
-                targetWeight, height, remark, sports, exerciseList);
+                targetWeight, height, remark, sports, exerciseList, scheduleList);
     }
 
 }

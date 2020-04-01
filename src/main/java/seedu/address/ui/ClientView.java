@@ -2,8 +2,8 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.client.Client;
 
@@ -27,7 +27,7 @@ public class ClientView extends UiPart<Region> {
     private Client client;
 
     @FXML
-    private HBox cardPane;
+    private ScrollPane scrollPane;
     @FXML
     private Label name;
     @FXML
