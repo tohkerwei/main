@@ -139,7 +139,7 @@ public class MainWindow extends UiPart<Stage> {
 
         clientViewDisplay = new ClientViewDisplay();
 
-        schedulePanel = new SchedulePanel(logic.getFilteredClientList());
+        schedulePanel = new SchedulePanel(logic.getScheduleDayList());
         schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
 
         resultDisplay = new ResultDisplay();

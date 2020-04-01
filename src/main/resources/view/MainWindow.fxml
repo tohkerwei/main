@@ -12,9 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="1000.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage"
-  xmlns="http://javafx.com/javafx/11.0.1"
-  xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="1000.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/bicep.png" />
   </icons>
@@ -64,9 +62,9 @@
               <children>
                 <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                   <children>
-                    <StackPane fx:id="clientViewPanelPlaceholder" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="321.0" styleClass="pane-with-no-border">
+                    <StackPane fx:id="clientViewPanelPlaceholder" minHeight="200.0" prefHeight="200.0" prefWidth="100.0" styleClass="pane-with-no-border" HBox.hgrow="ALWAYS">
                     </StackPane>
-                    <StackPane prefHeight="200.0" prefWidth="314.0" />
+                    <StackPane minHeight="200.0" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
                   </children>
                 </HBox>
                 <StackPane fx:id="exerciseListTablePlaceholder" layoutX="21.0" layoutY="21.0" minHeight="300.0" styleClass="pane-with-no-border" VBox.vgrow="ALWAYS">

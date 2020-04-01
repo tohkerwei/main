@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -9,6 +10,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleDay;
+import seedu.address.model.schedule.ScheduleList;
 
 /**
  * API of the Logic component
@@ -32,6 +36,14 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of clients */
     ObservableList<Client> getFilteredClientList();
+
+    /**
+     * Returns all schedules across all clients according to the week day.
+     * @return
+     *
+     * @author @Dban1
+     */
+    ObservableList<ScheduleDay> getScheduleDayList();
 
     /**
      * Returns the client required by {@code ViewCommand} from {@code ModelManager}.

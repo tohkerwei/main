@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.client.Client;
+import seedu.address.model.schedule.ScheduleDay;
 
 /**
  * An UI component that displays detailed information of a {@code Client}.
@@ -22,17 +22,20 @@ public class ScheduleCard extends UiPart<Region> {
      *      issue on AddressBook level 4</a>
      */
 
-    public final Client client;
+    public final ScheduleDay scheduleDay;
 
     @FXML
     private HBox cardPane;
     @FXML
     private Label name;
+    @FXML
+    private Label scheduleList;
 
-    public ScheduleCard(Client client) {
+    public ScheduleCard(ScheduleDay scheduleDay) {
         super(FXML);
-        this.client = client;
-        name.setText(client.getName().fullName);
+        this.scheduleDay = scheduleDay;
+        name.setText(scheduleDay.getDayName());
+        scheduleList.setText(scheduleDay.getDayScheduleString());
     }
 
     @Override
@@ -49,7 +52,7 @@ public class ScheduleCard extends UiPart<Region> {
 
         // state check
         ScheduleCard card = (ScheduleCard) other;
-        return client.equals(card.client);
+        return scheduleDay.equals(card.scheduleDay);
     }
 
 }

@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.ScheduleDay;
 
 /**
  * Panel containing the schedule panel.
@@ -18,11 +19,11 @@ public class SchedulePanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(SchedulePanel.class);
 
     @FXML
-    private ListView<Client> schedule;
+    private ListView<ScheduleDay> schedule;
 
-    public SchedulePanel(ObservableList<Client> clientList) {
+    public SchedulePanel(ObservableList<ScheduleDay> scheduleDayList) {
         super(FXML);
-        schedule.setItems(clientList);
+        schedule.setItems(scheduleDayList);
         schedule.setCellFactory(listView -> new ScheduleCell());
     }
 
@@ -30,16 +31,16 @@ public class SchedulePanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Client} using
      * a {@code ClientCard}.
      */
-    class ScheduleCell extends ListCell<Client> {
+    class ScheduleCell extends ListCell<ScheduleDay> {
         @Override
-        protected void updateItem(Client client, boolean empty) {
-            super.updateItem(client, empty);
+        protected void updateItem(ScheduleDay scheduleDay, boolean empty) {
+            super.updateItem(scheduleDay, empty);
 
-            if (empty || client == null) {
+            if (empty || scheduleDay == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ScheduleCard(client).getRoot());
+                setGraphic(new ScheduleCard(scheduleDay).getRoot());
             }
         }
     }
