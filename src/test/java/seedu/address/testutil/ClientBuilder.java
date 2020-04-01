@@ -185,10 +185,6 @@ public class ClientBuilder {
         return this;
     }
 
-    public ClientBuilder withScheduleList(ScheduleList scheduleList) {
-        this.sche
-    }
-
     /**
      * Builds and returns the client.
      */

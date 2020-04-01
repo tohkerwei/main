@@ -24,4 +24,5 @@ public class StartTime extends Time {
         super(time);
         this.value = formatTime(time);
         this.directTimeInt = Integer.parseInt(time);
+    }
 }
