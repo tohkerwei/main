@@ -1,18 +1,15 @@
-package seedu.address.model.exercise;
+package seedu.address.model.client;
 
 import java.util.HashMap;
 
 import seedu.address.logic.statistics.PersonalBestFinder;
-import seedu.address.model.client.Client;
+import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.ExerciseName;
 
 public class PersonalBest {
     private HashMap<ExerciseName, Exercise> pbTable;
 
-    public PersonalBest(HashMap<ExerciseName, Exercise> pbTable) {
-        this.pbTable = pbTable;
-    }
-
-    public void createPbList(Client client) {
+    public void setPersonalBest(Client client) {
         pbTable = PersonalBestFinder.createPbList(client);
     }
 

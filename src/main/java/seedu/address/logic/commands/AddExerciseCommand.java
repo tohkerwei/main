@@ -10,14 +10,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
 
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
-import java.util.HashMap;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.PersonalBest;
 import seedu.address.model.exercise.Exercise;
-import seedu.address.model.exercise.ExerciseName;
-import seedu.address.model.exercise.PersonalBest;
 import seedu.address.model.exercise.UniqueExerciseList;
 
 /**
@@ -77,16 +74,16 @@ public class AddExerciseCommand extends Command {
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
             clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
             clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
-            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList);
+            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList, clientToEdit.getPersonalBest());
 
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-        PersonalBest personalBest = new PersonalBest(new HashMap<ExerciseName, Exercise>());
-        personalBest.createPbList(model.getClientInView());
+        PersonalBest personalBest = clientToEdit.getPersonalBest();
+        personalBest.setPersonalBest(clientToEdit);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, clientToEdit.getExerciseList().toString())
-                + "\n" + personalBest.toString());
+                + "\n" + clientToEdit.getPersonalBest().toString());
     }
 
     @Override

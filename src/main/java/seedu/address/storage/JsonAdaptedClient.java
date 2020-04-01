@@ -18,6 +18,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
+import seedu.address.model.client.PersonalBest;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
@@ -131,6 +132,8 @@ class JsonAdaptedClient {
         }
         modelExerciseList.sortByExerciseDate(); // do a sanity presort to ensure initial list is sorted
 
+        final PersonalBest modelPersonalBest = new PersonalBest();
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -212,6 +215,7 @@ class JsonAdaptedClient {
         final Remark modelRemark = new Remark(remark);
 
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
-                modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport, modelExerciseList);
+                modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport, modelExerciseList,
+                modelPersonalBest);
     }
 }
