@@ -35,6 +35,11 @@
   -fx-background-color: -fx-focus-color;
 }
 
+#clientView {
+  -fx-background-color: #FAFAFA;
+  -fx-effect: dropshadow(gaussian, #9E9E9E, 8, 0, 0, 5);
+}
+
 .list-view {
   -fx-padding: 0;
   -fx-background-color: transparent;
