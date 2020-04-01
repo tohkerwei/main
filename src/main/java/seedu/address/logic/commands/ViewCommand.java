@@ -53,7 +53,8 @@ public class ViewCommand extends Command {
         PersonalBest personalBest = new PersonalBest(new HashMap<ExerciseName, Exercise>());
         personalBest.createPbList(model.getClientInView());
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, client.getName().fullName) + personalBest.toString());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, client.getName().fullName)
+                + "\n" + personalBest.toString());
     }
 
     @Override

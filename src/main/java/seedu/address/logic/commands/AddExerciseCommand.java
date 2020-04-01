@@ -10,10 +10,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
 
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
+import java.util.HashMap;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.ExerciseName;
+import seedu.address.model.exercise.PersonalBest;
 import seedu.address.model.exercise.UniqueExerciseList;
 
 /**
@@ -78,7 +82,11 @@ public class AddExerciseCommand extends Command {
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToEdit.getExerciseList().toString()));
+        PersonalBest personalBest = new PersonalBest(new HashMap<ExerciseName, Exercise>());
+        personalBest.createPbList(model.getClientInView());
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToEdit.getExerciseList().toString())
+                + "\n" + personalBest.toString());
     }
 
     @Override
