@@ -27,7 +27,7 @@ public class ScheduleList {
     public ScheduleList duplicate() {
         ScheduleList copiedList = new ScheduleList();
         copiedList.setSchedule();
-        return new ScheduleList()
+        return new ScheduleList();
     }
 
     public void add(Schedule schedule) {
