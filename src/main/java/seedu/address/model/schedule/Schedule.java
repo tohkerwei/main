@@ -19,6 +19,7 @@ public class Schedule implements Comparable<Schedule> {
     private final Day day;
     private final StartTime startTime;
     private final EndTime endTime;
+    private String clientName = "unnamed";
 
     public Schedule(Day day, StartTime startTime, EndTime endTime) {
         requireAllNonNull(day, startTime, endTime);
@@ -26,6 +27,15 @@ public class Schedule implements Comparable<Schedule> {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    /**
+     * Returns a schedule with a client name tagged to it.
+     * @param s
+     * @return
+     */
+    public void assignClientName(String s) {
+        this.clientName = s;
     }
 
     /**
@@ -77,8 +87,12 @@ public class Schedule implements Comparable<Schedule> {
         Day clonedDay = this.day.clone();
         StartTime clonedStartTime = this.startTime.clone();
         EndTime clonedEndTime = this.endTime.clone();
+        String clonedClientName = this.clientName;
 
-        return new Schedule(clonedDay, clonedStartTime, clonedEndTime);
+        Schedule clonedSchedule = new Schedule(clonedDay, clonedStartTime, clonedEndTime);
+        clonedSchedule.assignClientName(clonedClientName);
+
+        return clonedSchedule;
     }
     /**
      * Returns true if both schedule have the same attribute values
@@ -147,5 +161,9 @@ public class Schedule implements Comparable<Schedule> {
             DayEnum.Weekday thisWeekday = this.getDay().getDayEnum();
             return otherWeekday.compareTo(thisWeekday);
         }
+    }
+
+    public String getClientName() {
+        return this.clientName;
     }
 }

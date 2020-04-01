@@ -78,7 +78,7 @@ public class ScheduleDay {
     public String getDayScheduleString() {
         final StringBuilder sb = new StringBuilder();
         for (Schedule s: scheduleList) {
-            sb.append(s.getTimeFrame() + "\n");
+            sb.append(s.getTimeFrame() + " " + s.getClientName() + "\n");
         }
         System.out.println(sb.toString() + "im here");
         return sb.toString();

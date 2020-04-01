@@ -198,6 +198,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates the SchedulePanel.
+     *
+     * @author @Dban1
+     */
+    private void refreshSchedulePanel() {
+        schedulePanel = new SchedulePanel(logic.getScheduleDayList());
+
+        schedulePanelPlaceholder.getChildren().clear();
+        schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
+
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -219,6 +232,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
+            refreshSchedulePanel();
 
             return commandResult;
         } catch (CommandException | ParseException e) {

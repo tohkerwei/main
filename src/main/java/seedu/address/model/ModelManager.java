@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.ScheduleDay;
 import seedu.address.model.schedule.ScheduleList;
 
@@ -167,6 +168,9 @@ public class ModelManager implements Model {
     public ObservableList<ScheduleDay> getScheduleDayList() {
         ArrayList<ScheduleList> fullScheduleList = new ArrayList<>();
         for (Client c: filteredClients) {
+            for (Schedule s: c.getScheduleList().getScheduleList()) {
+                s.assignClientName(c.getName().fullName);
+            }
             fullScheduleList.add(c.getScheduleList());
         }
         return ScheduleDay.weeklySchedule(fullScheduleList);

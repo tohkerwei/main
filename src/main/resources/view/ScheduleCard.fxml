@@ -13,7 +13,7 @@
                <Glow />
             </effect>
          </Label>
-      <Label fx:id="scheduleList" alignment="TOP_LEFT" maxHeight="999.0" maxWidth="180.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="180.0" styleClass="cell_big_label" text="\$scheduleList" wrapText="true" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
+      <Label fx:id="scheduleList" alignment="TOP_LEFT" maxHeight="999.0" maxWidth="180.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="180.0" styleClass="cell_big_label" text="\$scheduleList" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
       </children>
    </AnchorPane>
 </HBox>

@@ -19,6 +19,7 @@ class JsonAdaptedSchedule {
     private final String day;
     private final String startTime;
     private final String endTime;
+    private final String clientName;
 
     /**
      * Constructs a {@code JsonAdaptedSchedule} with the given {@code Schedule}
@@ -26,10 +27,11 @@ class JsonAdaptedSchedule {
      */
     @JsonCreator
     public JsonAdaptedSchedule(@JsonProperty("day") String day, @JsonProperty("startTime") String startTime,
-            @JsonProperty("endTime") String endTime) {
+            @JsonProperty("endTime") String endTime, @JsonProperty("clientName") String clientName) {
         this.day = day;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.clientName = clientName;
     }
 
     /**
@@ -39,6 +41,7 @@ class JsonAdaptedSchedule {
         day = source.getDay().value.toString();
         startTime = source.getStartTime().getTime();
         endTime = source.getEndTime().getTime();
+        clientName = source.getClientName();
     }
 
     /**
@@ -74,7 +77,15 @@ class JsonAdaptedSchedule {
         }
         final EndTime modelEndTime = new EndTime(endTime);
 
-        return new Schedule(modelDay, modelStartTime, modelEndTime);
+        if (clientName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
+        }
+        final String modelClientName = clientName;
+
+        Schedule schedule = new Schedule(modelDay, modelStartTime, modelEndTime);
+        schedule.assignClientName(modelClientName);
+
+        return schedule;
     }
 
 }
