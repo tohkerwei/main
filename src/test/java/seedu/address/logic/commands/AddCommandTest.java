@@ -167,6 +167,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void clearClientInView() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasClientInView() {
             throw new AssertionError("This method should not be called.");
         }

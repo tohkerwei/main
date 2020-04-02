@@ -109,6 +109,13 @@ public interface Model {
     void setClientInView(Client client);
 
     /**
+     * Clears the client in {@code clientInView}.
+     *
+     * @author @yonggie
+     */
+    void clearClientInView();
+
+    /**
      * Returns true if a client with the same identity as {@code client} exists in
      * the address book.
      *
