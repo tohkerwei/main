@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXERCISE;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +32,6 @@ public class AddExerciseCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
     }
-
 
     @Test
     public void constructor_nullClient_throwsNullPointerException() {
@@ -77,10 +75,8 @@ public class AddExerciseCommandTest {
 
     @Test
     public void equals() {
-        Client client = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-
-        Exercise exercise1 = client.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);
-        Exercise exercise2 = client.getExerciseList().getExercise(INDEX_SECOND_EXERCISE);
+        Exercise exercise1 = new ExerciseBuilder().withExerciseName("exercise1").build();
+        Exercise exercise2 = new ExerciseBuilder().withExerciseName("exercise2").build();
 
         AddExerciseCommand addCommand1 = new AddExerciseCommand(exercise1);
         AddExerciseCommand addCommand2 = new AddExerciseCommand(exercise2);
