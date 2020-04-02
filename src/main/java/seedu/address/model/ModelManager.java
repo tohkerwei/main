@@ -104,6 +104,9 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteClient(Client target) {
+        if (target == getClientInView()) {
+            clearClientInView();
+        }
         addressBook.removeClient(target);
     }
 
