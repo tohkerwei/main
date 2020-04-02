@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 class DayTest {
 
-    Day originalDay = new Day("mon");
+    private Day originalDay = new Day("mon");
 
     @Test
     public void constructor_null_throwsNullPointerException() {

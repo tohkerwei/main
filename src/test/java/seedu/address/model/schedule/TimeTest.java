@@ -1,12 +1,13 @@
 package seedu.address.model.schedule;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 class TimeTest {
 
-    Time time = new Time("0000") {}; //anonymous class that extends abstract Time for testing
+    private Time time = new Time("0000") {}; //anonymous class that extends abstract Time for testing
 
     @Test
     void isValidTimingFormat() {
@@ -52,4 +53,5 @@ class TimeTest {
     void getDirectTimeInt() {
         assertTrue(time.getDirectTimeInt() == 0);
     }
+
 }
