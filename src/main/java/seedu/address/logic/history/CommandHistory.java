@@ -1,5 +1,8 @@
 package seedu.address.logic.history;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import seedu.address.model.CommandHistoryState;
 import seedu.address.storage.CommandHistoryStorage;
 
@@ -9,11 +12,13 @@ import seedu.address.storage.CommandHistoryStorage;
  */
 public class CommandHistory {
 
+    private static final Path STORAGE_FILE_PATH = Paths.get("data", "command.txt");
+
     private CommandHistoryStorage historyStorage;
     private CommandHistoryState historyState;
 
     public CommandHistory() {
-        historyStorage = new CommandHistoryStorage();
+        historyStorage = new CommandHistoryStorage(STORAGE_FILE_PATH);
         historyState = new CommandHistoryState(historyStorage.readFromStorage());
     }
 

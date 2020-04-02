@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -14,10 +13,14 @@ import java.util.ArrayList;
  */
 public class CommandHistoryStorage {
 
-    private Path commandHistoryPath = Paths.get("data", "command.txt");
+    private Path commandHistoryPath;
+
+    public CommandHistoryStorage(Path commandHistoryPath) {
+        this.commandHistoryPath = commandHistoryPath;
+    }
 
     /**
-     * Creates an empty new file for use in this class later.
+     * Creates an empty new file for future use.
      */
     private void createNewFile() {
         File file = commandHistoryPath.toFile();
@@ -30,7 +33,9 @@ public class CommandHistoryStorage {
     }
 
     /**
-     * Returns an ArrayList of each command string from storage.
+     * Returns an ArrayList of each command string from storage. If the file does
+     * not exist, this method will call {@code createNewFile} to ensure that the
+     * file is created for future use.
      */
     public ArrayList<String> readFromStorage() {
         ArrayList<String> commands = new ArrayList<>();
