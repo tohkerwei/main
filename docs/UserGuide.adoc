@@ -37,7 +37,8 @@ In this guide, we cover:
 
 As this is primarily a CLI based application, some features are included to make the user experience better. The following features are provided to simplify the use of FitBiz:
 
-* Command History: similar to most modern CLIs, users can press the kbd:[Up] and kbd:[Down] arrow key to cycle through their previously entered commands
+* Command History: similar to most modern CLIs, users can press the kbd:[Up] and kbd:[Down] arrow key to cycle through their previously entered commands. This history is persisted in the storage, allowing users to quickly reference what they have entered in a previous usage of this app.
+* Command Auto Completion: again, similar to most modern CLIs, users can press the kbd:[Tab] key to auto complete the commands that they have partially typed. If the partially typed letters begin a string that uniquely identifies a command, the complete command name appears. Otherwise, a list of all commands similar to the ambiguous letters will appear.
 
 == Quick Start
 
@@ -55,13 +56,16 @@ As this is primarily a CLI based application, some features are included to make
 
 == Commands
 
-*Format of Commands*
+This section introduces the syntax and the usages of the commands available in FitBiz. In explaining the syntax, we will adhere to the following format: 
 
 * Words in `UPPER_SNAKE_CASE` are the parameters to be supplied by the user
-e.g. in `add-c n/NAME`, `NAME` is a parameter which can be used as `add-c n/John Doe`
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`
-* Items with `…` after them can be used multiple times including zero times e.g. `[t/TAG]…` can be used as (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable
+** e.g. in `add-c n/NAME`, `NAME` is a parameter which can be used as `add-c n/John Doe`
+* Items in square brackets are optional
+** e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`
+* Items with `…` after them can be used multiple times including zero times
+** e.g. `[t/TAG]…` can be used as (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order
+** e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable
 
 === Add a new client profile: `add-c`
 
@@ -130,7 +134,7 @@ Examples:
 * `edit-c 1 n/Ming Liang a/age v/60 a/gender v/male`
 ** Edits the name of the 1st client to Ming Liang, age to 60, and gender to male.
 
-=== Export as CSV: `export`
+=== Export as CSV: `export` [Coming in v1.4]
 
 Exports a client’s training record to a CSV file.
 
@@ -144,7 +148,7 @@ Example:
 * `export 6`
 ** Exports training records of the 6th client
 
-=== Filter clients based on attribute: `filter-c`
+=== Filter clients based on attribute: `filter-c` [Coming in v1.4]
 
 Filters the client list by the specified keyword(s) that matches the name or any attributes the client has.
 
@@ -160,7 +164,7 @@ Examples:
 * `filter-c Johnny`
 ** Returns a client list of `Johnny Tim` and `johnny`
 
-=== Display visualisations of training progress: `graph`
+=== Display visualisations of training progress: `graph` [Coming in v1.4]
 
 Shows visualisations of a client’s exercise progress.
 
@@ -197,20 +201,9 @@ Shows all clients currently entered in this program.
 
 Format: `list-c`
 
-=== Start a timer: `time`
-
-Starts a timer which will notify you when it ends.
-
-Format: `time [h/HOURS] [m/MINUTES] [s/SECONDS]`
-
-Examples:
-
-* `time m/4 s/40`
-** Starts a timer for 4 minutes and 40 seconds
-
 === View a client profile: `view-c`
 
-Shows all available information of the client at the specified index.
+Shows all available information of the client at the specified index. This also displays all the exercises recorded for the client as well as their personal bests for said exercises.
 
 Format: `view-c INDEX`
 
@@ -220,25 +213,11 @@ Format: `view-c INDEX`
 Examples:
 
 * `view-c 3`
-** Shows information about the 3rd client
+** Shows all information about the 3rd client
 * `view-c 45`
-** Shows information about the 45th client
+** Shows all information about the 45th client
 
-=== View cliental best: `view-pb`
-
-Displays the cliental best of all exercises of the client at the specified index.
-
-Format: `view-pb INDEX`
-
-* `INDEX` refers to the index number shown in the displayed client list
-* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
-
-Example:
-
-* `view-pb 6`
-** Shows the cliental best for all exercises done by the 6th client
-
-=== View schedule for the day/week: `view-s`
+=== View schedule for the day/week: `view-s` [Coming in v2.0]
 
 Shows the schedule for today or the time specified.
 
