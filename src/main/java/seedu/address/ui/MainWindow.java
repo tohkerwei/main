@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -17,6 +15,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.util.logging.Logger;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar
@@ -212,19 +212,6 @@ public class MainWindow extends UiPart<Stage> {
         PersonalBestTable personalBestTable = clientViewDisplay.getPersonalBestTable();
         personalBestTablePlaceholder.getChildren().clear();
         personalBestTablePlaceholder.getChildren().add(personalBestTable.getRoot());
-    }
-
-    /**
-     * Updates the SchedulePanel.
-     *
-     * @author @Dban1
-     */
-    private void refreshSchedulePanel() {
-        schedulePanel = new SchedulePanel(logic.getScheduleDayList());
-
-        schedulePanelPlaceholder.getChildren().clear();
-        schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
-
     }
 
     /**
