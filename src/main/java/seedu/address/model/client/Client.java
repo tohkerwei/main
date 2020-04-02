@@ -28,26 +28,25 @@ public class Client {
     private final Set<Tag> tags = new HashSet<>();
 
     // Start of new/optional data fields
-    // TODO: change this to final and uninitialised
-    private Birthday birthday = new Birthday("");
-    private CurrentWeight currentWeight;
-    private Gender gender;
-    private TargetWeight targetWeight;
-    private Height height;
+    private final Birthday birthday;
+    private final CurrentWeight currentWeight;
+    private final Gender gender;
+    private final TargetWeight targetWeight;
+    private final Height height;
     private final Set<Sport> sports = new HashSet<>();
-    private Remark remark;
-    private UniqueExerciseList exerciseList;
-    private PersonalBest personalBest;
-    private ScheduleList scheduleList;
+    private final Remark remark;
+    private final UniqueExerciseList exerciseList;
+    private final PersonalBest personalBest;
+    private final ScheduleList scheduleList;
 
-    // TODO: remove this overloaded constructor after finalising attributes
     /**
-     * Overloaded Client constructor for FitBiz.
+     * Every field must be present and not null.
      */
     public Client(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags, Birthday birthday,
             CurrentWeight currentWeight, TargetWeight targetWeight, Height height, Remark remark, Set<Sport> sports,
             UniqueExerciseList exerciseList, PersonalBest personalBest, ScheduleList scheduleList) {
-        requireAllNonNull(name, phone, email, address, tags, birthday);
+        requireAllNonNull(name, gender, phone, email, address, tags, birthday, currentWeight, targetWeight, height,
+                remark, sports, exerciseList, personalBest, scheduleList);
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -63,18 +62,6 @@ public class Client {
         this.exerciseList = exerciseList;
         this.personalBest = personalBest;
         this.scheduleList = scheduleList;
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Client(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
     }
 
     public Name getName() {
