@@ -37,7 +37,8 @@ In this guide, we cover:
 
 As this is primarily a CLI based application, some features are included to make the user experience better. The following features are provided to simplify the use of FitBiz:
 
-* Command History: similar to most modern CLIs, users can press the kbd:[Up] and kbd:[Down] arrow key to cycle through their previously entered commands
+* Command History: similar to most modern CLIs, users can press the kbd:[Up] and kbd:[Down] arrow key to cycle through their previously entered commands. This history is persisted in the storage, allowing users to quickly reference what they have entered in a previous usage of this app.
+* Command Auto Completion: again, similar to most modern CLIs, users can press the kbd:[Tab] key to auto complete the commands that they have partially typed. If the partially typed letters begin a string that uniquely identifies a command, the complete command name appears. Otherwise, a list of all commands similar to the ambiguous letters will appear.
 
 == Quick Start
 
@@ -55,13 +56,16 @@ As this is primarily a CLI based application, some features are included to make
 
 == Commands
 
-*Format of Commands*
+This section introduces the syntax and the usages of the commands available in FitBiz. In explaining the syntax, we will adhere to the following format:
 
 * Words in `UPPER_SNAKE_CASE` are the parameters to be supplied by the user
-e.g. in `add-c n/NAME`, `NAME` is a parameter which can be used as `add-c n/John Doe`
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`
-* Items with `…` after them can be used multiple times including zero times e.g. `[t/TAG]…` can be used as (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable
+** e.g. in `add-c n/NAME`, `NAME` is a parameter which can be used as `add-c n/John Doe`
+* Items in square brackets are optional
+** e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`
+* Items with `…` after them can be used multiple times including zero times
+** e.g. `[t/TAG]…` can be used as (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order
+** e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable
 
 === Add a new client profile: `add-c`
 
@@ -81,23 +85,48 @@ Examples:
 * `add-c n/Low Tah Kiow, John t/powerlifter e/betsycrowe@example.com a/some street p/1234567 t/strongman`
 ** Adds a new client: Low Tah Kiow, John with the above information
 
-=== Record a client's exercise: `add-e`
+=== Add a client's exercise: `add-e`
 
-Adds and records an exercise to a client at the specified index.
+Adds and records an exercise to the client currently being viewed.
 
-Format: `add-e CLIENT_INDEX e/EXERCISE_NAME [d/DATE] [w/WEIGHT] [r/REMARKS]`
+Format: `add-e n/EXERCISE_NAME d/DATE [ew/EXERCISE_WEIGHT] [reps/REPS] [sets/SETS]`
 
-* `CLIENT_INDEX` refers to the index number shown in the displayed client list
-* `CLIENT_INDEX` must be a positive integer (ie. 1, 2, 3, ...)
-* If `DATE` is not specified, it will be defaulted to the current day
+* `add-e` can only be used when a client is in view (ie. `view-c` is called first)
 * `DATE` must be of the form `DD-MM-YYYY` (ie. 02-07-2020 for 2nd July 2020)
+* `n/EXERCISE_NAME` is case sensitive. e.g `squats` will not match `Squats`
+* The order of words will matter. e.g `High Lunge` will not match `Lunge High`
+* `[ew/EXERCISE_WEIGHT] [reps/REPS] [sets/SETS]` must be a positive whole integer (ie. 1, 2, 3, ...)
 
 Examples:
 
-* `add-e 2 e/Push Ups d/25-02-2020 r/50 Reps`
-** Adds an exercise called "Push Ups" with remarks "50 reps" on 2nd July 2020 to the 2nd client
-* `add-e 3 e/Bench Press d/26-02-2020 w/120 r/10 Reps`
+* `view-c 1`
++
+`add-e n/Push Ups d/25-02-2020 reps/50`
++
+** Adds an exercise called "Push Ups" with "50 reps" on 2nd July 2020 to the 1st client
+* `view-c 3`
++
+`add-e n/Bench Press d/26-02-2020 ew/120 reps/10`
++
 ** Adds an exercise called "Bench Press" of weight 120kg with remarks "50 reps" on 2nd July 2020 to the 3rd client
+
+=== Delete a client's exercise: `delete-e`
+
+Deletes an existing exercise at the specified index from the exercise list of the client currently being viewed.
+
+Format: `delete-e INDEX`
+
+* `delete-e` can only be used when a client is in view (ie. `view-c` is called first)
+* `INDEX` refers to the index number shown in the displayed exercise list of the client currently being viewed
+* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
+
+Examples:
+
+* `view-c 1`
++
+`delete-e 4`
++
+** Deletes the 4th exercise from the exercise list of the 1st client
 
 === Delete a client: `delete-c`
 
@@ -130,7 +159,7 @@ Examples:
 * `edit-c 1 n/Ming Liang a/age v/60 a/gender v/male`
 ** Edits the name of the 1st client to Ming Liang, age to 60, and gender to male.
 
-=== Export as CSV: `export`
+=== Export as CSV: `export` [Coming in v1.4]
 
 Exports a client’s training record to a CSV file.
 
@@ -144,7 +173,7 @@ Example:
 * `export 6`
 ** Exports training records of the 6th client
 
-=== Filter clients based on attribute: `filter-c`
+=== Filter clients based on attribute: `filter-c` [Coming in v1.4]
 
 Filters the client list by the specified keyword(s) that matches the name or any attributes the client has.
 
@@ -160,7 +189,7 @@ Examples:
 * `filter-c Johnny`
 ** Returns a client list of `Johnny Tim` and `johnny`
 
-=== Display visualisations of training progress: `graph`
+=== Display visualisations of training progress: `graph` [Coming in v1.4]
 
 Shows visualisations of a client’s exercise progress.
 
@@ -197,20 +226,9 @@ Shows all clients currently entered in this program.
 
 Format: `list-c`
 
-=== Start a timer: `time`
-
-Starts a timer which will notify you when it ends.
-
-Format: `time [h/HOURS] [m/MINUTES] [s/SECONDS]`
-
-Examples:
-
-* `time m/4 s/40`
-** Starts a timer for 4 minutes and 40 seconds
-
 === View a client profile: `view-c`
 
-Shows all available information of the client at the specified index.
+Shows all available information of the client at the specified index. This also displays all the exercises recorded for the client as well as their personal bests for said exercises.
 
 Format: `view-c INDEX`
 
@@ -220,25 +238,36 @@ Format: `view-c INDEX`
 Examples:
 
 * `view-c 3`
-** Shows information about the 3rd client
+** Shows all information about the 3rd client
 * `view-c 45`
-** Shows information about the 45th client
+** Shows all information about the 45th client
 
-=== View cliental best: `view-pb`
+=== Schedule trainings for a client: `schedule`
 
-Displays the cliental best of all exercises of the client at the specified index.
+Assigns weekly schedule timings to a client. The schedule will be displayed on the right panel of FitBiz, with the timings as well as the client name. This command can assign multiple timings to a client at once, by adding more arguments following the command. 
 
-Format: `view-pb INDEX`
+Format: `schedule INDEX day/DAY st/STARTTIME et/ENDTIME`
 
-* `INDEX` refers to the index number shown in the displayed client list
-* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
+* `INDEX` refers to the index number shown on the displayed client list
+* `INDEX` must be a positive integer(ie. 1, 2, 3, ...)
+* `INDEX` must be for an existing client index number
+* `DAY` must be any one of the following values:
+** MON
+** TUE
+** WED
+** THU
+** FRI
+** SAT
+** SUN
+* `DAY` is not case-sensitive
 
-Example:
+Examples:
 
-* `view-pb 6`
-** Shows the cliental best for all exercises done by the 6th client
+* `schedule 1 day/mon st/1100 et/1200`
+** Adds to the 1st client a schedule for training from 11:00am to 12:00pm on Monday
 
-=== View schedule for the day/week: `view-s`
+
+=== View schedule for the day/week: `view-s` [Coming in v2.0]
 
 Shows the schedule for today or the time specified.
 
@@ -281,6 +310,7 @@ Examples:
 |`filter-c KEYWORD [MORE_KEYWORDS]`| Filters a client based on specified keywords.
 |`list-c`| Shows the list of clients in FitBiz.
 |`view-c INDEX`| Shows detailed information of a client.
+|`schedule INDEX [day/DAY] [st/STARTTIME] [et/ENDTIME]`| Assigns a schedule to a client.
 |=======================================================================
 
 === Exercise Commands
@@ -288,7 +318,7 @@ Examples:
 [width="100%",cols="20%,<30%",options="header",]
 |=======================================================================
 |Command | Summary
-|`add-e n/NAME d/DATE reps/REPS sets/SETS…`| Adds a new exercise to a client.
+|`add-e n/EXERCISE_NAME d/DATE ew/WEIGHT reps/REPS sets/SETS`| Adds a new exercise to a client.
+|`delete-e INDEX`| Deletes an exercise in the exercise list of the client.
 |`graph e/Push Ups`| Shows a graph of the exercise progress done by a client.
-|`view-pb INDEX`| Shows the personal best for all exercises done by client.
 |=======================================================================
