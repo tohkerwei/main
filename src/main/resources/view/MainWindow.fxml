@@ -12,7 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="1000.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="1000.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage" 
+  xmlns="http://javafx.com/javafx/11.0.1" 
+  xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/bicep.png" />
   </icons>
@@ -60,14 +62,14 @@
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
               <children>
-                <HBox prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                <HBox spacing="10" VBox.vgrow="ALWAYS">
                   <children>
-                    <StackPane fx:id="clientViewPanelPlaceholder" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="321.0" styleClass="pane-with-no-border" HBox.hgrow="ALWAYS" />
-                    <StackPane fx:id="personalBestTablePlaceholder" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="314.0" HBox.hgrow="ALWAYS" />
+                    <StackPane fx:id="clientViewPanelPlaceholder" minHeight="200.0" prefHeight="200.0" prefWidth="300.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS" />
+                    <StackPane fx:id="personalBestTablePlaceholder" minHeight="200.0" prefHeight="200.0" prefWidth="300.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS" />
                   </children>
-                           <padding>
-                              <Insets bottom="10.0" />
-                           </padding>
+                  <padding>
+                    <Insets bottom="10.0" />
+                  </padding>
                 </HBox>
                 <StackPane fx:id="exerciseListTablePlaceholder" layoutX="21.0" layoutY="21.0" minHeight="300.0" styleClass="pane-with-no-border" VBox.vgrow="ALWAYS" />
               </children>

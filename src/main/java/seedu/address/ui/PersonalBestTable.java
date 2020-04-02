@@ -41,6 +41,7 @@ public class PersonalBestTable extends UiPart<Region> {
         exerciseDate.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseDate"));
         exerciseWeight.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseWeight"));
         exerciseReps.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseReps"));
+        exerciseName.setText("Personal Best Exercise");
         tableView.setItems(e);
     }
 }
