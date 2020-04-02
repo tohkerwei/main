@@ -17,11 +17,16 @@ public class PersonalBest {
 
     public void setPersonalBest(Client client) {
         personalBestTable = PersonalBestFinder.createPbList(client);
+        personalBestList.clear();
         personalBestList.addAll(personalBestTable.values());
     }
 
     @Override
     public String toString() {
-        return personalBestList.toString();
+        String toPrint = "Personal Best \n";
+        for (Exercise e : personalBestList) {
+            toPrint += e.toString() + "\n";
+        }
+        return toPrint;
     }
 }

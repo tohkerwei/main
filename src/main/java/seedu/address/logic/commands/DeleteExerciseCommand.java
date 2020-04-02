@@ -7,6 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.PersonalBest;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.UniqueExerciseList;
 
@@ -50,6 +51,9 @@ public class DeleteExerciseCommand extends Command {
 
         Exercise toRemove = clientToEditExerciseList.getExercise(targetIndex);
         model.deleteExercise(toRemove);
+
+        PersonalBest personalBest = clientToEdit.getPersonalBest();
+        personalBest.setPersonalBest(clientToEdit);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
     }
