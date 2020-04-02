@@ -85,23 +85,48 @@ Examples:
 * `add-c n/Low Tah Kiow, John t/powerlifter e/betsycrowe@example.com a/some street p/1234567 t/strongman`
 ** Adds a new client: Low Tah Kiow, John with the above information
 
-=== Record a client's exercise: `add-e`
+=== Add a client's exercise: `add-e`
 
-Adds and records an exercise to a client at the specified index.
+Adds and records an exercise to the client currently being viewed.
 
-Format: `add-e CLIENT_INDEX e/EXERCISE_NAME [d/DATE] [w/WEIGHT] [r/REMARKS]`
+Format: `add-e n/EXERCISE_NAME d/DATE [ew/EXERCISE_WEIGHT] [reps/REPS] [sets/SETS]`
 
-* `CLIENT_INDEX` refers to the index number shown in the displayed client list
-* `CLIENT_INDEX` must be a positive integer (ie. 1, 2, 3, ...)
-* If `DATE` is not specified, it will be defaulted to the current day
+* `add-e` can only be used when a client is in view (ie. `view-c` is called first)
 * `DATE` must be of the form `DD-MM-YYYY` (ie. 02-07-2020 for 2nd July 2020)
+* `n/EXERCISE_NAME` is case sensitive. e.g `squats` will not match `Squats`
+* The order of words will matter. e.g `High Lunge` will not match `Lunge High`
+* `[ew/EXERCISE_WEIGHT] [reps/REPS] [sets/SETS]` must be a positive whole integer (ie. 1, 2, 3, ...)
 
 Examples:
 
-* `add-e 2 e/Push Ups d/25-02-2020 r/50 Reps`
-** Adds an exercise called "Push Ups" with remarks "50 reps" on 2nd July 2020 to the 2nd client
-* `add-e 3 e/Bench Press d/26-02-2020 w/120 r/10 Reps`
+* `view-c 1`
++
+`add-e n/Push Ups d/25-02-2020 reps/50`
++
+** Adds an exercise called "Push Ups" with "50 reps" on 2nd July 2020 to the 1st client
+* `view-c 3`
++
+`add-e n/Bench Press d/26-02-2020 ew/120 reps/10`
++
 ** Adds an exercise called "Bench Press" of weight 120kg with remarks "50 reps" on 2nd July 2020 to the 3rd client
+
+=== Delete a client's exercise: `delete-e`
+
+Deletes an existing exercise at the specified index from the exercise list of the client currently being viewed.
+
+Format: `delete-e INDEX`
+
+* `delete-e` can only be used when a client is in view (ie. `view-c` is called first)
+* `INDEX` refers to the index number shown in the displayed exercise list of the client currently being viewed
+* `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
+
+Examples:
+
+* `view-c 1`
++
+`delete-e 4`
++
+** Deletes the 4th exercise from the exercise list of the 1st client
 
 === Delete a client: `delete-c`
 
@@ -293,7 +318,7 @@ Examples:
 [width="100%",cols="20%,<30%",options="header",]
 |=======================================================================
 |Command | Summary
-|`add-e n/NAME d/DATE reps/REPS sets/SETS…`| Adds a new exercise to a client.
+|`add-e n/EXERCISE_NAME d/DATE ew/WEIGHT reps/REPS sets/SETS`| Adds a new exercise to a client.
+|`delete-e INDEX`| Deletes an exercise in the exercise list of the client.
 |`graph e/Push Ups`| Shows a graph of the exercise progress done by a client.
-|`view-pb INDEX`| Shows the personal best for all exercises done by client.
 |=======================================================================
