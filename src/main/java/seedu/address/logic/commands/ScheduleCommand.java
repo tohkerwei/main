@@ -27,7 +27,7 @@ public class ScheduleCommand extends Command {
             + "start and end time in 24 hour format, "
             + "in 30 minutes denominations. Multiple training schedule can be added to a client.\n"
             + "Parameters: INDEX (a positive integer) d/DAY st/START_TIME et/END_TIME [MORE_SCHEDULE]...\n"
-            + "Example: " + COMMAND_WORD + " 1 d/mon st/1200 et/1400 d/fri st/1330 et/1500";
+            + "Example: " + COMMAND_WORD + " 1 day/mon st/1200 et/1400 day/fri st/1330 et/1500";
 
     public static final String MESSAGE_INVALID_ARG_COUNT = "Invalid number of arguments found for adding schedules."
             + "Please check you have entered the right amount of Day(s), Start Time(s) and End Time(s). You have"
