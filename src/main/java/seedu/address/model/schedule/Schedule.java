@@ -14,7 +14,8 @@ import java.util.Objects;
 public class Schedule implements Comparable<Schedule> {
     public static final String MESSAGE_CONSTRAINTS = "Schedule day should be the first 3 letters of the day. "
             + "Timings should be given in 24 hour format and in HHmm format. "
-            + "Start time cannot be later than end time. Maximum range is 0000-2359";
+            + "Start time cannot be later than end time.\nMaximum range is 0000-2359."
+            + " Example usage: schedule 1 day/tue st/1100 et/1200";
 
     private final Day day;
     private final StartTime startTime;
@@ -58,6 +59,19 @@ public class Schedule implements Comparable<Schedule> {
      */
     public void assignClientName(String s) {
         this.clientName = s;
+    }
+
+    /**
+     * @author tohkerwei
+     * @param scheduleString a schedule in string format
+     * @return a schedule object
+     */
+    public static Schedule stringToSchedule(String scheduleString) {
+        String[] tokens = scheduleString.split(" ", 0);
+        Day day = new Day(tokens[0]);
+        StartTime startTime = new StartTime(tokens[2].substring(0, 2) + tokens[2].substring(3, 5));
+        EndTime endTime = new EndTime(tokens[4].substring(0, 2) + tokens[4].substring(3, 5));
+        return new Schedule(day, startTime, endTime);
     }
 
     public Day getDay() {

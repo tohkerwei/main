@@ -127,15 +127,13 @@ public interface Model {
     /**
      * @author @Dban1
      * Returns a view of the schedule list from across all clients.
-     *
-     * @return
      */
-     ObservableList<ScheduleDay> getScheduleDayList();
-  
-     /**
+    ObservableList<ScheduleDay> getScheduleDayList();
+
+    /**
      * Deletes the given exercise in clientInView exercise list.
      * There must be client in clientInView.
      */
-    void deleteExercise (Exercise exercise);
+    void deleteExercise(Exercise exercise);
 
 }

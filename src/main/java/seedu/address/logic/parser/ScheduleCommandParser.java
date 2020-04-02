@@ -56,8 +56,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
                 PREFIX_START_TIME, PREFIX_END_TIME);
         Index index;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DAY, PREFIX_END_TIME, PREFIX_START_TIME)
-                || argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
 

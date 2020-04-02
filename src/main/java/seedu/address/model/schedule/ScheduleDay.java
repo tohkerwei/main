@@ -39,7 +39,7 @@ public class ScheduleDay {
         ArrayList<Schedule> sundaySchedule = new ArrayList<>();
 
         for (ScheduleList sl : allClientScheduleList) {
-            for (Schedule s : sl.getScheduleList()) {
+            for (Schedule s : sl.getArrayList()) {
                 switch (s.getDay().getDayEnum()) {
                 case MON:
                     mondaySchedule.add(s);

@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -10,11 +9,11 @@ import javafx.scene.layout.Region;
 import seedu.address.model.exercise.Exercise;
 
 /**
- * A UI component that displays exercises of a {@code Client} in a TableView.
+ * A UI component that displays personal bests of each exercise of a {@code Client} in a TableView.
  */
-public class ExerciseListTable extends UiPart<Region> {
+public class PersonalBestTable extends UiPart<Region> {
 
-    private static final String FXML = "ExerciseListTable.fxml";
+    private static final String FXML = "PersonalBestTable.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved
@@ -28,30 +27,20 @@ public class ExerciseListTable extends UiPart<Region> {
     @FXML
     private TableView<Exercise> tableView;
     @FXML
-    private TableColumn<Exercise, String> id;
-    @FXML
     private TableColumn<Exercise, String> exerciseName;
     @FXML
     private TableColumn<Exercise, String> exerciseDate;
     @FXML
-    private TableColumn<Exercise, String> exerciseSets;
+    private TableColumn<Exercise, String> exerciseWeight;
     @FXML
     private TableColumn<Exercise, String> exerciseReps;
-    @FXML
-    private TableColumn<Exercise, String> exerciseWeight;
 
-    public ExerciseListTable(ObservableList<Exercise> e) {
+    public PersonalBestTable(ObservableList<Exercise> e) {
         super(FXML);
-        id.setCellValueFactory(data -> {
-            Exercise exercise = data.getValue();
-            int index = e.indexOf(exercise) + 1;
-            return new SimpleStringProperty(Integer.toString(index));
-        });
         exerciseName.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseName"));
         exerciseDate.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseDate"));
-        exerciseSets.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseSets"));
-        exerciseReps.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseReps"));
         exerciseWeight.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseWeight"));
+        exerciseReps.setCellValueFactory(new PropertyValueFactory<Exercise, String>("exerciseReps"));
         tableView.setItems(e);
     }
 }

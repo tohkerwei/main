@@ -54,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane clientViewPanelPlaceholder;
 
     @FXML
-    private StackPane exercisePbTablePlaceholder;
+    private StackPane personalBestTablePlaceholder;
 
     @FXML
     private StackPane exerciseListTablePlaceholder;
@@ -208,6 +208,23 @@ public class MainWindow extends UiPart<Stage> {
         ExerciseListTable exerciseListTable = clientViewDisplay.getExerciseListTable();
         exerciseListTablePlaceholder.getChildren().clear();
         exerciseListTablePlaceholder.getChildren().add(exerciseListTable.getRoot());
+
+        PersonalBestTable personalBestTable = clientViewDisplay.getPersonalBestTable();
+        personalBestTablePlaceholder.getChildren().clear();
+        personalBestTablePlaceholder.getChildren().add(personalBestTable.getRoot());
+    }
+
+    /**
+     * Updates the SchedulePanel.
+     *
+     * @author @Dban1
+     */
+    private void refreshSchedulePanel() {
+        schedulePanel = new SchedulePanel(logic.getScheduleDayList());
+
+        schedulePanelPlaceholder.getChildren().clear();
+        schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
+
     }
 
     /**
