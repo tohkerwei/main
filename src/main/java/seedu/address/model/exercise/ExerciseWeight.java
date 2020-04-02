@@ -31,6 +31,16 @@ public class ExerciseWeight {
         return test.equals("") || test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Converts the string value of exercise weight to integer.
+     */
+    public int convertToInt() {
+        if (value.equals("")) {
+            return 0;
+        }
+        return Integer.parseInt(value);
+    }
+
     @Override
     public String toString() {
         return value;

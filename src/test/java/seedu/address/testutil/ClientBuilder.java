@@ -11,6 +11,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
+import seedu.address.model.client.PersonalBest;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
@@ -53,6 +54,7 @@ public class ClientBuilder {
     private TargetWeight targetWeight;
     // TODO: change this later
     private UniqueExerciseList exerciseList = new UniqueExerciseList();
+    private PersonalBest personalBest = new PersonalBest();
     private ScheduleList scheduleList;
 
     public ClientBuilder() {
@@ -209,7 +211,7 @@ public class ClientBuilder {
      */
     public Client build() {
         return new Client(name, gender, phone, email, address, tags, birthday, currentWeight,
-                targetWeight, height, remark, sports, exerciseList, scheduleList);
+                targetWeight, height, remark, sports, exerciseList, personalBest, scheduleList);
     }
 
 }

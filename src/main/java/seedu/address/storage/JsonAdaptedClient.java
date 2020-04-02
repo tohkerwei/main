@@ -18,6 +18,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
+import seedu.address.model.client.PersonalBest;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
@@ -140,6 +141,8 @@ class JsonAdaptedClient {
         }
         modelExerciseList.sortByExerciseDate(); // do a sanity presort to ensure initial list is sorted
 
+        final PersonalBest modelPersonalBest = new PersonalBest();
+
         final ScheduleList modelScheduleList = new ScheduleList();
         for (JsonAdaptedSchedule schedule : scheduleList) {
             modelScheduleList.add(schedule.toModelType());
@@ -226,7 +229,7 @@ class JsonAdaptedClient {
         final Remark modelRemark = new Remark(remark);
 
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
-                modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport,
-                modelExerciseList, modelScheduleList);
+                modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport, modelExerciseList,
+                modelPersonalBest, modelScheduleList);
     }
 }

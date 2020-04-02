@@ -15,6 +15,7 @@ public class ClientViewDisplay {
 
     private ClientView clientView;
     private ExerciseListTable exerciseListTable;
+    private PersonalBestTable personalBestTable;
 
     public ClientView getClientView() {
         return clientView;
@@ -22,6 +23,10 @@ public class ClientViewDisplay {
 
     public ExerciseListTable getExerciseListTable() {
         return exerciseListTable;
+    }
+
+    public PersonalBestTable getPersonalBestTable() {
+        return personalBestTable;
     }
 
     /**
@@ -41,10 +46,19 @@ public class ClientViewDisplay {
     }
 
     /**
+     * Updates the personal bests of client in {@code PersonalBestTable}.
+     */
+    public void updatePersonalBestTable(ObservableList<Exercise> exerciseList) {
+        requireNonNull(exerciseList);
+        this.personalBestTable = new PersonalBestTable(exerciseList);
+    }
+
+    /**
      * Updates the client to be shown on {@code ClientViewDisplay}.
      */
     public void update(Client client) {
         updateClientView(client);
         updateExerciseListTable(client.getExerciseList().asUnmodifiableObservableList());
+        updatePersonalBestTable(client.getPersonalBest().getPersonalBest());
     }
 }
