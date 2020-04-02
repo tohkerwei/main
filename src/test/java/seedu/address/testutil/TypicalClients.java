@@ -30,7 +30,6 @@ public class TypicalClients {
             .withTags("friends")
             .withExercisesInExerciseList(new ExerciseBuilder().build())
             .withExercisesInExerciseList(new ExerciseBuilder().withExerciseName("ANOTHER").build())
-            .withScheduleList(new ScheduleBuilder())
             .build();
     public static final Client BENSON = new ClientBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")

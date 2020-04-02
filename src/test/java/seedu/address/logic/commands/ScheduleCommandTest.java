@@ -67,15 +67,15 @@ class ScheduleCommandTest {
     public void equals() {
         ArrayList<Schedule> scheduleListFirst = new ArrayList<>();
         ArrayList<Schedule> scheduleListSecond = new ArrayList<>();
-        ScheduleCommand scheduleFirstCommand = new ScheduleCommand(INDEX_FIRST_CLIENT);
-        ScheduleCommand scheduleSecondCommand = new ScheduleCommand(INDEX_SECOND_CLIENT);
+        ScheduleCommand scheduleFirstCommand = new ScheduleCommand(INDEX_FIRST_CLIENT, scheduleListFirst);
+        ScheduleCommand scheduleSecondCommand = new ScheduleCommand(INDEX_SECOND_CLIENT, scheduleListSecond);
 
         // same object -> returns true
         assertTrue(scheduleFirstCommand.equals(scheduleFirstCommand));
 
         // same values -> returns true
-        ScheduleCommand deleteFirstCommandCopy = new ScheduleCommand(INDEX_FIRST_CLIENT);
-        assertTrue(scheduleFirstCommand.equals(deleteFirstCommandCopy));
+        ScheduleCommand scheduleFirstCommandCopy = new ScheduleCommand(INDEX_FIRST_CLIENT, scheduleListFirst);
+        assertTrue(scheduleFirstCommand.equals(scheduleFirstCommandCopy));
 
         // different types -> returns false
         assertFalse(scheduleFirstCommand.equals(1));
