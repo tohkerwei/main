@@ -1,8 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+
 import seedu.address.model.schedule.Day;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.schedule.StartTime;
 
 /**
@@ -26,6 +29,16 @@ public class ScheduleBuilder {
 
     public Schedule build() {
         return new Schedule(day, startTime, endTime);
+    }
+
+    /**
+     * Wraps the current Schedule in a ScheduleList.
+     * @return
+     */
+    public ScheduleList buildAsList() {
+        ArrayList<Schedule> scheduleList = new ArrayList<>();
+        scheduleList.add(this.build());
+        return new ScheduleList(scheduleList);
     }
 
     /**

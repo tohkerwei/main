@@ -125,10 +125,10 @@ public class Schedule implements Comparable<Schedule> {
 
 
         Schedule otherSchedule = (Schedule) other;
-        int otherSt = Integer.parseInt(otherSchedule.getStartTime().toString());
-        int otherEt = Integer.parseInt(otherSchedule.getEndTime().toString());
-        int thisSt = Integer.parseInt(this.getStartTime().toString());
-        int thisEt = Integer.parseInt(this.getEndTime().toString());
+        int otherSt = otherSchedule.getStartTime().getDirectTimeInt();
+        int otherEt = otherSchedule.getEndTime().getDirectTimeInt();
+        int thisSt = this.getStartTime().getDirectTimeInt();
+        int thisEt = this.getEndTime().getDirectTimeInt();
 
         // Checks if there are overlaps between 2 schedules.
         return otherSchedule.getDay().equals(getDay())

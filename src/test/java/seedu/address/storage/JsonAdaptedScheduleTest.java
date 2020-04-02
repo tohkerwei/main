@@ -1,28 +1,29 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalClients.BENSON;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.model.schedule.Schedule;
-import seedu.address.testutil.ScheduleBuilder;
+import seedu.address.commons.exceptions.IllegalValueException;
 
 class JsonAdaptedScheduleTest {
 
     private static final String INVALID_DAY = "RANDOMDAY";
-    private static final String INVALID_START_TIME = "55:55";
-    private static final String INVALID_END_TIME = "99:99";
+    private static final String INVALID_START_TIME = "5555";
+    private static final String INVALID_END_TIME = "9999";
 
     private static final String VALID_DAY = "MON";
-    private static final String VALID_START_TIME = "11:00";
-    private static final String VALID_END_TIME = "12:00";
+    private static final String VALID_START_TIME = "1100";
+    private static final String VALID_END_TIME = "1200";
 
     @Test
     public void toModelType_validSchedule_returnsSchedule() {
-        Schedule testSchedule = new ScheduleBuilder().withDay(VALID_DAY).withStartTime(VALID_START_TIME)
-                .withEndTime(VALID_END_TIME).build();
-        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(testSchedule);
+        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(BENSON.getScheduleList().getArrayList().get(0));
 
-        assertEquals(testSchedule, schedule);
+        try {
+            assertEquals(BENSON.getScheduleList().getArrayList().get(0), schedule.toModelType());
+        } catch (IllegalValueException e) {
+            throw new AssertionError("This test should not fail.");
+        }
     }
 }

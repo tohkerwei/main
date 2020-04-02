@@ -22,6 +22,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.schedule.Day;
+import seedu.address.model.schedule.EndTime;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.StartTime;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
 /**
@@ -71,6 +75,9 @@ public class CommandTestUtil {
     public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "wrong123";
     public static final String INVALID_STARTTIME_DESC = " " + PREFIX_START_TIME + "asd123";
     public static final String INVALID_ENDTIME_DESC = " " + PREFIX_START_TIME + "bobobooooo";
+
+    public static final Schedule VALID_SCHEDULE_ONE = new Schedule(new Day(VALID_DAY_MON),
+            new StartTime(VALID_TIME_START), new EndTime(VALID_TIME_END));
 
 
     public static final EditCommand.EditClientDescriptor DESC_AMY;
