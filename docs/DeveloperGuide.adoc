@@ -214,11 +214,13 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 === Storage of Clients and Exercises 
 
-This section explains the implementation and design considerations for the implementation of the exercise storage for the clients.
+This section explains the implementation and design considerations for storage of clients and exercises.
 
 ==== Implementation
 
 We have decided to store the exercises done by the client together with the same client in one JSON file. Each `JsonAdaptedClient` will have a list of `JsonAdaptedExercise`.
+
+image::ClientExerciseStorageClassDiagram.png[]
 
 ==== Design Considerations
 
@@ -245,7 +247,7 @@ Tough to identify which JSON file is for which client
 
 We decided to use the first approach of storing the exercises with the client and all clients in one JSON file. There are multiple reasons for our choice as mentioned below. 
 
-We want to keep the implementation reading and storing of data simple. The first approach is definitely the most simple. When reading the data, it will remove the need to associate the exercises to the client. A client might potentially have a large amount of exercises, resulting in the reading process to be extremely slow.
+We want to keep the implementation reading and storing of data simple. The first approach is  the most simple. When reading the data, it will remove the need to associate the exercises to the client. A client might potentially have a large amount of exercises, resulting in the reading process to be extremely slow.
 
 Moreover, storing the exercise data from client data does not provide any performance benefits. Due to time constraints, we decided that the application should store all the data everytime it closes. This is regardless if the particular exercise or client data has been changed. Having to keep track of which data is edited and only overwrite those data would greatly increase the complexity of the application. Therefore, keeping exercises data separate from client data would be unnecessary and provide little additional functionality to the user. 
 
