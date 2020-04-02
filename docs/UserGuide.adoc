@@ -217,6 +217,31 @@ Examples:
 * `view-c 45`
 ** Shows all information about the 45th client
 
+=== Schedule trainings for a client: `schedule`
+
+Assigns weekly schedule timings to a client. The schedule will be displayed on the right panel of FitBiz, with the timings as well as the client name. This command can assign multiple timings to a client at once, by adding more arguments following the command. 
+
+Format: `schedule INDEX day/DAY st/STARTTIME et/ENDTIME`
+
+* `INDEX` refers to the index number shown on the displayed client list
+* `INDEX` must be a positive integer(ie. 1, 2, 3, ...)
+* `INDEX` must be for an existing client index number
+* `DAY` must be any one of the following values:
+** MON
+** TUE
+** WED
+** THU
+** FRI
+** SAT
+** SUN
+* `DAY` is not case-sensitive
+
+Examples:
+
+* `schedule 1 day/mon st/1100 et/1200`
+** Adds to the 1st client a schedule for training from 11:00am to 12:00pm on Monday
+
+
 === View schedule for the day/week: `view-s` [Coming in v2.0]
 
 Shows the schedule for today or the time specified.
@@ -260,6 +285,7 @@ Examples:
 |`filter-c KEYWORD [MORE_KEYWORDS]`| Filters a client based on specified keywords.
 |`list-c`| Shows the list of clients in FitBiz.
 |`view-c INDEX`| Shows detailed information of a client.
+|`schedule INDEX [day/DAY] [st/STARTTIME] [et/ENDTIME]`| Assigns a schedule to a client.
 |=======================================================================
 
 === Exercise Commands
