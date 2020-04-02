@@ -31,6 +31,16 @@ public class ExerciseReps {
         return test.equals("") || test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Converts the string value of exercise reps to integer.
+     */
+    public int convertToInt() {
+        if (value.equals("")) {
+            return 0;
+        }
+        return Integer.parseInt(value);
+    }
+
     @Override
     public String toString() {
         return value;

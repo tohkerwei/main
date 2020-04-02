@@ -15,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.ScheduleDay;
 import seedu.address.storage.Storage;
 
 /**
@@ -84,5 +85,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservableList<ScheduleDay> getScheduleDayList() {
+        return model.getScheduleDayList();
     }
 }

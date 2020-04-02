@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.statistics.PersonalBestFinder;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.exercise.Exercise;
@@ -49,7 +50,11 @@ public class DeleteExerciseCommand extends Command {
         }
 
         Exercise toRemove = clientToEditExerciseList.getExercise(targetIndex);
-        model.deleteExercise(toRemove);
+
+        // mutates the list belonging to the client by adding the exercise
+        clientToEditExerciseList.remove(toRemove);
+
+        PersonalBestFinder.generateAndSetPersonalBest(clientToEdit);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
     }

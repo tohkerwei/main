@@ -1,12 +1,13 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -14,14 +15,26 @@ import java.util.ArrayList;
  */
 public class CommandHistoryStorage {
 
-    private Path commandHistoryPath = Paths.get("data", "command.txt");
+    private Path commandHistoryPath;
+
+    public CommandHistoryStorage(Path commandHistoryPath) {
+        this.commandHistoryPath = commandHistoryPath;
+        createNewFile();
+    }
 
     /**
-     * Creates an empty new file for use in this class later.
+     * Creates an empty new file for future use if the file does not currently
+     * exists.
      */
     private void createNewFile() {
         File file = commandHistoryPath.toFile();
+
+        if (file.exists()) {
+            return;
+        }
+
         file.getParentFile().mkdirs();
+
         try {
             file.createNewFile();
         } catch (IOException ex) {
@@ -30,9 +43,11 @@ public class CommandHistoryStorage {
     }
 
     /**
-     * Returns an ArrayList of each command string from storage.
+     * Returns an ArrayList of each command string from storage. If the file does
+     * not exist, this method will call {@code createNewFile} to ensure that the
+     * file is created for future use.
      */
-    public ArrayList<String> readCommandHistory() {
+    public ArrayList<String> readFromStorage() {
         ArrayList<String> commands = new ArrayList<>();
         try {
             BufferedReader reader = Files.newBufferedReader(commandHistoryPath);
@@ -45,7 +60,7 @@ public class CommandHistoryStorage {
             reader.close();
         } catch (IOException ex) {
             // create new file
-            createNewFile();
+            System.out.println(ex.getStackTrace());
         }
         return commands;
     }
@@ -55,7 +70,8 @@ public class CommandHistoryStorage {
      *
      * @param history cannot be null.
      */
-    public void saveCommandHistory(ArrayList<String> history) {
+    public void saveToStorage(ArrayList<String> history) {
+        requireNonNull(history);
         try {
             BufferedWriter writer = Files.newBufferedWriter(commandHistoryPath);
 
@@ -63,6 +79,19 @@ public class CommandHistoryStorage {
                 writer.write(command);
                 writer.newLine();
             }
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println(ex.getStackTrace());
+        }
+    }
+
+    /**
+     * Clears the history from storage.
+     */
+    public void clearStorage() {
+        try {
+            BufferedWriter writer = Files.newBufferedWriter(commandHistoryPath);
+
             writer.close();
         } catch (IOException ex) {
             System.out.println(ex.getStackTrace());
