@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.exercise.Exercise;
 
 /**
  * The API of the Model component.
@@ -112,4 +113,10 @@ public interface Model {
      * @author @yonggiee
      */
     void updateClientViewIfApplicable(Client clientToEdit, Client editedClient);
+
+    /**
+     * Deletes the given exercise in clientInView exercise list.
+     * There must be client in clientInView.
+     */
+    void deleteExercise (Exercise exercise);
 }

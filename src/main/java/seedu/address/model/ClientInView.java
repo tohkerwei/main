@@ -20,4 +20,21 @@ public class ClientInView {
     public boolean hasClientInView() {
         return client != null;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof ClientInView)) {
+            return false;
+        }
+
+        // state check
+        return (((ClientInView) obj).client == null && client == null)
+            || ((ClientInView) obj).client.equals(client);
+    }
 }
