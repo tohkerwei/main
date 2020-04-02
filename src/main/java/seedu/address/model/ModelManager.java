@@ -104,6 +104,9 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteClient(Client target) {
+        if (target == getClientInView()) {
+            clearClientInView();
+        }
         addressBook.removeClient(target);
     }
 
@@ -147,6 +150,11 @@ public class ModelManager implements Model {
     @Override
     public void setClientInView(Client client) {
         clientInView.setClient(client);
+    }
+
+    @Override
+    public void clearClientInView() {
+        setClientInView(null);
     }
 
     @Override
