@@ -44,20 +44,14 @@ public class DeleteExerciseCommand extends Command {
         Client clientToEdit = model.getClientInView();
         UniqueExerciseList clientToEditExerciseList = clientToEdit.getExerciseList();
 
+        if (targetIndex.getZeroBased() >= clientToEditExerciseList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EXERCISE_DISPLAYED_INDEX);
+        }
+
         Exercise toRemove = clientToEditExerciseList.getExercise(targetIndex);
 
         // mutates the list belonging to the client by adding the exercise
         clientToEditExerciseList.remove(toRemove);
-
-        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
-            clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
-            clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
-            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList,
-                clientToEdit.getScheduleList());
-
-        if (targetIndex.getZeroBased() >= clientToEditExerciseList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EXERCISE_DISPLAYED_INDEX);
-        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
     }
