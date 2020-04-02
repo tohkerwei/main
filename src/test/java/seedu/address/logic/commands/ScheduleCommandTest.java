@@ -1,13 +1,19 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.model.ClientInView;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -31,5 +37,53 @@ class ScheduleCommandTest {
         expectedModel.setClient(model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased()), clientToSchedule);
 
         assertCommandSuccess(scheduleCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexFilteredList_showsCommandException() {
+        ArrayList<Schedule> emptyScheduleList = new ArrayList<>();
+        Client clientToSchedule = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_CLIENT, emptyScheduleList);
+
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new ClientInView());
+        expectedModel.setClient(model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased()), clientToSchedule);
+        showNoClient(expectedModel);
+
+        assertCommandFailure(scheduleCommand, expectedModel, expectedMessage);
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show no one.
+     */
+    private void showNoClient(Model model) {
+        model.updateFilteredClientList(p -> false);
+
+        assertTrue(model.getFilteredClientList().isEmpty());
+    }
+
+    @Test
+    public void equals() {
+        ArrayList<Schedule> scheduleListFirst = new ArrayList<>();
+        ArrayList<Schedule> scheduleListSecond = new ArrayList<>();
+        ScheduleCommand scheduleFirstCommand = new ScheduleCommand(INDEX_FIRST_CLIENT);
+        ScheduleCommand scheduleSecondCommand = new ScheduleCommand(INDEX_SECOND_CLIENT);
+
+        // same object -> returns true
+        assertTrue(scheduleFirstCommand.equals(scheduleFirstCommand));
+
+        // same values -> returns true
+        ScheduleCommand deleteFirstCommandCopy = new ScheduleCommand(INDEX_FIRST_CLIENT);
+        assertTrue(scheduleFirstCommand.equals(deleteFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(scheduleFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(scheduleFirstCommand.equals(null));
+
+        // different client -> returns false
+        assertFalse(scheduleFirstCommand.equals(scheduleSecondCommand));
     }
 }

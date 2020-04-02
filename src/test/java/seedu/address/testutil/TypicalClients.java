@@ -17,6 +17,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.schedule.ScheduleList;
 
 /**
  * A utility class containing a list of {@code Client} objects to be used in tests.
@@ -29,6 +30,7 @@ public class TypicalClients {
             .withTags("friends")
             .withExercisesInExerciseList(new ExerciseBuilder().build())
             .withExercisesInExerciseList(new ExerciseBuilder().withExerciseName("ANOTHER").build())
+            .withScheduleList(new ScheduleBuilder())
             .build();
     public static final Client BENSON = new ClientBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
