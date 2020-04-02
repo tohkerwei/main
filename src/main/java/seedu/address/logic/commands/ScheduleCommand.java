@@ -75,7 +75,7 @@ public class ScheduleCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ScheduleCommand // instanceof handles nulls
+                || (other instanceof ScheduleCommand // instance of handles nulls
                 && toAdd.equals(((ScheduleCommand) other).toAdd)
                 && index.equals(((ScheduleCommand) other).index));
     }
