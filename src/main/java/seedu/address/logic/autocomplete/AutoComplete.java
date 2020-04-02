@@ -11,11 +11,13 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddExerciseCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteExerciseCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.ui.ResultDisplay;
 
@@ -52,11 +54,13 @@ public class AutoComplete {
         trie.insert(AddExerciseCommand.COMMAND_WORD);
         trie.insert(ClearCommand.COMMAND_WORD);
         trie.insert(DeleteCommand.COMMAND_WORD);
+        trie.insert(DeleteExerciseCommand.COMMAND_WORD);
         trie.insert(EditCommand.COMMAND_WORD);
         trie.insert(ExitCommand.COMMAND_WORD);
         trie.insert(FindCommand.COMMAND_WORD);
         trie.insert(HelpCommand.COMMAND_WORD);
         trie.insert(ListCommand.COMMAND_WORD);
+        trie.insert(ScheduleCommand.COMMAND_WORD);
         trie.insert(ViewCommand.COMMAND_WORD);
     }
 
