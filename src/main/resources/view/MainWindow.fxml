@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL ?>
-<?import javafx.geometry.Insets ?>
-<?import javafx.scene.Scene ?>
-<?import javafx.scene.control.Menu ?>
-<?import javafx.scene.control.MenuBar ?>
-<?import javafx.scene.control.MenuItem ?>
-<?import javafx.scene.image.Image ?>
-<?import javafx.scene.layout.HBox ?>
-<?import javafx.scene.layout.StackPane ?>
-<?import javafx.scene.layout.VBox ?>
-<?import javafx.stage.Stage ?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.stage.Stage?>
 
 <fx:root minHeight="600" minWidth="1000.0" onCloseRequest="#handleExit" title="FitBiz" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
@@ -62,14 +62,14 @@
               <children>
                 <HBox prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                   <children>
-                    <StackPane fx:id="clientViewPanelPlaceholder" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="321.0" styleClass="pane-with-no-border" HBox.hgrow="ALWAYS"></StackPane>
-                    <StackPane fx:id="personalBestTablePlaceholder" prefHeight="200.0" prefWidth="314.0" HBox.hgrow="ALWAYS" />
+                    <StackPane fx:id="clientViewPanelPlaceholder" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="321.0" styleClass="pane-with-no-border" HBox.hgrow="ALWAYS" />
+                    <StackPane fx:id="personalBestTablePlaceholder" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" prefWidth="314.0" HBox.hgrow="ALWAYS" />
                   </children>
                            <padding>
                               <Insets bottom="10.0" />
                            </padding>
                 </HBox>
-                <StackPane fx:id="exerciseListTablePlaceholder" layoutX="21.0" layoutY="21.0" minHeight="300.0" styleClass="pane-with-no-border" VBox.vgrow="ALWAYS"></StackPane>
+                <StackPane fx:id="exerciseListTablePlaceholder" layoutX="21.0" layoutY="21.0" minHeight="300.0" styleClass="pane-with-no-border" VBox.vgrow="ALWAYS" />
               </children>
             </VBox>
 
