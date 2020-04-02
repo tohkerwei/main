@@ -61,6 +61,19 @@ public class Schedule implements Comparable<Schedule> {
         this.clientName = s;
     }
 
+    /**
+     * @author tohkerwei
+     * @param scheduleString a schedule in string format
+     * @return a schedule object
+     */
+    public static Schedule stringToSchedule(String scheduleString) {
+        String[] tokens = scheduleString.split(" ", 0);
+        Day day = new Day(tokens[0]);
+        StartTime startTime = new StartTime(tokens[2].substring(0, 2) + tokens[2].substring(3, 5));
+        EndTime endTime = new EndTime(tokens[4].substring(0, 2) + tokens[4].substring(3, 5));
+        return new Schedule(day, startTime, endTime);
+    }
+
     public Day getDay() {
         return this.day;
     }

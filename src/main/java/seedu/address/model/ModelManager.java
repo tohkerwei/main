@@ -170,7 +170,7 @@ public class ModelManager implements Model {
     public ObservableList<ScheduleDay> getScheduleDayList() {
         ArrayList<ScheduleList> fullScheduleList = new ArrayList<>();
         for (Client c: filteredClients) {
-            for (Schedule s: c.getScheduleList().getScheduleList()) {
+            for (Schedule s: c.getScheduleList().getArrayList()) {
                 s.assignClientName(c.getName().fullName);
             }
             fullScheduleList.add(c.getScheduleList());

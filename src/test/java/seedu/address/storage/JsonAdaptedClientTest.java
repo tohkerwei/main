@@ -34,6 +34,7 @@ public class JsonAdaptedClientTest {
     private static final String INVALID_GENDER = "helicopter";
     private static final String INVALID_TARGET_WEIGHT = "tree fiddy";
     private static final String INVALID_HEIGHT = "fiddy 3";
+    private static final String INVALID_SCHEDULE = "mon Time: 99:99 - 55:55";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -51,7 +52,7 @@ public class JsonAdaptedClientTest {
             .collect(Collectors.toList());
     private static final List<JsonAdaptedExercise> VALID_EXERCISE_LIST = BENSON.getExerciseList()
             .asUnmodifiableObservableList().stream().map(JsonAdaptedExercise::new).collect(Collectors.toList());
-    private static final List<JsonAdaptedSchedule> VALID_SCHEDULE_LIST = BENSON.getScheduleList().getScheduleList()
+    private static final List<JsonAdaptedSchedule> VALID_SCHEDULE_LIST = BENSON.getScheduleList().getArrayList()
             .stream().map(JsonAdaptedSchedule::new).collect(Collectors.toList());
 
     @Test

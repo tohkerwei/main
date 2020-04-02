@@ -37,6 +37,7 @@ public class ClientBuilder {
     public static final String DEFAULT_HEIGHT = "175";
     public static final String DEFAULT_REMARK = "Some remarks";
     public static final String DEFAULT_SPORT = "Coding";
+    public static final String DEFAULT_SCHEDULE = "mon Time: 12:00 - 14:00";
 
     private Name name;
     private Phone phone;
@@ -86,7 +87,9 @@ public class ClientBuilder {
         targetWeight = clientToCopy.getTargetWeight();
         sports = new HashSet<>(clientToCopy.getSports());
         tags = new HashSet<>(clientToCopy.getTags());
-        scheduleList = clientToCopy.getScheduleList();
+        ScheduleList newScheduleList = new ScheduleList();
+        newScheduleList = clientToCopy.getScheduleList();
+        scheduleList = newScheduleList;
     }
 
     /**
