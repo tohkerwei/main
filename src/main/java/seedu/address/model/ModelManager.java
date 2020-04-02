@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.PersonalBest;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.UniqueExerciseList;
 
@@ -167,6 +168,7 @@ public class ModelManager implements Model {
     public void deleteExercise (Exercise exercise) {
         Client clientToEdit = getClientInView();
         UniqueExerciseList clientToEditExerciseList = clientToEdit.getExerciseList();
+        PersonalBest clientToEditPersonalBest = clientToEdit.getPersonalBest();
 
         // mutates the list belonging to the client by removing the exercise
         clientToEditExerciseList.remove(exercise);
@@ -174,7 +176,7 @@ public class ModelManager implements Model {
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
             clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
             clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
-            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList);
+            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList, clientToEditPersonalBest);
 
         setClient(clientToEdit, editedClient);
     }
