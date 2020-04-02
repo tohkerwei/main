@@ -88,10 +88,6 @@ public class Day {
         }
     }
 
-    public String getDay() {
-        return value.toString();
-    }
-
     public Weekday getDayEnum() {
         return value;
     }
