@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,9 +13,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.PersonalBest;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.UniqueExerciseList;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.ScheduleDay;
+import seedu.address.model.schedule.ScheduleList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -162,13 +165,25 @@ public class ModelManager implements Model {
         }
     }
 
+    //=========== ScheduleList ==================================================================================
+    @Override
+    public ObservableList<ScheduleDay> getScheduleDayList() {
+        ArrayList<ScheduleList> fullScheduleList = new ArrayList<>();
+        for (Client c: filteredClients) {
+            for (Schedule s: c.getScheduleList().getArrayList()) {
+                s.assignClientName(c.getName().fullName);
+            }
+            fullScheduleList.add(c.getScheduleList());
+        }
+        return ScheduleDay.weeklySchedule(fullScheduleList);
+    };
+
     //=========== Exercise ================================================================================
 
     @Override
     public void deleteExercise (Exercise exercise) {
         Client clientToEdit = getClientInView();
         UniqueExerciseList clientToEditExerciseList = clientToEdit.getExerciseList();
-        PersonalBest clientToEditPersonalBest = clientToEdit.getPersonalBest();
 
         // mutates the list belonging to the client by removing the exercise
         clientToEditExerciseList.remove(exercise);
@@ -176,7 +191,8 @@ public class ModelManager implements Model {
         Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
             clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
             clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
-            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList, clientToEditPersonalBest);
+            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList, clientToEdit.getPersonalBest(),
+            clientToEdit.getScheduleList());
 
         setClient(clientToEdit, editedClient);
     }

@@ -73,7 +73,7 @@ public class AddExerciseCommand extends Command {
             clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
             clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
             clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList,
-            clientToEdit.getPersonalBest());
+            clientToEdit.getPersonalBest(), clientToEdit.getScheduleList());
 
         model.setClient(clientToEdit, editedClient);
 

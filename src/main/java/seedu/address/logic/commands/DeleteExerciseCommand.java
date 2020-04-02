@@ -50,7 +50,9 @@ public class DeleteExerciseCommand extends Command {
         }
 
         Exercise toRemove = clientToEditExerciseList.getExercise(targetIndex);
-        model.deleteExercise(toRemove);
+
+        // mutates the list belonging to the client by adding the exercise
+        clientToEditExerciseList.remove(toRemove);
 
         PersonalBestFinder.generateAndSetPersonalBest(clientToEdit);
 

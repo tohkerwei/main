@@ -18,6 +18,7 @@ import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.UniqueExerciseList;
+import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -37,6 +38,7 @@ public class ClientBuilder {
     public static final String DEFAULT_HEIGHT = "175";
     public static final String DEFAULT_REMARK = "Some remarks";
     public static final String DEFAULT_SPORT = "Coding";
+    public static final String DEFAULT_SCHEDULE = "mon Time: 12:00 - 14:00";
 
     private Name name;
     private Phone phone;
@@ -53,6 +55,7 @@ public class ClientBuilder {
     // TODO: change this later
     private UniqueExerciseList exerciseList = new UniqueExerciseList();
     private PersonalBest personalBest = new PersonalBest();
+    private ScheduleList scheduleList;
 
     public ClientBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -67,6 +70,7 @@ public class ClientBuilder {
         targetWeight = new TargetWeight(DEFAULT_TARGET_WEIGHT);
         tags = new HashSet<>();
         sports = new HashSet<>();
+        scheduleList = new ScheduleList();
     }
 
     /**
@@ -85,6 +89,9 @@ public class ClientBuilder {
         targetWeight = clientToCopy.getTargetWeight();
         sports = new HashSet<>(clientToCopy.getSports());
         tags = new HashSet<>(clientToCopy.getTags());
+        ScheduleList newScheduleList = new ScheduleList();
+        newScheduleList = clientToCopy.getScheduleList();
+        scheduleList = newScheduleList;
     }
 
     /**
@@ -98,7 +105,7 @@ public class ClientBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Client} that we are building.
      */
-    public ClientBuilder withTags(String ... tags) {
+    public ClientBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -178,7 +185,7 @@ public class ClientBuilder {
     /**
      * Parses the {@code sports} into a {@code Set<Sport>} and set it to the {@code Client} that we are building.
      */
-    public ClientBuilder withSports(String ... sports) {
+    public ClientBuilder withSports(String... sports) {
         this.sports = SampleDataUtil.getSportSet(sports);
         return this;
     }
@@ -192,11 +199,19 @@ public class ClientBuilder {
     }
 
     /**
+     * Sets the {@code scheduleList} to the {@code Client} that we are building.
+     */
+    public ClientBuilder withScheduleList(ScheduleList scheduleList) {
+        this.scheduleList = scheduleList;
+        return this;
+    }
+
+    /**
      * Builds and returns the client.
      */
     public Client build() {
         return new Client(name, gender, phone, email, address, tags, birthday, currentWeight,
-                targetWeight, height, remark, sports, exerciseList, personalBest);
+                targetWeight, height, remark, sports, exerciseList, personalBest, scheduleList);
     }
 
 }
