@@ -5,6 +5,9 @@ import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
 
+/**
+ * A utility class to help with building Schedule objects.
+ */
 public class ScheduleBuilder {
 
     public static final String DEFAULT_DAY = ("MON");

@@ -1,29 +1,30 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import static seedu.address.logic.commands.CommandTestUtil.DAY_DESC_MON;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDTIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTTIME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_END;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_START;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_MON;
+
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ScheduleCommand;
-import seedu.address.model.client.*;
 import seedu.address.model.schedule.Day;
 import seedu.address.model.schedule.EndTime;
 import seedu.address.model.schedule.Schedule;
 import seedu.address.model.schedule.StartTime;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.ClientBuilder;
-import seedu.address.testutil.EditClientDescriptorBuilder;
-
-import java.util.ArrayList;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalClients.AMY;
-import static seedu.address.testutil.TypicalClients.BOB;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
 public class ScheduleCommandParserTest {
 

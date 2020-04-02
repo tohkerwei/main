@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
