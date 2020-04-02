@@ -150,6 +150,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void clearClientInView() {
+        setClientInView(null);
+    }
+
+    @Override
     public boolean hasClientInView() {
         return clientInView.hasClientInView();
     }

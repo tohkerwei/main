@@ -194,24 +194,44 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Removes UI elements from panels regarding {@code ClientInView}.
+     *
+     * @author @yonggiee
+     */
+    private void clearClientInViewDisplay() {
+        clientViewPanelPlaceholder.getChildren().clear();
+        exerciseListTablePlaceholder.getChildren().clear();
+        personalBestTablePlaceholder.getChildren().clear();
+    }
+
+    /**
+     * Adds UI elements to panels regarding {@code ClientInView}.
+     *
+     * @author @yonggiee
+     */
+    private void addClientInViewDisplay() {
+        ClientView clientView = clientViewDisplay.getClientView();
+        clientViewPanelPlaceholder.getChildren().add(clientView.getRoot());
+
+        ExerciseListTable exerciseListTable = clientViewDisplay.getExerciseListTable();
+        exerciseListTablePlaceholder.getChildren().add(exerciseListTable.getRoot());
+
+        PersonalBestTable personalBestTable = clientViewDisplay.getPersonalBestTable();
+        personalBestTablePlaceholder.getChildren().add(personalBestTable.getRoot());
+    }
+
+    /**
      * Updates {@code clientInView}.
      *
      * @author @yonggiee
      */
     private void refreshClientInViewDisplay() {
-        clientViewDisplay.update(logic.getClientInView());
+        clearClientInViewDisplay();
 
-        ClientView clientView = clientViewDisplay.getClientView();
-        clientViewPanelPlaceholder.getChildren().clear();
-        clientViewPanelPlaceholder.getChildren().add(clientView.getRoot());
-
-        ExerciseListTable exerciseListTable = clientViewDisplay.getExerciseListTable();
-        exerciseListTablePlaceholder.getChildren().clear();
-        exerciseListTablePlaceholder.getChildren().add(exerciseListTable.getRoot());
-
-        PersonalBestTable personalBestTable = clientViewDisplay.getPersonalBestTable();
-        personalBestTablePlaceholder.getChildren().clear();
-        personalBestTablePlaceholder.getChildren().add(personalBestTable.getRoot());
+        if (logic.hasClientInView()) {
+            clientViewDisplay.update(logic.getClientInView());
+            addClientInViewDisplay();
+        }
     }
 
     /**
@@ -238,9 +258,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (logic.hasClientInView()) {
-                refreshClientInViewDisplay();
-            }
+            refreshClientInViewDisplay();
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
