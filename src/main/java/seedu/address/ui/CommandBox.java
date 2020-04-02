@@ -10,8 +10,8 @@ import javafx.scene.layout.Region;
 import seedu.address.logic.autocomplete.AutoComplete;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.history.CommandHistory;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.CommandHistory;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -43,7 +43,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
                 if (ke.getCode() == KeyCode.UP) {
-                    String prevCommand = commandHistory.getPrevCommand();
+                    String prevCommand = commandHistory.getPreviousCommand();
                     commandTextField.setText(prevCommand);
                     commandTextField.positionCaret(CARET_POSITION_INDEX);
                 } else if (ke.getCode() == KeyCode.DOWN) {
@@ -69,7 +69,7 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         String enteredCommand = commandTextField.getText();
-        commandHistory.add(enteredCommand);
+        commandHistory.addToHistory(enteredCommand);
         try {
             commandTextField.setText("");
             commandExecutor.execute(enteredCommand);

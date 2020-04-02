@@ -2,12 +2,11 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 
-import seedu.address.storage.CommandHistoryStorage;
-
 /**
- * This represents the model of the command history.
+ * This represents the model of the command history and contains the underlying
+ * data structure to be used by {@code CommandHistory}.
  */
-public class CommandHistory {
+public class CommandHistoryState {
 
     private static final int START_INDEX = 0;
     private static final int MAX_HISTORY_SIZE = 100;
@@ -15,22 +14,13 @@ public class CommandHistory {
 
     private ArrayList<String> history;
     private int index;
-    private CommandHistoryStorage commandHistoryStorage;
 
     /**
      * Default constructor for this class.
      */
-    public CommandHistory() {
-        this.commandHistoryStorage = new CommandHistoryStorage();
-        initialiseCommandHistory();
-    }
-
-    /**
-     * Initialises the history from the storage.
-     */
-    private void initialiseCommandHistory() {
-        history = new ArrayList<String>(commandHistoryStorage.readCommandHistory());
-        index = history.size();
+    public CommandHistoryState(ArrayList<String> initialState) {
+        history = initialState;
+        index = initialState.size();
     }
 
     private boolean isAtStart() {
@@ -87,15 +77,14 @@ public class CommandHistory {
             return;
         }
         if (isAtMaxCapacity()) {
-            history.remove(0);
+            history.remove(START_INDEX);
         }
 
         history.add(command);
         index = history.size();
-        commandHistoryStorage.saveCommandHistory(history);
     }
 
-    public String getPrevCommand() {
+    public String getPreviousCommand() {
         if (isAtStart()) {
             return hasNoHistory() ? EMPTY_STRING : history.get(index);
         }
@@ -113,17 +102,17 @@ public class CommandHistory {
 
     /**
      * Returns a copy of the history list. Any modifications done to this returned
-     * list will not affect the list stored in this class.
+     * list will not affect the internal list stored in this class.
      */
-    public ArrayList<String> getHistory() {
+    public ArrayList<String> getCurrentState() {
         return new ArrayList<String>(history);
     }
 
     /**
-     * Clears and resets the history and the index.
+     * Clears and resets the state of the history and the index.
      */
-    public void clearHistory() {
+    public void clearState() {
         history.clear();
-        index = 0;
+        index = START_INDEX;
     }
 }
