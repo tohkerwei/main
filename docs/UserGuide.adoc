@@ -293,6 +293,6 @@ Examples:
 |=======================================================================
 |Command | Summary
 |`add-e n/EXERCISE_NAME d/DATE ew/WEIGHT reps/REPS sets/SETS`| Adds a new exercise to a client.
-|`delete-e INDEX`| Deletes an exercise in the exercise list of the client. 
+|`delete-e INDEX`| Deletes an exercise in the exercise list of the client.
 |`graph e/Push Ups`| Shows a graph of the exercise progress done by a client.
 |=======================================================================
