@@ -50,8 +50,7 @@ public class ViewCommand extends Command {
         PersonalBest personalBest = client.getPersonalBest();
         personalBest.setPersonalBest(client);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, client.getName().fullName)
-                + "\n" + personalBest.toString());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, client.getName().fullName));
     }
 
     @Override

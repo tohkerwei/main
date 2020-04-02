@@ -7,9 +7,17 @@ import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseName;
 import seedu.address.model.exercise.UniqueExerciseList;
 
+/**
+ * Finds the personal best of every exercise with valid weight or reps in exercise list.
+ */
 public class PersonalBestFinder {
 
-    // create a new hashmap of personal bests when view-c or add-e is called
+    /**
+     * Creates a new hashmap of personal bests when view-c or add-e is called.
+     *
+     * @param clientInView The client currently in view
+     * @return A newly created hashmap of personal bests
+     */
     public static HashMap<ExerciseName, Exercise> createPbList(Client clientInView) {
         UniqueExerciseList exerciseList = clientInView.getExerciseList();
         HashMap<ExerciseName, Exercise> pbTable = new HashMap<ExerciseName, Exercise>();
@@ -38,6 +46,12 @@ public class PersonalBestFinder {
         return pbTable;
     }
 
+    /**
+     * Checks if exercise has either one of weight or reps or both.
+     *
+     * @param ex The exercise to be checked
+     * @return True if the exercise has either weight or reps or both.
+     */
     private static boolean hasWeightOrReps(Exercise ex) {
         boolean hasWeight = !ex.getExerciseWeight().toString().equals("");
         boolean hasReps = !ex.getExerciseReps().toString().equals("");

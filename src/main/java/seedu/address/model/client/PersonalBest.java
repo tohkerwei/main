@@ -8,6 +8,9 @@ import seedu.address.logic.statistics.PersonalBestFinder;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseName;
 
+/**
+ * Represents the personal bests of a client's exercises in FitBiz.
+ */
 public class PersonalBest {
     private HashMap<ExerciseName, Exercise> personalBestTable;
     private ObservableList<Exercise> personalBestList = FXCollections.observableArrayList();
