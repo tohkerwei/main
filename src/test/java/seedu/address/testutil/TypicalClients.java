@@ -28,6 +28,7 @@ public class TypicalClients {
             .withPhone("94351253")
             .withTags("friends")
             .withExercisesInExerciseList(new ExerciseBuilder().build())
+            .withExercisesInExerciseList(new ExerciseBuilder().withExerciseName("Pull").build())
             .build();
     public static final Client BENSON = new ClientBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
