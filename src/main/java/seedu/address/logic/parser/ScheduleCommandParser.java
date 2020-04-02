@@ -95,7 +95,6 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
                         ScheduleCommand.MESSAGE_CONTAINS_DUPLICATES));
             }
             scheduleList.add(schedule);
-            System.out.println(schedule);
         }
 
         return new ScheduleCommand(index, scheduleList);

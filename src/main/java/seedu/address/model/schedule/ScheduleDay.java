@@ -88,7 +88,6 @@ public class ScheduleDay {
         for (Schedule s : scheduleList) {
             sb.append(s.getTimeFrame() + " " + s.getClientName() + "\n");
         }
-        System.out.println(sb.toString() + "im here");
         return sb.toString();
     }
 
