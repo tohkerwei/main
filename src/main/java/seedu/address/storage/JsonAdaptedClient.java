@@ -23,6 +23,7 @@ import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.exercise.UniqueExerciseList;
+import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,6 +47,7 @@ class JsonAdaptedClient {
     private final String remark;
     private final List<JsonAdaptedSport> sports = new ArrayList<>();
     private final List<JsonAdaptedExercise> exerciseList = new ArrayList<>();
+    private final List<JsonAdaptedSchedule> scheduleList = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
@@ -57,7 +59,8 @@ class JsonAdaptedClient {
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("currentWeight") String currentWeight,
             @JsonProperty("targetWeight") String targetWeight, @JsonProperty("height") String height,
             @JsonProperty("remark") String remark, @JsonProperty("sports") List<JsonAdaptedSport> sports,
-            @JsonProperty("exerciseList") List<JsonAdaptedExercise> exerciseList) {
+            @JsonProperty("exerciseList") List<JsonAdaptedExercise> exerciseList,
+            @JsonProperty("scheduleList") List<JsonAdaptedSchedule> scheduleList) {
         this.name = name;
         this.gender = gender;
         this.phone = phone;
@@ -76,6 +79,9 @@ class JsonAdaptedClient {
         }
         if (exerciseList != null) {
             this.exerciseList.addAll(exerciseList);
+        }
+        if (scheduleList != null) {
+            this.scheduleList.addAll(scheduleList);
         }
     }
 
@@ -103,6 +109,9 @@ class JsonAdaptedClient {
                 .asUnmodifiableObservableList().stream()
                 .map(JsonAdaptedExercise::new)
                 .collect(Collectors.toList()));
+        scheduleList.addAll(source.getScheduleList().getArrayList().stream()
+                    .map(JsonAdaptedSchedule::new)
+                    .collect(Collectors.toList()));
     }
 
     /**
@@ -130,6 +139,11 @@ class JsonAdaptedClient {
             modelExerciseList.add(ex.toModelType());
         }
         modelExerciseList.sortByExerciseDate(); // do a sanity presort to ensure initial list is sorted
+
+        final ScheduleList modelScheduleList = new ScheduleList();
+        for (JsonAdaptedSchedule schedule : scheduleList) {
+            modelScheduleList.add(schedule.toModelType());
+        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -212,6 +226,7 @@ class JsonAdaptedClient {
         final Remark modelRemark = new Remark(remark);
 
         return new Client(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags, modelBirthday,
-                modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport, modelExerciseList);
+                modelCurrentWeight, modelTargetWeight, modelHeight, modelRemark, modelSport,
+                modelExerciseList, modelScheduleList);
     }
 }
