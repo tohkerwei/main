@@ -56,7 +56,7 @@ As this is primarily a CLI based application, some features are included to make
 
 == Commands
 
-This section introduces the syntax and the usages of the commands available in FitBiz. In explaining the syntax, we will adhere to the following format: 
+This section introduces the syntax and the usages of the commands available in FitBiz. In explaining the syntax, we will adhere to the following format:
 
 * Words in `UPPER_SNAKE_CASE` are the parameters to be supplied by the user
 ** e.g. in `add-c n/NAME`, `NAME` is a parameter which can be used as `add-c n/John Doe`
