@@ -1,24 +1,23 @@
 package seedu.address.model.client;
 
-import java.util.HashMap;
+import java.util.Collection;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.logic.statistics.PersonalBestFinder;
 import seedu.address.model.exercise.Exercise;
-import seedu.address.model.exercise.ExerciseName;
 
 /**
  * Represents the personal bests of a client's exercises in FitBiz.
  */
 public class PersonalBest {
-    private HashMap<ExerciseName, Exercise> personalBestTable;
-    private ObservableList<Exercise> personalBestList = FXCollections.observableArrayList();
+    private ObservableList<Exercise> personalBestList;
 
-    public void setPersonalBest(Client client) {
-        personalBestTable = PersonalBestFinder.createPbList(client);
-        personalBestList.clear();
-        personalBestList.addAll(personalBestTable.values());
+    public void setPersonalBest(Collection<Exercise> values) {
+        this.personalBestList = FXCollections.observableArrayList(values);
+    }
+
+    public ObservableList<Exercise> getPersonalBest() {
+        return this.personalBestList;
     }
 
     @Override

@@ -3,6 +3,7 @@ package seedu.address.logic.statistics;
 import java.util.HashMap;
 
 import seedu.address.model.client.Client;
+import seedu.address.model.client.PersonalBest;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseName;
 import seedu.address.model.exercise.UniqueExerciseList;
@@ -13,13 +14,13 @@ import seedu.address.model.exercise.UniqueExerciseList;
 public class PersonalBestFinder {
 
     /**
-     * Creates a new hashmap of personal bests when view-c or add-e is called.
+     * Generates and sets personal bests when view-c, add-e or delete-e is called.
      *
      * @param clientInView The client currently in view
-     * @return A newly created hashmap of personal bests
      */
-    public static HashMap<ExerciseName, Exercise> createPbList(Client clientInView) {
+    public static void generateAndSetPersonalBest(Client clientInView) {
         UniqueExerciseList exerciseList = clientInView.getExerciseList();
+        PersonalBest personalBest = clientInView.getPersonalBest();
         HashMap<ExerciseName, Exercise> pbTable = new HashMap<ExerciseName, Exercise>();
 
         for (Exercise ex : exerciseList) {
@@ -43,7 +44,8 @@ public class PersonalBestFinder {
                 pbTable.put(name, ex);
             }
         }
-        return pbTable;
+
+        personalBest.setPersonalBest(pbTable.values());
     }
 
     /**

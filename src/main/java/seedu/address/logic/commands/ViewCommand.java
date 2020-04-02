@@ -8,9 +8,9 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.statistics.PersonalBestFinder;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.PersonalBest;
 
 /**
  * Displays all details of a client from FitBiz, denoted by index in list view.
@@ -47,8 +47,7 @@ public class ViewCommand extends Command {
         Client client = lastShownList.get(index.getZeroBased());
         model.setClientInView(client);
 
-        PersonalBest personalBest = client.getPersonalBest();
-        personalBest.setPersonalBest(client);
+        PersonalBestFinder.generateAndSetPersonalBest(client);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, client.getName().fullName));
     }

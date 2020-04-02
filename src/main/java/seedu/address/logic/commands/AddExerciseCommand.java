@@ -9,9 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REPS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.statistics.PersonalBestFinder;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.PersonalBest;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.UniqueExerciseList;
 
@@ -77,8 +77,7 @@ public class AddExerciseCommand extends Command {
 
         model.setClient(clientToEdit, editedClient);
 
-        PersonalBest personalBest = clientToEdit.getPersonalBest();
-        personalBest.setPersonalBest(clientToEdit);
+        PersonalBestFinder.generateAndSetPersonalBest(editedClient);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, clientToEdit.getExerciseList().toString()));
     }
