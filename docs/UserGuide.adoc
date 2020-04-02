@@ -244,7 +244,7 @@ Examples:
 
 === Schedule trainings for a client: `schedule`
 
-Assigns weekly schedule timings to a client. The schedule will be displayed on the right panel of FitBiz, with the timings as well as the client name. This command can assign multiple timings to a client at once, by adding more arguments following the command. 
+Assigns weekly schedule timings to a client. The schedule will be displayed on the right panel of FitBiz, with the timings as well as the client's name. This command can assign multiple schedules to a client at once, by adding more arguments following the command.
 
 Format: `schedule INDEX day/DAY st/STARTTIME et/ENDTIME`
 
