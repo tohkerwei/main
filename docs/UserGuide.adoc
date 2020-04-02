@@ -103,12 +103,12 @@ Examples:
 +
 `add-e n/Push Ups d/25-02-2020 reps/50`
 +
-** Adds an exercise called "Push Ups" with "50 reps" on 2nd July 2020 to the 1st client
+** Adds an exercise called "Push Ups" with "50 reps" on 25th February 2020 to the 1st client
 * `view-c 3`
 +
 `add-e n/Bench Press d/26-02-2020 ew/120 reps/10`
 +
-** Adds an exercise called "Bench Press" of weight 120kg with remarks "50 reps" on 2nd July 2020 to the 3rd client
+** Adds an exercise called "Bench Press" of weight 120kg with "10 reps" on 26th February 2020 to the 3rd client
 
 === Delete a client's exercise: `delete-e`
 
@@ -152,11 +152,11 @@ Format: `edit-c INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GENDER] [h/HEI
 * `INDEX` must be a positive integer (ie. 1, 2, 3, ...)
 * At least one of the optional fields must be provided
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative
-* You can remove all the client’s tags by typing `t/`` without specifying any tags after it
+* You can remove all the client’s tags by typing `t/` without specifying any tags after it
 
 Examples:
 
-* `edit-c 1 n/Ming Liang a/age v/60 a/gender v/male`
+* `edit-c 1 n/Ming Liang a/60 a/male`
 ** Edits the name of the 1st client to Ming Liang, age to 60, and gender to male.
 
 === Export as CSV: `export` [Coming in v1.4]
@@ -207,7 +207,8 @@ Examples:
 
 === View help: `help`
 
-Lists all available commands and a short description of what they do. Specify the command for more detailed explanation.
+Opens a window with the link to the User Guide. `Currently in v1.3`
+Lists all available commands and a short description of what they do. Specify the command for more detailed explanation. `Coming in v1.4`
 
 Format: `help [c/COMMAND]`
 
