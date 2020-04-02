@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,14 +19,22 @@ public class CommandHistoryStorage {
 
     public CommandHistoryStorage(Path commandHistoryPath) {
         this.commandHistoryPath = commandHistoryPath;
+        createNewFile();
     }
 
     /**
-     * Creates an empty new file for future use.
+     * Creates an empty new file for future use if the file does not currently
+     * exists.
      */
     private void createNewFile() {
         File file = commandHistoryPath.toFile();
+
+        if (file.exists()) {
+            return;
+        }
+
         file.getParentFile().mkdirs();
+
         try {
             file.createNewFile();
         } catch (IOException ex) {
@@ -50,7 +60,7 @@ public class CommandHistoryStorage {
             reader.close();
         } catch (IOException ex) {
             // create new file
-            createNewFile();
+            System.out.println(ex.getStackTrace());
         }
         return commands;
     }
@@ -61,6 +71,7 @@ public class CommandHistoryStorage {
      * @param history cannot be null.
      */
     public void saveToStorage(ArrayList<String> history) {
+        requireNonNull(history);
         try {
             BufferedWriter writer = Files.newBufferedWriter(commandHistoryPath);
 
