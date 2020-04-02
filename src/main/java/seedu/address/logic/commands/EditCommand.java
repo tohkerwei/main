@@ -39,6 +39,7 @@ import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
 import seedu.address.model.client.TargetWeight;
 import seedu.address.model.exercise.UniqueExerciseList;
+import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -112,9 +113,10 @@ public class EditCommand extends Command {
         Remark updatedRemark = editClientDescriptor.getRemark()
                 .orElse(clientToEdit.getRemark());
         UniqueExerciseList exerciseList = clientToEdit.getExerciseList();
+        ScheduleList scheduleList = clientToEdit.getScheduleList();
         return new Client(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedBirthday, updatedCurrentWeight, updatedTargetWeight, updatedHeight, updatedRemark, updatedSport,
-                exerciseList);
+                exerciseList, scheduleList);
     }
 
     @Override
