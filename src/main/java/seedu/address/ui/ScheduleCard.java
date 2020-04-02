@@ -38,7 +38,7 @@ public class ScheduleCard extends UiPart<Region> {
         scheduleList.setText(scheduleDay.getDayScheduleString());
         scheduleList.setPrefWidth(200);
         scheduleList.setPrefHeight(20 + scheduleDay.getNumberOfSchedules() * 17);
-        cardPane.setPrefHeight(75 + scheduleDay.getNumberOfSchedules() * 17);
+        cardPane.setPrefHeight(45 + scheduleDay.getNumberOfSchedules() * 17);
     }
 
 
