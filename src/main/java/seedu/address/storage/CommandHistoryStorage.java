@@ -32,7 +32,7 @@ public class CommandHistoryStorage {
     /**
      * Returns an ArrayList of each command string from storage.
      */
-    public ArrayList<String> readCommandHistory() {
+    public ArrayList<String> readFromStorage() {
         ArrayList<String> commands = new ArrayList<>();
         try {
             BufferedReader reader = Files.newBufferedReader(commandHistoryPath);
@@ -55,7 +55,7 @@ public class CommandHistoryStorage {
      *
      * @param history cannot be null.
      */
-    public void saveCommandHistory(ArrayList<String> history) {
+    public void saveToStorage(ArrayList<String> history) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(commandHistoryPath);
 
@@ -63,6 +63,19 @@ public class CommandHistoryStorage {
                 writer.write(command);
                 writer.newLine();
             }
+            writer.close();
+        } catch (IOException ex) {
+            System.out.println(ex.getStackTrace());
+        }
+    }
+
+    /**
+     * Clears the history from storage.
+     */
+    public void clearStorage() {
+        try {
+            BufferedWriter writer = Files.newBufferedWriter(commandHistoryPath);
+
             writer.close();
         } catch (IOException ex) {
             System.out.println(ex.getStackTrace());
