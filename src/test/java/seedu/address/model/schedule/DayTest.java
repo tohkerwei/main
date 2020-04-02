@@ -15,6 +15,7 @@ class DayTest {
         assertThrows(NullPointerException.class, () -> new Day(null));
     }
 
+
     @Test
     public void isValidDay() {
         //null day

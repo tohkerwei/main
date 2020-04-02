@@ -53,7 +53,7 @@ public abstract class Time {
      * @param time time in string
      * @return formatted time in HH:MM
      */
-    public String formatTime(String time) {
+    public static String formatTime(String time) {
         String formattedEndTime = time.substring(0, 2) + ":" + time.substring(2, 4);
         return formattedEndTime;
     }
