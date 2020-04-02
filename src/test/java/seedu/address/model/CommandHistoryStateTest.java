@@ -89,8 +89,11 @@ public class CommandHistoryStateTest {
         String command3 = historyState.getPreviousCommand();
         String command4 = historyState.getPreviousCommand();
         String command5 = historyState.getPreviousCommand();
-        assertTrue(command1 == VALID_COMMAND_1 && command2 == VALID_COMMAND_1 && command3 == VALID_COMMAND_1
-                && command4 == VALID_COMMAND_1 && command5 == VALID_COMMAND_1);
+        assertTrue(command1 == VALID_COMMAND_1
+                && command2 == VALID_COMMAND_1
+                && command3 == VALID_COMMAND_1
+                && command4 == VALID_COMMAND_1
+                && command5 == VALID_COMMAND_1);
     }
 
     @Test
