@@ -28,6 +28,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Gender;
 import seedu.address.model.client.Height;
 import seedu.address.model.client.Name;
+import seedu.address.model.client.PersonalBest;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Remark;
 import seedu.address.model.client.Sport;
@@ -91,9 +92,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                 : new Remark("");
         Set<Sport> sportList = ParserUtil.parseSports(argMultimap.getAllValues(PREFIX_SPORT));
         UniqueExerciseList exerciseList = new UniqueExerciseList();
+        PersonalBest personalBest = new PersonalBest();
         ScheduleList scheduleList = new ScheduleList();
         Client client = new Client(name, gender, phone, email, address, tagList, birthday,
-                currentWeight, targetWeight, height, remark, sportList, exerciseList, scheduleList);
+                currentWeight, targetWeight, height, remark, sportList, exerciseList, personalBest,
+                scheduleList);
 
         return new AddCommand(client);
     }

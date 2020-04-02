@@ -192,7 +192,7 @@ public class ModelManager implements Model {
             clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
             clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
             clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList,
-                clientToEdit.getScheduleList());
+            clientToEdit.getPersonalBest(), clientToEdit.getScheduleList());
 
         setClient(clientToEdit, editedClient);
     }
