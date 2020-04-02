@@ -28,4 +28,19 @@ public class ScheduleBuilder {
         return new Schedule(day, startTime, endTime);
     }
 
+    public ScheduleBuilder withDay(String day) {
+        this.day = new Day(day);
+        return this;
+    }
+
+    public ScheduleBuilder withStartTime(String st) {
+        this.startTime = new StartTime(st);
+        return this;
+    }
+
+    public ScheduleBuilder withEndTime(String et) {
+        this.endTime = new EndTime(et);
+        return this;
+    }
+
 }
