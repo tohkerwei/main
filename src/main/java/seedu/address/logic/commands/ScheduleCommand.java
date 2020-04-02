@@ -36,7 +36,7 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_CONTAINS_DUPLICATES = "One or more of your input schedules have overlapping"
             + " time periods. Please check again.";
 
-    public static final String MESSAGE_SUCCESS = "Training schedule has been added for %1$s";
+    public static final String MESSAGE_SUCCESS = "Training schedule has been added for %1$s: \n%2$s";
 
     private final Index index;
     private final ArrayList<Schedule> toAdd;
@@ -68,7 +68,8 @@ public class ScheduleCommand extends Command {
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedClient.getScheduleList().toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedClient.getName().fullName,
+                editedClient.getScheduleList().toString()));
     }
 
     @Override

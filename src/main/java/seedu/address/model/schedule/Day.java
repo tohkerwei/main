@@ -24,7 +24,6 @@ public class Day {
         requireNonNull(day);
         checkArgument(isValidDay(day), MESSAGE_CONSTRAINTS);
         this.value = assignDay(day);
-        System.out.println(this.value);
     }
 
     /**
