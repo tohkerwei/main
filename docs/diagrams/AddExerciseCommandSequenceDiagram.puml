@@ -17,7 +17,7 @@ activate AddExerciseCommand
 AddExerciseCommand -[LOGIC_COLOR]> model : hasClientInView()
 
 activate model
-model --[MODEL_COLOR]> AddExerciseCommand : true
+model --[MODEL_COLOR]> AddExerciseCommand : True
 deactivate model
 
 AddExerciseCommand -[LOGIC_COLOR]> model : getClientInView()

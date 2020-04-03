@@ -228,13 +228,17 @@ image::ExerciseClassDiagram.png[]
 
 Currently, there are only 2 exercise commands. The `add-e` command adds an exercise to the client and the `delete-e` command deletes an exercise from a client. The commands follow a similar execution flow as other commands.
 
-For the `add-e` command, we had to pay particular attention to the index where new Exercise is added. This is such that the exercises for the client will be displayed in descending chronological order in the table after a `view-c` command. `TableView` provides sorting for dates. However, having `TableView` to do the sorting would result in a mismatch of indexes of the exercises in the `UniqueExerciseList` and in the `TableView`. This would result in problems when using `delete-e` command as it deletes the exercise at the specified index.
+For the `add-e` command, we had to pay particular attention to the index where new Exercise is added. This is such that the exercises for the client will be displayed in descending chronological order in the table after a `view-c` command. `TableView` provides sorting for dates. However, having `TableView` to do the sorting would result in mismatch of indexes of the exercises in the `UniqueExerciseList` and in the `TableView`. This would result in problems when using `delete-e` command as it deletes the exercise at the specified index.
 
-We will use an example of an `add-e` command to illustrate the program execution flow. Consider an instance where user inputs `add-e n/pushup d/12-12-2011 reps/20`. The `AddressBookParser` will create a `AddExerciseCommandParser`. By using `ParserUtil`, `AddExerciseCommandParser` will extract details like the reps of the exercise and pass the arguments to `AddExerciseCommand`. The sequence diagram below shows the execution flow when the AddExerciseCommand is executed.
+We will use an example of a `add-e` command to illustrate the program execution flow. Consider an instance where user inputs `add-e n/pushup d/12-12-2011 reps/20`. The `AddressBookParser` will create a `AddExerciseCommandParser`. By using `ParserUtil`, `AddExerciseCommandParser` will extract details like the reps of the exercise and pass the arguments to `AddExerciseCommand`. The sequence diagram below shows the execution flow when the AddExerciseCommand is executed.
 
 image::AddExerciseCommandSequenceDiagram.png[]
 
+`AddExerciseCommand` checks if there is an client being viewed. For this instance, we will consider the positive case where indeed there is a client being viewed. `AddExerciseCommand` will retrieve the client being viewed from the `Model` so that details like the existing exercise list of the client can be obtained. The sequence diagram illustrates the execution flow of how the new exercise, `toAdd`, is added to the exercise list.
+
 image::AddExerciseCommandSequenceDiagramPart2.png[]
+
+The exercise list, `UniqueExerciseList`, will go through a loop and iterate through the exercises in the list. The date of each exercise will be compared with the date of the `toAdd` exercise. `toAdd` will then be added to the `UniqueExerciseList` at the index to keep the list sorted.
 
 ==== Design Considerations
 
