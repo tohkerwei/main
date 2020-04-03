@@ -310,7 +310,7 @@ Lastly, we foresee that it is improbable for the data size of both clients and e
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
-=== Personal Best
+=== Personal Best --- Li Zi Ying
 
 This feature allows the users (ie. gym managers) to view the personal bests of exercises done by a client. This information is displayed in a table form, after the command `view-c INDEX` is called.
 
@@ -326,6 +326,8 @@ The personal best feature is facilitated by the model `PersonalBest`, and the lo
 When the user inputs `view-c`, `add-e` or `delete-c`, `PersonalBestFinder#generateAndSetPersonalBest` is called, taking the client currently in view as the parameter. `PersonalBestFinder#generateAndSetPersonalBest` then retrieves client's list of exercises using `Client#getExerciseList` and creates a new `HashMap`, where the `key` is `ExerciseName` and the `value` is `Exercise`. Then the personal bests of each exercise of the client in view are generated using the above considerations. Finally the list of personal bests is set using `PersonalBest#setPersonalBest`.
 
 A simplified class diagram of the classes involved in this feature is given below:
+
+image::PersonalBestClassDiagram.png[]
 
 ==== Design Considerations
 
