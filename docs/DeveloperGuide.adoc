@@ -162,14 +162,14 @@ This feature allows users to save their previously entered commands and to retri
 
 This command history mechanism is facilitated by the logic class `CommandHistory`, which controls both the model `CommandHistoryState` and the storage `CommandHistoryStorage`. The behaviour has been implemented to mimic most modern CLIs, namely:
 
-. The empty string, `""`, will not be stored in the history
-. Commands that are similar to the most recently stored command in the history will not be stored (ie. duplicate commands will not be stored)
-. All other user input, be it valid or invalid commands, will be stored
-. There is a maximum size of the stored history (100 in this case, for performance reasons discussed in the later section)
-. Pressing the kbd:[Up] arrow key will browse backwards towards the least recently entered commands
-. Pressing the kbd:[Down] arrow key will browse forwards towards the most recently entered commands
-. The caret position must be at the end of the command when browsing the history
-. Persistent storage of the command history is supported (ie. a user can quit the app and come back to the same history as his previous usage of the app)
+. The empty string, `""`, should not be stored in the history
+. Commands that are similar to the most recently stored command in the history should not be stored (ie. duplicate commands will not be stored)
+. All other user input, be it valid or invalid commands, should be stored
+. Number of commands should only be stored up to a well-defined maximum number (100 in this case, for performance reasons discussed in the later section)
+. Pressing the kbd:[Up] arrow key should browse backwards towards the least recently entered commands
+. Pressing the kbd:[Down] arrow key should browse forwards towards the most recently entered commands
+. The caret position should be at the end of the command string when browsing the history
+. Persistent storage of the command history should be supported (ie. a user can quit the app and come back to the same history as his previous usage of the app)
 
 Since all user inputs, be it valid or invalid commands, should be stored, and since detection of the kbd:[Up] and kbd:[Down] arrow keys must occur in the `CommandBox` class found in the UI, we have decided to let `CommandBox` directly interact with `CommandHistory`. In other words, `CommandBox` will be responsible for calling `CommandHistory#addToHistory`, `CommandHistory#getNextCommand`, and `CommandHistory#getPreviousCommand`. A simplified class diagram of the classes involved in this feature is given below:
 
@@ -213,10 +213,10 @@ This feature is facilitated by the logic found in the `AutoComplete` class. Befo
 . The caret position should be at the end of the line after any successful autocompletion of commands
 . Any unambiguous commands should be completed upon pressing of the kbd:[Tab] key
 . Any ambiguous commands should be completed up till the longest common prefix of all similar commands
-** ie. using the example in the introduction above, when the user enters `a` and presses kbd:[Tab], the autocompletion should be till `add-`
+** Using the ambiguous command example in the introduction above, when the user enters `a` and presses kbd:[Tab], the autocompletion should return `add-` to the user
 . A list of all similar commands should be presented to the user should he try to autocomplete an ambiguous command
 
-A limitation of the current design is that we are only able to autocomplete commands, and not other fields/parameters like names and addresses that have been used by the user before. However, since all commands defined in FitBiz do not have empty spaces in them, this allows us to easily determine when to disable this feature. As such the following code snippet has been used in `AutoComplete#execute` to stop execution of the code if white spaces has been detected:
+A limitation of the current design is that we are only able to autocomplete _commands_, and not other fields/parameters like names and addresses that have been used by the user before. As such, since all commands defined in FitBiz do not have empty spaces in them, this allows us to easily determine when to disable this feature (ie. when the user has already completed the command and has moved on to entering the parameters). As such, the following code snippet is used in `AutoComplete#execute` to stop trying to autocomplete if white spaces has been detected:
 
 ```java
 if (currCommand.contains(WHITE_SPACE_STRING)) {
