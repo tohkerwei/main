@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Gender {
 
-    public static final String MESSAGE_CONSTRAINTS =
-        "Gender should be Male/Female/Others";
+    public static final String MESSAGE_CONSTRAINTS = "Gender is case insensitive and can only be"
+        + " 'male' (or 'm'), 'female' (or 'f'), or 'others' (or 'o').";
 
     public final String value;
 

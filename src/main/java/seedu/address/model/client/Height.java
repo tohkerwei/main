@@ -11,9 +11,10 @@ import java.math.BigDecimal;
  */
 public class Height {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Input height must either be whole or decimal number (eg. 165 or 155.2)";
-    public static final String VALIDATION_REGEX = "[0-9]{1,3}(\\.[0-9]{0,3})?";
+    public static final String MESSAGE_CONSTRAINTS = "Heights must either be a whole or decimal number"
+            + " (eg. 165 or 186.22). Make sure that you only have a maximum of 3 digits before and"
+            + " 2 digits after the decimal place.";
+    public static final String VALIDATION_REGEX = "[0-9]{1,3}(\\.[0-9]{0,2})?";
     private static final String EMPTY_STRING = "";
 
     public final String value;
