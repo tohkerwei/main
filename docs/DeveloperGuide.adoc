@@ -7,6 +7,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 :xrefstyle: full
+:experimental:
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
@@ -155,7 +156,7 @@ This section describes some noteworthy details on how certain features are imple
 
 === Command History
 
-This feature allows users to save their previously entered commands and to retrieve them using the "up" and "down" arrow keys, similar to what most modern CLIs offer.
+This feature allows users to save their previously entered commands and to retrieve them using the kbd:[Up] and kbd:[Down] arrow keys, similar to what most modern CLIs offer.
 
 ==== Implementation
 
@@ -165,12 +166,12 @@ This command history mechanism is facilitated by the logic class `CommandHistory
 * Commands that are similar to the most recently stored command in the history will not be stored (ie. duplicate commands will not be stored)
 * All other user input, be it valid or invalid commands, will be stored
 * There is a maximum size of the stored history (100 in this case, for performance reasons discussed in the later section)
-* Pressing the "up" arrow key will browse backwards towards the least recently entered commands
-* Pressing the "down" arrow key will browse forwards towards the most recently entered commands
+* Pressing the kbd:[Up] arrow key will browse backwards towards the least recently entered commands
+* Pressing the kbd:[Down] arrow key will browse forwards towards the most recently entered commands
 * The caret position must be at the end of the command when browsing the history
 * Persistent storage of the command history is supported (ie. a user can quit the app and come back to the same history as his previous usage of the app)
 
-Since all user inputs, be it valid or invalid commands, should be stored, and since detection of the kbd:[Up] and kbd:[down] arrow keys must occur in the `CommandBox` class found in the UI, we have decided to let `CommandBox` directly interact with `CommandHistory`. In other words, `CommandBox` will be responsible for calling `CommandHistory#addToHistory`, `CommandHistory#getNextCommand`, and `CommandHistory#getPreviousCommand`. A simplified class diagram of the classes involved in this feature is given below:
+Since all user inputs, be it valid or invalid commands, should be stored, and since detection of the kbd:[Up] and kbd:[Down] arrow keys must occur in the `CommandBox` class found in the UI, we have decided to let `CommandBox` directly interact with `CommandHistory`. In other words, `CommandBox` will be responsible for calling `CommandHistory#addToHistory`, `CommandHistory#getNextCommand`, and `CommandHistory#getPreviousCommand`. A simplified class diagram of the classes involved in this feature is given below:
 
 image::CommandHistoryClassDiagram.png[]
 
