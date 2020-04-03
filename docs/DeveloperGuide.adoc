@@ -162,14 +162,14 @@ This feature allows users to save their previously entered commands and to retri
 
 This command history mechanism is facilitated by the logic class `CommandHistory`, which controls both the model `CommandHistoryState` and the storage `CommandHistoryStorage`. The behaviour has been implemented to mimic most modern CLIs, namely:
 
-* The empty string, `""`, will not be stored in the history
-* Commands that are similar to the most recently stored command in the history will not be stored (ie. duplicate commands will not be stored)
-* All other user input, be it valid or invalid commands, will be stored
-* There is a maximum size of the stored history (100 in this case, for performance reasons discussed in the later section)
-* Pressing the kbd:[Up] arrow key will browse backwards towards the least recently entered commands
-* Pressing the kbd:[Down] arrow key will browse forwards towards the most recently entered commands
-* The caret position must be at the end of the command when browsing the history
-* Persistent storage of the command history is supported (ie. a user can quit the app and come back to the same history as his previous usage of the app)
+. The empty string, `""`, will not be stored in the history
+. Commands that are similar to the most recently stored command in the history will not be stored (ie. duplicate commands will not be stored)
+. All other user input, be it valid or invalid commands, will be stored
+. There is a maximum size of the stored history (100 in this case, for performance reasons discussed in the later section)
+. Pressing the kbd:[Up] arrow key will browse backwards towards the least recently entered commands
+. Pressing the kbd:[Down] arrow key will browse forwards towards the most recently entered commands
+. The caret position must be at the end of the command when browsing the history
+. Persistent storage of the command history is supported (ie. a user can quit the app and come back to the same history as his previous usage of the app)
 
 Since all user inputs, be it valid or invalid commands, should be stored, and since detection of the kbd:[Up] and kbd:[Down] arrow keys must occur in the `CommandBox` class found in the UI, we have decided to let `CommandBox` directly interact with `CommandHistory`. In other words, `CommandBox` will be responsible for calling `CommandHistory#addToHistory`, `CommandHistory#getNextCommand`, and `CommandHistory#getPreviousCommand`. A simplified class diagram of the classes involved in this feature is given below:
 
@@ -201,6 +201,53 @@ In the interest of saving developement time and better code readability, we deci
 Moreover, the implementation of `CommandHistoryStorage#saveCommandHistory` will rewrite the whole data file in storage (as opposed to appending the file with the newly entered command). This decision was made to protect the integrity of the storage file, making sure that it always has the exact same data as what is stored in the `CommandHistory` model. As such, this rewriting of the file during the maximum capacity of the array list will be the bigger bottleneck in terms of performance, as opposed to the reassignment of indices.
 
 As such, the choice of 100 as the maximum size of the command history is thus chosen. This number must be small enough to not cause the app to lag when the whole history is being written to storage, as well as be big enough to satisfy the user. Ultimately, we felt that 100 is a very generous estimate given that a user really only needs the past few commands at any point of time.
+
+=== Command Autocompletion
+
+Similar to the previously mentioned "Command History" feature, this feature improves the user experience by allowing users to press the kbd:[Tab] key to auto complete their partially entered commands.
+
+==== Implementation
+
+This feature is mostly facilitated by the logic found in the `AutoComplete` class. Firstly, let us define the definitions of _unambiguous_ and _ambiguous_ commands. Unambiguous commands are those that can be uniquely identified by the sequence of letters that the user has entered. Ambiguous commands are those that cannot be identified by the said sequence of letters. For example, assume we only have 3 commands in our app, `add-c`, `add-e`, and `edit-c`. If the user enters `e` and presses kbd:[Tab], we say that this is an unambiguous command since clearly only `edit-c` can be the correct command. If instead, the user enters `a` and presses kbd:[Tab], we say that this is an ambiguous command, since both `add-c` and `add-e` are possible choices. Again, let us start by defining the behaviour (which also has been implemented to mimic most modern CLIs):
+
+. The caret position should be at the end of the line after any successful autocompletion of commands
+. Any unambiguous commands should be completed upon pressing of the kbd:[Tab] key
+. Any ambiguous commands should be completed up till the longest common prefix of all similar commands
+** ie. using the example in the introduction above, when the user enters `a` and presses kbd:[Tab], the autocompletion should be till `add-`
+. A list of all similar commands should be presented to the user should he try to autocomplete an ambiguous command
+
+A limitation of the current design is that we are only able to autocomplete commands, and not other fields like names and addresses that have been used before. However, since all commands defined in FitBiz do not have empty spaces in them, this allows us to easily determine when to disable this feature. As such the following code snippet has been used in `AutoComplete#execute` to stop execution of the code if white spaces has been detected:
+
+```java
+if (currCommand.contains(WHITE_SPACE_STRING)) {
+      return;
+}
+```
+
+Similarly, since this feature relies heavily on the UI `CommandBox`, we have decided to let `CommandBox` interact with `AutoComplete` directly. `AutoComplete` makes use of the `Trie` data structure which we will discuss in the next section. As such, the following simplified class diagram shows exactly which classes are responsible for this feature:
+
+image::CommandAutocompleteClassDiagram.png[]
+
+==== Design Considerations
+
+To implement this feature, we have decided to use a Trie data structure. Since no such data structure exists natively in Java, we had to implement our own version of it. Of course, we also considered other much simpler alternatives like simply storing all available commands in a `List`. A quick summary is given here:
+
+[options='header']
+|====================
+| Data Structure | Pros and Cons
+| Trie |
+*Pros*: Searching is relatively inexpensive, and handles behaviour number 3 discussed above efficiently
+
+*Cons*: Harder initial development of this data structure
+| List |
+*Pros*: Fast initial development
+
+*Cons*: Searching is computationally expensive; does not scale well with the app as the list of commands grow
+|====================
+
+As such, the choice of implementing our own Trie data structure is obvious. Exchanging some initial development time for future scalability of our app will ensure that we, or future developers, do not end up wasting time refactoring what could have been done in the first place. Moreover, as mentioned, the Trie data structure is effective and computationally inexpensive in finding the longest common prefix of all ambiguous commands. The same cannot be said when using just a list.
+
+Also, since we have implemented our own Trie data structure, it would also allow more custom logic to be added later, and allow more creative freedom with respect to the features that future developers would want to add. 
 
 === Logging
 
