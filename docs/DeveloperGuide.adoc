@@ -331,6 +331,8 @@ image::PersonalBestClassDiagram.png[]
 
 In the following sequence diagram, we trace the execution for when the user decides to enter the command `view-c` into FitBiz:
 
+image::PersonalBestSequenceDiagram.png[]
+
 ==== Design Considerations
 
 In designing this features, we had to decide on the placement of the `PersonalBest` class in the model to comply with the OOP standards. Currently, the `PersonalBest` model has a whole-part relationship with `Client`, with `Client` being the whole and `PersonalBest` being a part of `Client`. The alternative is to consider `PersonalBest` as a part of `Exercise` instead.
