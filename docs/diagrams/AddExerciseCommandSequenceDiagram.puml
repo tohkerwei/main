@@ -13,30 +13,30 @@ end box
 
 [-> AddExerciseCommand : execute(model)
 
-activate AddExerciseCommand
+activate AddExerciseCommand LOGIC_COLOR
 AddExerciseCommand -[LOGIC_COLOR]> model : hasClientInView()
 
-activate model
+activate model MODEL_COLOR
 model --[MODEL_COLOR]> AddExerciseCommand : True
 deactivate model
 
 AddExerciseCommand -[LOGIC_COLOR]> model : getClientInView()
-activate model
+activate model MODEL_COLOR
 AddExerciseCommand <[MODEL_COLOR]-- model : clientToEdit
 deactivate model
 
 AddExerciseCommand -[LOGIC_COLOR]> client : getExerciseList()
-activate client
+activate client MODEL_COLOR
 AddExerciseCommand <[MODEL_COLOR]-- client : exerciseList
 deactivate client
 
-activate model
+activate model MODEL_COLOR
 ref over model, client
     addToSort
 end ref
 
 AddExerciseCommand -[MODEL_COLOR]> client2 **
-activate client2
+activate client2 MODEL_COLOR
 
 client2 --[MODEL_COLOR]> AddExerciseCommand : editedClient
 deactivate client2
