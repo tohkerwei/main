@@ -154,7 +154,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-=== Command History
+=== Command History --- Aaron Choo
 
 This feature allows users to save their previously entered commands and to retrieve them using the kbd:[Up] and kbd:[Down] arrow keys, similar to what most modern CLIs offer.
 
@@ -202,7 +202,7 @@ Moreover, the implementation of `CommandHistoryStorage#saveCommandHistory` will 
 
 As such, the choice of 100 as the maximum size of the command history is thus chosen. This number must be small enough to not cause the app to lag when the whole history is being written to storage, as well as be big enough to satisfy the user. Ultimately, we felt that 100 is a very generous estimate given that a user really only needs the past few commands at any point of time.
 
-=== Command Autocompletion
+=== Command Autocompletion --- Aaron Choo
 
 Similar to the previously mentioned "Command History" feature, this feature improves the user experience by allowing users to press the kbd:[Tab] key to autocomplete their partially entered commands.
 
