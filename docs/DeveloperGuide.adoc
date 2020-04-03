@@ -159,7 +159,7 @@ This feature allows users to save their previously entered commands and to retri
 
 ==== Implementation
 
-This command history mechanism is facilitated by the model `CommandHistory`, and the storage code in `CommandHistoryStorage`. The behaviour of this feature mimics most modern CLIs, namely:
+This command history mechanism is facilitated by the logic class `CommandHistory`, which controls both the model `CommandHistoryState` and the storage `CommandHistoryStorage`. The behaviour has been implemented to mimic most modern CLIs, namely:
 
 * The empty string, `""`, will not be stored in the history
 * Commands that are similar to the most recently stored command in the history will not be stored (ie. duplicate commands will not be stored)
@@ -170,13 +170,17 @@ This command history mechanism is facilitated by the model `CommandHistory`, and
 * The caret position must be at the end of the command when browsing the history
 * Persistent storage of the command history is supported (ie. a user can quit the app and come back to the same history as his previous usage of the app)
 
-Since all entered user inputs should be stored, be it valid or invalid commands, and since detection of the "up" and "down" arrow keys must occur in the `CommandBox` class found in the UI, we have decided to let `CommandBox` directly interact with `CommandHistory`. In other words, `CommandBox` will call `CommandHistory#add`, `CommandHistory#getNextCommand`, and `CommandHistory#getPrevCommand`. A simplified class diagram of the classes involved in this feature is given below:
+Since all user inputs, be it valid or invalid commands, should be stored, and since detection of the kbd:[Up] and kbd:[down] arrow keys must occur in the `CommandBox` class found in the UI, we have decided to let `CommandBox` directly interact with `CommandHistory`. In other words, `CommandBox` will be responsible for calling `CommandHistory#addToHistory`, `CommandHistory#getNextCommand`, and `CommandHistory#getPreviousCommand`. A simplified class diagram of the classes involved in this feature is given below:
 
 image::CommandHistoryClassDiagram.png[]
 
+In the following sequence diagram, we trace the execution for when the user decides to enter the command `list-c` into FitBiz:
+
+image::CommandHistorySequenceDiagram.png[]
+
 ==== Design Considerations
 
-In designing this feature, we had to decide on the underlying data structure to store the command history. Currently, each line of command is stored in an `ArrayList<String>`. The alternative is to store the commands in a `LinkedList<String>`.
+In designing the model `CommandHistoryState`, we had to decide on the underlying data structure to store the command history. We currently use an `ArrayList<String>`, where each line of command is stored as an individual entry. Another alternative that we have considered is to store the commands in a `LinkedList<String>`.
 
 [options='header']
 |====================
@@ -191,9 +195,9 @@ In designing this feature, we had to decide on the underlying data structure to 
 *Cons*: Harder to implement as pointers have to be manipulated
 |====================
 
-In the interest of saving developement time and better code readability, we decided to use an array list to store the commands. Since we have capped the maximum size of history to be 100, we found out through testing that this causes no observable nor significant lag when the list reaches the maximum capacity and has to reassign all 100 indices.
+In the interest of saving developement time and better code readability, we decided to use an array list to store the commands. Since we have capped the maximum size of history to be 100, there is a need to remove the first item (or the zeroth index) from the list to free up space. Of course, doing a `remove(0)` on a 100-item array list will require that all 99 remaining items in the list be reassigned to new indices. However, we found out through extensive testing that this causes no observable nor significant lag when the maximum capacity of 100 items is reached and this happens.
 
-Moreover, the implementation of `CommandHistoryStorage#saveCommandHistory` will rewrite the whole data file in storage (as opposed to appending the file with the newly entered command). This decision was made to protect the integrity of the storage file, making sure that it always has the exact same data as what is stored in the `CommandHistory` model. As such, this rewriting of the file during maximum capacity of the history will be the bigger bottleneck in term of performance, as opposed to the reassignment of indices.
+Moreover, the implementation of `CommandHistoryStorage#saveCommandHistory` will rewrite the whole data file in storage (as opposed to appending the file with the newly entered command). This decision was made to protect the integrity of the storage file, making sure that it always has the exact same data as what is stored in the `CommandHistory` model. As such, this rewriting of the file during the maximum capacity of the array list will be the bigger bottleneck in terms of performance, as opposed to the reassignment of indices.
 
 As such, the choice of 100 as the maximum size of the command history is thus chosen. This number must be small enough to not cause the app to lag when the whole history is being written to storage, as well as be big enough to satisfy the user. Ultimately, we felt that 100 is a very generous estimate given that a user really only needs the past few commands at any point of time.
 

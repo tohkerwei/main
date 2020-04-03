@@ -5,5 +5,6 @@ skinparam arrowColor MODEL_COLOR_T4
 skinparam classBackgroundColor MODEL_COLOR
 
 CommandBox "1" *-right-> "1" CommandHistory
-CommandHistory "1" *-right-> "1" CommandHistoryStorage
+CommandHistory "1" *-right-> CommandHistoryStorage
+CommandHistory "1" *-right-> CommandHistoryState
 @enduml
