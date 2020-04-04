@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -71,6 +72,8 @@ public class CommandTestUtil {
     public static final String DAY_DESC_MON = " " + PREFIX_DAY + VALID_DAY_MON;
     public static final String TIME_DESC_START = " " + PREFIX_START_TIME + VALID_TIME_START;
     public static final String TIME_DESC_END = " " + PREFIX_END_TIME + VALID_TIME_END;
+    public static final String SCHEDULE_DESC_MON = " " + PREFIX_SCHEDULE + VALID_DAY_MON + "-" + VALID_TIME_START
+                            + "-" + VALID_TIME_END;
 
     public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "wrong123";
     public static final String INVALID_STARTTIME_DESC = " " + PREFIX_START_TIME + "asd123";

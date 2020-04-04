@@ -1,13 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.DAY_DESC_MON;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ENDTIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_STARTTIME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_END;
-import static seedu.address.logic.commands.CommandTestUtil.TIME_DESC_START;
+import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_MON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_MON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
@@ -49,7 +48,7 @@ public class ScheduleCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_CLIENT;
-        String userInput = targetIndex.getOneBased() + DAY_DESC_MON + TIME_DESC_START + TIME_DESC_END;
+        String userInput = targetIndex.getOneBased() + SCHEDULE_DESC_MON;
 
         ArrayList<Schedule> scheduleArrayList = new ArrayList<Schedule>();
         scheduleArrayList.add(new Schedule(new Day("mon"), new StartTime("1200"), new EndTime("1400")));
@@ -60,7 +59,7 @@ public class ScheduleCommandParserTest {
     @Test
     public void parse_missingOptionalFields_success() {
         Index targetIndex = INDEX_SECOND_CLIENT;
-        String userInput = "" + targetIndex.getOneBased();
+        String userInput = "" + targetIndex.getOneBased() + " " + PREFIX_SCHEDULE;
 
         ArrayList<Schedule> scheduleArrayList = new ArrayList<Schedule>();
         ScheduleCommand expectedCommand = new ScheduleCommand(targetIndex, scheduleArrayList);
@@ -69,8 +68,9 @@ public class ScheduleCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_DAY_DESC, Schedule.MESSAGE_CONSTRAINTS); // invalid day
-        assertParseFailure(parser, "1" + INVALID_STARTTIME_DESC, Schedule.MESSAGE_CONSTRAINTS); // invalid start time
-        assertParseFailure(parser, "1" + INVALID_ENDTIME_DESC, Schedule.MESSAGE_CONSTRAINTS); // invalid end time
+        String message = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "1" + INVALID_DAY_DESC, message); // invalid day
+        assertParseFailure(parser, "1" + INVALID_STARTTIME_DESC, message); // invalid start time
+        assertParseFailure(parser, "1" + INVALID_ENDTIME_DESC, message); // invalid end time
     }
 }
