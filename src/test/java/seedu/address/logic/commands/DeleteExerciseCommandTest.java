@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -26,6 +27,13 @@ import seedu.address.model.exercise.Exercise;
 public class DeleteExerciseCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
+
+    @Test
+    public void execute_noClientInView_throwsCommandException() {
+        DeleteExerciseCommand deleteExerciseCommand = new DeleteExerciseCommand(INDEX_FIRST_EXERCISE);
+
+        assertCommandFailure(deleteExerciseCommand, model, DeleteExerciseCommand.MESSAGE_CLIENT_NOT_IN_VIEW);
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
