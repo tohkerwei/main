@@ -264,19 +264,37 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
 
-=== Storage of Clients and Exercises
+=== Exercise Feature --- Yong Jie
 
-This section explains the implementation and design considerations for storage of clients and exercises.
+The function of recording the clients' exercises is one of the main features of our application. This section provides its key implementation details.
 
 ==== Implementation
 
-We have decided to store the exercises done by the client together with the same client in one JSON file. Each `JsonAdaptedClient` will have a list of `JsonAdaptedExercise`.
+===== Exercise class
 
-image::ClientExerciseStorageClassDiagram.png[]
+We implemented the `Exercise` class to contain the details of the exercise. An example would be the use of `ExerciseWeight` class to represent the weight of the exercise. Below shows a UML class diagram which provides further understanding of `Exercise`.
+
+image::ExerciseClassDiagram.png[]
+
+===== Exercise Commands
+
+Currently, there are only 2 exercise commands. The `add-e` command adds an exercise to the client and the `delete-e` command deletes an exercise from a client. The commands follow a similar execution flow as other commands.
+
+For the `add-e` command, we had to pay particular attention to the index where new Exercise is added. This is such that the exercises for the client will be displayed in descending chronological order in the table after a `view-c` command. `TableView` provides sorting for dates. However, having `TableView` to do the sorting would result in mismatch of indexes of the exercises in the `UniqueExerciseList` and in the `TableView`. This would result in problems when using `delete-e` command as it deletes the exercise at the specified index.
+
+We will use an example of a `add-e` command to illustrate the program execution flow. Consider an instance where user inputs `add-e n/pushup d/12-12-2011 reps/20`. The `AddressBookParser` will create a `AddExerciseCommandParser`. By using `ParserUtil`, `AddExerciseCommandParser` will extract details like the reps of the exercise and pass the arguments to `AddExerciseCommand`. The sequence diagram below shows the execution flow when the AddExerciseCommand is executed. Details of exception thrown are omitted as this is a postive instance and for simplicity.
+
+image::AddExerciseCommandSequenceDiagram.png[]
+
+`AddExerciseCommand` checks if there is an client being viewed. For this instance, we will consider the positive case where indeed there is a client being viewed. `AddExerciseCommand` will retrieve the client being viewed from the `Model` so that details like the existing exercise list of the client can be obtained. The sequence diagram illustrates the execution flow of how the new exercise, `toAdd`, is added to the exercise list.
+
+image::AddExerciseCommandSequenceDiagramPart2.png[]
+
+The exercise list, `UniqueExerciseList`, will go through a loop and iterate through the exercises in the list. The date of each exercise will be compared with the date of the `toAdd` exercise. `toAdd` will then be added to the `UniqueExerciseList` at the index to keep the list sorted.
 
 ==== Design Considerations
 
-While implementing the storage for clients and exercises, we had multiple choices. We decided to save the exercises together with the client who did them. All the clients will then be stored in one JSON file.
+This section explains the our design considerations and analysis for the storage of exercises.
 
 [options='header']
 |====================
@@ -297,13 +315,15 @@ While implementing the storage for clients and exercises, we had multiple choice
 Tough to identify which JSON file is for which client
 |====================
 
-We decided to use the first approach of storing the exercises with the client and all clients in one JSON file. There are multiple reasons for our choice as mentioned below.
+We decided to use the first approach of storing the exercises with the associated client and have all the clients data in one JSON file. By code wise, each `JsonAdaptedClient` will have a list of `JsonAdaptedExercise`.
 
-We want to keep the implementation reading and storing of data simple. The first approach is  the most simple. When reading the data, it will remove the need to associate the exercises to the client. A client might potentially have a large amount of exercises, resulting in the reading process to be extremely slow.
+image::ClientExerciseStorageClassDiagram.png[]
 
-Moreover, storing the exercise data from client data does not provide any performance benefits. Due to time constraints, we decided that the application should store all the data everytime it closes. This is regardless if the particular exercise or client data has been changed. Having to keep track of which data is edited and only overwrite those data would greatly increase the complexity of the application. Therefore, keeping exercises data separate from client data would be unnecessary and provide little additional functionality to the user.
+We want to keep the implementation reading and storing of data simple. The first approach is  the most simple. When reading the data, it removes the need to associate the exercises to the client. A client might potentially have a large amount of exercises, resulting in the reading process to be extremely slow.
 
-Lastly, we foresee that it is improbable for the data size of both clients and exercises to exceed the maximum size limit of a JSON file. With the target user in mind, it is unlikely that he will have an enormous amount of clients as he have to cater time for each of them. Even though each client might have many exercises, the information of each exercise is relatively small.
+Moreover, storing the exercise data from client data does not provide any performance benefits. Due to time constraints, we decided that the application should store all the data everytime it closes. This is regardless if the particular exercise or client data has been changed. Having to keep track of which data is edited and only overwrite those data would greatly increase the complexity of the application. Therefore, keeping exercises data separate from client data would be unnecessary and provide little additional functionality/benefits to the user.
+
+Lastly, we foresee that it is improbable for the data size of both clients and exercises to exceed the maximum size limit of a JSON file. With the target user in mind, it is unlikely that he will have an enormous amount of clients as he will have to cater time for each of them. Even though each client might have many exercises, the information of each exercise is relatively small. For now, collectively, the client and exercise data is unlikely to exceed the JSON size limit. We might consider to have multiple JSON files if the data size gets too big in future versions.
 
 [[Implementation-Configuration]]
 === Configuration
