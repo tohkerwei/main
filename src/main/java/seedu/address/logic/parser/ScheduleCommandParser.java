@@ -85,8 +85,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             try {
                 schedule = new Schedule(day, startTime, endTime);
             } catch (IllegalArgumentException iae) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE),
-                        iae);
+                throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
             }
             if (!checkIfOverlaps(schedule, scheduleSet)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
