@@ -146,12 +146,29 @@ public class Client {
      * between two clients.
      */
     public boolean isSameClient(Client otherClient) {
+        if (otherClient == null) {
+            return false;
+        }
+
         if (otherClient == this) {
             return true;
         }
 
-        return otherClient != null && otherClient.getName().equals(getName())
-                && (otherClient.getPhone().equals(getPhone()) || otherClient.getEmail().equals(getEmail()));
+        if (otherClient.getPhone().equals(getPhone())) {
+            return true;
+        }
+
+        if (otherClient.getEmail().equals(getEmail())) {
+            return true;
+        }
+
+        // if names are equal, both phone and email must be different to be considered different
+        if (otherClient.getName().equals(getName())) {
+            return (otherClient.getPhone().equals(getPhone()) || otherClient.getEmail().equals(getEmail()));
+        }
+
+        // if all checks fail, just return false
+        return false;
     }
 
     /**
