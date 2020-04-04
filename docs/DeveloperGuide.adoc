@@ -282,7 +282,7 @@ Currently, there are only 2 exercise commands. The `add-e` command adds an exerc
 
 For the `add-e` command, we had to pay particular attention to the index where new Exercise is added. This is such that the exercises for the client will be displayed in descending chronological order in the table after a `view-c` command. `TableView` provides sorting for dates. However, having `TableView` to do the sorting would result in mismatch of indexes of the exercises in the `UniqueExerciseList` and in the `TableView`. This would result in problems when using `delete-e` command as it deletes the exercise at the specified index.
 
-We will use an example of a `add-e` command to illustrate the program execution flow. Consider an instance where user inputs `add-e n/pushup d/12-12-2011 reps/20`. The `AddressBookParser` will create a `AddExerciseCommandParser`. By using `ParserUtil`, `AddExerciseCommandParser` will extract details like the reps of the exercise and pass the arguments to `AddExerciseCommand`. The sequence diagram below shows the execution flow when the AddExerciseCommand is executed.
+We will use an example of a `add-e` command to illustrate the program execution flow. Consider an instance where user inputs `add-e n/pushup d/12-12-2011 reps/20`. The `AddressBookParser` will create a `AddExerciseCommandParser`. By using `ParserUtil`, `AddExerciseCommandParser` will extract details like the reps of the exercise and pass the arguments to `AddExerciseCommand`. The sequence diagram below shows the execution flow when the AddExerciseCommand is executed. Details of exception thrown are omitted as this is a postive instance and for simplicity.
 
 image::AddExerciseCommandSequenceDiagram.png[]
 
@@ -294,7 +294,7 @@ The exercise list, `UniqueExerciseList`, will go through a loop and iterate thro
 
 ==== Design Considerations
 
-This section explains the our design considerations and analysis for the storage of clients and exercises.
+This section explains the our design considerations and analysis for the storage of exercises.
 
 [options='header']
 |====================
