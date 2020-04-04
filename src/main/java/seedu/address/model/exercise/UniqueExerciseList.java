@@ -79,8 +79,8 @@ public class UniqueExerciseList implements Iterable<Exercise> {
             throw new DuplicateExerciseException();
         }
         int idx = 0;
+        LocalDate toAddDate = toAdd.getExerciseDate().value;
         for (Exercise curr : internalList) {
-            LocalDate toAddDate = toAdd.getExerciseDate().value;
             LocalDate currDate = curr.getExerciseDate().value;
             if (toAddDate.compareTo(currDate) < 0) {
                 idx++;
