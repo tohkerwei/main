@@ -37,7 +37,7 @@ public class ClientTest {
 
         // different name -> returns false
         editedAlice = new ClientBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameClient(editedAlice));
+        assertTrue(ALICE.isSameClient(editedAlice));
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
