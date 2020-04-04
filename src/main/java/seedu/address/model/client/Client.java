@@ -141,9 +141,9 @@ public class Client {
     }
 
     /**
-     * Returns true if both clients of the same name have at least one other
-     * identity field that is the same. This defines a weaker notion of equality
-     * between two clients.
+     * Returns true if both clients have the same phone numbers OR both clients have
+     * the same email addresses. Thus, for clients to have the same name, both phone
+     * and email must be different.
      */
     public boolean isSameClient(Client otherClient) {
         if (otherClient == null) {
@@ -160,11 +160,6 @@ public class Client {
 
         if (otherClient.getEmail().equals(getEmail())) {
             return true;
-        }
-
-        // if names are equal, both phone and email must be different to be considered different
-        if (otherClient.getName().equals(getName())) {
-            return (otherClient.getPhone().equals(getPhone()) || otherClient.getEmail().equals(getEmail()));
         }
 
         // if all checks fail, just return false
@@ -202,17 +197,11 @@ public class Client {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Gender: ").append(getGender())
-                .append(" Phone: ").append(getPhone())
-                .append(" Email: ").append(getEmail())
-                .append(" Address: ").append(getAddress())
-                .append(" Birthday: ").append(getBirthday())
-                .append(" Current Weight: ").append(getCurrentWeight())
-                .append(" Target Weight: ").append(getTargetWeight())
-                .append(" Height: ").append(getHeight())
-                .append(" Remark: ").append(getRemark())
-                .append(" Tags: ");
+        builder.append(getName()).append(" Gender: ").append(getGender()).append(" Phone: ").append(getPhone())
+                .append(" Email: ").append(getEmail()).append(" Address: ").append(getAddress()).append(" Birthday: ")
+                .append(getBirthday()).append(" Current Weight: ").append(getCurrentWeight()).append(" Target Weight: ")
+                .append(getTargetWeight()).append(" Height: ").append(getHeight()).append(" Remark: ")
+                .append(getRemark()).append(" Tags: ");
         getTags().forEach(builder::append);
         builder.append(" Sports: ");
         getSports().forEach(builder::append);
