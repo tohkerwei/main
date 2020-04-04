@@ -25,7 +25,7 @@ public class ScheduleCommand extends Command {
             + "by the index number used in the displayed client list. "
             + "The schedule should include the first 3 letters of the day, \n"
             + "start and end time in 24 hour format, "
-            + "in 30 minutes denominations. Multiple training schedule can be added to a client.\n"
+            + "in 1-minute denominations. Multiple training schedule can be added to a client.\n"
             + "Parameters: INDEX (a positive integer) d/DAY st/START_TIME et/END_TIME [MORE_SCHEDULE]...\n"
             + "Example: " + COMMAND_WORD + " 1 day/mon st/1200 et/1400 day/fri st/1330 et/1500";
 
