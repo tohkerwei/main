@@ -206,7 +206,7 @@ As such, the choice of 100 as the maximum size of the command history is thus ch
 This feature allows for a user to assign a weekly schedule to a client. Timings are represented in the 24-hour format `HHmm`. Each client can have none or multiple schedules that do not have overlapping timings. Multiple clients are allowed to have overlapping timings with each other.
 
 ==== Implementation
-This scheduling mechanism is facilitated by `ScheduleList`, which is a wrapper class for an `ArrayList` of `Schedule` objects. Each `Client` contains one `ScheduleList` attribute to keep track of all `Schedule` assigned to it. If there are no assigned `Schedule` for the `Client`, then the `ScheduleList` contains an empty `ArrayList` of `Schedule`. 
+This scheduling mechanism is facilitated by `ScheduleList`, which is a wrapper class for an `ArrayList` of `Schedule` objects. Each `Client` contains one `ScheduleList` attribute to keep track of all `Schedule` assigned to it. If there are no assigned `Schedule` for the `Client`, then the `ScheduleList` contains an empty `ArrayList` of `Schedule`.
 
 `Schedule` comprises three attributes:
 
@@ -321,8 +321,6 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
 
-
-=== Storage of Clients and Exercises
 === Exercise Feature --- Yong Jie
 
 The function of recording the clients' exercises is one of the main features of our application. This section provides its key implementation details.
@@ -388,6 +386,54 @@ Lastly, we foresee that it is improbable for the data size of both clients and e
 === Configuration
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
+
+=== Personal Best --- Li Zi Ying
+
+This feature allows the users (ie. gym managers) to view the personal bests of exercises done by a client. This information is displayed in a table form, after the command `view-c INDEX` is called.
+
+==== Implementation
+
+The personal best feature is facilitated by the model `PersonalBest`, and the logic behind it is in `PersonalBestFinder`. The behaviour of this feature determines the personal best of each exercise done by the client based on these considerations:
+
+* If the `ExerciseWeight` attribute is recorded in the `Exercise`, then the `ExerciseWeight` is used as comparison
+* If there is no `ExerciseWeight` recorded in the `Exercise`, then `ExerciseReps` will be used as comparison
+* If neither of `ExerciseWeight` and `ExerciseReps` are recorded into the `Exercise`, then this particular exercise will not be put into the Exercise Personal Best table
+** However, if the another `Exercise` of the same name is added in the future with `ExerciseWeight` and/or `ExerciseReps` specified, then the personal best of this exercise will still be calculated and shown in the Exercise Personal Best table
+
+When the user inputs `view-c`, `add-e` or `delete-c`, `PersonalBestFinder#generateAndSetPersonalBest` is called, taking the client currently in view as the parameter. `PersonalBestFinder#generateAndSetPersonalBest` then retrieves client's list of exercises using `Client#getExerciseList` and creates a new `HashMap`, where the `key` is `ExerciseName` and the `value` is `Exercise`. Then the personal bests of each exercise of the client in view are generated using the above considerations. Finally the list of personal bests is set using `PersonalBest#setPersonalBest`.
+
+A simplified class diagram of the classes involved in this feature is given below:
+
+image::PersonalBestClassDiagram.png[]
+
+In the following sequence diagram, we trace the execution for when the user decides to enter the command `view-c` into FitBiz:
+
+image::PersonalBestSequenceDiagram.png[]
+
+==== Design Considerations
+
+In designing this features, we had to decide on the placement of the `PersonalBest` class in the model to comply with the OOP standards. Currently, the `PersonalBest` model has a whole-part relationship with `Client`, with `Client` being the whole and `PersonalBest` being a part of `Client`. The alternative is to consider `PersonalBest` as a part of `Exercise` instead.
+
+[options='header']
+|====================
+| Considerations | Pros and Cons
+| Put `PersonalBest` as a part of `Client` |
+*Pros*: Logically makes more sense, as each client has to have a list of exercises to themselves, and thus `PersonalBest` of each of these exercises
+
+*Cons*: Might have significant conflicts as the `Client` model is changed to include one more attribute
+
+| Put `PersonalBest` as a part of `Exercise` |
+*Pros*: Keep `Exercise` data and methods separate from `Client` data and methods
+
+*Cons*: Actually increases coupling as the logic was flawed
+
+|====================
+
+We decided to use the first approach of placing `PersonalBest` as a part of `Client` instead of `Exercise`. There are multiple reasons for our choice as mentioned below.
+
+We want to maintain the OOP structure of the program. Logically, the personal best should belong to the client as the list of exercises belongs to the client. As the list of exercises is unique to every client, the personal best should also be so.
+
+Moreover, even though personal best is generated using the list of exercises in the client, it can be instantiated even without an exercise list. Therefore it does not require the exercise class to exist and does not have a whole-part relationship with exercise. Coupling will also be increased as the client will be relying on the exercise class to generate the personal best. Therefore, the final choice was to place the personal best under client, with every client having their own personal best attribute.
 
 == Documentation
 
