@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REPS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
 
 import seedu.address.testutil.EditExerciseDescriptorBuilder;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Contains helper methods for testing exerise commands.
@@ -21,8 +23,11 @@ public class ExerciseCommandTestUtil {
     public static final String VALID_EXERCISE_SETS_BENCH = "4";
     public static final String VALID_EXERCISE_WEIGHT_PUSHUP = "";
     public static final String VALID_EXERCISE_WEIGHT_BENCH = "100";
-    public static final String VALID_EXERCISE_DATE_PUSHUP = "12-12-2012";
-    public static final String VALID_EXERCISE_DATE_BENCH = "01-05-2020";
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    public static final String VALID_EXERCISE_DATE_PUSHUP =
+        LocalDate.now().minusDays(1).format(DATE_TIME_FORMATTER);
+    public static final String VALID_EXERCISE_DATE_BENCH =
+        LocalDate.now().minusMonths(4).format(DATE_TIME_FORMATTER);
 
     public static final String EXERCISE_NAME_DESC_PUSHUP =
         " " + PREFIX_NAME + VALID_EXERCISE_NAME_PUSHUP;

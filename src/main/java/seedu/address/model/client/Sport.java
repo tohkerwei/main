@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Sport {
 
-    public static final String MESSAGE_CONSTRAINTS = "Sport can take on any name and can be left blank";
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String MESSAGE_CONSTRAINTS = "Sport should only contain alphanumeric characters and spaces";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public final String sportName;
 
     /**

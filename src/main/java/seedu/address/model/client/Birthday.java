@@ -16,7 +16,7 @@ public class Birthday {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Birthday input should be in the format DD-MM-YYYY, and not be more current than the current date";
+            "Birthdays should be in the format DD-MM-YYYY (eg. 02-03-1999), and cannot exceed the current date";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final LocalDate value;
     public final String displayValue;
