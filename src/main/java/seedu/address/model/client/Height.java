@@ -16,6 +16,7 @@ public class Height {
             + " 2 digits after the decimal place.";
     public static final String VALIDATION_REGEX = "[0-9]{1,3}(\\.[0-9]{0,2})?";
     private static final String EMPTY_STRING = "";
+    private static final String FORMAT_TWO_DECIMAL_PLACES = "%1$.2f";
 
     public final String value;
 
@@ -36,7 +37,8 @@ public class Height {
     }
 
     /**
-     * Formats the height using {@code BigDecimal}.
+     * Formats the given {@code height} using {@code BigDecimal} to two decimal
+     * places.
      *
      * @param height height to format
      * @return formatted height to 2 decimal places
@@ -45,8 +47,8 @@ public class Height {
         if (isEmptyString(height)) {
             return EMPTY_STRING;
         }
-        BigDecimal bd = new BigDecimal(height);
-        return String.format("%1$.2f", bd);
+        BigDecimal bigDecimal = new BigDecimal(height);
+        return String.format(FORMAT_TWO_DECIMAL_PLACES, bigDecimal);
     }
 
     /**
