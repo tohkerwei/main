@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 import static seedu.address.logic.commands.HelpCommand.USER_GUIDE_URL;
 
 import java.util.logging.Logger;
@@ -170,6 +171,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleHelp() {
         logic.openUrlInDefaultWebBrowser(USER_GUIDE_URL);
+        resultDisplay.setFeedbackToUser(SHOWING_HELP_MESSAGE);
     }
 
     void show() {
