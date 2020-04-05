@@ -35,7 +35,8 @@ public class TypicalClients {
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends").withBirthday("12-03-1980")
             .withCurrentWeight("70.3").withGender("m").withTargetWeight("90")
-            .withHeight("180").withSports("Hockey", "Skating").withRemark("Thicc").build();
+            .withHeight("180").withSports("Hockey", "Skating").withRemark("Thicc")
+            .withScheduleList(new ScheduleBuilder().buildAsList()).build();
     public static final Client CARL = new ClientBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Client DANIEL = new ClientBuilder().withName("Daniel Meier").withPhone("87652533")
