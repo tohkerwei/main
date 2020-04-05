@@ -14,7 +14,8 @@ import java.time.format.DateTimeParseException;
 public class ExerciseDate {
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Date input should be in the format DD-MM-YYYY and it should not be blank";
+        "Date input should be in the format DD-MM-YYYY and should not be blank. "
+        + "It should only be from within one year before to the current date.";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public final LocalDate value;
     public final String displayValue;
@@ -36,7 +37,16 @@ public class ExerciseDate {
      */
     public static boolean isValidExerciseDate(String test) {
         try {
-            LocalDate.parse(test, DATE_TIME_FORMATTER);
+            LocalDate testDate = LocalDate.parse(test, DATE_TIME_FORMATTER);
+            LocalDate dateNow = LocalDate.now();
+            LocalDate dateNowMinusOneYear = dateNow.minusYears(1);
+
+            if (dateNow.isBefore(testDate)) {
+                return false;
+            } else if (dateNowMinusOneYear.isAfter(testDate)) {
+                return false;
+            }
+
             return true;
         } catch (DateTimeParseException e) {
             return false;

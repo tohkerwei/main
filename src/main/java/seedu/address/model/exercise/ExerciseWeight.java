@@ -9,8 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ExerciseWeight {
 
-    public static final String MESSAGE_CONSTRAINTS = "Input weight must be whole number (eg. 65)";
-    public static final String VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_CONSTRAINTS =
+        "Input Weight must be a whole number from 1 to 9999 (eg. 65)";
+    public static final String VALIDATION_REGEX = "^([1-9][0-9]{0,3})$";
     public final String value;
 
     /**
