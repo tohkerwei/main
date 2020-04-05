@@ -35,14 +35,14 @@ public class CommandHistoryTest {
     }
 
     @Test
-    public void clearHistory_correctOutput() {
+    public void clearHistory_returnsCorrectOutputs() {
         commandHistory.clearHistory(); // sanity check that history is cleared
         assertEquals(commandHistory.getNextCommand(), EMPTY_STRING);
         assertEquals(commandHistory.getPreviousCommand(), EMPTY_STRING);
     }
 
     @Test
-    public void getPreviousCommand_oneItemHistory_sameStringReturned() {
+    public void getPreviousCommand_oneItemHistory_returnsSameString() {
         commandHistory.clearHistory(); // sanity check that history is cleared
         commandHistory.addToHistory(VALID_COMMAND_1);
         String command1 = commandHistory.getPreviousCommand();
@@ -58,7 +58,7 @@ public class CommandHistoryTest {
     }
 
     @Test
-    public void simulatedUsage() {
+    public void simulatedUsage_returnsCorrectOutputs() {
         commandHistory.clearHistory(); // sanity check that history is cleared
         commandHistory.addToHistory(VALID_COMMAND_1);
         commandHistory.addToHistory(VALID_COMMAND_2);
