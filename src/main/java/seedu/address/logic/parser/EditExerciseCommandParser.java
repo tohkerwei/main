@@ -26,32 +26,39 @@ public class EditExerciseCommandParser implements Parser<EditExerciseCommand> {
      */
     public EditExerciseCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_REPS, PREFIX_SETS, PREFIX_EXERCISE_WEIGHT, PREFIX_DATE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
+            args, PREFIX_NAME, PREFIX_REPS, PREFIX_SETS, PREFIX_EXERCISE_WEIGHT, PREFIX_DATE);
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditExerciseCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditExerciseCommand.MESSAGE_USAGE), pe);
         }
 
         EditExerciseCommand.EditExerciseDescriptor editExerciseDescriptor = new EditExerciseDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editExerciseDescriptor.setExerciseName(ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editExerciseDescriptor.setExerciseName(
+                ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_REPS).isPresent()) {
-            editExerciseDescriptor.setExerciseReps(ParserUtil.parseExerciseReps(argMultimap.getValue(PREFIX_REPS).get()));
+            editExerciseDescriptor.setExerciseReps(
+                ParserUtil.parseExerciseReps(argMultimap.getValue(PREFIX_REPS).get()));
         }
         if (argMultimap.getValue(PREFIX_SETS).isPresent()) {
-            editExerciseDescriptor.setExerciseSets(ParserUtil.parseExerciseSets(argMultimap.getValue(PREFIX_SETS).get()));
+            editExerciseDescriptor.setExerciseSets(
+                ParserUtil.parseExerciseSets(argMultimap.getValue(PREFIX_SETS).get()));
         }
         if (argMultimap.getValue(PREFIX_EXERCISE_WEIGHT).isPresent()) {
-            editExerciseDescriptor.setExerciseWeight(ParserUtil.parseExerciseWeight(argMultimap.getValue(PREFIX_EXERCISE_WEIGHT).get()));
+            editExerciseDescriptor.setExerciseWeight(
+                ParserUtil.parseExerciseWeight(argMultimap.getValue(PREFIX_EXERCISE_WEIGHT).get()));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editExerciseDescriptor.setExerciseDate(ParserUtil.parseExerciseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editExerciseDescriptor.setExerciseDate(
+                ParserUtil.parseExerciseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
-        
+
         if (!editExerciseDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditExerciseCommand.MESSAGE_NOT_EDITED);
         }

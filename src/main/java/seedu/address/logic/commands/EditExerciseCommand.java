@@ -6,13 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REPS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -51,9 +46,10 @@ public class EditExerciseCommand extends Command {
 
     public static final String MESSAGE_EDIT_EXERCISE_SUCCESS = "Edited Exercise: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in FitBiz. Consider increment the sets of that existing exercise.";
+    public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in FitBiz. "
+        + "Consider increment the sets of that existing exercise.";
     public static final String MESSAGE_CLIENT_NOT_IN_VIEW = "You currently do not have a client in view, "
-            + "use the view-c command to view a client first";
+        + "use the view-c command to view a client first";
 
     private final Index targetIndex;
     private final EditExerciseDescriptor editExerciseDescriptor;
@@ -74,13 +70,15 @@ public class EditExerciseCommand extends Command {
      * Creates and returns a {@code Exercise} with the details of {@code exerciseToEdit}
      * edited with {@code editExerciseDescriptor}.
      */
-    private static Exercise createEditedExercise(Exercise exerciseToEdit, EditExerciseDescriptor editExerciseDescriptor) {
+    private static Exercise createEditedExercise(Exercise exerciseToEdit,
+        EditExerciseDescriptor editExerciseDescriptor) {
         assert exerciseToEdit != null;
 
         ExerciseName updatedName = editExerciseDescriptor.getExerciseName().orElse(exerciseToEdit.getExerciseName());
         ExerciseReps updatedReps = editExerciseDescriptor.getExerciseReps().orElse(exerciseToEdit.getExerciseReps());
         ExerciseSets updatedSets = editExerciseDescriptor.getExerciseSets().orElse(exerciseToEdit.getExerciseSets());
-        ExerciseWeight updatedWeight = editExerciseDescriptor.getExerciseWeight().orElse(exerciseToEdit.getExerciseWeight());
+        ExerciseWeight updatedWeight = editExerciseDescriptor.getExerciseWeight()
+            .orElse(exerciseToEdit.getExerciseWeight());
         ExerciseDate updatedDate = editExerciseDescriptor.getExerciseDate().orElse(exerciseToEdit.getExerciseDate());
 
         return new Exercise(updatedName, updatedReps, updatedSets, updatedWeight, updatedDate);
