@@ -24,7 +24,7 @@ import seedu.address.model.exercise.Exercise;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteExerciseCommand}.
- * 
+ *
  * @author @yonggiee
  */
 public class DeleteExerciseCommandTest {

@@ -9,7 +9,7 @@ import seedu.address.model.exercise.ExerciseWeight;
 
 /**
  * A utility class to help with building Exercise objects.
- * 
+ *
  * @author @yonggiee
  */
 public class ExerciseBuilder {
