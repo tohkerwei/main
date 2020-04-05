@@ -31,7 +31,7 @@ public class TypicalClients {
             .withExercisesInExerciseList(new ExerciseBuilder().withExerciseName("ANOTHER").build())
             .build();
 
-        public static final Client ALICE2 = new ClientBuilder().withName("Alice Pauline")
+        public static final Client ALICE_DELETED_EXERCISE = new ClientBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")

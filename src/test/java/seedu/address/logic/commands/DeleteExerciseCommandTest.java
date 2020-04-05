@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalClients.ALICE2;
+import static seedu.address.testutil.TypicalClients.ALICE_DELETED_EXERCISE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXERCISE;
@@ -24,6 +24,8 @@ import seedu.address.model.exercise.Exercise;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteExerciseCommand}.
+ * 
+ * @author @yonggiee
  */
 public class DeleteExerciseCommandTest {
 
@@ -54,10 +56,10 @@ public class DeleteExerciseCommandTest {
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
         Client alice = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-        expectedModel.setClient(alice, ALICE2);
-    
-        expectedModel.setClientInView(ALICE2);
-        // Alice2 have UniqueExerciseList with the exercise deleted
+        expectedModel.setClient(alice, ALICE_DELETED_EXERCISE);
+
+        expectedModel.setClientInView(ALICE_DELETED_EXERCISE);
+        // ALICE_DELETED_EXERCISE have UniqueExerciseList with the exercise deleted
 
         assertCommandSuccess(deleteExerciseCommand, model, expectedMessage, expectedModel);
     }
