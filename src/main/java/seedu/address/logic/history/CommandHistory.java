@@ -7,8 +7,8 @@ import seedu.address.model.CommandHistoryState;
 import seedu.address.storage.CommandHistoryStorage;
 
 /**
- * This class represents the logic behind the command history and exposes the
- * methods needed for this feature.
+ * This class represents the logic behind the command history feature and acts
+ * as an interface by exposing the necessary methods needed.
  */
 public class CommandHistory {
 
@@ -28,7 +28,8 @@ public class CommandHistory {
 
     /**
      * Overloaded constructor for this class which allows the storage file path for
-     * storage {@code CommandHistoryStorage} to be set.
+     * storage {@code CommandHistoryStorage} to be set. Provided for ease of JUnit
+     * testing.
      */
     public CommandHistory(Path storagePath) {
         historyStorage = new CommandHistoryStorage(storagePath);
@@ -47,14 +48,14 @@ public class CommandHistory {
     }
 
     /**
-     * Returns the previous command while browsing the history.
+     * Returns the previous (least recent) command while browsing the history.
      */
     public String getPreviousCommand() {
         return historyState.getPreviousCommand();
     }
 
     /**
-     * Returns the next command while browsing the history.
+     * Returns the next (most recent) command while browsing the history.
      */
     public String getNextCommand() {
         return historyState.getNextCommand();
