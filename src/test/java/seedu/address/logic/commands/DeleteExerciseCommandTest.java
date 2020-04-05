@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXERCISE;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -25,7 +26,14 @@ import seedu.address.model.exercise.Exercise;
  */
 public class DeleteExerciseCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
+    private Model model;
+    private Client clientInView;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
+        clientInView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+    }
 
     @Test
     public void execute_noClientInView_throwsCommandException() {
@@ -36,7 +44,6 @@ public class DeleteExerciseCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Client clientInView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         model.setClientInView(clientInView);
         System.out.println(clientInView.getExerciseList());
         Exercise exerciseToDelete = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);
@@ -54,7 +61,6 @@ public class DeleteExerciseCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Client clientInView = model.getFilteredClientList().get(INDEX_FIRST_EXERCISE.getZeroBased());
         model.setClientInView(clientInView);
 
         Index outOfBoundIndex = Index.fromOneBased(clientInView.getExerciseList().size() + 1);
