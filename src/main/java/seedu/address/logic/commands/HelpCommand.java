@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import seedu.address.model.Model;
 
@@ -26,10 +29,28 @@ public class HelpCommand extends Command {
      * @param url website url to open
      */
     public static void openUrlInDefaultWebBrowser(String url) {
-        try {
-            new ProcessBuilder("x-www-browser", url).start();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String os = System.getProperty("os.name").toLowerCase().substring(0, 3);
+
+        switch (os) {
+        case "win":
+        case "mac":
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                try {
+                    Desktop.getDesktop().browse(new URI("http://www.example.com"));
+                } catch (IOException | URISyntaxException e) {
+                    e.printStackTrace();
+                }
+            }
+            break;
+        case "lin":
+            try {
+                new ProcessBuilder("x-www-browser", url).start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            break;
+        default:
+            break;
         }
     }
 
