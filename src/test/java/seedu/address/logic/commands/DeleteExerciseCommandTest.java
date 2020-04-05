@@ -47,7 +47,7 @@ public class DeleteExerciseCommandTest {
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
         Client expectedClientInView = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         expectedModel.setClientInView(expectedClientInView);
-        // ALICE is static so deleting in model will also stimulate delete in expectedModel
+        // ALICE is static so deleting in model will also stimulate delete in expectedModel TODO
 
         assertCommandSuccess(deleteExerciseCommand, model, expectedMessage, expectedModel);
     }

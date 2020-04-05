@@ -138,8 +138,7 @@ public class EditExerciseCommand extends Command {
         private ExerciseWeight exerciseWeight;
         private ExerciseDate exerciseDate;
 
-        public EditExerciseDescriptor() {
-        }
+        public EditExerciseDescriptor() {}
 
         /**
          * Copy constructor. A defensive copy of {@code tags} is used internally.
