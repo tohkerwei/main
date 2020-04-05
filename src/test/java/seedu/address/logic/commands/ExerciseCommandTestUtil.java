@@ -25,9 +25,9 @@ public class ExerciseCommandTestUtil {
     public static final String VALID_EXERCISE_WEIGHT_BENCH = "100";
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     public static final String VALID_EXERCISE_DATE_PUSHUP =
-        LocalDate.now().minusDays(1).format(DATE_TIME_FORMATTER);
-    public static final String VALID_EXERCISE_DATE_BENCH =
         LocalDate.now().minusMonths(4).format(DATE_TIME_FORMATTER);
+    public static final String VALID_EXERCISE_DATE_BENCH =
+        LocalDate.now().minusDays(1).format(DATE_TIME_FORMATTER);
 
     public static final String EXERCISE_NAME_DESC_PUSHUP =
         " " + PREFIX_NAME + VALID_EXERCISE_NAME_PUSHUP;

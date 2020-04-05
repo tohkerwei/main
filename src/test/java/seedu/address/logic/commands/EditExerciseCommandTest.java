@@ -18,7 +18,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditExerciseCommand.EditExerciseDescriptor;
 import seedu.address.model.ClientInView;
-import seedu.address.model.FitBiz;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -30,6 +29,8 @@ import seedu.address.testutil.ExerciseBuilder;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code EditExerciseCommand}.
+ *
+ * @author @yonggiee
  */
 public class EditExerciseCommandTest {
 
@@ -41,6 +42,7 @@ public class EditExerciseCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
         clientInView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
     }
+
     @Test
     public void execute_noClientInView_throwsCommandException() {
         Exercise editedExercise = new ExerciseBuilder().build();
@@ -51,66 +53,33 @@ public class EditExerciseCommandTest {
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastClient = Index.fromOneBased(model.getFilteredClientList().size());
-        Client lastClient = model.getFilteredClientList().get(indexLastClient.getZeroBased());
+    public void execute_duplicateExerciseUnfilteredList_failure() {
+        model.setClientInView(clientInView);
 
-        ClientBuilder clientInList = new ClientBuilder(lastClient);
-        Client editedClient = clientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Exercise firstExercise = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);        
 
-        EditCommand.EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastClient, descriptor);
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
-                new ClientInView());
-        expectedModel.setClient(lastClient, editedClient);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE, new EditExerciseCommand.EditExerciseDescriptor());
-        Client editedClient = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-
-        String expectedMessage = String.format(EditExerciseCommand.MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise);
-
-        Model expectedModel = new ModelManager(new FitBiz(model.getAddressBook()), new UserPrefs(),
-                new ClientInView());
-
-        assertCommandSuccess(editExerciseCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_duplicateClientUnfilteredList_failure() {
-        showClientAtIndex(model, INDEX_FIRST_CLIENT);
-
-        // edit client in filtered list into a duplicate in address book
-        Client clientInList = model.getAddressBook().getClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_CLIENT,
-                new EditClientDescriptorBuilder(clientInList).build());
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_CLIENT);
+        EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(firstExercise).build();
+        EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_SECOND_EXERCISE, descriptor);
+       assertCommandFailure(editExerciseCommand, model, EditExerciseCommand.MESSAGE_DUPLICATE_EXERCISE);
     }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         model.setClientInView(clientInView);
-        Exercise exerciseToedit = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);
-        EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(DESC_PUSHUP).build();
+        Exercise firstExercise = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);        
+        EditExerciseDescriptor descriptor = (new EditExerciseDescriptorBuilder(firstExercise)).withExerciseReps("20").build();
+
+        Exercise editedExercise = new ExerciseBuilder(firstExercise).withExerciseReps("20").build();
         EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE, descriptor);
 
-        String expectedMessage = String.format(EditExerciseCommand.MESSAGE_EDIT_EXERCISE_SUCCESS, exerciseToedit);
+        String expectedMessage = String.format(EditExerciseCommand.MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise);
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
-        Client alice = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-        expectedModel.setClient(alice, ALICE_EDITED_EXERCISE);
+        Client clientInViewExpected = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        expectedModel.setClientInView(clientInViewExpected);
 
-        expectedModel.setClientInView(ALICE_EDITED_EXERCISE);
+        Exercise firstExerciseExpected = clientInViewExpected.getExerciseList().getExercise(INDEX_FIRST_EXERCISE); 
+        expectedModel.editExercise(firstExerciseExpected, editedExercise);
 
         assertCommandSuccess(editExerciseCommand, model, expectedMessage, expectedModel);
     }
@@ -129,11 +98,6 @@ public class EditExerciseCommandTest {
     @Test
     public void equals() {
         final EditExerciseCommand standardCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE, DESC_PUSHUP);
-
-        // same values -> returns true
-        EditExerciseCommand.EditExerciseDescriptor copyDescriptor = new EditExerciseDescriptor(DESC_PUSHUP);
-        EditExerciseCommand commandWithSameValues = new EditExerciseCommand(INDEX_FIRST_EXERCISE, copyDescriptor);
-        assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
