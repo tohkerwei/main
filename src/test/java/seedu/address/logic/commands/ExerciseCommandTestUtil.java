@@ -14,15 +14,15 @@ import seedu.address.testutil.EditExerciseDescriptorBuilder;
 public class ExerciseCommandTestUtil {
 
     public static final String VALID_EXERCISE_NAME_PUSHUP = "pushup";
-    public static final String VALID_EXERCISE_NAME_BENCH = "bench press";
+    public static final String VALID_EXERCISE_NAME_BENCH = "Bench Press";
     public static final String VALID_EXERCISE_REPS_PUSHUP = "30";
-    public static final String VALID_EXERCISE_REPS_BENCH = "2";
+    public static final String VALID_EXERCISE_REPS_BENCH = "12";
     public static final String VALID_EXERCISE_SETS_PUSHUP = "5";
     public static final String VALID_EXERCISE_SETS_BENCH = "4";
     public static final String VALID_EXERCISE_WEIGHT_PUSHUP = "";
     public static final String VALID_EXERCISE_WEIGHT_BENCH = "100";
     public static final String VALID_EXERCISE_DATE_PUSHUP = "12-12-2012";
-    public static final String VALID_EXERCISE_DATE_BENCH = "13-01-2014";
+    public static final String VALID_EXERCISE_DATE_BENCH = "01-05-2020";
 
     public static final String EXERCISE_NAME_DESC_PUSHUP =
         " " + PREFIX_NAME + VALID_EXERCISE_NAME_PUSHUP;

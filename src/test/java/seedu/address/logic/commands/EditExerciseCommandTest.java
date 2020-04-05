@@ -11,13 +11,14 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXERCISE;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditExerciseCommand.EditExerciseDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.ClientInView;
+import seedu.address.model.FitBiz;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -32,8 +33,14 @@ import seedu.address.testutil.ExerciseBuilder;
  */
 public class EditExerciseCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
+    private Model model;
+    private Client clientInView;
 
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
+        clientInView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+    }
     @Test
     public void execute_noClientInView_throwsCommandException() {
         Exercise editedExercise = new ExerciseBuilder().build();
@@ -41,25 +48,6 @@ public class EditExerciseCommandTest {
         EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE, descriptor);
 
         assertCommandFailure(editExerciseCommand, model, EditExerciseCommand.MESSAGE_CLIENT_NOT_IN_VIEW);
-    }
-
-    @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Client clientInView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-        model.setClientInView(clientInView);
-
-        Exercise editedExercise = new ExerciseBuilder().build();
-        EditExerciseCommand.EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(editedExercise).build();
-        EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE, descriptor);
-
-        String expectedMessage = String.format(EditExerciseCommand.MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
-                new ClientInView());
-        Client expectedClientInView = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-        expectedModel.setClientInView(expectedClientInView);
-
-        assertCommandSuccess(editExerciseCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -86,15 +74,15 @@ public class EditExerciseCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_CLIENT, new EditCommand.EditClientDescriptor());
+        EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE, new EditExerciseCommand.EditExerciseDescriptor());
         Client editedClient = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
+        String expectedMessage = String.format(EditExerciseCommand.MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new FitBiz(model.getAddressBook()), new UserPrefs(),
                 new ClientInView());
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editExerciseCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -111,30 +99,29 @@ public class EditExerciseCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Client clientInView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         model.setClientInView(clientInView);
-        System.out.println(clientInView.getExerciseList());
         Exercise exerciseToedit = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);
-        EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE);
+        EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(DESC_PUSHUP).build();
+        EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE, descriptor);
 
-        String expectedMessage = String.format(EditExerciseCommand.MESSAGE_SUCCESS, exerciseToedit);
+        String expectedMessage = String.format(EditExerciseCommand.MESSAGE_EDIT_EXERCISE_SUCCESS, exerciseToedit);
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
-        Client expectedClientInView = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-        expectedModel.setClientInView(expectedClientInView);
-        // ALICE is static so deleting in model will also stimulate edit in
-        // expectedModel
+        Client alice = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        expectedModel.setClient(alice, ALICE_EDITED_EXERCISE);
+
+        expectedModel.setClientInView(ALICE_EDITED_EXERCISE);
 
         assertCommandSuccess(editExerciseCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Client clientInView = model.getFilteredClientList().get(INDEX_FIRST_EXERCISE.getZeroBased());
         model.setClientInView(clientInView);
 
         Index outOfBoundIndex = Index.fromOneBased(clientInView.getExerciseList().size() + 1);
-        EditExerciseCommand editExerciseCommand = new EditExerciseCommand(outOfBoundIndex);
+        EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(DESC_PUSHUP).build();
+        EditExerciseCommand editExerciseCommand = new EditExerciseCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editExerciseCommand, model, Messages.MESSAGE_INVALID_EXERCISE_DISPLAYED_INDEX);
     }
