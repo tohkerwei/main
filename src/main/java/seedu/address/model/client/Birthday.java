@@ -69,11 +69,15 @@ public class Birthday {
         return value.hashCode();
     }
 
+    public boolean isEmpty() {
+        return value == null;
+    }
+
     public String getAge() {
         if (this.value == null) {
             return "-";
         }
-        long age = DAYS.between(LocalDate.now(), this.value) / 365;
+        long age = DAYS.between(this.value, LocalDate.now()) / 365;
         return Long.toString(age);
     }
 

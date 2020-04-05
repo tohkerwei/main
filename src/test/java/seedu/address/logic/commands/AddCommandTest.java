@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.UniqueExerciseList;
 import seedu.address.model.schedule.ScheduleDay;
 import seedu.address.testutil.ClientBuilder;
 
@@ -188,6 +189,10 @@ public class AddCommandTest {
 
         @Override
         public void editExercise(Exercise target, Exercise editedExercise) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public Client addExerciseToClient(Exercise exercise) {
             throw new AssertionError("This method should not be called.");
         }
 

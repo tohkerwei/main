@@ -164,6 +164,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateClientViewIfApplicable(Client clientToEdit, Client editedClient) {
+        requireAllNonNull(clientToEdit, editedClient);
         if (!clientInView.hasClientInView()) {
             return;
         }
@@ -188,6 +189,36 @@ public class ModelManager implements Model {
 
     //=========== Exercise ================================================================================
 
+    /**
+     * Creates a new {@code Client} with the new exercise list. Other attributes remain the
+     * same.
+     */
+    private Client buildClientWithNewExerciseList(Client clientToEdit,
+        UniqueExerciseList clientToEditExerciseList) {
+
+        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
+            clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
+            clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
+            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList,
+            clientToEdit.getPersonalBest(), clientToEdit.getScheduleList());
+
+        return editedClient;
+    }
+
+    @Override
+    public Client addExerciseToClient(Exercise exercise) {
+        requireNonNull(exercise);
+
+        Client clientToEdit = getClientInView();
+        UniqueExerciseList clientToEditExerciseList = clientToEdit.getExerciseList();
+        clientToEditExerciseList.addToSorted(exercise);
+
+        Client editedClient = buildClientWithNewExerciseList(clientToEdit, clientToEditExerciseList);
+
+        setClient(clientToEdit, editedClient);
+        return editedClient;
+    }
+
     @Override
     public boolean hasExercise(Exercise exercise) {
         requireNonNull(exercise);
@@ -205,17 +236,14 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteExercise (Exercise exercise) {
+        requireNonNull(exercise);
         Client clientToEdit = getClientInView();
         UniqueExerciseList clientToEditExerciseList = clientToEdit.getExerciseList();
 
         // mutates the list belonging to the client by removing the exercise
         clientToEditExerciseList.remove(exercise);
 
-        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
-            clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
-            clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
-            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList,
-            clientToEdit.getPersonalBest(), clientToEdit.getScheduleList());
+        Client editedClient = buildClientWithNewExerciseList(clientToEdit, clientToEditExerciseList);
 
         setClient(clientToEdit, editedClient);
     }

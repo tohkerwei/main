@@ -47,7 +47,7 @@ public class ClientCard extends UiPart<Region> {
         super(FXML);
         this.client = client;
         id.setText(displayedIndex + ". ");
-        name.setText(client.getName().fullName);
+        name.setText(client.getName().fullName + " " + client.buildBirthdayAndGender());
         String phoneLabel = "Phone: ";
         String phoneAttributeForDisplay = getAttributeForDisplay(client.getPhone().value);
         String fullPhoneForDisplay = phoneLabel + phoneAttributeForDisplay;

@@ -67,16 +67,7 @@ public class AddExerciseCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_EXERCISE);
         }
 
-        // mutates the list belonging to the client by adding the exercise
-        clientToEditExerciseList.addToSorted(toAdd);
-
-        Client editedClient = new Client(clientToEdit.getName(), clientToEdit.getGender(), clientToEdit.getPhone(),
-            clientToEdit.getEmail(), clientToEdit.getAddress(), clientToEdit.getTags(), clientToEdit.getBirthday(),
-            clientToEdit.getCurrentWeight(), clientToEdit.getTargetWeight(), clientToEdit.getHeight(),
-            clientToEdit.getRemark(), clientToEdit.getSports(), clientToEditExerciseList,
-            clientToEdit.getPersonalBest(), clientToEdit.getScheduleList());
-
-        model.setClient(clientToEdit, editedClient);
+        Client editedClient = model.addExerciseToClient(toAdd);
 
         PersonalBestFinder.generateAndSetPersonalBest(editedClient);
 

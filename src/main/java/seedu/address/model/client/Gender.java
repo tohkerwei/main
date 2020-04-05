@@ -12,6 +12,8 @@ public class Gender {
     public static final String MESSAGE_CONSTRAINTS =
         "Gender should be Male/Female/Others";
 
+    private static final String EMPTY_STRING = "";
+
     public final String value;
 
     /**
@@ -31,13 +33,21 @@ public class Gender {
     public static boolean isValidGender(String test) {
         requireNonNull(test);
         String testInLowerCase = test.trim().toLowerCase();
-        return test.equals("")
+        return test.equals(EMPTY_STRING)
             || testInLowerCase.equals("male")
             || testInLowerCase.equals("m")
             || testInLowerCase.equals("female")
             || testInLowerCase.equals("f")
             || testInLowerCase.equals("others")
             || testInLowerCase.equals("o");
+    }
+
+    public boolean isEmpty() {
+        return value.equals(EMPTY_STRING);
+    }
+
+    public String getOneLetterFormat() {
+        return value.substring(0, 1).toUpperCase();
     }
 
     @Override
