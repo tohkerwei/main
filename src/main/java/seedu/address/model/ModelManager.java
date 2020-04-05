@@ -149,7 +149,6 @@ public class ModelManager implements Model {
 
     @Override
     public void setClientInView(Client client) {
-        requireNonNull(client);
         clientInView.setClient(client);
     }
 
