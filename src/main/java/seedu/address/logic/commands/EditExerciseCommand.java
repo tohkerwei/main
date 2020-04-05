@@ -47,7 +47,7 @@ public class EditExerciseCommand extends Command {
     public static final String MESSAGE_EDIT_EXERCISE_SUCCESS = "Edited Exercise: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in FitBiz. "
-        + "Consider increment the sets of that existing exercise.";
+        + "Consider incrementing the sets of that existing exercise.";
     public static final String MESSAGE_CLIENT_NOT_IN_VIEW = "You currently do not have a client in view, "
         + "use the view-c command to view a client first";
 
