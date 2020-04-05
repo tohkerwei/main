@@ -189,6 +189,21 @@ public class ModelManager implements Model {
     //=========== Exercise ================================================================================
 
     @Override
+    public boolean hasExercise(Exercise exercise) {
+        requireNonNull(exercise);
+        return getClientInView().getExerciseList().contains(exercise);
+    }
+
+
+    @Override
+    public void editExercise (Exercise target, Exercise editedExercise) {
+        Client clientToEdit = getClientInView();
+        UniqueExerciseList clientToEditExerciseList = clientToEdit.getExerciseList();
+
+        clientToEditExerciseList.setExercise(target, editedExercise);
+    }
+
+    @Override
     public void deleteExercise (Exercise exercise) {
         Client clientToEdit = getClientInView();
         UniqueExerciseList clientToEditExerciseList = clientToEdit.getExerciseList();
