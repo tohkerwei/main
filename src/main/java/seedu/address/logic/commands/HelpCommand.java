@@ -32,17 +32,18 @@ public class HelpCommand extends Command {
         String os = System.getProperty("os.name").toLowerCase().substring(0, 3);
 
         switch (os) {
-        case "win":
-        case "mac":
+        case "win": // windows
+        case "mac": // macOS
             if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                 try {
-                    Desktop.getDesktop().browse(new URI("http://www.example.com"));
+                    Desktop.getDesktop().browse(new URI(url));
                 } catch (IOException | URISyntaxException e) {
                     e.printStackTrace();
                 }
             }
             break;
-        case "lin":
+        case "lin": // linux
+        case "uni": // unix
             try {
                 new ProcessBuilder("x-www-browser", url).start();
             } catch (IOException e) {
