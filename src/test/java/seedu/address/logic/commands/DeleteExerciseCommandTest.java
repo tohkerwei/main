@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.ALICE2;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXERCISE;
@@ -45,16 +46,18 @@ public class DeleteExerciseCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         model.setClientInView(clientInView);
-        System.out.println(clientInView.getExerciseList());
+
         Exercise exerciseToDelete = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);
         DeleteExerciseCommand deleteExerciseCommand = new DeleteExerciseCommand(INDEX_FIRST_EXERCISE);
 
         String expectedMessage = String.format(DeleteExerciseCommand.MESSAGE_SUCCESS, exerciseToDelete);
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
-        Client expectedClientInView = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-        expectedModel.setClientInView(expectedClientInView);
-        // ALICE is static so deleting in model will also stimulate delete in expectedModel
+        Client alice = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        expectedModel.setClient(alice, ALICE2);
+    
+        expectedModel.setClientInView(ALICE2);
+        // Alice2 have UniqueExerciseList with the exercise deleted
 
         assertCommandSuccess(deleteExerciseCommand, model, expectedMessage, expectedModel);
     }
