@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.HelpCommand.USER_GUIDE_URL;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -39,7 +41,6 @@ public class MainWindow extends UiPart<Stage> {
     private ClientViewDisplay clientViewDisplay;
     private SchedulePanel schedulePanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -82,8 +83,6 @@ public class MainWindow extends UiPart<Stage> {
 
         // set the font
         setFont(primaryStage);
-
-        helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -170,11 +169,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        logic.openUrlInDefaultWebBrowser(USER_GUIDE_URL);
     }
 
     void show() {
@@ -189,7 +184,6 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 

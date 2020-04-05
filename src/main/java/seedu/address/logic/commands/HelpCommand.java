@@ -1,10 +1,5 @@
 package seedu.address.logic.commands;
 
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import seedu.address.model.Model;
 
 /**
@@ -23,41 +18,8 @@ public class HelpCommand extends Command {
             + " website. If not, please visit the following URL:\n"
             + USER_GUIDE_URL;
 
-    /**
-     * Opens the provided {@code url} in the user's default web browser.
-     *
-     * @param url website url to open
-     */
-    public static void openUrlInDefaultWebBrowser(String url) {
-        String os = System.getProperty("os.name").toLowerCase().substring(0, 3);
-
-        switch (os) {
-        case "win": // windows
-        case "mac": // macOS
-            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                try {
-                    Desktop.getDesktop().browse(new URI(url));
-                } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
-                }
-            }
-            break;
-        case "lin": // linux
-        case "uni": // unix
-            try {
-                new ProcessBuilder("x-www-browser", url).start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            break;
-        default:
-            break;
-        }
-    }
-
     @Override
     public CommandResult execute(Model model) {
-        openUrlInDefaultWebBrowser(USER_GUIDE_URL);
-        return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }
