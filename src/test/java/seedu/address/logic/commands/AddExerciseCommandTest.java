@@ -47,9 +47,9 @@ public class AddExerciseCommandTest {
 
         CommandResult commandResult = new AddExerciseCommand(newExercise).execute(model);
 
-        assertEquals(String.format(AddExerciseCommand.MESSAGE_SUCCESS, 
-                clientInView.getExerciseList().toString()),
-                commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddExerciseCommand.MESSAGE_SUCCESS,
+            clientInView.getExerciseList().toString()),
+            commandResult.getFeedbackToUser());
     }
 
     @Test
