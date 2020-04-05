@@ -31,6 +31,7 @@ public class DeleteExerciseCommand extends Command {
     private final Index targetIndex;
 
     public DeleteExerciseCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
