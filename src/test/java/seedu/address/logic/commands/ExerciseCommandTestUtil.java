@@ -6,9 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REPS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
 
-import seedu.address.testutil.EditExerciseDescriptorBuilder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import seedu.address.testutil.EditExerciseDescriptorBuilder;
 
 /**
  * Contains helper methods for testing exerise commands.
@@ -63,11 +64,19 @@ public class ExerciseCommandTestUtil {
     public static final EditExerciseCommand.EditExerciseDescriptor DESC_PUSHUP;
     public static final EditExerciseCommand.EditExerciseDescriptor DESC_BENCH;
 
-     static {
-        DESC_PUSHUP = new EditExerciseDescriptorBuilder().withExerciseName(VALID_EXERCISE_NAME_PUSHUP).withExerciseReps(VALID_EXERCISE_REPS_PUSHUP)
-            .withExerciseSets(VALID_EXERCISE_SETS_PUSHUP).withExerciseWeight(VALID_EXERCISE_WEIGHT_PUSHUP).withExerciseDate(VALID_EXERCISE_DATE_PUSHUP).build();
-        DESC_BENCH = new EditExerciseDescriptorBuilder().withExerciseName(VALID_EXERCISE_NAME_BENCH).withExerciseReps(VALID_EXERCISE_REPS_BENCH)
-            .withExerciseSets(VALID_EXERCISE_SETS_BENCH).withExerciseWeight(VALID_EXERCISE_WEIGHT_BENCH).withExerciseDate(VALID_EXERCISE_DATE_BENCH).build();
-     }
+    static {
+        DESC_PUSHUP = new EditExerciseDescriptorBuilder()
+        .withExerciseName(VALID_EXERCISE_NAME_PUSHUP)
+            .withExerciseReps(VALID_EXERCISE_REPS_PUSHUP)
+            .withExerciseSets(VALID_EXERCISE_SETS_PUSHUP)
+            .withExerciseWeight(VALID_EXERCISE_WEIGHT_PUSHUP)
+            .withExerciseDate(VALID_EXERCISE_DATE_PUSHUP).build();
+        DESC_BENCH = new EditExerciseDescriptorBuilder()
+            .withExerciseName(VALID_EXERCISE_NAME_BENCH)
+            .withExerciseReps(VALID_EXERCISE_REPS_BENCH)
+            .withExerciseSets(VALID_EXERCISE_SETS_BENCH)
+            .withExerciseWeight(VALID_EXERCISE_WEIGHT_BENCH)
+            .withExerciseDate(VALID_EXERCISE_DATE_BENCH).build();
+    }
 
 }

@@ -11,13 +11,13 @@ import seedu.address.model.exercise.ExerciseWeight;
 
 /**
  * A utility class to help with building EditExerciseDescriptor objects.
- * 
+ *
  * @author @yonggiee
  */
 public class EditExerciseDescriptorBuilder {
 
     private EditExerciseDescriptor descriptor;
-    
+
     public EditExerciseDescriptorBuilder() {
         descriptor = new EditExerciseCommand.EditExerciseDescriptor();
     }
@@ -30,13 +30,13 @@ public class EditExerciseDescriptorBuilder {
      * Returns an {@code EditExerciseDescriptor} with fields containing
      * {@code Exercise}'s details
      */
-    public EditExerciseDescriptorBuilder(Exercise Exercise) {
+    public EditExerciseDescriptorBuilder(Exercise exercise) {
         descriptor = new EditExerciseCommand.EditExerciseDescriptor();
-        descriptor.setExerciseName(Exercise.getExerciseName());
-        descriptor.setExerciseReps(Exercise.getExerciseReps());
-        descriptor.setExerciseSets(Exercise.getExerciseSets());
-        descriptor.setExerciseWeight(Exercise.getExerciseWeight());
-        descriptor.setExerciseDate(Exercise.getExerciseDate());
+        descriptor.setExerciseName(exercise.getExerciseName());
+        descriptor.setExerciseReps(exercise.getExerciseReps());
+        descriptor.setExerciseSets(exercise.getExerciseSets());
+        descriptor.setExerciseWeight(exercise.getExerciseWeight());
+        descriptor.setExerciseDate(exercise.getExerciseDate());
     }
 
     /**

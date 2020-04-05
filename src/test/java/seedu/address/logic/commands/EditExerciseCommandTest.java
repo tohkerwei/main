@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.ExerciseCommandTestUtil.DESC_PUSHUP;
 import static seedu.address.logic.commands.ExerciseCommandTestUtil.DESC_BENCH;
+import static seedu.address.logic.commands.ExerciseCommandTestUtil.DESC_PUSHUP;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
@@ -46,7 +46,8 @@ public class EditExerciseCommandTest {
     @Test
     public void execute_noClientInView_throwsCommandException() {
         Exercise editedExercise = new ExerciseBuilder().build();
-        EditExerciseCommand.EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(editedExercise).build();
+        EditExerciseCommand.EditExerciseDescriptor descriptor =
+            new EditExerciseDescriptorBuilder(editedExercise).build();
         EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE, descriptor);
 
         assertCommandFailure(editExerciseCommand, model, EditExerciseCommand.MESSAGE_CLIENT_NOT_IN_VIEW);
@@ -56,18 +57,19 @@ public class EditExerciseCommandTest {
     public void execute_duplicateExerciseUnfilteredList_failure() {
         model.setClientInView(clientInView);
 
-        Exercise firstExercise = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);        
+        Exercise firstExercise = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);
 
         EditExerciseDescriptor descriptor = new EditExerciseDescriptorBuilder(firstExercise).build();
         EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_SECOND_EXERCISE, descriptor);
-       assertCommandFailure(editExerciseCommand, model, EditExerciseCommand.MESSAGE_DUPLICATE_EXERCISE);
+        assertCommandFailure(editExerciseCommand, model, EditExerciseCommand.MESSAGE_DUPLICATE_EXERCISE);
     }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         model.setClientInView(clientInView);
-        Exercise firstExercise = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);        
-        EditExerciseDescriptor descriptor = (new EditExerciseDescriptorBuilder(firstExercise)).withExerciseReps("20").build();
+        Exercise firstExercise = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);
+        EditExerciseDescriptor descriptor = (new EditExerciseDescriptorBuilder(firstExercise))
+            .withExerciseReps("20").build();
 
         Exercise editedExercise = new ExerciseBuilder(firstExercise).withExerciseReps("20").build();
         EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE, descriptor);
@@ -78,7 +80,7 @@ public class EditExerciseCommandTest {
         Client clientInViewExpected = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         expectedModel.setClientInView(clientInViewExpected);
 
-        Exercise firstExerciseExpected = clientInViewExpected.getExerciseList().getExercise(INDEX_FIRST_EXERCISE); 
+        Exercise firstExerciseExpected = clientInViewExpected.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);
         expectedModel.editExercise(firstExerciseExpected, editedExercise);
 
         assertCommandSuccess(editExerciseCommand, model, expectedMessage, expectedModel);
