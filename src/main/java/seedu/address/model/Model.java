@@ -138,6 +138,12 @@ public interface Model {
     ObservableList<ScheduleDay> getScheduleDayList();
 
     /**
+     * Adds the given exercise to the clientInView exercise list. There must be
+     * client in clientInView.
+     */
+    Client addExerciseToClient(Exercise exercise);
+
+    /**
      * Deletes the given exercise in clientInView exercise list.
      * There must be client in clientInView.
      */
