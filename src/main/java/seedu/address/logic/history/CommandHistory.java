@@ -12,13 +12,26 @@ import seedu.address.storage.CommandHistoryStorage;
  */
 public class CommandHistory {
 
-    private static final Path STORAGE_FILE_PATH = Paths.get("data", "command.txt");
+    private static final Path DEFAULT_STORAGE_FILE_PATH = Paths.get("data", "command.txt");
 
     private CommandHistoryStorage historyStorage;
     private CommandHistoryState historyState;
 
+    /**
+     * Default constructor for this class which uses the default storage file path
+     * for storage {@code CommandHistoryStorage}.
+     */
     public CommandHistory() {
-        historyStorage = new CommandHistoryStorage(STORAGE_FILE_PATH);
+        historyStorage = new CommandHistoryStorage(DEFAULT_STORAGE_FILE_PATH);
+        historyState = new CommandHistoryState(historyStorage.readFromStorage());
+    }
+
+    /**
+     * Overloaded constructor for this class which allows the storage file path for
+     * storage {@code CommandHistoryStorage} to be set.
+     */
+    public CommandHistory(Path storagePath) {
+        historyStorage = new CommandHistoryStorage(storagePath);
         historyState = new CommandHistoryState(historyStorage.readFromStorage());
     }
 
