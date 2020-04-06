@@ -37,7 +37,8 @@ public class AddExerciseCommand extends Command {
         + PREFIX_SETS + "8";
 
     public static final String MESSAGE_SUCCESS = "New exercise added. Current recorded exercises:\n%1$s";
-    public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in this client";
+    public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in this client. "
+        + "Consider incrementing the sets of that existing exercise.";
     public static final String MESSAGE_CLIENT_NOT_IN_VIEW = "You currently do not have a client in view, "
         + "use the view-c command to view a client first";
 

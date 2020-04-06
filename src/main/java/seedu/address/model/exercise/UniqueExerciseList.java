@@ -103,11 +103,13 @@ public class UniqueExerciseList implements Iterable<Exercise> {
             throw new ExerciseNotFoundException();
         }
 
+        remove(target);
+
         if (!target.isSameExercise(editedExercise) && contains(editedExercise)) {
             throw new DuplicateExerciseException();
         }
 
-        internalList.set(index, editedExercise);
+        addToSorted(editedExercise);
     }
 
     /**

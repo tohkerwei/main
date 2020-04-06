@@ -138,10 +138,22 @@ public interface Model {
     ObservableList<ScheduleDay> getScheduleDayList();
 
     /**
+     * Returns true if a exercise with the same identity as {@code exercise} exists in
+     * exercise list of the client in view.
+     */
+    boolean hasExercise(Exercise exercise);
+
+    /*
      * Adds the given exercise to the clientInView exercise list. There must be
      * client in clientInView.
      */
     Client addExerciseToClient(Exercise exercise);
+
+    /**
+     * Replaces the {@code target} in clientInView exercise list with {@code editedExercise}.
+     * There must be client in clientInView.
+     */
+    void editExercise (Exercise target, Exercise editedExercise);
 
     /**
      * Deletes the given exercise in clientInView exercise list.
