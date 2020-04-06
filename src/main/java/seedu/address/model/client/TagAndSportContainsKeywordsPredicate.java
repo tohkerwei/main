@@ -38,8 +38,8 @@ public class TagAndSportContainsKeywordsPredicate implements Predicate<Client> {
             hasSport = true;
         } else {
             hasSport = sportKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.
-                            containsWordIgnoreCase(setSportToString(client.getSports()), keyword));
+                    .anyMatch(keyword -> StringUtil
+                            .containsWordIgnoreCase(setSportToString(client.getSports()), keyword));
         }
 
         return hasTag && hasSport;
