@@ -71,7 +71,6 @@ public class ScheduleCommand extends Command {
                 clientToEdit.getRemark(), clientToEdit.getSports(), clientToEdit.getExerciseList(),
                 clientToEdit.getPersonalBest(), newScheduleList);
         model.setClient(clientToEdit, editedClient);
-        model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
         // if toAdd is empty, meaning the schedule has been cleared
         if (toAdd.isEmpty()) {
