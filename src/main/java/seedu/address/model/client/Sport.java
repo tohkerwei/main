@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Client's sport in the address book.
+ * Represents a Client's sport in FitBiz.
  * Guarantees: immutable; is valid as declared in {@link #isValidSport(String)}
  */
 public class Sport {

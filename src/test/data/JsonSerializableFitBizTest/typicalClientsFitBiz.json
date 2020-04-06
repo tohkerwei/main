@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Client values as in TypicalClients#getTypicalAddressBook()",
+  "_comment": "FitBiz save file which contains the same Client values as in TypicalClients#getTypicalFitBiz()",
   "clients" : [ {
     "name" : "Alice Pauline",
     "gender" : "",
