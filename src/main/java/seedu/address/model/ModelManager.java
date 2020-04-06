@@ -20,7 +20,7 @@ import seedu.address.model.schedule.ScheduleDay;
 import seedu.address.model.schedule.ScheduleList;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the FitBiz data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -37,7 +37,7 @@ public class ModelManager implements Model {
         super();
         requireAllNonNull(fitBiz, userPrefs);
 
-        logger.fine("Initializing with address book: " + fitBiz + " and user prefs " + userPrefs);
+        logger.fine("Initializing with FitBiz: " + fitBiz + " and user prefs " + userPrefs);
 
         this.fitBiz = new FitBiz(fitBiz);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -127,7 +127,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedFitBiz}
      */
     @Override
     public ObservableList<Client> getFilteredClientList() {

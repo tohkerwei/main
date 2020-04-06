@@ -39,12 +39,12 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' FitBiz file path.
      */
     Path getFitBizFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' FitBiz file path.
      */
     void setFitBizFilePath(Path fitBizFilePath);
 
@@ -54,31 +54,31 @@ public interface Model {
     ReadOnlyFitBiz getFitBiz();
 
     /**
-     * Replaces address book data with the data in {@code fitBiz}.
+     * Replaces FitBiz data with the data in {@code fitBiz}.
      */
     void setFitBiz(ReadOnlyFitBiz fitBiz);
 
     /**
-     * Returns true if a client with the same identity as {@code client} exists in the address book.
+     * Returns true if a client with the same identity as {@code client} exists in the FitBiz.
      */
     boolean hasClient(Client client);
 
     /**
      * Deletes the given client.
-     * The client must exist in the address book.
+     * The client must exist in the FitBiz.
      */
     void deleteClient(Client target);
 
     /**
      * Adds the given client.
-     * {@code client} must not already exist in the address book.
+     * {@code client} must not already exist in the FitBiz.
      */
     void addClient(Client client);
 
     /**
      * Replaces the given client {@code target} with {@code editedClient}.
-     * {@code target} must exist in the address book.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * {@code target} must exist in the FitBiz.
+     * The client identity of {@code editedClient} must not be the same as another existing client in the FitBiz.
      */
     void setClient(Client target, Client editedClient);
 
@@ -117,7 +117,7 @@ public interface Model {
 
     /**
      * Returns true if a client with the same identity as {@code client} exists in
-     * the address book.
+     * the FitBiz.
      *
      * @author @yonggie
      */

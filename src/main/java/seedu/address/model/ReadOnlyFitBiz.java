@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of FitBiz.
  */
 public interface ReadOnlyFitBiz {
 

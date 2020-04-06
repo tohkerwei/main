@@ -117,7 +117,7 @@ public class EditCommandTest {
     public void execute_duplicateClientFilteredList_failure() {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
-        // edit client in filtered list into a duplicate in address book
+        // edit client in filtered list into a duplicate in FitBiz
         Client clientInList = model.getFitBiz().getClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CLIENT,
                 new EditClientDescriptorBuilder(clientInList).build());
@@ -137,13 +137,13 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list, but
-     * smaller than size of address book
+     * smaller than size of FitBiz
      */
     @Test
     public void execute_invalidClientIndexFilteredList_failure() {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
         Index outOfBoundIndex = INDEX_SECOND_CLIENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of FitBiz list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFitBiz().getClientList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,

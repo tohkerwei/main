@@ -61,7 +61,7 @@ public interface Logic {
     Boolean hasClientInView();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' FitBiz file path.
      */
     Path getFitBizFilePath();
 

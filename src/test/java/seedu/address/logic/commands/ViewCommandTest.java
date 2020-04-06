@@ -70,7 +70,7 @@ public class ViewCommandTest {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
         Index outOfBoundIndex = INDEX_SECOND_CLIENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of FitBiz list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFitBiz().getClientList().size());
 
         ViewCommand viewCommand = new ViewCommand(outOfBoundIndex);

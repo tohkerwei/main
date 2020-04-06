@@ -37,7 +37,7 @@ public class FitBizTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+    public void resetData_withValidReadOnlyFitBiz_replacesData() {
         FitBiz newData = getTypicalFitBiz();
         fitBiz.resetData(newData);
         assertEquals(newData, fitBiz);
@@ -49,7 +49,7 @@ public class FitBizTest {
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Client> newClients = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newClients);
+        FitBizStub newData = new FitBizStub(newClients);
 
         assertThrows(DuplicateClientException.class, () -> fitBiz.resetData(newData));
     }
@@ -60,18 +60,18 @@ public class FitBizTest {
     }
 
     @Test
-    public void hasClient_clientNotInAddressBook_returnsFalse() {
+    public void hasClient_clientNotInFitBiz_returnsFalse() {
         assertFalse(fitBiz.hasClient(ALICE));
     }
 
     @Test
-    public void hasClient_clientInAddressBook_returnsTrue() {
+    public void hasClient_clientInFitBiz_returnsTrue() {
         fitBiz.addClient(ALICE);
         assertTrue(fitBiz.hasClient(ALICE));
     }
 
     @Test
-    public void hasClient_clientWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasClient_clientWithSameIdentityFieldsInFitBiz_returnsTrue() {
         fitBiz.addClient(ALICE);
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -84,12 +84,12 @@ public class FitBizTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose clients list can violate interface constraints.
+     * A stub FitBizStub whose clients list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyFitBiz {
+    private static class FitBizStub implements ReadOnlyFitBiz {
         private final ObservableList<Client> clients = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Client> clients) {
+        FitBizStub(Collection<Client> clients) {
             this.clients.setAll(clients);
         }
 

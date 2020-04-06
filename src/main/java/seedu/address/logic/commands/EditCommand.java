@@ -44,7 +44,7 @@ import seedu.address.model.schedule.ScheduleList;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing client in the address book.
+ * Edits the details of an existing client in the FitBiz.
  */
 public class EditCommand extends Command {
 

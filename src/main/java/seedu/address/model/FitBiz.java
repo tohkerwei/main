@@ -59,7 +59,7 @@ public class FitBiz implements ReadOnlyFitBiz {
     //// client-level operations
 
     /**
-     * Returns true if a client with the same identity as {@code client} exists in the address book.
+     * Returns true if a client with the same identity as {@code client} exists in the FitBiz.
      */
     public boolean hasClient(Client client) {
         requireNonNull(client);
@@ -67,8 +67,8 @@ public class FitBiz implements ReadOnlyFitBiz {
     }
 
     /**
-     * Adds a client to the address book.
-     * The client must not already exist in the address book.
+     * Adds a client to the FitBiz.
+     * The client must not already exist in the FitBiz.
      */
     public void addClient(Client p) {
         clients.add(p);
@@ -76,8 +76,8 @@ public class FitBiz implements ReadOnlyFitBiz {
 
     /**
      * Replaces the given client {@code target} in the list with {@code editedClient}.
-     * {@code target} must exist in the address book.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * {@code target} must exist in the FitBiz.
+     * The client identity of {@code editedClient} must not be the same as another existing client in the FitBiz.
      */
     public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
@@ -87,7 +87,7 @@ public class FitBiz implements ReadOnlyFitBiz {
 
     /**
      * Removes {@code key} from this {@code FitBiz}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the FitBiz.
      */
     public void removeClient(Client key) {
         clients.remove(key);
