@@ -17,12 +17,10 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter-c";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters and display all clients whose tags or sports"
-            + "contains any of the specified keywords for respective parameter (case-insensitive) and "
-            + "displays them as a list with index numbers.\n"
-            + "Either tags or sports is optional. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters and display all clients whose tags or sports "
+            + "contains any of the specified keywords for respective parameter (case-insensitive) \n"
             + "Parameters: t/KEYWORD... s/KEYWORD...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + " vegetarian overweight handsome "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "vegetarian overweight handsome "
             + PREFIX_SPORT + "soccer dance basketball";
 
     private final TagAndSportContainsKeywordsPredicate predicate;

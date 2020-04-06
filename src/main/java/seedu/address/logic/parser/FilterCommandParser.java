@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.commands.FilterCommand;
@@ -29,9 +30,20 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        List<String> tagKeywords = argMultimap.getAllValues(PREFIX_TAG);
-        List<String> sportKeywords = argMultimap.getAllValues(PREFIX_SPORT);
+        List<String> tags = argMultimap.getAllValues(PREFIX_TAG);
+        List<String> sports = argMultimap.getAllValues(PREFIX_SPORT);
 
-        return new FilterCommand(new TagAndSportContainsKeywordsPredicate(tagKeywords, sportKeywords));
+        return new FilterCommand(new TagAndSportContainsKeywordsPredicate(splitKeywords(tags), splitKeywords(sports)));
+    }
+
+    public List<String> splitKeywords(List<String> list) {
+        List<String> keywords = new ArrayList<>();
+        if(!list.isEmpty()) {
+            String[] keywordArray = list.get(0).split(" ");
+            for (String s : keywordArray) {
+                keywords.add(s);
+            }
+        }
+        return keywords;
     }
 }
