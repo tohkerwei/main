@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ExerciseCommandTestUtil.DESC_BENCH;
 import static seedu.address.logic.commands.ExerciseCommandTestUtil.DESC_PUSHUP;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalFitBiz;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXERCISE;
@@ -39,7 +39,7 @@ public class EditExerciseCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
+        model = new ModelManager(getTypicalFitBiz(), new UserPrefs(), new ClientInView());
         clientInView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
     }
 
@@ -76,7 +76,7 @@ public class EditExerciseCommandTest {
 
         String expectedMessage = String.format(EditExerciseCommand.MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise);
 
-        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
+        ModelManager expectedModel = new ModelManager(getTypicalFitBiz(), new UserPrefs(), new ClientInView());
         Client clientInViewExpected = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         expectedModel.setClientInView(clientInViewExpected);
 
