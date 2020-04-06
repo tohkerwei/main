@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.FitBiz;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFitBiz;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Birthday;
 import seedu.address.model.client.Client;
@@ -56,7 +56,7 @@ public class SampleDataUtil {
                     getSportSet("Fencing"), new UniqueExerciseList(), new PersonalBest(), new ScheduleList()) };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyFitBiz getSampleFitBiz() {
         FitBiz sampleAb = new FitBiz();
         for (Client sampleClient : getSampleClients()) {
             sampleAb.addClient(sampleClient);

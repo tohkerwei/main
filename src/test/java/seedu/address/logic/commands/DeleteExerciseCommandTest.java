@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.ALICE_DELETED_EXERCISE;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalFitBiz;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EXERCISE;
@@ -34,7 +34,7 @@ public class DeleteExerciseCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
+        model = new ModelManager(getTypicalFitBiz(), new UserPrefs(), new ClientInView());
         clientInView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
     }
 
@@ -54,7 +54,7 @@ public class DeleteExerciseCommandTest {
 
         String expectedMessage = String.format(DeleteExerciseCommand.MESSAGE_SUCCESS, exerciseToDelete);
 
-        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
+        ModelManager expectedModel = new ModelManager(getTypicalFitBiz(), new UserPrefs(), new ClientInView());
         Client alice = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         expectedModel.setClient(alice, ALICE_DELETED_EXERCISE);
 

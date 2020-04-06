@@ -74,7 +74,7 @@ public class TypicalClients {
     /**
      * Returns an {@code FitBiz} with all the typical clients.
      */
-    public static FitBiz getTypicalAddressBook() {
+    public static FitBiz getTypicalFitBiz() {
         FitBiz ab = new FitBiz();
         for (Client client : getTypicalClients()) {
             ab.addClient(client);
