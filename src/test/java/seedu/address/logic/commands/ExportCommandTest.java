@@ -39,7 +39,7 @@ public class ExportCommandTest {
         expectedModel.setClientInView(clientWithExercises);
 
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(MESSAGE_SUCCESS,clientWithExercisesCsvFileName));
+                String.format(MESSAGE_SUCCESS, clientWithExercisesCsvFileName));
 
         assertCommandSuccess(new ExportCommand(), model, expectedCommandResult, expectedModel);
     }
