@@ -14,7 +14,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TARGET_WEIGHT;
 
+import java.util.List;
+
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 
@@ -22,6 +25,11 @@ import seedu.address.model.client.Client;
  * Adds a client to the FitBiz.
  */
 public class AddCommand extends Command {
+
+    public static final List<Prefix> ADD_COMMAND_PREFIXES = List.of(PREFIX_NAME,
+            PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_GENDER,
+            PREFIX_BIRTHDAY, PREFIX_CURRENT_WEIGHT, PREFIX_TARGET_WEIGHT,
+            PREFIX_HEIGHT, PREFIX_REMARK, PREFIX_SPORT, PREFIX_TAG);
 
     public static final String COMMAND_WORD = "add-c";
 

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.schedule.Schedule;
@@ -18,6 +20,8 @@ import seedu.address.model.schedule.ScheduleList;
  * Adds the training schedule of the client in FitBiz.
  */
 public class ScheduleCommand extends Command {
+
+    public static final List<Prefix> SCHEDULE_COMMAND_PREFIXES = List.of(PREFIX_SCHEDULE);
 
     public static final String COMMAND_WORD = "schedule";
 

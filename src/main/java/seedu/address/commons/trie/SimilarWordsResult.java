@@ -15,4 +15,26 @@ public class SimilarWordsResult {
         this.longestPrefixString = longestPrefixString;
         this.similarWords = similarWords;
     }
+
+    public boolean hasNoResult() {
+        return similarWords.isEmpty();
+    }
+
+    public boolean hasOnlyOneWord() {
+        return similarWords.size() == 1;
+    }
+
+    public String getSingleWord() {
+        assert hasOnlyOneWord();
+        return similarWords.get(0);
+    }
+
+    public String getLongestPrefix() {
+        return longestPrefixString;
+    }
+
+    public ArrayList<String> getSimilarWords() {
+        return similarWords;
+    }
+
 }

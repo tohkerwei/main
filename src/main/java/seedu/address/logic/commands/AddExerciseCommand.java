@@ -8,7 +8,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REPS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SETS;
 
+import java.util.List;
+
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.statistics.PersonalBestFinder;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
@@ -19,6 +22,9 @@ import seedu.address.model.exercise.UniqueExerciseList;
  * Adds an exercise done by a client in FitBiz.
  */
 public class AddExerciseCommand extends Command {
+
+    public static final List<Prefix> ADD_EXERCISE_COMMAND_PREFIXES = List.of(PREFIX_NAME,
+            PREFIX_DATE, PREFIX_REPS, PREFIX_EXERCISE_WEIGHT, PREFIX_SETS);
 
     public static final String COMMAND_WORD = "add-e";
 
