@@ -41,22 +41,22 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getFitBizFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setFitBizFilePath(Path fitBizFilePath);
 
     /**
      * Returns the FitBiz
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyFitBiz getFitBiz();
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code fitBiz}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setFitBiz(ReadOnlyFitBiz fitBiz);
 
     /**
      * Returns true if a client with the same identity as {@code client} exists in the address book.

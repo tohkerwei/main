@@ -12,7 +12,7 @@ import seedu.address.model.client.UniqueClientList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameClient comparison)
  */
-public class FitBiz implements ReadOnlyAddressBook {
+public class FitBiz implements ReadOnlyFitBiz {
 
     private final UniqueClientList clients;
 
@@ -32,7 +32,7 @@ public class FitBiz implements ReadOnlyAddressBook {
     /**
      * Creates an FitBiz using the Clients in the {@code toBeCopied}
      */
-    public FitBiz(ReadOnlyAddressBook toBeCopied) {
+    public FitBiz(ReadOnlyFitBiz toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -50,7 +50,7 @@ public class FitBiz implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code FitBiz} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyFitBiz newData) {
         requireNonNull(newData);
 
         setClients(newData.getClientList());

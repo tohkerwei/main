@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.ALICE;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalFitBiz;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,25 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.testutil.ClientBuilder;
 
-public class AddressBookTest {
+public class FitBizTest {
 
-    private final FitBiz addressBook = new FitBiz();
+    private final FitBiz fitBiz = new FitBiz();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getClientList());
+        assertEquals(Collections.emptyList(), fitBiz.getClientList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> fitBiz.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        FitBiz newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        FitBiz newData = getTypicalFitBiz();
+        fitBiz.resetData(newData);
+        assertEquals(newData, fitBiz);
     }
 
     @Test
@@ -51,42 +51,42 @@ public class AddressBookTest {
         List<Client> newClients = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newClients);
 
-        assertThrows(DuplicateClientException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateClientException.class, () -> fitBiz.resetData(newData));
     }
 
     @Test
     public void hasClient_nullClient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasClient(null));
+        assertThrows(NullPointerException.class, () -> fitBiz.hasClient(null));
     }
 
     @Test
     public void hasClient_clientNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasClient(ALICE));
+        assertFalse(fitBiz.hasClient(ALICE));
     }
 
     @Test
     public void hasClient_clientInAddressBook_returnsTrue() {
-        addressBook.addClient(ALICE);
-        assertTrue(addressBook.hasClient(ALICE));
+        fitBiz.addClient(ALICE);
+        assertTrue(fitBiz.hasClient(ALICE));
     }
 
     @Test
     public void hasClient_clientWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addClient(ALICE);
+        fitBiz.addClient(ALICE);
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasClient(editedAlice));
+        assertTrue(fitBiz.hasClient(editedAlice));
     }
 
     @Test
     public void getClientList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getClientList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> fitBiz.getClientList().remove(0));
     }
 
     /**
      * A stub ReadOnlyAddressBook whose clients list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AddressBookStub implements ReadOnlyFitBiz {
         private final ObservableList<Client> clients = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Client> clients) {

@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalFitBiz;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
@@ -34,7 +34,7 @@ import seedu.address.testutil.EditClientDescriptorBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ClientInView());
+    private Model model = new ModelManager(getTypicalFitBiz(), new UserPrefs(), new ClientInView());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -44,7 +44,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
-        Model expectedModel = new ModelManager(new FitBiz(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new FitBiz(model.getFitBiz()), new UserPrefs(),
                 new ClientInView());
         expectedModel.setClient(model.getFilteredClientList().get(0), editedClient);
 
@@ -66,7 +66,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
-        Model expectedModel = new ModelManager(new FitBiz(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new FitBiz(model.getFitBiz()), new UserPrefs(),
                 new ClientInView());
         expectedModel.setClient(lastClient, editedClient);
 
@@ -80,7 +80,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
-        Model expectedModel = new ModelManager(new FitBiz(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new FitBiz(model.getFitBiz()), new UserPrefs(),
                 new ClientInView());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -97,7 +97,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
-        Model expectedModel = new ModelManager(new FitBiz(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new FitBiz(model.getFitBiz()), new UserPrefs(),
                 new ClientInView());
         expectedModel.setClient(model.getFilteredClientList().get(0), editedClient);
 
@@ -118,7 +118,7 @@ public class EditCommandTest {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
         // edit client in filtered list into a duplicate in address book
-        Client clientInList = model.getAddressBook().getClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
+        Client clientInList = model.getFitBiz().getClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_CLIENT,
                 new EditClientDescriptorBuilder(clientInList).build());
 
@@ -144,7 +144,7 @@ public class EditCommandTest {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
         Index outOfBoundIndex = INDEX_SECOND_CLIENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getClientList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getFitBiz().getClientList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).build());
