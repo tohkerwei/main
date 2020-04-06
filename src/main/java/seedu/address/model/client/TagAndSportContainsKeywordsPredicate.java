@@ -1,12 +1,12 @@
 package seedu.address.model.client;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.tag.Tag;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
+import seedu.address.model.tag.Tag;
 
 /**
  * @author tohkerwei
@@ -23,6 +23,7 @@ public class TagAndSportContainsKeywordsPredicate implements Predicate<Client> {
         this.sportKeywords = sportKeywords;
     }
 
+    @Override
     public boolean test(Client client) {
         boolean hasTag;
         boolean hasSport;
@@ -37,7 +38,8 @@ public class TagAndSportContainsKeywordsPredicate implements Predicate<Client> {
             hasSport = true;
         } else {
             hasSport = sportKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(setSportToString(client.getSports()), keyword));
+                    .anyMatch(keyword -> StringUtil.
+                            containsWordIgnoreCase(setSportToString(client.getSports()), keyword));
         }
 
         return hasTag && hasSport;
@@ -54,7 +56,7 @@ public class TagAndSportContainsKeywordsPredicate implements Predicate<Client> {
         for (Tag tag : tagsSet) {
             tagArray.add(tag.tagName);
         }
-        for (int i = 0; i < tagsSet.size() ; i ++) {
+        for (int i = 0; i < tagsSet.size(); i++) {
             sb.append(tagArray.get(i));
             sb.append(" ");
         }
@@ -72,7 +74,7 @@ public class TagAndSportContainsKeywordsPredicate implements Predicate<Client> {
         for (Sport sport : sportSet) {
             sportArray.add(sport.sportName);
         }
-        for (int i = 0; i < sportSet.size() ; i ++) {
+        for (int i = 0; i < sportSet.size(); i++) {
             sb.append(sportArray.get(i));
             sb.append(" ");
         }

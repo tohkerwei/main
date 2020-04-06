@@ -1,19 +1,19 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.model.Model;
-import seedu.address.model.client.TagAndSportContainsKeywordsPredicate;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPORT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.model.Model;
+import seedu.address.model.client.TagAndSportContainsKeywordsPredicate;
 
 /**
  * @author tohkerwei
  * Filters and lists all clients in FitBiz whose tag or sports contains argument keywords for the respective parameters.
  * Keyword matching is case insensitive.
  */
-public class FilterCommand extends Command{
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter-c";
 
