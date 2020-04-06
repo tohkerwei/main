@@ -9,16 +9,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * This represents the storage for the command history.
+ * This is a utility class to handle reading from and writing to storage.
  */
-public class CommandHistoryStorage {
+public class StorageReaderWriter {
 
-    private Path commandHistoryPath;
+    private Path filePath;
 
-    public CommandHistoryStorage(Path commandHistoryPath) {
-        this.commandHistoryPath = commandHistoryPath;
+    public StorageReaderWriter(Path filePath) {
+        this.filePath = filePath;
         createNewFile();
     }
 
@@ -27,7 +28,7 @@ public class CommandHistoryStorage {
      * exists.
      */
     private void createNewFile() {
-        File file = commandHistoryPath.toFile();
+        File file = filePath.toFile();
 
         if (file.exists()) {
             return;
@@ -43,14 +44,13 @@ public class CommandHistoryStorage {
     }
 
     /**
-     * Returns an ArrayList of each command string from storage. If the file does
-     * not exist, this method will call {@code createNewFile} to ensure that the
-     * file is created for future use.
+     * Returns a {@code List} of strings from the storage file located at
+     * {@code filePath}, where each item in the list represents a new line.
      */
-    public ArrayList<String> readFromStorage() {
+    public List<String> readFromStorage() {
         ArrayList<String> commands = new ArrayList<>();
         try {
-            BufferedReader reader = Files.newBufferedReader(commandHistoryPath);
+            BufferedReader reader = Files.newBufferedReader(filePath);
 
             String line = reader.readLine();
             while (line != null) {
@@ -59,23 +59,23 @@ public class CommandHistoryStorage {
             }
             reader.close();
         } catch (IOException ex) {
-            // create new file
             System.out.println(ex.getStackTrace());
         }
         return commands;
     }
 
     /**
-     * Saves the given command history to the storage.
+     * Overwrites (not append) the given {@code lines} to the storage file located
+     * at {@code filePath}.
      *
-     * @param history cannot be null.
+     * @param lines cannot be null.
      */
-    public void saveToStorage(ArrayList<String> history) {
-        requireNonNull(history);
+    public void writeToStorage(List<String> lines) {
+        requireNonNull(lines);
         try {
-            BufferedWriter writer = Files.newBufferedWriter(commandHistoryPath);
+            BufferedWriter writer = Files.newBufferedWriter(filePath);
 
-            for (String command : history) {
+            for (String command : lines) {
                 writer.write(command);
                 writer.newLine();
             }
@@ -86,11 +86,11 @@ public class CommandHistoryStorage {
     }
 
     /**
-     * Clears the history from storage.
+     * Clears the storage file located at {@code filePath}.
      */
     public void clearStorage() {
         try {
-            BufferedWriter writer = Files.newBufferedWriter(commandHistoryPath);
+            BufferedWriter writer = Files.newBufferedWriter(filePath);
 
             writer.close();
         } catch (IOException ex) {
