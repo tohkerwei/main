@@ -21,7 +21,7 @@ import seedu.address.model.schedule.ScheduleList;
  */
 public class ScheduleCommand extends Command {
 
-    public static final List<Prefix> SCHEDULE_COMMAND_PREFIXES = List.of(PREFIX_SCHEDULE);
+    public static final List<Prefix> PREFIXES = List.of(PREFIX_SCHEDULE);
 
     public static final String COMMAND_WORD = "schedule";
 

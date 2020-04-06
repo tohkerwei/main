@@ -1,9 +1,6 @@
 package seedu.address.logic.autocomplete;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.commands.AddCommand.ADD_COMMAND_PREFIXES;
-import static seedu.address.logic.commands.AddExerciseCommand.ADD_EXERCISE_COMMAND_PREFIXES;
-import static seedu.address.logic.commands.ScheduleCommand.SCHEDULE_COMMAND_PREFIXES;
 
 import java.util.List;
 
@@ -87,47 +84,83 @@ public class AutoComplete {
         return toReturn;
     }
 
-    public void noCommandHandler() {
+    private void noCommandHandler() {
         resultDisplay.setFeedbackToUser(FEEDBACK_NO_COMMANDS);
     }
 
     /**
-     * Handles the instance when the autocomplete can uniquely identify a single command.
+     * Handles the instance when the autocomplete can uniquely identify a single
+     * command.
      */
-    public void singleCommandHandler(String command) {
+    private void singleCommandHandler(String command) {
         String textToSet = command;
+        String textToFeedback = FEEDBACK_EMPTY_STRING;
+        int caretPositionToSet = CARET_POSITION_INDEX;
 
         switch (command) {
-        case DeleteCommand.COMMAND_WORD:
-        case DeleteExerciseCommand.COMMAND_WORD:
-        case EditCommand.COMMAND_WORD:
-        case EditExerciseCommand.COMMAND_WORD:
-        case FindCommand.COMMAND_WORD:
-        case ViewCommand.COMMAND_WORD:
-            textToSet += PREAMBLE_WHITE_SPACE;
-            break;
         case AddCommand.COMMAND_WORD:
-            textToSet += generatePrefixesString(ADD_COMMAND_PREFIXES);
+            textToSet += generatePrefixesString(AddCommand.PREFIXES);
+            textToFeedback = AddCommand.MESSAGE_USAGE;
             break;
         case AddExerciseCommand.COMMAND_WORD:
-            textToSet += generatePrefixesString(ADD_EXERCISE_COMMAND_PREFIXES);
+            textToSet += generatePrefixesString(AddExerciseCommand.PREFIXES);
+            textToFeedback = AddExerciseCommand.MESSAGE_USAGE;
+            break;
+        case ClearCommand.COMMAND_WORD:
+            textToFeedback = ClearCommand.MESSAGE_USAGE;
+            break;
+        case DeleteCommand.COMMAND_WORD:
+            textToSet += PREAMBLE_WHITE_SPACE;
+            textToFeedback = DeleteCommand.MESSAGE_USAGE;
+            break;
+        case DeleteExerciseCommand.COMMAND_WORD:
+            textToSet += PREAMBLE_WHITE_SPACE;
+            textToFeedback = DeleteExerciseCommand.MESSAGE_USAGE;
+            break;
+        case EditCommand.COMMAND_WORD:
+            textToSet += PREAMBLE_WHITE_SPACE;
+            textToFeedback = EditCommand.MESSAGE_USAGE;
+            break;
+        case ExitCommand.COMMAND_WORD:
+            textToFeedback = ExitCommand.MESSAGE_USAGE;
+            break;
+        case EditExerciseCommand.COMMAND_WORD:
+            textToSet += PREAMBLE_WHITE_SPACE;
+            textToFeedback = EditExerciseCommand.MESSAGE_USAGE;
+            break;
+        case FindCommand.COMMAND_WORD:
+            textToSet += PREAMBLE_WHITE_SPACE;
+            textToFeedback = FindCommand.MESSAGE_USAGE;
+            break;
+        case HelpCommand.COMMAND_WORD:
+            textToFeedback = HelpCommand.MESSAGE_USAGE;
+            break;
+        case ListCommand.COMMAND_WORD:
+            textToFeedback = ListCommand.MESSAGE_USAGE;
             break;
         case ScheduleCommand.COMMAND_WORD:
-            textToSet += generatePrefixesString(SCHEDULE_COMMAND_PREFIXES);
+            textToSet += PREAMBLE_WHITE_SPACE + generatePrefixesString(ScheduleCommand.PREFIXES);
+            textToFeedback = ScheduleCommand.MESSAGE_USAGE;
+            caretPositionToSet = textToSet.indexOf(PREAMBLE_WHITE_SPACE) + 1;
+            break;
+        case ViewCommand.COMMAND_WORD:
+            textToSet += PREAMBLE_WHITE_SPACE;
+            textToFeedback = ViewCommand.MESSAGE_USAGE;
             break;
         default:
             break;
         }
 
         commandTextField.setText(textToSet);
-        commandTextField.positionCaret(CARET_POSITION_INDEX);
-        resultDisplay.setFeedbackToUser(FEEDBACK_EMPTY_STRING);
+        commandTextField.positionCaret(caretPositionToSet);
+        resultDisplay.setFeedbackToUser(textToFeedback);
     }
 
     /**
-     * Handles the instance when the autocomplete cannot uniquely identify a single command.
+     * Handles the instance when the autocomplete cannot uniquely identify a single
+     * command.
      */
-    public void multipleCommandsHandler(SimilarWordsResult result) {
+    private void multipleCommandsHandler(SimilarWordsResult result) {
         commandTextField.setText(result.getLongestPrefix());
         commandTextField.positionCaret(CARET_POSITION_INDEX);
         resultDisplay.setFeedbackToUser(FEEDBACK_MULTIPLE_COMMANDS + result.getSimilarWords().toString());
