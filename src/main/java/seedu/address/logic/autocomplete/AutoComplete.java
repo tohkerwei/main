@@ -1,6 +1,7 @@
 package seedu.address.logic.autocomplete;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIMITTER;
 
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class AutoComplete {
     /**
      * Returns a string of {@code prefixes} delimited by a single empty space.
      */
-    public String generatePrefixesString(List<Prefix> prefixes) {
+    private String generatePrefixesString(List<Prefix> prefixes) {
         String toReturn = EMPTY_STRING;
         for (Prefix p : prefixes) {
             toReturn += WHITE_SPACE_STRING + p.toString();
@@ -101,10 +102,12 @@ public class AutoComplete {
         case AddCommand.COMMAND_WORD:
             textToSet += generatePrefixesString(AddCommand.PREFIXES);
             textToFeedback = AddCommand.MESSAGE_USAGE;
+            caretPositionToSet = textToSet.indexOf(PREFIX_DELIMITTER) + 1;
             break;
         case AddExerciseCommand.COMMAND_WORD:
             textToSet += generatePrefixesString(AddExerciseCommand.PREFIXES);
             textToFeedback = AddExerciseCommand.MESSAGE_USAGE;
+            caretPositionToSet = textToSet.indexOf(PREFIX_DELIMITTER) + 1;
             break;
         case ClearCommand.COMMAND_WORD:
             textToFeedback = ClearCommand.MESSAGE_USAGE;
@@ -167,14 +170,38 @@ public class AutoComplete {
     }
 
     /**
+     * Handles the instance when the command has already been completed and the user
+     * presses tab to get to the next prefix. This method will set the caret
+     * position of the user to the next {@code PREFIX_DELIMITTER} when the user
+     * presses tab. If no such {@code PREFIX_DELIMITTER} exists in the user's
+     * command, this method will stop.
+     */
+    private void typingCommandHandler(String currentCommand) {
+        if (!currentCommand.contains(PREFIX_DELIMITTER)) {
+            return;
+        }
+
+        int currentCaretPosition = commandTextField.getCaretPosition();
+        int nextPrefixPosition = currentCommand.indexOf(PREFIX_DELIMITTER, currentCaretPosition);
+        if (nextPrefixPosition == -1) {
+            // next prefix not found, wrap around to start
+            nextPrefixPosition = currentCommand.indexOf(PREFIX_DELIMITTER) + 1;
+        } else {
+            nextPrefixPosition++;
+        }
+        commandTextField.positionCaret(nextPrefixPosition);
+    }
+
+    /**
      * Executes the main logic behind the autocomplete. Should be called when the
      * user presses "tab".
      */
     public void execute() {
         String currCommand = commandTextField.getText();
 
-        // command has already been completed
+        // command word has already been completed
         if (currCommand.contains(WHITE_SPACE_STRING)) {
+            typingCommandHandler(currCommand);
             return;
         }
 
