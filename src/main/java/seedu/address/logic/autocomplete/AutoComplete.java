@@ -98,16 +98,19 @@ public class AutoComplete {
         String textToSet = command;
 
         switch (command) {
+        case DeleteCommand.COMMAND_WORD:
+        case DeleteExerciseCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_WORD:
+        case EditExerciseCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_WORD:
+        case ViewCommand.COMMAND_WORD:
+            textToSet += PREAMBLE_WHITE_SPACE;
+            break;
         case AddCommand.COMMAND_WORD:
             textToSet += generatePrefixesString(ADD_COMMAND_PREFIXES);
             break;
         case AddExerciseCommand.COMMAND_WORD:
             textToSet += generatePrefixesString(ADD_EXERCISE_COMMAND_PREFIXES);
-            break;
-        case ViewCommand.COMMAND_WORD:
-        case EditCommand.COMMAND_WORD:
-        case EditExerciseCommand.COMMAND_WORD:
-            textToSet += PREAMBLE_WHITE_SPACE;
             break;
         case ScheduleCommand.COMMAND_WORD:
             textToSet += generatePrefixesString(SCHEDULE_COMMAND_PREFIXES);
