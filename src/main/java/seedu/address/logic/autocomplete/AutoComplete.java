@@ -14,6 +14,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteExerciseCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -61,6 +62,7 @@ public class AutoComplete {
         trie.insert(DeleteExerciseCommand.COMMAND_WORD);
         trie.insert(EditCommand.COMMAND_WORD);
         trie.insert(ExitCommand.COMMAND_WORD);
+        trie.insert(ExportCommand.COMMAND_WORD);
         trie.insert(FindCommand.COMMAND_WORD);
         trie.insert(HelpCommand.COMMAND_WORD);
         trie.insert(ListCommand.COMMAND_WORD);
