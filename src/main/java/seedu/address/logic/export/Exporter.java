@@ -22,7 +22,7 @@ public class Exporter {
      * @param client the {@code Client} to export
      * @throws CommandException if {@code client} does not have any exercises stored
      */
-    public static void exportExercisesAsCsv(Client client) throws CommandException {
+    public static String exportExercisesAsCsv(Client client) throws CommandException {
         List<Exercise> exercises = client.getExerciseList().asUnmodifiableObservableList();
 
         if (exercises.isEmpty()) {
@@ -30,7 +30,7 @@ public class Exporter {
         }
 
         String fileName = client.getName().fullName + ".csv";
-        Path filePath = Paths.get("data", fileName);
+        Path filePath = Paths.get("exports", fileName);
         StorageReaderWriter storageReaderWriter = new StorageReaderWriter(filePath);
 
         List<String> lines = new LinkedList<>();
@@ -50,5 +50,7 @@ public class Exporter {
         }
 
         storageReaderWriter.writeToStorage(lines);
+
+        return fileName;
     }
 }

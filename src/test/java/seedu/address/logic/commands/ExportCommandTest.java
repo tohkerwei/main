@@ -20,6 +20,7 @@ public class ExportCommandTest {
     private Client clientWithoutExercises = new ClientBuilder().build();
     private Client clientWithExercises = new ClientBuilder()
             .withExercisesInExerciseList(new ExerciseBuilder().build()).build();
+    private String clientWithExercisesCsvFileName = clientWithExercises.getName().fullName + ".csv";
 
     @Test
     public void execute_noClientInView_throwsCommandException() {
@@ -37,7 +38,8 @@ public class ExportCommandTest {
         model.setClientInView(clientWithExercises);
         expectedModel.setClientInView(clientWithExercises);
 
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_SUCCESS);
+        CommandResult expectedCommandResult = new CommandResult(
+                String.format(MESSAGE_SUCCESS,clientWithExercisesCsvFileName));
 
         assertCommandSuccess(new ExportCommand(), model, expectedCommandResult, expectedModel);
     }
