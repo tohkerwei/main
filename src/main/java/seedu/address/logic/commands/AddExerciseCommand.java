@@ -29,7 +29,7 @@ public class AddExerciseCommand extends Command {
         + "[" + PREFIX_REPS + "REPS] "
         + "[" + PREFIX_EXERCISE_WEIGHT + "EXERCISE_WEIGHT] "
         + "[" + PREFIX_SETS + "SETS]\n"
-        + "Example: " + COMMAND_WORD
+        + "Example: " + COMMAND_WORD + " "
         + PREFIX_NAME + "bench press "
         + PREFIX_DATE + "10-12-2020 "
         + PREFIX_REPS + "12 "
