@@ -1,5 +1,7 @@
 package seedu.address.commons.trie;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 
 /**
@@ -12,6 +14,7 @@ public class SimilarWordsResult {
     public final ArrayList<String> similarWords;
 
     public SimilarWordsResult(String longestPrefixString, ArrayList<String> similarWords) {
+        requireAllNonNull(longestPrefixString, similarWords);
         this.longestPrefixString = longestPrefixString;
         this.similarWords = similarWords;
     }
