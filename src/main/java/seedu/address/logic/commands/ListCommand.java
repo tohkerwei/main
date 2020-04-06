@@ -14,6 +14,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all clients";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all clients in FitBiz";
 
     @Override
     public CommandResult execute(Model model) {

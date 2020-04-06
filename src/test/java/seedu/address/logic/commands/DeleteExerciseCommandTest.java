@@ -52,7 +52,8 @@ public class DeleteExerciseCommandTest {
         Exercise exerciseToDelete = clientInView.getExerciseList().getExercise(INDEX_FIRST_EXERCISE);
         DeleteExerciseCommand deleteExerciseCommand = new DeleteExerciseCommand(INDEX_FIRST_EXERCISE);
 
-        String expectedMessage = String.format(DeleteExerciseCommand.MESSAGE_SUCCESS, exerciseToDelete);
+        String expectedMessage = String.format(DeleteExerciseCommand.MESSAGE_SUCCESS,
+            exerciseToDelete.getForOutput());
 
         ModelManager expectedModel = new ModelManager(getTypicalFitBiz(), new UserPrefs(), new ClientInView());
         Client alice = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());

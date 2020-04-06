@@ -44,7 +44,7 @@ public class EditExerciseCommand extends Command {
             + PREFIX_NAME + "pushup "
             + PREFIX_REPS + "20";
 
-    public static final String MESSAGE_EDIT_EXERCISE_SUCCESS = "Edited Exercise: %1$s";
+    public static final String MESSAGE_EDIT_EXERCISE_SUCCESS = "Edited Exercise:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_EXERCISE = "This exercise already exists in FitBiz. "
         + "Consider incrementing the sets of that existing exercise.";
@@ -107,7 +107,7 @@ public class EditExerciseCommand extends Command {
         }
 
         model.editExercise(exerciseToEdit, editedExercise);
-        return new CommandResult(String.format(MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise));
+        return new CommandResult(String.format(MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise.getForOutput()));
     }
 
     @Override

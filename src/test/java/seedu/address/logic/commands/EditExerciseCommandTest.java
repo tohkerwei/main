@@ -74,7 +74,8 @@ public class EditExerciseCommandTest {
         Exercise editedExercise = new ExerciseBuilder(firstExercise).withExerciseReps("20").build();
         EditExerciseCommand editExerciseCommand = new EditExerciseCommand(INDEX_FIRST_EXERCISE, descriptor);
 
-        String expectedMessage = String.format(EditExerciseCommand.MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise);
+        String expectedMessage = String.format(EditExerciseCommand.MESSAGE_EDIT_EXERCISE_SUCCESS,
+            editedExercise.getForOutput());
 
         ModelManager expectedModel = new ModelManager(getTypicalFitBiz(), new UserPrefs(), new ClientInView());
         Client clientInViewExpected = expectedModel.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
