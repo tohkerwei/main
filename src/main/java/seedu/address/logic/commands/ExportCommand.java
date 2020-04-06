@@ -14,6 +14,8 @@ public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the exercises of the client in view.";
+
     public static final String MESSAGE_SUCCESS = "Succesfully exported this client's exercises.";
 
     public static final String MESSAGE_CLIENT_NOT_IN_VIEW = "You currently do not have a client in view, ";

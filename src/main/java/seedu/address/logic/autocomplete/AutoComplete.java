@@ -129,6 +129,9 @@ public class AutoComplete {
         case ExitCommand.COMMAND_WORD:
             textToFeedback = ExitCommand.MESSAGE_USAGE;
             break;
+        case ExportCommand.COMMAND_WORD:
+            textToFeedback = ExportCommand.MESSAGE_USAGE;
+            break;
         case EditExerciseCommand.COMMAND_WORD:
             textToSet += PREAMBLE_WHITE_SPACE;
             textToFeedback = EditExerciseCommand.MESSAGE_USAGE;
