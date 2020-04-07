@@ -181,6 +181,9 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
+            if (tagName.equals(EMPTY_ATTRIBUTE)) {
+                continue;
+            }
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
@@ -266,6 +269,9 @@ public class ParserUtil {
         requireNonNull(sports);
         final Set<Sport> sportSet = new HashSet<>();
         for (String sportName : sports) {
+            if (sportName.equals(EMPTY_ATTRIBUTE)) {
+                continue;
+            }
             sportSet.add(parseSport(sportName));
         }
         return sportSet;
