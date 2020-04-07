@@ -39,6 +39,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
+    public static final String EMPTY_ATTRIBUTE = "";
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     private static final int DAY_INDEX = 0;
@@ -154,7 +155,7 @@ public class ParserUtil {
         case "o":
             return new Gender("Others");
         default:
-            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
+            return new Gender(EMPTY_ATTRIBUTE);
         }
     }
 
