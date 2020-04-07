@@ -65,7 +65,7 @@ public class UniqueExerciseList implements Iterable<Exercise> {
 
     /**
      * Inserts an exercise to the list while ensuring list is sorted by the exercise
-     * dates.
+     * date in descending order and by exercise name in ascending order.
      *
      * <p>
      * The exercise must not already exist in the list. This basically does
@@ -97,6 +97,7 @@ public class UniqueExerciseList implements Iterable<Exercise> {
                     idx++;
                 }
             } else {
+                // toAddDate is later than currDate
                 idx++;
             }
         }
@@ -127,7 +128,8 @@ public class UniqueExerciseList implements Iterable<Exercise> {
     }
 
     /**
-     * Sorts the list by the exercise date in descending order, then by name in ascending order.
+     * Sorts the list by the exercise date in descending order, and if the dates
+     * are equal, then by the exercise name in ascending order.
      */
     public void sortByExerciseDateAndName() {
         Comparator<Exercise> byExerciseDate = (Exercise e1, Exercise e2) -> {
