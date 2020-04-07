@@ -28,13 +28,13 @@ public class TypicalClients {
             .withPhone("94351253")
             .withTags("friends")
             .withExercisesInExerciseList(new ExerciseBuilder().build())
-            .withExercisesInExerciseList(new ExerciseBuilder().withExerciseName("ANOTHER").build())
+            .withExercisesInExerciseList(new ExerciseBuilder().withExerciseName("ZANOTHER").build())
             .build();
     public static final Client ALICE_DELETED_EXERCISE = new ClientBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
-            .withExercisesInExerciseList(new ExerciseBuilder().withExerciseName("ANOTHER").build())
+            .withExercisesInExerciseList(new ExerciseBuilder().withExerciseName("ZANOTHER").build())
             .build();
     public static final Client BENSON = new ClientBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
