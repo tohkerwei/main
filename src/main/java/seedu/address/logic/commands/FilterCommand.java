@@ -20,8 +20,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters and display all clients whose tags or sports "
             + "contains any of the specified keywords for respective parameter (case-insensitive) \n"
             + "Parameters: t/KEYWORD... s/KEYWORD...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "vegetarian overweight handsome "
-            + PREFIX_SPORT + "soccer dance basketball";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TAG + "normal" + " " + PREFIX_SPORT + "hockey";
 
     private final TagAndSportContainsKeywordsPredicate predicate;
 
