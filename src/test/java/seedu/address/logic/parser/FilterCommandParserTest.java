@@ -4,12 +4,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.model.client.Sport;
 import seedu.address.model.client.TagAndSportContainsKeywordsPredicate;
 
 public class FilterCommandParserTest {
@@ -24,7 +24,10 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_emptyTagAndSport_throwsParseException() {
-        assertParseFailure(parser, "t/ s/", Sport.MESSAGE_CONSTRAINTS);
+        FilterCommand expectedFilterCommand =
+                new FilterCommand(new TagAndSportContainsKeywordsPredicate(new ArrayList<String>(),
+                        new ArrayList<String>()));
+        assertParseSuccess(parser, "t/ s/", expectedFilterCommand);
     }
 
     @Test
