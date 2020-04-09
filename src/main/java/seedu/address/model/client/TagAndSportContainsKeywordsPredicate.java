@@ -31,14 +31,14 @@ public class TagAndSportContainsKeywordsPredicate implements Predicate<Client> {
             hasTag = true;
         } else {
             hasTag = tagKeywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(setTagToString(client.getTags()), keyword));
+                    .allMatch(keyword -> StringUtil.containsWordIgnoreCase(setTagToString(client.getTags()), keyword));
         }
 
         if (sportKeywords.isEmpty()) {
             hasSport = true;
         } else {
             hasSport = sportKeywords.stream()
-                    .anyMatch(keyword -> StringUtil
+                    .allMatch(keyword -> StringUtil
                             .containsWordIgnoreCase(setSportToString(client.getSports()), keyword));
         }
 
