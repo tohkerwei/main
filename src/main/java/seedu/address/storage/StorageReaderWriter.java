@@ -23,7 +23,7 @@ public class StorageReaderWriter {
      * Constructor which takes in a file path {@code filePath} that contains the
      * location of the file to read from or write to. If the file does not currently
      * exists, it will be created for future use.
-     * 
+     *
      * @param filePath location of the file to read/write
      */
     public StorageReaderWriter(Path filePath) {
