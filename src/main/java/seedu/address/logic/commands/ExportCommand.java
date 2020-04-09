@@ -8,7 +8,8 @@ import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 
 /**
- * Lists all clients in FitBiz to the user.
+ * Exports the exercises of the current client in view defined in
+ * {@code ClientInView}.
  */
 public class ExportCommand extends Command {
 
