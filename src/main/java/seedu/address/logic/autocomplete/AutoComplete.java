@@ -202,15 +202,15 @@ public class AutoComplete {
      * user presses "tab".
      */
     public void execute() {
-        String currCommand = commandTextField.getText();
+        String trimmedCommand = commandTextField.getText().trim();
 
         // command word has already been completed
-        if (currCommand.contains(WHITE_SPACE_STRING)) {
-            completedCommandHandler(currCommand);
+        if (trimmedCommand.contains(WHITE_SPACE_STRING)) {
+            completedCommandHandler(trimmedCommand);
             return;
         }
 
-        SimilarWordsResult similarWords = trie.listAllSimilarWords(currCommand);
+        SimilarWordsResult similarWords = trie.listAllSimilarWords(trimmedCommand);
 
         if (similarWords.hasNoResult()) {
             noCommandHandler();
