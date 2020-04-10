@@ -177,11 +177,11 @@ public class AutoComplete {
     /**
      * Handles the instance when the command has already been completed and the user
      * presses tab to get to the next prefix. This method will set the caret
-     * position of the user to the next {@code PREFIX_DELIMITTER} when the user
-     * presses tab. If no such {@code PREFIX_DELIMITTER} exists in the user's
-     * command, this method will stop.
+     * position of the user to the next {@code PREFIX_DELIMITTER} (with wraparound)
+     * when the user presses tab. If no such {@code PREFIX_DELIMITTER} exists in the
+     * user's command, this method will stop.
      */
-    private void typingCommandHandler(String currentCommand) {
+    private void completedCommandHandler(String currentCommand) {
         if (!currentCommand.contains(PREFIX_DELIMITTER)) {
             return;
         }
@@ -206,7 +206,7 @@ public class AutoComplete {
 
         // command word has already been completed
         if (currCommand.contains(WHITE_SPACE_STRING)) {
-            typingCommandHandler(currCommand);
+            completedCommandHandler(currCommand);
             return;
         }
 
