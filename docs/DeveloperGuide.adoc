@@ -433,6 +433,23 @@ We want to maintain the OOP structure of the program. Logically, the personal be
 
 Moreover, even though personal best is generated using the list of exercises in the client, it can be instantiated even without an exercise list. Therefore it does not require the exercise class to exist and does not have a whole-part relationship with exercise. Coupling will also be increased as the client will be relying on the exercise class to generate the personal best. Therefore, the final choice was to place the personal best under client, with every client having their own personal best attribute.
 
+=== Filtering the clients list
+This feature allows users to filter the list of clients by specifying the `Tag` or `Sport` of the clients they want to view.
+
+==== Implementation
+This filtering mechanism is facilitated by `TagAndSportContainsKeywordsPredicate`, that implements `Predicate<Client>` which is a wrapper class for a boolean. `TagAndSportContainsKeywordsPredicate` contains 2 booleans:
+
+1. `hasTag`: evaluates if the client has all the `Tag` specified
+2. `hasSport`: evaluates if the client has all the `Sport` specified
+
+If there is no keyword specified for either `Tag` or `Sport`, the corresponding boolean will return `true`. There must be at least 1 keyword specified, regardless of whether it is a `Tag` or `Sport`. `TagAndSportContainsKeywordsPredicate` will then evaluate and return the logical addition of `hasTag` and `hasSport`.
+
+In the following sequence diagram, we will be tracing the execution of the command `filter t/obese s/swim` entered by the user.
+
+image::FilterSequenceDiagram.png[]
+
+==== Design Considerations
+
 == Documentation
 
 Refer to the guide <<Documentation#, here>>.
