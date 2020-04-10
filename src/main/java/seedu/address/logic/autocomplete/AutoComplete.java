@@ -94,6 +94,13 @@ public class AutoComplete {
     /**
      * Handles the instance when the autocomplete can uniquely identify a single
      * command.
+     *
+     * <p>
+     * This method will auto generate the prefixes for some commands like add-c,
+     * add-e, and schedule. The caret position will also be set to the most
+     * appropriate position. The display of {@code ResultDisplay} will also indicate
+     * the usage of the current completed command.
+     * </p>
      */
     private void singleCommandHandler(String command) {
         String textToSet = command;
@@ -176,10 +183,14 @@ public class AutoComplete {
 
     /**
      * Handles the instance when the command has already been completed and the user
-     * presses tab to get to the next prefix. This method will set the caret
-     * position of the user to the next {@code PREFIX_DELIMITTER} (with wraparound)
-     * when the user presses tab. If no such {@code PREFIX_DELIMITTER} exists in the
-     * user's command, this method will stop.
+     * presses tab to get to the next prefix.
+     *
+     * <p>
+     * This method will set the caret position of the user to the next
+     * {@code PREFIX_DELIMITTER} (with wraparound) when the user presses tab. If no
+     * such {@code PREFIX_DELIMITTER} exists in the user's command, this method will
+     * stop.
+     * </p>
      */
     private void completedCommandHandler(String currentCommand) {
         if (!currentCommand.contains(PREFIX_DELIMITTER)) {
@@ -198,8 +209,8 @@ public class AutoComplete {
     }
 
     /**
-     * Executes the main logic behind the autocomplete. Should be called when the
-     * user presses "tab".
+     * Executes the main logic behind the autocomplete, and should be called when
+     * the user presses "tab".
      */
     public void execute() {
         String trimmedCommand = commandTextField.getText().trim();
