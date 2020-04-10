@@ -449,6 +449,28 @@ In the following sequence diagram, we will be tracing the execution of the comma
 image::FilterSequenceDiagram.png[]
 
 ==== Design Considerations
+[options='header']
+|====================
+| Considerations | Pros and Cons
+|Check if a client contains `Tag` and `Sport` keywords seperately before combining the results|
+*Pros*: Code will be neater for debugging and adding more parameters to filter will be easier
+
+*Cons*: Parts of the code will be duplicated
+
+|Combine all keywords and check if all keywords exist in the combined list of `Tag` and `Sport` |
+*Pros*: Lesser duplicated codes and simpler logic
+
+*Cons*: Harder to fix errors or add new attributes to filter
+
+|====================
+
+We decided to use the first approach of checking if the client contains `Tag` specified and `Sport` specified separately.
+
+Firstly, by separating the checks for each attributes, a correct implementation of checking `Tag` against the keywords will allow us to easily duplicate the check to be done for `Sport`. This makes the code easier to debug as we can simply check the hasAttribute boolean to see if it gives the correct value.
+
+Secondly, separating the checks for each attributes will allow us to add attributes of different types stored in different data structure easier. We could simply add another check on the attribute against the keyword specified then do a logical addition of the result against the others.
+
+Therefore, as we foresee us adding more attributes to be filtered increasing the need to ensure logical correctness, the first approach is the most ideal.
 
 == Documentation
 
