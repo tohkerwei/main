@@ -433,7 +433,7 @@ We want to maintain the OOP structure of the program. Logically, the personal be
 
 Moreover, even though personal best is generated using the list of exercises in the client, it can be instantiated even without an exercise list. Therefore it does not require the exercise class to exist and does not have a whole-part relationship with exercise. Coupling will also be increased as the client will be relying on the exercise class to generate the personal best. Therefore, the final choice was to place the personal best under client, with every client having their own personal best attribute.
 
-=== Filtering the clients list
+=== Filtering the list of clients --- Toh Ker Wei
 This feature allows users to filter the list of clients by specifying the `Tag` or `Sport` of the clients they want to view.
 
 ==== Implementation
@@ -471,6 +471,19 @@ Firstly, by separating the checks for each attributes, a correct implementation 
 Secondly, separating the checks for each attributes will allow us to add attributes of different types stored in different data structure easier. We could simply add another check on the attribute against the keyword specified then do a logical addition of the result against the others.
 
 Therefore, as we foresee us adding more attributes to be filtered increasing the need to ensure logical correctness, the first approach is the most ideal.
+
+=== Viewing the information of a client
+This feature allows users to view the information of a specific client using his `INDEX` in the clients list. Information displayed includes additional information of the client, exercises done and his personal best of exercises done.
+
+==== Implementation
+The view client's information feature is primarily facilitated by the model `Client`. The details for list of exercises done and personal best will be discussed in section 3.7 and not be covered here. The client's `INDEX` in the clients list will be used to identify and retrieve his information.
+
+In the following sequence diagram, we will be tracing the execution when the user enters the command `view-c 3`
+
+image::ViewSequenceDiagram.png[]
+
+==== Design Considerations
+
 
 == Documentation
 
