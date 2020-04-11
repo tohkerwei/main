@@ -472,11 +472,11 @@ Secondly, separating the checks for each attributes will allow us to add attribu
 
 Therefore, as we foresee us adding more attributes to be filtered increasing the need to ensure logical correctness, the first approach is the most ideal.
 
-=== Viewing the information of a client
+=== Viewing the information of a client --- Toh Ker Wei
 This feature allows users to view the information of a specific client using his `INDEX` in the clients list. Information displayed includes additional information of the client, exercises done and his personal best of exercises done.
 
 ==== Implementation
-The view client's information feature is primarily facilitated by the model `Client`. The details for list of exercises done and personal best will be discussed in section 3.7 and not be covered here. The client's `INDEX` in the clients list will be used to identify and retrieve his information.
+The view client's information feature is primarily facilitated by the model `Client`. The details for list of exercises done and personal best will be discussed in section 3.7 and not be covered here. The client's `INDEX` in the clients list will be used to identify and retrieve his information. Additionally, only when a client's information is being viewed, graph of his exercises can be plotted.
 
 In the following sequence diagram, we will be tracing the execution when the user enters the command `view-c 3`
 
@@ -484,6 +484,28 @@ image::ViewSequenceDiagram.png[]
 
 ==== Design Considerations
 
+[options='header']
+|====================
+| Considerations | Pros and Cons
+|View client using client's `INDEX`|
+*Pros*: Every client has a specific `INDEX`
+
+*Cons*: User has to look through the list for client's `INDEX` to view his information
+
+|View client using client's name|
+*Pros*: User can view information by knowing the name
+
+*Cons*: Clients could have same names and thus user will have to use their `INDEX` or other information to specify whcih client to view
+
+|====================
+
+We decided to use the first approach of using the client's `INDEX` to view his information.
+
+Firstly, as the client's `INDEX` is unique, there will not be conflicts as to which client's information should be displayed, making `view-c` less complex and only responsible for retrieving and displaying the client's information.
+
+Secondly, in cases where users manage many clients and some with same names, there are functions like find and filter which allow users to scope the clients list and easily find the desired client's `INDEX`.
+
+Therefore, viewing a client by his `INDEX` minimises the responsibility of the command and will not need to resolve conflicting clients and is the most ideal.
 
 == Documentation
 
